@@ -1,0 +1,537 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_height="0dp">
+
+        <ImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/profile_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_back" />
+
+        <ImageView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/iv_back"
+            android:padding="5dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
+            android:background="@drawable/back_button_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="NG Verification Details"
+            android:textColor="#ee5222"
+            android:textSize="17sp"
+            android:textAllCaps="true"
+            app:layout_constraintBottom_toBottomOf="@id/iv_back"
+            app:layout_constraintEnd_toStartOf="@id/iv_profile"
+            app:layout_constraintStart_toEndOf="@id/iv_back"
+            app:layout_constraintTop_toTopOf="@id/iv_back" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_status"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/iv_back"
+            app:layout_constraintTop_toBottomOf="@id/iv_back">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/vgl_50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <LinearLayout
+                    android:id="@+id/ll_bp_no"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="BP Number"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/barlow_regular"
+                        android:layout_weight="5"
+                        android:textColor="@color/black"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_bp_no"
+                        android:text=""
+                        android:textSize="16sp"
+                        android:layout_weight="5"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/barlow_regular"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/ll_assigned_date"
+                    app:layout_constraintTop_toBottomOf="@id/ll_bp_no"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Assigned Date"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/barlow_regular"
+                        android:layout_weight="5"
+                        android:textColor="@color/black"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_date"
+                        android:text=""
+                        android:textSize="16sp"
+                        android:layout_weight="5"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/barlow_regular"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_initial"
+                    app:layout_constraintTop_toBottomOf="@id/ll_assigned_date"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Final Reading"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/barlow_regular"
+                        android:layout_weight="5"
+                        android:textColor="@color/black"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_initial"
+                        android:text=""
+                        android:textSize="16sp"
+                        android:layout_weight="5"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/barlow_regular"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_burner"
+                    app:layout_constraintTop_toBottomOf="@id/ll_initial"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Burner Type"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/barlow_regular"
+                        android:layout_weight="5"
+                        android:textColor="@color/black"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_burner"
+                        android:text="5"
+                        android:textSize="16sp"
+                        android:layout_weight="5"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/barlow_regular"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_work_date"
+                    app:layout_constraintTop_toBottomOf="@id/ll_burner"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Work Start Date"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/barlow_regular"
+                        android:layout_weight="5"
+                        android:textColor="@color/black"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_work"
+                        android:text="10-09-2022"
+                        android:textSize="16sp"
+                        android:layout_weight="5"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/barlow_regular"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_customer_title"
+                    app:layout_constraintTop_toBottomOf="@id/ll_work_date"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="Upload Image"
+                    android:textAllCaps="true"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:textSize="16sp"
+                    android:textColor="#EE5222"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:id="@+id/view_line"
+                    android:background="#1A80A8"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_customer_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <TextView
+                    android:id="@+id/tv_selfie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textColor="#545454"
+                    android:focusableInTouchMode="true"
+                    android:focusable="true"
+                    android:text="@string/selfie_with_meter_0"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_up_24"
+                    app:layout_constraintEnd_toStartOf="@id/iv_selfie"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_line"
+                    android:fontFamily="@font/poppins_bold"
+                    app:layout_goneMarginBottom="32dp"/>
+
+                <ImageView
+                    android:id="@+id/iv_selfie"
+                    android:src="@drawable/ic_baseline_photo_camera_24"
+                    app:layout_constraintTop_toTopOf="@id/tv_selfie"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="10dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_selfie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_selfie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:isScrollContainer="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_selfie"
+                    tools:listitem="@layout/photo_list_item" />
+
+                <TextView
+                    android:id="@+id/tv_meter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textColor="#545454"
+                    android:focusableInTouchMode="true"
+                    android:focusable="true"
+                    android:ellipsize="end"
+                    android:text="@string/meter_photo_0"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_up_24"
+                    app:layout_constraintEnd_toStartOf="@id/iv_meter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_selfie"
+                    android:fontFamily="@font/poppins_bold"
+                    app:layout_goneMarginBottom="32dp"/>
+
+                <ImageView
+                    android:id="@+id/iv_meter"
+                    android:src="@drawable/ic_baseline_photo_camera_24"
+                    app:layout_constraintTop_toTopOf="@id/tv_meter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="10dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_meter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_meter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:isScrollContainer="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_meter"
+                    tools:listitem="@layout/photo_list_item" />
+
+                <TextView
+                    android:id="@+id/tv_installation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/installation_0"
+                    android:textColor="#545454"
+                    android:focusableInTouchMode="true"
+                    android:focusable="true"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_up_24"
+                    app:layout_constraintEnd_toStartOf="@id/iv_installation"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_meter"
+                    android:fontFamily="@font/poppins_bold"
+                    app:layout_goneMarginBottom="32dp"/>
+
+                <ImageView
+                    android:id="@+id/iv_installation"
+                    android:src="@drawable/ic_baseline_photo_camera_24"
+                    app:layout_constraintTop_toTopOf="@id/tv_installation"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="10dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_installation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_installation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:isScrollContainer="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_installation"
+                    tools:listitem="@layout/photo_list_item" />
+
+                <TextView
+                    android:id="@+id/tv_service"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/service_card_0"
+                    android:textColor="#545454"
+                    android:focusableInTouchMode="true"
+                    android:focusable="true"
+                    android:ellipsize="end"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_up_24"
+                    app:layout_constraintEnd_toStartOf="@id/iv_service"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_installation"
+                    android:fontFamily="@font/poppins_bold"
+                    app:layout_goneMarginBottom="32dp"/>
+
+                <ImageView
+                    android:id="@+id/iv_service"
+                    android:src="@drawable/ic_baseline_photo_camera_24"
+                    app:layout_constraintTop_toTopOf="@id/tv_service"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="10dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_service"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:isScrollContainer="false"
+
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_service"
+                    tools:listitem="@layout/photo_list_item" />
+
+                <TextView
+                    android:id="@+id/tv_live_gas"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/final_meter_reading_image"
+                    android:textColor="#545454"
+                    android:ellipsize="end"
+                    android:focusableInTouchMode="true"
+                    android:focusable="true"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_up_24"
+                    app:layout_constraintEnd_toStartOf="@id/iv_live_gas"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_service"
+                    android:fontFamily="@font/poppins_bold"
+                    app:layout_goneMarginBottom="32dp"/>
+
+                <ImageView
+                    android:id="@+id/iv_live_gas"
+                    android:src="@drawable/ic_baseline_photo_camera_24"
+                    app:layout_constraintTop_toTopOf="@id/tv_live_gas"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="10dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_live_gas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_live_gas"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:isScrollContainer="false"
+
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_live_gas"
+                    tools:listitem="@layout/photo_list_item" />
+
+
+                <CheckBox
+                    android:id="@+id/cb_acknowledge"
+                    app:layout_constraintTop_toBottomOf="@id/rv_live_gas"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    app:layout_constraintTop_toTopOf="@id/cb_acknowledge"
+                    app:layout_constraintStart_toEndOf="@id/cb_acknowledge"
+                    app:layout_constraintBottom_toBottomOf="@id/cb_acknowledge"
+                    android:text="@string/ng_acknowledge"
+                    android:textSize="11sp"
+                    android:textColor="#545454"
+                    android:id="@+id/tv_acknowledge"
+                    android:fontFamily="@font/barlow_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+                <Button
+                    android:id="@+id/btn_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/submit_btn_background"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:text="SUBMIT"
+                    android:textColor="@color/white"
+                    android:textSize="19sp"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cb_acknowledge" />
+
+                <Button
+                    android:id="@+id/btn_approve"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/submit_btn_background"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:text="Approve"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    app:backgroundTint="@null"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toStartOf="@id/btn_decline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_submit" />
+
+                <Button
+                    android:id="@+id/btn_decline"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/submit_btn_background"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:text="Decline"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    app:backgroundTint="@null"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@id/btn_approve"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_submit" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

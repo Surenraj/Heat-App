@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "651510984993",
+    "project_id": "heat-app-4edac",
+    "storage_bucket": "heat-app-4edac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:651510984993:android:e3a80128655e60d33a8e60",
+        "android_client_info": {
+          "package_name": "com.thinkgas.heatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "651510984993-pik4cc1jbu9d3g488gi1vjjcc9hoa8hs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thinkgas.heatapp",
+            "certificate_hash": "d893bc8f1c9e02a025fa6761637478c11d2b8546"
+          }
+        },
+        {
+          "client_id": "651510984993-6bqg89def32or0gfdi7eudskef12g9e9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVQRF7HsIm3YY8ROaRfX42zdL7pn9liBE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "651510984993-6bqg89def32or0gfdi7eudskef12g9e9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

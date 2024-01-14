@@ -1,0 +1,1464 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/profile_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_back" />
+
+    <ImageView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/iv_back"
+        android:padding="5dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
+        android:background="@drawable/back_button_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        app:layout_constraintStart_toEndOf="@id/iv_back"
+        app:layout_constraintEnd_toStartOf="@id/iv_profile"
+        app:layout_constraintTop_toTopOf="@id/iv_back"
+        app:layout_constraintBottom_toBottomOf="@id/iv_back"
+        android:textSize="20sp"
+        android:text="NG APPROVAL"
+        android:textAllCaps="true"
+
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="#ee5222"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_back"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="0dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_status"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_back">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_customer_details"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/tv_customer_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:text="Karthikeyan Gokulnath"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_bp_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="BP Number :"
+                    android:textColor="#545454"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_customer_name" />
+
+
+                <View
+                    android:id="@+id/view_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#1A80A8"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_bp_no" />
+
+                <TextView
+                    android:id="@+id/tv_installation_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:text="Installation Details"
+                    android:textAllCaps="true"
+                    android:textColor="#EE5222"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_line" />
+
+                <View
+                    android:id="@+id/view_line_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#1A80A8"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_installation_details" />
+
+
+                <LinearLayout
+                    android:id="@+id/ll_installation_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_line_1">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="House No."
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_house_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_7"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="Society"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_society"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_8"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="Block/Tower"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_block"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_9"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="Floor"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_floor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_10"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="Area"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_area"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_11"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="City"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_city"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:fontFamily="@font/barlow_regular"
+                            android:maxLines="2"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_12"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="Mobile No."
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <EditText
+                            android:id="@+id/et_mobile"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/edit_icon_bg"
+                            android:drawableEnd="@drawable/edit_icon"
+                            android:fontFamily="@font/barlow_regular"
+                            android:maxLines="2"
+                            android:padding="5dp"
+                            android:text=""
+                            android:textColor="#545454"
+                            android:textColorHint="#80545454"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_13"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="Alternate No."
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <EditText
+                            android:id="@+id/et_alternate_no"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/edit_icon_bg"
+                            android:drawableEnd="@drawable/edit_icon"
+                            android:fontFamily="@font/barlow_regular"
+                            android:maxLines="2"
+                            android:padding="5dp"
+                            android:text=""
+                            android:textColor="#545454"
+                            android:textColorHint="#80545454"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_14"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:id="@+id/cl_meter_no"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="Meter No."
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_17"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_meter_no"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:fontFamily="@font/barlow_regular"
+                            android:maxLines="2"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_17"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cl_meter_make"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="Meter Make"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_18"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_meter_make"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:fontFamily="@font/barlow_regular"
+                            android:maxLines="2"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_18"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cl_meter_type"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="Meter Type"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_19"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_meter_type"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:fontFamily="@font/barlow_regular"
+                            android:maxLines="2"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_19"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="LMC With/Without Meter"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_21"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_lmc_type"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:fontFamily="@font/barlow_regular"
+                            android:maxLines="2"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_21"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="@string/select_rfc_status"
+                        android:textColor="#545454"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/spinner_rfc_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="8dp"
+                        android:focusable="true"
+                        android:background="@drawable/bg_spinner"
+                        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="5dp"
+                        android:text="Select Status"
+                        android:textColor="#545454"
+                        app:backgroundTint="@null" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:id="@+id/ll_follow_up"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_follow_title"
+                            android:text="@string/follow_up_date_and_time"
+                            android:layout_marginTop="10dp"
+                            android:textColor="#545454"
+                            tools:visibility="visible"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="16sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_date_time"
+                            app:layout_constraintTop_toBottomOf="@id/tv_follow_title"
+                            android:layout_marginTop="8dp"
+                            app:backgroundTint="@null"
+                            android:background="@drawable/bg_spinner"
+                            android:text="Select Date &amp; Time"
+                            android:paddingHorizontal="5dp"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:textColor="#545454"
+                            android:gravity="center_vertical"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp" />
+
+                        <TextView
+                            android:id="@+id/tv_description"
+                            app:layout_constraintTop_toBottomOf="@id/tv_date_time"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:text="@string/comments"
+                            android:textColor="#545454"
+                            tools:visibility="visible"
+
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="16sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <EditText
+                            android:id="@+id/et_description"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginTop="10dp"
+                            android:hint="Comments"
+                            android:gravity="start"
+                            android:textColor="#545454"
+                            android:padding="5dp"
+                            android:maxLines="4"
+                            android:ellipsize="end"
+                            android:background="@drawable/description_background"
+                            app:layout_constraintTop_toBottomOf="@id/tv_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/tv_mmt_testing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="@string/mmt_testing"
+                        android:textColor="#545454"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_mmt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <RadioButton
+                            android:id="@+id/rb_mmt_done"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="Done"
+                            android:checked="false"
+                            android:textColor="#545454"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_mmt_not_done"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="Not Done"
+                            android:checked="false"
+                            android:textColor="#545454"
+                            android:textSize="12sp" />
+
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/tv_leakage_testing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="@string/leakage_testing"
+                        android:textColor="#545454"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_leakage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <RadioButton
+                            android:id="@+id/rb_leakage_done"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="Done"
+                            android:textColor="#545454"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_leakage_not_done"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="Not Done"
+                            android:textColor="#545454"
+                            android:textSize="12sp" />
+
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/tv_live_gas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="@string/live_gas_pressure_mbar"
+                        android:textColor="#545454"
+
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <EditText
+                        android:id="@+id/et_live_gas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/et_form_bg"
+                        android:ellipsize="end"
+
+                        android:hint="Gas Pressure (mbar)"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:padding="15dp"
+                        android:textColor="#545454"
+                        android:textColorHint="#80545454"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:id="@+id/cv_sr"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_drs_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:textColor="#545454"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="@string/drs_number"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <EditText
+                            android:background="@drawable/et_form_bg"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/et_sr_no"
+                            app:layout_constraintTop_toBottomOf="@id/tv_drs_no"
+                            android:hint="DRS Number"
+                            android:textSize="16sp"
+                            android:padding="15dp"
+                            android:layout_marginTop="8dp"
+                            android:textColor="#545454"
+                            android:textColorHint="#80545454"
+                            android:inputType="text"
+                            android:id="@+id/et_drs_no"
+                            android:maxLength="15"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_sr_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:textColor="#545454"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="@string/sr_number"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@id/et_sr_no"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <EditText
+                            android:background="@drawable/et_form_bg"
+                            app:layout_constraintStart_toEndOf="@id/et_drs_no"
+                            app:layout_constraintTop_toBottomOf="@id/tv_sr_no"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:hint="SR No."
+                            android:textSize="16sp"
+                            android:padding="15dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="8dp"
+                            android:inputType="text"
+                            android:id="@+id/et_sr_no"
+                            android:textColor="#545454"
+                            android:textColorHint="#80545454"
+                            android:maxLength="15"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:id="@+id/cv_meter"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_meter_reading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:textColor="#545454"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="@string/final_meter_reading"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <EditText
+                            android:background="@drawable/et_form_bg"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/et_gi_union"
+                            app:layout_constraintTop_toBottomOf="@id/tv_meter_reading"
+                            android:hint="Meter Reading"
+                            android:textSize="16sp"
+                            android:padding="15dp"
+                            android:layout_marginTop="8dp"
+                            android:textColor="#545454"
+                            android:textColorHint="#80545454"
+                            android:inputType="numberDecimal"
+                            android:id="@+id/et_meter_reading"
+                            android:maxLength="15"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_gi_union"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:textColor="#545454"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="@string/gi_union"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@id/et_gi_union"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <EditText
+                            android:background="@drawable/et_form_bg"
+                            app:layout_constraintStart_toEndOf="@id/et_meter_reading"
+                            app:layout_constraintTop_toBottomOf="@id/tv_gi_union"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:hint="GI Union"
+                            android:textSize="16sp"
+                            android:padding="15dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="8dp"
+                            android:inputType="number"
+                            android:id="@+id/et_gi_union"
+                            android:textColor="#545454"
+                            android:textColorHint="#80545454"
+                            android:maxLength="15"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                    <TextView
+                        android:id="@+id/tv_burner_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/barlow_regular"
+
+                        android:text="@string/burner_type"
+                        android:textColor="#545454"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/spinner_burner_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_spinner"
+                        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                        android:gravity="center_vertical"
+                        android:focusable="true"
+
+                        android:paddingHorizontal="5dp"
+                        android:text="Select Burner"
+                        android:textColor="#545454"
+                        android:visibility="gone"
+                        app:backgroundTint="@null"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tv_hose_options"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/barlow_regular"
+
+                        android:text="@string/hose_pipe"
+                        android:textColor="#545454"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/spinner_hose"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_spinner"
+                        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                        android:gravity="center_vertical"
+                        android:focusable="true"
+                        android:paddingHorizontal="5dp"
+                        android:text="Select Hose Pipe"
+                        android:textColor="#545454"
+                        android:visibility="gone"
+                        app:backgroundTint="@null"
+                        tools:visibility="visible" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_nozzle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <TextView
+                            android:id="@+id/tv_nb_65"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="@string/nozzle_brass_65"
+                            android:textColor="#545454"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/spinner_nb_65"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/bg_spinner"
+                            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+
+                            android:ellipsize="end"
+                            android:gravity="center_vertical"
+                            android:inputType="numberDecimal"
+                            android:paddingHorizontal="5dp"
+                            android:text="Size(65)"
+                            android:textColor="#545454"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toStartOf="@id/spinner_nb_90"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_nb_65" />
+
+                        <TextView
+                            android:id="@+id/tv_nb_90"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="@string/nozzle_brass_90"
+                            android:textColor="#545454"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@id/spinner_nb_90"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/spinner_nb_90"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/bg_spinner"
+                            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+
+                            android:gravity="center_vertical"
+                            android:paddingHorizontal="5dp"
+                            android:text="Size (90)"
+                            android:textColor="#545454"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/spinner_nb_65"
+                            app:layout_constraintTop_toBottomOf="@id/tv_nb_90" />
+
+                        <TextView
+                            android:id="@+id/tv_nb_110"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="@string/nozzle_brass_110"
+                            android:textColor="#545454"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/spinner_nb_65" />
+
+                        <TextView
+                            android:id="@+id/spinner_nb_110"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/bg_spinner"
+                            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                            android:ellipsize="end"
+                            android:gravity="center_vertical"
+                            android:paddingHorizontal="5dp"
+                            android:text="Size(110)"
+                            android:textColor="#545454"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toStartOf="@id/spinner_nb_125"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_nb_110" />
+
+                        <TextView
+                            android:id="@+id/tv_nb_125"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="@string/nozzle_brass_125"
+                            android:textColor="#545454"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@id/spinner_nb_125"
+                            app:layout_constraintTop_toBottomOf="@id/spinner_nb_90" />
+
+                        <TextView
+                            android:id="@+id/spinner_nb_125"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/bg_spinner"
+                            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                            android:gravity="center_vertical"
+                            android:paddingHorizontal="5dp"
+                            android:text="Size (125)"
+                            android:textColor="#545454"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/spinner_nb_110"
+                            app:layout_constraintTop_toBottomOf="@id/tv_nb_125" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+<!--                    <RadioGroup-->
+<!--                        android:id="@+id/rg_meter"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:gravity="center"-->
+<!--                        android:orientation="horizontal"-->
+
+<!--                        android:visibility="gone"-->
+<!--                        tools:visibility="visible">-->
+
+<!--                        <RadioButton-->
+<!--                            android:id="@+id/rb_correct"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:checked="true"-->
+<!--                            android:text="Meter is correct"-->
+<!--                            android:textColor="#545454" />-->
+
+<!--                        <RadioButton-->
+<!--                            android:id="@+id/rb_incorrect"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Meter is incorrect"-->
+<!--                            android:textColor="#545454" />-->
+<!--                    </RadioGroup>-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_ng_status"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:fontFamily="@font/barlow_regular"-->
+<!--                        android:text="@string/select_ng_status"-->
+<!--                        android:textColor="#545454"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:visibility="gone"-->
+<!--                        tools:visibility="visible" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/spinner_ng_status"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="48dp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:background="@drawable/bg_spinner"-->
+<!--                        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"-->
+<!--                        android:gravity="center_vertical"-->
+<!--                        android:paddingHorizontal="5dp"-->
+<!--                        android:text="Select Type"-->
+<!--                        android:textColor="#545454"-->
+<!--                        android:visibility="gone"-->
+<!--                        app:backgroundTint="@null"-->
+<!--                        tools:visibility="visible" />-->
+
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:id="@+id/cl_readings"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:visibility="gone"-->
+<!--                        tools:visibility="visible">-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_initial"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="5dp"-->
+<!--                            android:fontFamily="@font/barlow_regular"-->
+<!--                            android:text="@string/initial_reading"-->
+<!--                            android:textColor="#545454"-->
+<!--                            android:textSize="16sp"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                        <EditText-->
+<!--                            android:id="@+id/et_initial_meter"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="8dp"-->
+<!--                            android:background="@drawable/et_form_bg"-->
+<!--                            android:ellipsize="end"-->
+<!--                            android:hint="Initial Reading"-->
+<!--                            android:inputType="numberDecimal"-->
+<!--                            android:maxLength="15"-->
+<!--                            android:maxLines="1"-->
+<!--                            android:padding="15dp"-->
+<!--                            android:textColor="#545454"-->
+<!--                            android:textColorHint="#80545454"-->
+<!--                            android:textSize="16sp"-->
+<!--                            app:layout_constraintEnd_toStartOf="@id/et_sr_no"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toBottomOf="@id/tv_initial" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_burner"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="5dp"-->
+<!--                            android:fontFamily="@font/barlow_regular"-->
+<!--                            android:text="@string/burner_details"-->
+<!--                            android:textColor="#545454"-->
+<!--                            android:textSize="16sp"-->
+<!--                            app:layout_constraintStart_toStartOf="@id/et_sr_no"-->
+<!--                            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                        <EditText-->
+<!--                            android:id="@+id/et_sr_no"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginStart="5dp"-->
+<!--                            android:layout_marginTop="8dp"-->
+<!--                            android:background="@drawable/et_form_bg"-->
+<!--                            android:ellipsize="end"-->
+<!--                            android:hint="Initial Reading"-->
+<!--                            android:inputType="numberDecimal"-->
+<!--                            android:maxLength="15"-->
+<!--                            android:maxLines="1"-->
+<!--                            android:padding="15dp"-->
+<!--                            android:textColor="#545454"-->
+<!--                            android:textColorHint="#80545454"-->
+<!--                            android:textSize="16sp"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toEndOf="@id/et_initial_meter"-->
+<!--                            app:layout_constraintTop_toBottomOf="@id/tv_burner" />-->
+
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+                    <TextView
+                        android:id="@+id/tv_date_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="@string/conversion_date"
+                        android:textColor="#545454"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tv_conversation_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="8dp"
+                        android:focusable="true"
+
+                        android:background="@drawable/bg_spinner"
+                        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="5dp"
+                        android:text="Select Date"
+                        android:textColor="#545454"
+                        android:visibility="gone"
+                        app:backgroundTint="@null"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tv_extension"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Extension/Modification of LMC"
+                        android:textColor="#545454"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/spinner_lmc_extension"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="8dp"
+                        android:focusable="true"
+                        android:background="@drawable/bg_spinner"
+                        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="5dp"
+                        android:text="Select LMC"
+                        android:textColor="#545454"
+                        app:backgroundTint="@null" />
+
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/btn_submit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/submit_btn_background"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:text="NEXT"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    app:backgroundTint="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll_installation_details" />
+
+
+                <Button
+                    android:id="@+id/btn_approve"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/submit_btn_background"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:text="Approve"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    android:visibility="gone"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toStartOf="@id/btn_decline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_submit" />
+
+                <Button
+                    android:id="@+id/btn_decline"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/submit_btn_background"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:text="Decline"
+                    android:visibility="gone"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    app:backgroundTint="@null"
+                    app:layout_constraintStart_toEndOf="@id/btn_approve"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_submit" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

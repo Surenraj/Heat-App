@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/profile_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_back" />
+
+    <ImageView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/iv_back"
+        android:padding="5dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
+        android:background="@drawable/back_button_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        app:layout_constraintStart_toEndOf="@id/iv_back"
+        app:layout_constraintEnd_toStartOf="@id/iv_profile"
+        app:layout_constraintTop_toTopOf="@id/iv_back"
+        app:layout_constraintBottom_toBottomOf="@id/iv_back"
+        android:textSize="20sp"
+        android:text="RFC APPROVAL - IMAGE"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="#ee5222"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        app:layout_constraintTop_toBottomOf="@id/iv_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_height="0dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_status"
+            android:layout_marginHorizontal="15dp"
+            app:cardCornerRadius="20dp"
+            app:cardBackgroundColor="@color/white"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintTop_toBottomOf="@id/iv_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_customer_details"
+                android:layout_width="match_parent"
+                android:padding="10dp"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_customer_info"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="Customer Information"
+                    android:textAllCaps="true"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:textSize="16sp"
+                    android:textColor="#EE5222"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:id="@+id/view_line_1"
+                    android:background="#1A80A8"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_customer_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_isometric"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/view_line_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/preview_layout_background">
+
+                        <TextView
+                            android:id="@+id/tv_isometric"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No Image Attached"
+                            android:textColor="#545454"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_isometric"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            tools:listitem="@layout/photo_list_item"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            android:orientation="horizontal"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/tv_installation_details"
+                    app:layout_constraintTop_toBottomOf="@id/cv_isometric"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="RFC/NG Document"
+                    android:textAllCaps="true"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:textSize="16sp"
+                    android:textColor="#EE5222"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:id="@+id/view_line_2"
+                    android:background="#1A80A8"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_installation_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_installation_details"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/view_line_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/preview_layout_background">
+
+                        <TextView
+                            android:id="@+id/tv_installation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No Image Attached"
+                            android:textColor="#545454"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_installation"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            tools:listitem="@layout/photo_list_item"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            android:orientation="horizontal"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <TextView
+                    android:id="@+id/tv_customer_signature"
+                    app:layout_constraintTop_toBottomOf="@id/cv_installation_details"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="Customer Signature"
+                    android:textAllCaps="true"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:textSize="16sp"
+                    android:textColor="#EE5222"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:id="@+id/view_line_4"
+                    android:background="#1A80A8"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_customer_signature"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_signature"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/view_line_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/preview_layout_background">
+
+                        <TextView
+                            android:id="@+id/tv_signature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No Image Attached"
+                            android:textColor="#545454"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_signature"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            tools:listitem="@layout/photo_list_item"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            android:orientation="horizontal"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+                <Button
+                    android:id="@+id/btn_next"
+                    app:layout_constraintTop_toBottomOf="@id/cv_signature"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:text="NEXT"
+                    app:backgroundTint="@null"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:textColor="@color/white"
+                    android:textSize="19sp"
+                    android:background="@drawable/submit_btn_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

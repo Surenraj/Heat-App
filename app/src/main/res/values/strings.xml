@@ -1,0 +1,114 @@
+<resources>
+    <string name="app_name">HEAT APP</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--    Feasibility Status-->
+    <string name="status_type">Status Type <font color='#FF0000'>*</font></string>
+    <string name="sub_status">Sub Status <font color='#FF0000'>*</font></string>
+    <string name="pipeline_category">Pipeline Category <font color='#FF0000'>*</font></string>
+    <string name="riser_required">Riser Required <font color='#FF0000'>*</font></string>
+    <string name="riser_length">Riser Length <font color='#FF0000'>*</font></string>
+    <string name="gi_mlc_pipe_length">GI Pipe Length <font color='#FF0000'>*</font></string>
+    <string name="mlc_pipe_length">MLC Pipe Length <font color='#FF0000'>*</font></string>
+
+    <string name="gc_required">GC Status <font color='#FF0000'>*</font></string>
+    <string name="description">Description <font color='#FF0000'>*</font></string>
+    <string name="attachments_0">Attachments (0) <font color='#FF0000'>*</font></string>
+    <string name="isometric_0">Isometric Drawing (0) <font color='#FF0000'>*</font></string>
+
+    <!--    LMC Status-->
+    <string name="follow_up_date_and_time">Follow Up Date and Time <font color='#FF0000'>*</font></string>
+
+    <!--    LMC Connection-->
+    <string name="lmc_type">LMC Type <font color='#FF0000'>*</font></string>
+    <string name="meter_details">Meter Details <font color='#FF0000'>*</font></string>
+    <string name="meter_number">Meter Number <font color='#FF0000'>*</font></string>
+    <string name="meter_id">Meter Id</string>
+    <string name="meter_type">Meter Type <font color='#FF0000'>*</font></string>
+    <string name="initial_meter">Initial Meter Reading <font color='#FF0000'>*</font></string>
+    <string name="regulator_number">Regulator Number <font color='#FF0000'>*</font></string>
+    <string name="gi_installation">GI Length <font color='#FF0000'>*</font></string>
+    <string name="cu_installation">MLC Length <font color='#FF0000'>*</font></string>
+    <string name="av_no">AV Qty. <font color='#FF0000'>*</font></string>
+    <string name="iv_no">IV Qty. <font color='#FF0000'>*</font></string>
+    <string name="pipelength">Pipelength <font color='#FF0000'>*</font></string>
+    <string name="property_type">Property Type <font color='#FF0000'>*</font></string>
+    <string name="gas_type">GC Status <font color='#FF0000'>*</font></string>
+
+    <!--    LMC Final-->
+    <string name="pvc_sleeve">PVC Sleeve <font color='#FF0000'>*</font></string>
+    <string name="meter_installation">Meter Installation <font color='#FF0000'>*</font></string>
+    <string name="clamping_gi_pvc">Clamping(GI/PVC) <font color='#FF0000'>*</font></string>
+    <string name="gas_meter_testing">PPT Testing <font color='#FF0000'>*</font></string>
+    <string name="cementing_of_holes">Cementing of Holes <font color='#FF0000'>*</font></string>
+    <string name="painting_of_gi_pipe">Painting of GI Pipe <font color='#FF0000'>*</font></string>
+    <string name="tf_avail">TF/GC Available <font color='#FF0000'>*</font></string>
+    <string name="connectivity">GC/LMC Connectivity <font color='#FF0000'>*</font></string>
+    <string name="end_cap">End Cap <font color='#FF0000'>*</font></string>
+    <string name="area_gassified">Area Gasified <font color='#FF0000'>*</font></string>
+    <string name="hole_drilled">LMC Alignment <font color='#FF0000'>*</font></string>
+    <string name="mcv_testing">MCV Testing <font color='#FF0000'>*</font></string>
+    <string name="cs_one">1-I am ready to get any appliance converted for natural gas Usage <font color='#FF0000'>*</font></string>
+    <string name="cs_two">2-I went NG Conversion at later date <font color='#FF0000'>*</font></string>
+    <string name="installation_0">Installation Document (0) <font color='#FF0000'>*</font></string>
+    <string name="drawing_0">PPT Gauge Image (0) <font color='#FF0000'>*</font></string>
+    <string name="selfie_with_meter_0">Selfie with meter (0) <font color='#FF0000'>*</font></string>
+    <string name="acknowledge"><![CDATA[I Acknowledge that customer Mobile & Email is Correct]]> <font color='#FF0000'>*</font></string>
+
+    <!--    NG Verification-->
+    <string name="meter_photo_0">MMT Gauge Testing Photo (0) <font color='#FF0000'>*</font></string>
+    <string name="service_card_0">Live Stove Gas Image (0) <font color='#FF0000'>*</font></string>
+    <string name="final_meter_reading_image">Final Meter Reading Image <font color='#FF0000'>*</font></string>
+    <string name="ng_acknowledge">I have tested all the fittings and Installation for leakage <font color='#FF0000'>*</font></string>
+
+    <!--    NG Approval-->
+    <string name="select_ng_status">Select NG Status <font color='#FF0000'>*</font></string>
+    <string name="initial_reading">Initial Reading <font color='#FF0000'>*</font></string>
+    <string name="burner_details">Burner Details <font color='#FF0000'>*</font></string>
+    <string name="conversion_date">Conversion Date <font color='#FF0000'>*</font></string>
+    <string name="customer_signature_0">Customer Signature (0)</string>
+    <string name="select_rfc_status">Select RFC Status <font color='#FF0000'>*</font></string>
+    <string name="comments">Comments <font color='#FF0000'>*</font></string>
+    <string name="mmt_testing">MMT Testing <font color='#FF0000'>*</font></string>
+    <string name="leakage_testing">Leakage Testing <font color='#FF0000'>*</font></string>
+    <string name="live_gas_pressure_mbar">Live Gas pressure (mbar) <font color='#FF0000'>*</font></string>
+    <string name="final_meter_reading">Final Meter Reading <font color='#FF0000'>*</font></string>
+    <string name="burner_type">Burner Type <font color='#FF0000'>*</font></string>
+    <string name="hose_pipe">Hose Pipe <font color='#FF0000'>*</font></string>
+    <string name="drs_number">DRS Number <font color='#FF0000'>*</font></string>
+    <string name="sr_number">SR Number <font color='#FF0000'>*</font></string>
+    <string name="gi_clamp">GI Clamp <font color='#FF0000'>*</font></string>
+    <string name="mlc_clamp">MLC Clamp <font color='#FF0000'>*</font></string>
+    <string name="gi_m_f_elbow">GI M/F Elbow <font color='#FF0000'>*</font></string>
+    <string name="gi_f_f_elbow">GI F/F Elbow <font color='#FF0000'>*</font></string>
+    <string name="gi_2_nipple">GI 2\' Nipple  <font color='#FF0000'>*</font></string>
+    <string name="gi_3_nipple">GI 3\' Nipple  <font color='#FF0000'>*</font></string>
+    <string name="gi_4_nipple">GI 4\' Nipple  <font color='#FF0000'>*</font></string>
+    <string name="gi_6_nipple">GI 6\' Nipple <font color='#FF0000'>*</font></string>
+    <string name="gi_8_nipple">GI 8\' Nipple <font color='#FF0000'>*</font></string>
+    <string name="gi_tee">GI Tee <font color='#FF0000'>*</font></string>
+    <string name="mlc_tee">MLC Tee <font color='#FF0000'>*</font></string>
+    <string name="gi_socket">GI Socket <font color='#FF0000'>*</font></string>
+    <string name="mlc_male_union">MLC Male Union <font color='#FF0000'>*</font></string>
+    <string name="mlc_female_union">MLC Female Union <font color='#FF0000'>*</font></string>
+    <string name="meter_no">Meter No. <font color='#FF0000'>*</font></string>
+    <string name="regulator_no">Regulator No. <font color='#FF0000'>*</font></string>
+    <string name="meter_company">Meter Company <font color='#FF0000'>*</font></string>
+    <string name="initial_meter_reading">Initial Meter Reading <font color='#FF0000'>*</font></string>
+    <string name="meter_bracket">Meter Bracket <font color='#FF0000'>*</font></string>
+    <string name="meter_sticker">Meter Sticker <font color='#FF0000'>*</font></string>
+    <string name="plate_marker">Plate Marker <font color='#FF0000'>*</font></string>
+    <string name="adaptor_gi_to_reg">Adopt GI to Reg. <font color='#FF0000'>*</font></string>
+    <string name="adaptor_reg_to_meter">Adopt Reg. to Meter <font color='#FF0000'>*</font></string>
+    <string name="adaptor_meter_to_gi_pipe">Adopt Meter to GI Pipe <font color='#FF0000'>*</font></string>
+    <string name="female_union_meter_to_mlc_pipe">Female Union Meter to MLC Pipe <font color='#FF0000'>*</font></string>
+    <string name="gi_union">GI Union <font color='#FF0000'>*</font></string>
+    <string name="lmc_execution">LMC Execution <font color='#FF0000'>*</font></string>
+    <string name="nozzle_brass_65">Nozzle Brass (65) <font color='#FF0000'>*</font></string>
+    <string name="nozzle_brass_90">Nozzle Brass (90) <font color='#FF0000'>*</font></string>
+    <string name="nozzle_brass_110">Nozzle Brass (110) <font color='#FF0000'>*</font></string>
+    <string name="nozzle_brass_125">Nozzle Brass (125) <font color='#FF0000'>*</font></string>
+    <string name="channel_name">HEAT APP</string>
+    <string name="channel_description">HEAT APP</string>
+
+</resources>

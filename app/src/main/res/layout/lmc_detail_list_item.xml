@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cv_pending"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    android:layout_marginHorizontal="15dp"
+    android:layout_marginTop="10dp"
+    app:cardCornerRadius="20dp"
+    app:strokeColor="#f17048"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_assign_date"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Assign Date : 16-03-2021 14:21:21"
+            android:fontFamily="@font/barlow_regular"
+            android:layout_marginStart="11dp"
+            android:textSize="10sp"
+            android:textColor="#545454"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_mobile"
+            app:layout_constraintTop_toBottomOf="@id/tv_assign_date"
+            app:layout_constraintStart_toStartOf="@id/tv_assign_date"
+            tools:text="9841095322"
+            android:fontFamily="@font/barlow_semibold"
+            android:textSize="14sp"
+            android:layout_marginTop="5dp"
+            android:textColor="#545454"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            app:layout_constraintStart_toStartOf="@id/tv_assign_date"
+            app:layout_constraintTop_toBottomOf="@id/tv_mobile"
+            tools:text="Karthikeyan Gokulnath"
+            android:fontFamily="@font/barlow_semibold"
+            android:textSize="14sp"
+            android:layout_marginTop="5dp"
+            android:textColor="#545454"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_address"
+            app:layout_constraintTop_toBottomOf="@id/tv_name"
+            app:layout_constraintStart_toStartOf="@id/tv_assign_date"
+            android:fontFamily="@font/barlow_regular"
+            android:minLines="3"
+            android:maxEms="12"
+            android:textSize="10sp"
+            android:textColor="#545454"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="No. 88, Arcot Road, Vijayashanthi Towers, Block 2, Vadapalani, Chennai - 600026."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/iv_status"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_pending_icon"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="8dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+
+        <TextView
+            android:id="@+id/btn_tpi_info"
+            android:text="TPI Info"
+            android:textAllCaps="false"
+            android:textColor="#3e92b3"
+            android:textSize="12sp"
+            android:fontFamily="@font/barlow_medium"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/tpi_btn_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</com.google.android.material.card.MaterialCardView>
