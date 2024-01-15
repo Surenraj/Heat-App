@@ -386,13 +386,14 @@ class NgApprovalFragment : Fragment() {
                 day = calendar.get(Calendar.DAY_OF_MONTH)
                 month = calendar.get(Calendar.MONTH)
                 year = calendar.get(Calendar.YEAR)
-                val datePickerDialog =
-                    DatePickerDialog(requireContext(), { datePicker, year, month, day ->
-                        conversionDate = AppUtils.getDate("$day-${month+1}-$year")
-
-                        tvConversationDate.text = conversionDate
-                        tvConversationDate.error = null
-                    }, year, month,day)
+//                val datePickerDialog =
+//                    DatePickerDialog(requireContext(), { datePicker, year, month, day ->
+//                        conversionDate = AppUtils.getDate("$day-${month+1}-$year")
+//
+//                        tvConversationDate.text = conversionDate
+//                        tvConversationDate.error = null
+//                    }, year, month,day)
+                val datePickerDialog = DatePickerDialog(requireContext(), dateListener, year, month, day )
                 datePickerDialog.datePicker.maxDate = Date().time
                 datePickerDialog.datePicker.minDate = Date().time
 
@@ -644,7 +645,10 @@ class NgApprovalFragment : Fragment() {
         myHour = hr
         myMinute = min
 
+        val date = AppUtils.getFollowUpDateTime("$myDay/$myMonth/$myYear $myHour:$myMinute")
+        conversionDate = date
         binding.tvDateTime.text = AppUtils.getFollowUpDateTime("$myDay/$myMonth/$myYear $myHour:$myMinute")
+        binding.tvConversationDate.text = AppUtils.getFollowUpDateTime("$myDay/$myMonth/$myYear $myHour:$myMinute")
         LmcStatusFragment.dateTime = "$myDay/$myMonth/$myYear $myHour:$myMinute"
     }
 

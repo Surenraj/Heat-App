@@ -71,7 +71,7 @@ class LmcFinalFragment : Fragment() {
     var holeDrilled:Int = 1
     var mcvTesting:Int = 1
     var acknowledgeStatus = 1
-    private var hasAcknowledged = false
+    private var hasAcknowledged = true
     var acTape:Int = 1
 
     private var photoURI: Uri? = null
@@ -258,9 +258,12 @@ class LmcFinalFragment : Fragment() {
 //                    }
 
                 }
+
                 if(args.pvcSleeve == "0"){
                     rgPvc.check(rgPvc.getChildAt(1).id)
-                } else rgPvc.check(rgPvc.getChildAt(0).id)
+                } else {
+                    rgPvc.check(rgPvc.getChildAt(0).id)
+                }
 
                 if(args.meterInstallation == "0")  rgMi.check(rgMi.getChildAt(1).id) else rgMi.check(rgMi.getChildAt(0).id)
 
@@ -313,7 +316,7 @@ class LmcFinalFragment : Fragment() {
                 cbAcknowledge.visibility = View.GONE
                 tvAcknowledge.visibility = View.GONE
                 rbPvcAvail.isEnabled = false
-                rbPvcAvail.isEnabled = false
+                rbPvcNa.isEnabled = false
 
                 rbMiAvail.isEnabled = false
                 rbMiNa.isEnabled = false
@@ -426,10 +429,13 @@ class LmcFinalFragment : Fragment() {
 //                )
 //            }
 
-            cbAcknowledge.setOnCheckedChangeListener { compoundButton, isChecked ->
-                hasAcknowledged = isChecked
-                acknowledgeStatus = if (isChecked) 1 else 0
-            }
+            hasAcknowledged = true
+            acknowledgeStatus = 1
+            cbAcknowledge.isChecked = true
+//            cbAcknowledge.setOnCheckedChangeListener { compoundButton, isChecked ->
+//                hasAcknowledged = isChecked
+//                acknowledgeStatus = if (isChecked) 1 else 0
+//            }
 
             btnSubmit.setOnClickListener {
 

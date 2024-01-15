@@ -313,6 +313,7 @@
                     android:background="@drawable/bg_spinner"
                     android:gravity="center_vertical"
                     android:hint="Meter Number"
+                    android:visibility="gone"
                     android:paddingHorizontal="5dp"
                     android:textColor="#545454"
                     android:textColorHint="#80545454"
@@ -327,9 +328,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="7dp"
                     android:src="@drawable/barcode_new"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_meter_id"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tv_meter_id"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_meter_id_text"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tv_meter_id" />
 
                 <TextView
@@ -342,7 +342,7 @@
                     android:textColor="#545454"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_meter_id" />
+                    app:layout_constraintTop_toBottomOf="@id/iv_qr" />
 
                 <EditText
                     android:id="@+id/tv_meter_type"

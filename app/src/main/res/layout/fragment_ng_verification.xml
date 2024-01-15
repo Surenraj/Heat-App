@@ -462,6 +462,8 @@
                     app:layout_constraintTop_toBottomOf="@id/rv_live_gas"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_width="wrap_content"
+                    android:clickable="false"
+                    android:checked="true"
                     android:layout_height="wrap_content" />
 
                 <TextView

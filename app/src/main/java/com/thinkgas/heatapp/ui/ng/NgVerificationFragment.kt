@@ -111,13 +111,14 @@ class NgVerificationFragment : Fragment()
             tvInitial.text = args.finalReading
             tvBurner.text = args.burnerType
             tvWork.text = args.workDate
-            cbAcknowledge.setOnCheckedChangeListener { view, isChecked ->
-                acknowledgeId = if(isChecked) "1" else "0"
-            }
-            if(args.acknowledgeId != null){
-                acknowledgeId = args.acknowledgeId
-                cbAcknowledge.isChecked = args.acknowledgeId == "1"
-            }
+//            cbAcknowledge.setOnCheckedChangeListener { view, isChecked ->
+                cbAcknowledge.isChecked = true
+                acknowledgeId = "1"
+//            }
+//            if(args.acknowledgeId != null){
+//                acknowledgeId = args.acknowledgeId
+//                cbAcknowledge.isChecked = args.acknowledgeId == "1"
+//            }
 
             ivProfile.setOnClickListener {
                 val logoutBuilder = AlertDialog.Builder(requireContext())
