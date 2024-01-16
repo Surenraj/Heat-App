@@ -905,7 +905,6 @@ class FeasibilityStatusFragment : Fragment() {
                                     spinnerType.text = statusType
                                     if(subStatus!=null){
                                         spinnerStatus.text = subStatus
-
                                     }
                                     if(pipeline!=null){
                                         spinnerPipeline.text = pipeline
@@ -962,6 +961,19 @@ class FeasibilityStatusFragment : Fragment() {
                                     }
                                 }
 
+                                if (args.status == "hold") {
+                                    binding.apply {
+                                        toggleVisibility(View.GONE)
+                                        tvFollowTitle.visibility = View.VISIBLE
+                                        tvDateTime.visibility = View.VISIBLE
+                                        tvDescription.visibility = View.VISIBLE
+                                        etDescription.visibility = View.VISIBLE
+                                        tvRiserLength.visibility = View.GONE
+                                        etRiserLength.visibility = View.GONE
+                                        isFailed = true
+                                    tvDateTime.text =args.
+                                    }
+                                }
                             }
 
                         } else {
