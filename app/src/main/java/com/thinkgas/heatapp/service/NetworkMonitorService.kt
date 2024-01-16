@@ -53,7 +53,7 @@ class NetworkMonitorService : Service() {
 
             if (!isNetworkActive) {
                 val intent = Intent(context, NoInternetActivity::class.java)
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
                 break
             }

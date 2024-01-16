@@ -8,12 +8,16 @@
     android:orientation="vertical"
     tools:context=".noInternet.NoInternetActivity">
 
+    <ImageView
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_200sdp"
+        android:src="@drawable/no_internet"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:fontFamily="@font/barlow_semibold"
         android:text="No Internet Connection"
         android:textSize="@dimen/_18sdp" />
@@ -23,7 +27,8 @@
         android:layout_width="wrap_content"
         android:background="@drawable/login_btn_bg"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/_15sdp"
         android:text="Retry" />
 
 </LinearLayout>
