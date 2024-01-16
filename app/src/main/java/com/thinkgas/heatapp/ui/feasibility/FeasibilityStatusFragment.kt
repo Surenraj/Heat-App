@@ -971,7 +971,10 @@ class FeasibilityStatusFragment : Fragment() {
                                         tvRiserLength.visibility = View.GONE
                                         etRiserLength.visibility = View.GONE
                                         isFailed = true
-                                    tvDateTime.text =args.
+
+//                                        if(args.followUpDate.toString() != "null") {
+                                            tvDateTime.text = args.followUpDate.toString()
+//                                        }
                                     }
                                 }
                             }

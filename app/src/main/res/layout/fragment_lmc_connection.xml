@@ -310,10 +310,13 @@
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@drawable/bg_spinner"
                     android:gravity="center_vertical"
                     android:hint="Meter Number"
-                    android:visibility="gone"
+                    android:visibility="visible"
+                    android:enabled="false"
+                    android:clickable="false"
                     android:paddingHorizontal="5dp"
                     android:textColor="#545454"
                     android:textColorHint="#80545454"
@@ -328,8 +331,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="7dp"
                     android:src="@drawable/barcode_new"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_meter_id_text"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_meter_id"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tv_meter_id" />
 
                 <TextView

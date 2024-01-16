@@ -355,6 +355,8 @@ class LmcStatusFragment : Fragment() {
                         isHold = true
                         cbFollowUp.visibility = View.VISIBLE
                         tvFollowText.visibility = View.VISIBLE
+                        spinnerLmc.visibility = View.VISIBLE
+                        tvLmcExecution.visibility = View.VISIBLE
                         cbFollowUp.isChecked = true
                         tvDateTime.text = args.followUpDate
                         etDescription.setText(args.description)
@@ -1299,8 +1301,8 @@ class LmcStatusFragment : Fragment() {
                                         cbFollowUp.visibility = View.VISIBLE
                                         tvFollowText.visibility = View.VISIBLE
                                         cbFollowUp.isChecked = false
-                                        tvLmcExecution.visibility = View.GONE
-                                        spinnerLmc.visibility = View.GONE
+                                        tvLmcExecution.visibility = View.VISIBLE
+                                        spinnerLmc.visibility = View.VISIBLE
 //                                        tvDescription.visibility = View.GONE
 //                                        etDescription.visibility = View.GONE
                                     }

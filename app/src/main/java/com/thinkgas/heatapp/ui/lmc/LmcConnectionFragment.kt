@@ -7,6 +7,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.opengl.Visibility
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -226,6 +227,7 @@ class LmcConnectionFragment : Fragment() {
                 etLastName.isEnabled = false
                 etEmail.isEnabled = false
                 btnUpdate.isEnabled = false
+                btnUpdate.visibility = View.GONE
                 etInitialMeter.isEnabled = false
                 etRegulatorNo.isEnabled = false
                 etCuInstallation.isEnabled = false
@@ -1147,6 +1149,7 @@ class LmcConnectionFragment : Fragment() {
                 lmcGasSpinner?.setShowKeyboard(false)
             }
 
+            tvMeterId.isEnabled = false
             ivQr.setOnClickListener {
                 requestCameraPermission.launch(
                     Manifest.permission.CAMERA

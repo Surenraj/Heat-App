@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +38,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
+import kotlin.math.log
 
 @AndroidEntryPoint
 class FeasibilityListFragment : Fragment() {
@@ -475,6 +477,7 @@ class FeasibilityListFragment : Fragment() {
     private fun listItemClicked(it: Agent) {
         when(args.status){
             "hold","done","failed"->{
+                Log.d("date-------------",it.followUpDate.toString())
                 val directions =
                     FeasibilityListFragmentDirections.actionFeasibilityListFragmentToFeasibilityStatusFragment(
                         customerName = it.customerName,
@@ -492,6 +495,7 @@ class FeasibilityListFragment : Fragment() {
                         riserLength = it.riserLength,
                         pipeLength = it.giPipelength,
                         gcStatus = it.gcStatus,
+                        followUpDate = it.followUpDate,
                         srNo = it.srNo,
                         drsNo = it.drsNo,
                         mlcLength = it.mlcPipelength
