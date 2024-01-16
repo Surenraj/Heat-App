@@ -358,6 +358,7 @@ class RfcExtensionFragment : Fragment() {
                         return@setOnClickListener
                     }
 
+                    //get_ng_approval_list.php
                     if (etMeterNo.text.isBlank()) {
                         etMeterNo.error = "Enter Meter No."
                         etMeterNo.requestFocus()

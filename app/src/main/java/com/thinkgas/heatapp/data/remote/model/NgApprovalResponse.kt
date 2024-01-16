@@ -184,7 +184,7 @@ data class NgInstallationDetails(
     val giUnion:String?,
     @SerializedName("follow_up_date")
     val followupDate:String?,
-    @SerializedName("comment")
+    @SerializedName("comments")
     val comment:String?
 )
 
@@ -198,5 +198,7 @@ data class NgVerificationDetails(
     @SerializedName("ng_burner_details")
     val ngBurnerDetails: Any?,
     @SerializedName("ng_initial_reading")
-    val ngInitialReading: Any?
+    val ngInitialReading: Any?,
+    @SerializedName("work_start_date")
+    val ngWorkStartDate: Any?
 )

@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -85,6 +86,7 @@ class NgApprovalFragment : Fragment() {
         var drsNumber:String? = null
         var srNumber:String? = null
         var giUnion:String? = null
+        var followUpDate: String? = null
     }
 
     var lmcGiClamp:String? = null
@@ -222,6 +224,10 @@ class NgApprovalFragment : Fragment() {
                 logoutAlert.show()
 
 
+            }
+
+            followUpDate?.let {
+                tvDateTime.text = it
             }
 
             rfcStatus?.let {
@@ -1113,7 +1119,14 @@ class NgApprovalFragment : Fragment() {
                                         tvHoseOptions.visibility = View.GONE
                                         spinnerHose.visibility = View.GONE
                                         clNozzle.visibility = View.GONE
+                                    }
 
+                                    if ((item.contains("passed", true)) || (item.contains("Failed", true))) {
+                                        tvFollowTitle.visibility = View.GONE
+                                        tvDateTime.visibility = View.GONE
+                                    }else {
+                                        tvFollowTitle.visibility = View.VISIBLE
+                                        tvDateTime.visibility = View.VISIBLE
                                     }
                                 }
 
@@ -1200,6 +1213,10 @@ class NgApprovalFragment : Fragment() {
                                 nozzle90Length = installationDetails.nozzle90 ?: ""
                                 nozzle110Length = installationDetails.nozzle110 ?: ""
                                 nozzle125Length = installationDetails.nozzle125 ?: ""
+                                followUpDate = installationDetails.followupDate ?: ""
+                                tvDateTime.text = installationDetails.followupDate.toString()
+                                etDescription.setText(installationDetails.comment.toString())
+
                                 if(installationDetails.rfcStatus != null) {
                                     if (installationDetails.rfcStatus == "Passed") {
                                         tvMmtTesting.visibility = View.VISIBLE
@@ -1239,6 +1256,8 @@ class NgApprovalFragment : Fragment() {
                                     btnSubmit.visibility = View.GONE
                                     btnApprove.visibility = View.VISIBLE
                                     btnDecline.visibility = View.VISIBLE
+                                    tvFollowTitle.visibility = View.GONE
+                                    tvDateTime.visibility = View.GONE
                                 }
                                 if(installationDetails.mmtTesting != null && installationDetails.rfcStatus == "Passed"){
                                     if (installationDetails.mmtTesting == "1") rbMmtDone.isChecked = true else rbMmtNotDone.isChecked = true
@@ -1314,6 +1333,11 @@ class NgApprovalFragment : Fragment() {
                                     spinnerNb90.text = installationDetails.nozzle90 ?: "Size(90)"
                                     spinnerNb110.text = installationDetails.nozzle110 ?: "Size(110)"
                                     spinnerNb125.text = installationDetails.nozzle125 ?: "Size(125)"
+                                }
+
+                                if ((installationDetails.rfcStatus?.lowercase() == "failed") || (installationDetails.rfcStatus?.lowercase() == "passed")) {
+                                    tvFollowTitle.visibility = View.GONE
+                                    tvDateTime.visibility = View.GONE
                                 }
                             }
                         }

@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -59,7 +60,7 @@ class LoginFragment : Fragment() {
         dialog = builder.create()
 
         binding.apply {
-
+            etMobile.transformationMethod = HideReturnsTransformationMethod.getInstance()
             etPassword.setOnTouchListener(object : View.OnTouchListener{
                 override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
                     if(p1?.action == MotionEvent.ACTION_UP) {
