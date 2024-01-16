@@ -241,6 +241,7 @@
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/barlow_regular"
                     android:textSize="16sp"
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -256,6 +257,7 @@
                     android:paddingHorizontal="5dp"
                     android:textColor="#545454"
                     android:gravity="center_vertical"
+                    android:visibility="gone"
                     android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

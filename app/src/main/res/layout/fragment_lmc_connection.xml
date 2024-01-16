@@ -137,6 +137,7 @@
                     android:hint="Mobile"
                     android:inputType="phone"
                     android:maxLength="15"
+                    android:enabled="false"
                     android:maxLines="1"
                     android:padding="5dp"
                     android:textColor="#545454"

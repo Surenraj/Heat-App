@@ -4,7 +4,9 @@ import `in`.galaxyofandroid.spinerdialog.SpinnerDialog
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.app.Dialog
+import android.app.TimePickerDialog
 import android.content.*
 import android.content.pm.ResolveInfo
 import android.graphics.*
@@ -47,6 +49,7 @@ import com.thinkgas.heatapp.databinding.CommentDialogBinding
 import com.thinkgas.heatapp.databinding.FragmentFeasibilityStatusBinding
 import com.thinkgas.heatapp.databinding.LayoutViewImageBinding
 import com.thinkgas.heatapp.ui.common.adapters.ViewAttachmentAdapter
+import com.thinkgas.heatapp.ui.lmc.LmcStatusFragment
 import com.thinkgas.heatapp.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.*
@@ -116,6 +119,17 @@ class FeasibilityStatusFragment : Fragment() {
         ISOMETRIC,
         ATTACHMENT,
     }
+
+    var day = 0
+    var month: Int = 0
+    var year: Int = 0
+    var hour: Int = 0
+    var minute: Int = 0
+    var myDay = 0
+    var myMonth: Int = 0
+    var myYear: Int = 0
+    var myHour: Int = 0
+    var myMinute: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -372,6 +386,7 @@ class FeasibilityStatusFragment : Fragment() {
                     params["riser_length"] = etRiserLength.text.toString()
                     params["gi_pipelength"] = etPipeLength.text.toString()
                     params["gc_status"] = fsGC!!
+                    params["follow_up_date"] = tvDateTime.text.toString()
                 }else{
                     if (etDescription.text.isNullOrBlank()){
                         etDescription.error = "Enter comments"
@@ -392,6 +407,7 @@ class FeasibilityStatusFragment : Fragment() {
                     params["fs_session_id"] = args.sessionId
                     params["approval_status"] = "Nil"
                     params["comments"] = ""
+                    params["follow_up_date"] = tvDateTime.text.toString()
 //                    params["riser_status"]=fsRiser!!
 //                    params["riser_length"] = etRiserLength.text.toString()
 //                    params["gi_pipelength"] = etPipeLength.text.toString()
@@ -822,6 +838,10 @@ class FeasibilityStatusFragment : Fragment() {
                                 binding.apply {
                                     if(status!!.contains("failed",true) || status.contains("hold",true)){
                                         toggleVisibility(View.GONE)
+                                        if (status.contains("hold",true)) {
+                                            tvFollowTitle.visibility = View.VISIBLE
+                                            tvDateTime.visibility = View.VISIBLE
+                                        }
                                         tvDescription.visibility = View.VISIBLE
                                         etDescription.visibility = View.VISIBLE
                                         tvRiserLength.visibility = View.GONE
@@ -844,6 +864,17 @@ class FeasibilityStatusFragment : Fragment() {
                                     spinnerType.error = null
                                     spinnerStatus.text = "Select Type"
                                     fsStatus = item
+
+                                    tvDateTime.setOnClickListener {
+                                        val calendar: Calendar = Calendar.getInstance()
+                                        day = calendar.get(Calendar.DAY_OF_MONTH)
+                                        month = calendar.get(Calendar.MONTH)
+                                        year = calendar.get(Calendar.YEAR)
+                                        val datePickerDialog =
+                                            DatePickerDialog(requireContext(), dateListener, year, month,day)
+                                        datePickerDialog.datePicker.minDate = Date().time
+                                        datePickerDialog.show()
+                                    }
                                 }
                                 val statusList = mutableListOf<String>()
                                 tpiMap[item]?.forEach {
@@ -1262,7 +1293,26 @@ class FeasibilityStatusFragment : Fragment() {
 //        canvas.drawText(text, x*scale, y*scale+500f, paint)
         return drawableBitmap
     }
+    private val dateListener = DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
+        myDay = i3
+        myYear = i
+        myMonth = i2
+        val calendar: Calendar = Calendar.getInstance()
+        hour = calendar.get(Calendar.HOUR)
+        minute = calendar.get(Calendar.MINUTE)
+        val timePickerDialog = TimePickerDialog(requireContext(), timeListener, hour, minute,
+            true)
+        timePickerDialog.show()
 
+    }
+
+    private val timeListener = TimePickerDialog.OnTimeSetListener { timePicker, hr, min ->
+        myHour = hr
+        myMinute = min
+
+        binding.tvDateTime.text = AppUtils.getFollowUpDateTime("$myDay/$myMonth/$myYear $myHour:$myMinute")
+        LmcStatusFragment.dateTime = "$myDay/$myMonth/$myYear $myHour:$myMinute"
+    }
 
     private fun setUploadObserver(){
         viewModel.uploadResponse.observe(viewLifecycleOwner){

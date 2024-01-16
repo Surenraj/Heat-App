@@ -93,11 +93,11 @@ class LoginFragment : Fragment() {
                 if (btnLogin.text.contains("login", true))
                 {
                     phoneNumber = etMobile.text.toString()
-//                    val password = etPassword.text.toString()
+                    val password = ""
                     if (validateMobileNumber(phoneNumber!!) && phoneNumber != null) {
                         val params = HashMap<String, String>()
                         params["mobile_no"] = phoneNumber!!
-//                        params["password"] = password
+                        params["password"] = ""
                         loginViewModel.getOtpValue(params)
                     } else {
                         etMobile.error = "Invalid mobile number"
