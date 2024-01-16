@@ -348,6 +348,8 @@ class LmcStatusFragment : Fragment() {
                         isFailed = true
                         spinnerLmc.visibility = View.GONE
                         tvLmcExecution.visibility = View.GONE
+                        tvDescription.visibility = View.VISIBLE
+                        etDescription.visibility = View.VISIBLE
                     }
 
                     if(args.statusType!!.contains("hold",true)){
@@ -355,11 +357,13 @@ class LmcStatusFragment : Fragment() {
                         isHold = true
                         cbFollowUp.visibility = View.VISIBLE
                         tvFollowText.visibility = View.VISIBLE
-                        spinnerLmc.visibility = View.VISIBLE
-                        tvLmcExecution.visibility = View.VISIBLE
+                        spinnerLmc.visibility = View.GONE
+                        tvLmcExecution.visibility = View.GONE
                         cbFollowUp.isChecked = true
                         tvDateTime.text = args.followUpDate
                         etDescription.setText(args.description)
+                        tvDescription.visibility = View.VISIBLE
+                        etDescription.visibility = View.VISIBLE
                     }
                 }
 
@@ -1301,10 +1305,10 @@ class LmcStatusFragment : Fragment() {
                                         cbFollowUp.visibility = View.VISIBLE
                                         tvFollowText.visibility = View.VISIBLE
                                         cbFollowUp.isChecked = false
-                                        tvLmcExecution.visibility = View.VISIBLE
-                                        spinnerLmc.visibility = View.VISIBLE
-//                                        tvDescription.visibility = View.GONE
-//                                        etDescription.visibility = View.GONE
+                                        tvLmcExecution.visibility = View.GONE
+                                        spinnerLmc.visibility = View.GONE
+                                        tvDescription.visibility = View.VISIBLE
+                                        etDescription.visibility = View.VISIBLE
                                     }
 
                                     if(item.contains("passed",true)){

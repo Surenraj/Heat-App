@@ -241,7 +241,6 @@
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/barlow_regular"
                     android:textSize="16sp"
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -257,7 +256,6 @@
                     android:paddingHorizontal="5dp"
                     android:textColor="#545454"
                     android:gravity="center_vertical"
-                    android:visibility="gone"
                     android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -338,22 +336,22 @@
 
                 <EditText
                     android:id="@+id/et_description"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="10dp"
-                    android:visibility="gone"
-                    android:hint="Description"
-                    android:gravity="start"
-                    tools:visibility="visible"
-
-                    android:textColor="#545454"
-                    android:padding="5dp"
-                    android:maxLines="4"
-                    android:ellipsize="end"
-                    android:background="@drawable/description_background"
-                    app:layout_constraintTop_toBottomOf="@id/tv_description"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/description_background"
+                    android:ellipsize="end"
+                    android:gravity="start"
+                    android:hint="Description"
+                    android:maxLines="4"
+                    android:padding="5dp"
+                    android:textSize="14sp"
+                    android:textColorHint="#80545454"
+                    android:textColor="#545454"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_description" />
 
                 <TextView
                     android:id="@+id/tv_attachments"
