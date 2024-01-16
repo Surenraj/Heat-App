@@ -841,6 +841,9 @@ class FeasibilityStatusFragment : Fragment() {
                                         if (status.contains("hold",true)) {
                                             tvFollowTitle.visibility = View.VISIBLE
                                             tvDateTime.visibility = View.VISIBLE
+                                        } else {
+                                            tvFollowTitle.visibility = View.GONE
+                                            tvDateTime.visibility = View.GONE
                                         }
                                         tvDescription.visibility = View.VISIBLE
                                         etDescription.visibility = View.VISIBLE
@@ -849,8 +852,22 @@ class FeasibilityStatusFragment : Fragment() {
                                         isFailed = true
                                     }else{
                                         toggleVisibility(View.VISIBLE)
-                                        tvDescription.visibility = View.GONE
-                                        etDescription.visibility = View.GONE
+
+                                        if (status!!.contains("done", true)) {
+                                            tvDescription.visibility = View.GONE
+                                            etDescription.visibility = View.GONE
+                                            tvFollowTitle.visibility = View.GONE
+                                            tvDateTime.visibility = View.GONE
+                                        } else {
+                                            tvDescription.visibility = View.VISIBLE
+                                            etDescription.visibility = View.VISIBLE
+                                        }
+
+                                        if (status!!.contains("failed",true)){
+                                            tvFollowTitle.visibility = View.GONE
+                                            tvDateTime.visibility = View.GONE
+                                        }
+
                                         if(fsRiser == "Yes"){
                                             tvRiserLength.visibility = View.VISIBLE
                                             etRiserLength.visibility = View.VISIBLE
@@ -939,6 +956,12 @@ class FeasibilityStatusFragment : Fragment() {
                                 if(args.status == "failed"){
                                     toggleVisibility(View.GONE)
                                     isFailed = true
+                                    binding.apply {
+                                        tvFollowTitle.visibility = View.GONE
+                                        tvDateTime.visibility = View.GONE
+                                        tvDescription.visibility = View.VISIBLE
+                                        etDescription.visibility = View.VISIBLE
+                                    }
                                 }
 
                                 val statusList = mutableListOf<String>()
@@ -975,6 +998,15 @@ class FeasibilityStatusFragment : Fragment() {
 //                                        if(args.followUpDate.toString() != "null") {
                                             tvDateTime.text = args.followUpDate.toString()
 //                                        }
+                                    }
+                                }
+
+                                if (args.status == "done") {
+                                    binding.apply {
+                                        tvDescription.visibility = View.GONE
+                                        etDescription.visibility = View.GONE
+                                        tvFollowTitle.visibility = View.GONE
+                                        tvDateTime.visibility = View.GONE
                                     }
                                 }
                             }
