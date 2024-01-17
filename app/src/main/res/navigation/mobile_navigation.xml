@@ -1489,6 +1489,14 @@
             app:argType="string"
             app:nullable="true" />
         <argument
+            android:name="description"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="folloUpDate"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
             android:name="gcApplication"
             app:argType="string"
             app:nullable="true" />

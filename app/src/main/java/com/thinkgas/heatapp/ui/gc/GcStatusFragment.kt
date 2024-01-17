@@ -6,6 +6,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.app.TimePickerDialog
 import android.content.*
 import android.content.pm.ResolveInfo
 import android.graphics.*
@@ -42,6 +43,7 @@ import com.thinkgas.heatapp.databinding.FragmentGcStatusBinding
 import com.thinkgas.heatapp.databinding.GcUnregDialogBinding
 import com.thinkgas.heatapp.databinding.LayoutViewImageBinding
 import com.thinkgas.heatapp.ui.common.adapters.ViewAttachmentAdapter
+import com.thinkgas.heatapp.ui.lmc.LmcStatusFragment
 import com.thinkgas.heatapp.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.*
@@ -105,6 +107,13 @@ class GcStatusFragment : Fragment() {
     var day = 0
     var month: Int = 0
     var year: Int = 0
+    var hour: Int = 0
+    var minute: Int = 0
+    var myDay = 0
+    var myMonth: Int = 0
+    var myYear: Int = 0
+    var myHour: Int = 0
+    var myMinute: Int = 0
 
     companion object {
         var attachmentFlag = false
@@ -169,6 +178,17 @@ class GcStatusFragment : Fragment() {
                 }
                 val logoutAlert = logoutBuilder.create()
                 logoutAlert.show()
+            }
+
+            tvDateTime.setOnClickListener {
+                val calendar: Calendar = Calendar.getInstance()
+                day = calendar.get(Calendar.DAY_OF_MONTH)
+                month = calendar.get(Calendar.MONTH)
+                year = calendar.get(Calendar.YEAR)
+                val datePickerDialog =
+                    DatePickerDialog(requireContext(), dateListener, year, month,day)
+                datePickerDialog.datePicker.minDate = Date().time
+                datePickerDialog.show()
             }
 
             when(args.status){
@@ -318,6 +338,7 @@ class GcStatusFragment : Fragment() {
                     gcType = args.gcType!!.toInt()
                 }
 
+                updateView(args.status.toString())
 //                if(args.lmcGcAlignment == "0")  rgCsTwo.check(rgCsTwo.getChildAt(1).id) else rgCsTwo.check(rgCsTwo.getChildAt(0).id)
 //
 //                if(args.lmcStatus == "0")  rgCsThree.check(rgCsThree.getChildAt(1).id) else rgCsThree.check(rgCsThree.getChildAt(0).id)
@@ -373,11 +394,11 @@ class GcStatusFragment : Fragment() {
                     params["status_type"] = gcStatus!!
                     params["sub_status_id"] = gcSubStatusCode!!
                     params["sub_status"] = gcSubStatus!!
-                    params["description"] = ""
+                    params["description"] = etDescription.text.toString()
+                    params["follow_up_date"] = tvDateTime.text.toString()
                     params["fs_session_id"] = args.sessionId.toString()
                     params["approval_status"] = "Nil"
                     params["comments"] = ""
-
                     viewModel.submitGc(params)
 
                     return@setOnClickListener
@@ -386,7 +407,7 @@ class GcStatusFragment : Fragment() {
                 if (gcDate.isNullOrBlank()) {
                     spinnerDate.error = "Select any date"
                     spinnerDate.requestFocus()
-                    return@setOnClickListener
+                    gcDate = ""
                 }
 //
 //                if(gcNumber.isNullOrBlank()){
@@ -398,7 +419,7 @@ class GcStatusFragment : Fragment() {
                 if (gcPotential.isNullOrBlank()) {
                     spinnerPotential.error = "Select Potential"
                     spinnerPotential.requestFocus()
-                    return@setOnClickListener
+                    gcPotential = ""
                 }
 
 //                if(gcApplication.isNullOrBlank()){
@@ -423,19 +444,16 @@ class GcStatusFragment : Fragment() {
                 if(gcAttachmentCount == 0){
                     tvAttachments.error = "LMC Alignment Image required"
                     tvAttachments.requestFocus()
-                    return@setOnClickListener
                 }
 
                 if(rccCount == 0){
                     tvRcc.error = "RCC Guard Image required"
                     tvRcc.requestFocus()
-                    return@setOnClickListener
                 }
 
                 if(warningCount == 0){
                     tvWarning.error = "Warning plate required"
                     tvWarning.requestFocus()
-                    return@setOnClickListener
                 }
 
                 gcStatusCode = tpiStatusMap[gcStatus].toString()
@@ -443,13 +461,13 @@ class GcStatusFragment : Fragment() {
                 params["application_number"] = args.appNo.toString()
                 params["bp_number"] = args.bpNo.toString()
                     params["customer_info"] = args.customerName.toString()
-                    params["status_type_id"] = gcStatusCode!!
-                    params["status_type"] = gcStatus!!
-                    params["sub_status_id"] = gcSubStatusCode!!
-                    params["sub_status"] = gcSubStatus!!
-                    params["gc_date"] = gcDate!!
+                    params["status_type_id"] = gcStatusCode.toString()
+                    params["status_type"] = gcStatus.toString()
+                    params["sub_status_id"] = gcSubStatusCode.toString()
+                    params["sub_status"] = gcSubStatus.toString()
+                    params["gc_date"] = gcDate.toString()
                     params["gc_number"] = ""
-                    params["potential"] = gcPotential!!
+                    params["potential"] = gcPotential.toString()
                     params["registered_customer_application_list"] = ""
                     params["lmc_status"] = lmcStatus.toString()
                     params["approval_status"] = "Nil"
@@ -460,8 +478,8 @@ class GcStatusFragment : Fragment() {
                     params["gc_contractor"] = ""
                     params["gc_supervisor"] = ""
                     params["location"] = "${AppCache.latitude} ${AppCache.longitude}"
-
-
+                    params["description"] = etDescription.text.toString()
+                    params["follow_up_date"] = tvDateTime.text.toString()
 
                 viewModel.submitGc(params)
 
@@ -665,6 +683,27 @@ class GcStatusFragment : Fragment() {
         }
 
 
+    }
+
+    private val dateListener = DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
+        myDay = i3
+        myYear = i
+        myMonth = i2 + 1
+
+        val calendar: Calendar = Calendar.getInstance()
+        hour = calendar.get(Calendar.HOUR)
+        minute = calendar.get(Calendar.MINUTE)
+        val timePickerDialog = TimePickerDialog(requireContext(), timeListener, hour, minute,
+            true)
+        timePickerDialog.show()
+
+    }
+
+    private val timeListener = TimePickerDialog.OnTimeSetListener { timePicker, hr, min ->
+        myHour = hr
+        myMinute = min
+        binding.tvDateTime.text = AppUtils.getFollowUpDateTime("$myDay/$myMonth/$myYear $myHour:$myMinute")
+        LmcStatusFragment.dateTime = "$myDay/$myMonth/$myYear $myHour:$myMinute"
     }
 
     private fun getAttachmentList() {
@@ -911,6 +950,98 @@ class GcStatusFragment : Fragment() {
         imageDialog?.show()
     }
 
+    private fun updateView(statusType: String) {
+        binding.apply {
+            when (statusType.lowercase()) {
+                "passed", "done" -> {
+                    tvDate.visibility = View.VISIBLE
+                    spinnerDate.visibility = View.VISIBLE
+                    tvPotential.visibility = View.VISIBLE
+                    spinnerPotential.visibility = View.VISIBLE
+                    tvApplication.visibility = View.VISIBLE
+                    etApplication.visibility = View.VISIBLE
+                    tvAttachments.visibility = View.VISIBLE
+                    ivAttachments.visibility = View.VISIBLE
+                    rvAttachment.visibility = View.VISIBLE
+                    tvRcc.visibility = View.VISIBLE
+                    ivIsometric.visibility = View.VISIBLE
+                    rvRcc.visibility = View.VISIBLE
+                    tvWarning.visibility = View.VISIBLE
+                    ivWarning.visibility = View.VISIBLE
+                    rvWarning.visibility = View.VISIBLE
+
+                    tvLocation.visibility = View.VISIBLE
+
+                    tvDescription.visibility = View.GONE
+                    etDescription.visibility = View.GONE
+
+                    tvFollowTitle.visibility = View.GONE
+                    tvDateTime.visibility = View.GONE
+                }
+
+                "hold" -> {
+                    tvDate.visibility = View.GONE
+                    spinnerDate.visibility = View.GONE
+                    tvPotential.visibility = View.GONE
+                    spinnerPotential.visibility = View.GONE
+                    tvApplication.visibility = View.GONE
+                    etApplication.visibility = View.GONE
+                    tvAttachments.visibility = View.GONE
+                    ivAttachments.visibility = View.GONE
+                    rvAttachment.visibility = View.GONE
+                    tvRcc.visibility = View.GONE
+                    ivIsometric.visibility = View.GONE
+                    rvRcc.visibility = View.GONE
+                    tvWarning.visibility = View.GONE
+                    ivWarning.visibility = View.GONE
+                    rvWarning.visibility = View.GONE
+
+                    tvLocation.visibility = View.GONE
+
+                    tvDescription.visibility = View.VISIBLE
+                    etDescription.visibility = View.VISIBLE
+
+                    tvFollowTitle.visibility = View.VISIBLE
+                    tvDateTime.visibility = View.VISIBLE
+                }
+
+                "failed" -> {
+                    tvDate.visibility = View.GONE
+                    spinnerDate.visibility = View.GONE
+                    tvPotential.visibility = View.GONE
+                    spinnerPotential.visibility = View.GONE
+                    tvApplication.visibility = View.GONE
+                    etApplication.visibility = View.GONE
+                    tvAttachments.visibility = View.GONE
+                    ivAttachments.visibility = View.GONE
+                    rvAttachment.visibility = View.GONE
+                    tvRcc.visibility = View.GONE
+                    ivIsometric.visibility = View.GONE
+                    rvRcc.visibility = View.GONE
+                    tvWarning.visibility = View.GONE
+                    ivWarning.visibility = View.GONE
+                    rvWarning.visibility = View.GONE
+
+                    tvLocation.visibility = View.GONE
+
+                    tvDescription.visibility = View.VISIBLE
+                    etDescription.visibility = View.VISIBLE
+
+                    tvFollowTitle.visibility = View.GONE
+                    tvDateTime.visibility = View.GONE
+                }
+            }
+
+            if (args.gcDate.isNullOrEmpty()) {
+                spinnerDate.text = "Select Date"
+            }
+
+            if (args.potentialId.isNullOrEmpty()) {
+                spinnerPotential.text = "Select Potential"
+            }
+        }
+    }
+
     private fun setUpObserver() {
         viewModel.tpiListResponse.observe(viewLifecycleOwner) {
             if (it != null) {
@@ -985,6 +1116,8 @@ class GcStatusFragment : Fragment() {
                                     spinnerType.error = null
                                     spinnerStatus.text = "Select Type"
                                     gcStatus = item
+
+                                    updateView(item.toString())
                                 }
                                 val statusList = mutableListOf<String>()
                                 tpiMap[item]?.forEach {
@@ -1028,6 +1161,10 @@ class GcStatusFragment : Fragment() {
                                     spinnerDate.text = args.gcDate
                                     etApplication.setText(args.gcApplication)
 
+                                    updateView(statusType.toString())
+
+                                    etDescription.setText(args.description)
+                                    tvDateTime.text = args.folloUpDate
                                 }
                                 gcStatusCode = args.statusTypeId.toString()
                                 gcStatus=statusType
@@ -1039,6 +1176,8 @@ class GcStatusFragment : Fragment() {
                                 gcNumber = args.gcNumber
                                 gcSupervisor = args.gcSupervisor
                                 gcContractor = args.gcContractor
+
+
 
                                 if(args.status == "failed"){
                                     toggleVisibility(View.GONE)
@@ -1271,7 +1410,6 @@ class GcStatusFragment : Fragment() {
                 params["approval_status"] = status
                 params["comments"] = etComment.text.toString()
                 viewModel.submitGc(params)
-
                 alert.dismiss()
 
                 //if ($rfc_approval_status == "Approved")

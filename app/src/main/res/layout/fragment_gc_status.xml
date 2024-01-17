@@ -351,6 +351,69 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
 
+                <TextView
+                    android:id="@+id/tv_follow_title"
+                    app:layout_constraintTop_toBottomOf="@id/et_application"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/follow_up_date_and_time"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#545454"
+                    tools:visibility="visible"
+                    android:fontFamily="@font/barlow_regular"
+                    android:textSize="16sp"
+                    android:visibility="visible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tv_date_time"
+                    app:layout_constraintTop_toBottomOf="@id/tv_follow_title"
+                    android:layout_marginTop="8dp"
+                    app:backgroundTint="@null"
+                    android:background="@drawable/bg_spinner"
+                    android:text="Select Date &amp; Time"
+                    android:paddingHorizontal="5dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:visibility="visible"
+                    android:textColor="#545454"
+                    android:gravity="center_vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp" />
+
+                <TextView
+                    android:id="@+id/tv_description"
+                    app:layout_constraintTop_toBottomOf="@id/tv_date_time"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/comments"
+                    android:visibility="visible"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:textSize="16sp"
+                    android:textColor="#545454"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/et_description"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:hint="Enter your comments"
+                    android:gravity="start"
+                    android:padding="5dp"
+                    android:visibility="visible"
+                    android:textColor="#DC545454"
+                    android:fontFamily="@font/barlow_regular"
+                    android:maxLines="4"
+                    android:ellipsize="end"
+                    android:background="@drawable/description_background"
+                    app:layout_constraintTop_toBottomOf="@id/tv_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
 
                 <!--                <TextView-->
 <!--                    android:id="@+id/tv_cs_two"-->
@@ -556,7 +619,7 @@
                     android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_up_24"
                     app:layout_constraintEnd_toStartOf="@id/iv_attachments"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/et_application"
+                    app:layout_constraintTop_toBottomOf="@id/et_description"
                     android:fontFamily="@font/poppins_bold"
                     app:layout_goneMarginBottom="32dp"/>
 
