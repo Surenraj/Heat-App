@@ -525,11 +525,11 @@ class NgApprovalFragment : Fragment() {
 
                     val params = HashMap<String,String?>()
                     params["application_number"] = args.appNo
-                    params["bp_number"] = bpNo!!
+                    params["bp_number"] = bpNo ?: ""
                     params["tpi_id"] = args.tpiId
                     params["customer_info"] = args.customerInfo
                     params["ng_session_id"] = args.sessionId
-                    params["ng_convertion_date"] = conversionDate!!
+                    params["ng_convertion_date"] = conversionDate.toString() ?: ""
                     params["ng_testing_leakage_acceptance"] = acknowledgeId ?: "0"
                     params["rfc_status"] = rfcStatus
                     params["mmt_testing"] = mmtStatus
@@ -652,10 +652,10 @@ class NgApprovalFragment : Fragment() {
         myMinute = min
 
         val date = AppUtils.getFollowUpDateTime("$myDay/$myMonth/$myYear $myHour:$myMinute")
-        conversionDate = date
         binding.tvDateTime.text = AppUtils.getFollowUpDateTime("$myDay/$myMonth/$myYear $myHour:$myMinute")
         binding.tvConversationDate.text = AppUtils.getFollowUpDateTime("$myDay/$myMonth/$myYear $myHour:$myMinute")
         LmcStatusFragment.dateTime = "$myDay/$myMonth/$myYear $myHour:$myMinute"
+        conversionDate = date.toString()
     }
 
     private fun submitNgApproval(status:String){
