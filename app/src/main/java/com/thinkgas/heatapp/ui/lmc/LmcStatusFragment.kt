@@ -242,6 +242,10 @@ class LmcStatusFragment : Fragment() {
                 spinnerLmc.text = lmcExecution
             }
 
+            if (description != null) {
+                etDescription.setText(description)
+            }
+
             cbFollowUp.setOnCheckedChangeListener { compoundButton, isChecked ->
                 if (isChecked) {
                     toggleFollowUpVisibility(true)
@@ -321,6 +325,9 @@ class LmcStatusFragment : Fragment() {
                     spinnerType.text = args.statusType
                     spinnerStatus.text = args.substatus
                     spinnerLmc.text = args.lmcExecution
+
+                    etDescription.setText(args.description)
+
                     cbFollowUp.visibility = View.GONE
                     tvFollowText.visibility = View.GONE
 
