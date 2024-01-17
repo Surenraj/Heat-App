@@ -546,8 +546,14 @@ class LmcConnectionFragment : Fragment() {
             }
 
             if(args.status == "hold" || args.status == "done"){
-                spinnerRfc.text = args.lmcType
-                spinnerMeter.text = args.meterDetails
+
+                if (!args.lmcType.isNullOrEmpty()) {
+                    spinnerRfc.text = args.lmcType
+                }
+
+                if (!args.meterDetails.isNullOrEmpty()) {
+                    spinnerMeter.text = args.meterDetails
+                }
                 spinnerGas.text = args.gasType
                 spinnerProperty.text = args.propertyType
 //                spinnerMeterNo.text = args.meterNo

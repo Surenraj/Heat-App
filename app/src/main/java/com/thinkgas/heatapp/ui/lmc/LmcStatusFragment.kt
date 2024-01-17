@@ -250,7 +250,11 @@ class LmcStatusFragment : Fragment() {
                 } else {
                     toggleFollowUpVisibility(false)
                     hasFollowUp = false
-                    btnSubmit.text = "Next"
+                    if (args.status.equals("passed")) {
+                        btnSubmit.text = "Next"
+                    } else {
+                        btnSubmit.text = "Submit"
+                    }
                 }
             }
 

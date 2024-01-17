@@ -173,6 +173,17 @@ class FeasibilityStatusFragment : Fragment() {
 
             }
 
+            tvDateTime.setOnClickListener {
+                val calendar: Calendar = Calendar.getInstance()
+                day = calendar.get(Calendar.DAY_OF_MONTH)
+                month = calendar.get(Calendar.MONTH)
+                year = calendar.get(Calendar.YEAR)
+                val datePickerDialog =
+                    DatePickerDialog(requireContext(), dateListener, year, month,day)
+                datePickerDialog.datePicker.minDate = Date().time
+                datePickerDialog.show()
+            }
+
 
             when(args.status){
                 "pending"->{
@@ -841,6 +852,8 @@ class FeasibilityStatusFragment : Fragment() {
                                         if (status.contains("hold",true)) {
                                             tvFollowTitle.visibility = View.VISIBLE
                                             tvDateTime.visibility = View.VISIBLE
+                                            tvDateTime.isEnabled = true
+                                            tvDateTime.isClickable = true
                                         } else {
                                             tvFollowTitle.visibility = View.GONE
                                             tvDateTime.visibility = View.GONE
@@ -989,6 +1002,8 @@ class FeasibilityStatusFragment : Fragment() {
                                         toggleVisibility(View.GONE)
                                         tvFollowTitle.visibility = View.VISIBLE
                                         tvDateTime.visibility = View.VISIBLE
+                                        tvDateTime.isEnabled = true
+                                        tvDateTime.isClickable = true
                                         tvDescription.visibility = View.VISIBLE
                                         etDescription.visibility = View.VISIBLE
                                         tvRiserLength.visibility = View.GONE
@@ -997,6 +1012,7 @@ class FeasibilityStatusFragment : Fragment() {
 
 //                                        if(args.followUpDate.toString() != "null") {
                                             tvDateTime.text = args.followUpDate.toString()
+                                            tvDateTime.isEnabled = true
 //                                        }
                                     }
                                 }
@@ -1343,7 +1359,8 @@ class FeasibilityStatusFragment : Fragment() {
     private val dateListener = DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
         myDay = i3
         myYear = i
-        myMonth = i2
+        myMonth = i2 + 1
+
         val calendar: Calendar = Calendar.getInstance()
         hour = calendar.get(Calendar.HOUR)
         minute = calendar.get(Calendar.MINUTE)
@@ -1356,7 +1373,6 @@ class FeasibilityStatusFragment : Fragment() {
     private val timeListener = TimePickerDialog.OnTimeSetListener { timePicker, hr, min ->
         myHour = hr
         myMinute = min
-
         binding.tvDateTime.text = AppUtils.getFollowUpDateTime("$myDay/$myMonth/$myYear $myHour:$myMinute")
         LmcStatusFragment.dateTime = "$myDay/$myMonth/$myYear $myHour:$myMinute"
     }
