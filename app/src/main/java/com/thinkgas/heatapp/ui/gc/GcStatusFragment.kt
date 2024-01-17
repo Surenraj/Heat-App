@@ -1039,6 +1039,10 @@ class GcStatusFragment : Fragment() {
             if (args.potentialId.isNullOrEmpty()) {
                 spinnerPotential.text = "Select Potential"
             }
+
+            if (args.folloUpDate.isNullOrEmpty()) {
+                tvDateTime.text = "Select Date & Time"
+            }
         }
     }
 
