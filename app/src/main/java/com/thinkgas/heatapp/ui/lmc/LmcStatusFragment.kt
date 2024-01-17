@@ -1163,7 +1163,7 @@ class LmcStatusFragment : Fragment() {
     private val dateListener = DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
         myDay = i3
         myYear = i
-        myMonth = i2
+        myMonth = i2 + 1
         val calendar: Calendar = Calendar.getInstance()
         hour = calendar.get(Calendar.HOUR)
         minute = calendar.get(Calendar.MINUTE)

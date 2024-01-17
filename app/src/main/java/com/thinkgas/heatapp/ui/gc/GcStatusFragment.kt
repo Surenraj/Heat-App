@@ -1440,7 +1440,7 @@ class GcStatusFragment : Fragment() {
                             Toast.makeText(requireContext(), it.data!!.message, Toast.LENGTH_SHORT)
                                 .show()
                         }
-//                        getAttachmentList()
+                        getAttachmentList()
                     }
                     Status.ERROR->{
                         setDialog(false)
