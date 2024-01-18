@@ -484,25 +484,25 @@ class NgApprovalFragment : Fragment() {
                             return@setOnClickListener
                         }
 
-//                        if(nozzle65Length.isNullOrBlank()){
-//                            spinnerNb65.error = "Select size(65)"
-//                            return@setOnClickListener
-//                        }
-//
-//                        if(nozzle90Length.isNullOrBlank()){
-//                            spinnerNb90.error = "Select size(90)"
-//                            return@setOnClickListener
-//                        }
-//
-//                        if(nozzle110Length.isNullOrBlank()){
-//                            spinnerNb110.error = "Select size(110)"
-//                            return@setOnClickListener
-//                        }
-//
-//                        if(nozzle125Length.isNullOrBlank()){
-//                            spinnerNb125.error = "Select size(125)"
-//                            return@setOnClickListener
-//                        }
+                        if(nozzle65Length.isNullOrBlank()){
+                            spinnerNb65.error = "Select size(65)"
+                            return@setOnClickListener
+                        }
+
+                        if(nozzle90Length.isNullOrBlank()){
+                            spinnerNb90.error = "Select size(90)"
+                            return@setOnClickListener
+                        }
+
+                        if(nozzle110Length.isNullOrBlank()){
+                            spinnerNb110.error = "Select size(110)"
+                            return@setOnClickListener
+                        }
+
+                        if(nozzle125Length.isNullOrBlank()){
+                            spinnerNb125.error = "Select size(125)"
+                            return@setOnClickListener
+                        }
                     }
 
 //                    if(drsNumber.isNullOrBlank()){

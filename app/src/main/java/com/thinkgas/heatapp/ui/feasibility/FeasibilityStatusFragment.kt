@@ -847,6 +847,10 @@ class FeasibilityStatusFragment : Fragment() {
                                 val status = tfStatus[id]
 
                                 binding.apply {
+                                    spinnerStatus.text = "Select sub status"
+                                    spinnerStatus.error = null
+                                    fsSubStatus = null
+
                                     if(status!!.contains("failed",true) || status.contains("hold",true)){
                                         toggleVisibility(View.GONE)
                                         if (status.contains("hold",true)) {
@@ -892,7 +896,7 @@ class FeasibilityStatusFragment : Fragment() {
                                     }
                                     spinnerType.text = item
                                     spinnerType.error = null
-                                    spinnerStatus.text = "Select Type"
+                                    spinnerStatus.text = "Select status type"
                                     fsStatus = item
 
                                     tvDateTime.setOnClickListener {

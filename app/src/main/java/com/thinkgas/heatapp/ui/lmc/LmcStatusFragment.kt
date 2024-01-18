@@ -48,6 +48,7 @@ import com.thinkgas.heatapp.databinding.CommentDialogBinding
 import com.thinkgas.heatapp.databinding.FragmentLmcStatusBinding
 import com.thinkgas.heatapp.databinding.LayoutViewImageBinding
 import com.thinkgas.heatapp.ui.common.adapters.ViewAttachmentAdapter
+import com.thinkgas.heatapp.ui.registration.RegistrationFragment
 import com.thinkgas.heatapp.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.*
@@ -406,19 +407,17 @@ class LmcStatusFragment : Fragment() {
 
             btnSubmit.setOnClickListener {
 
-//                if (fsStatus.isNullOrBlank()) {
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Please select status type",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                    return@setOnClickListener
-//                }
-//                if (fsSubStatus.isNullOrBlank()) {
-//                    Toast.makeText(requireContext(), "Please select substatus", Toast.LENGTH_SHORT)
-//                        .show()
-//                    return@setOnClickListener
-//                }
+                if(fsStatus.isNullOrBlank()){
+                    spinnerType.error = "Please Select status"
+                    spinnerType.requestFocus()
+                    return@setOnClickListener
+                }
+
+                if(fsSubStatus.isNullOrBlank()){
+                    spinnerStatus.error = "Please Select substatus"
+                    spinnerStatus.requestFocus()
+                    return@setOnClickListener
+                }
 
                 if(args.status == "pending") {
                     fsStatusCode = tpiStatusMap[fsStatus].toString()
@@ -1293,8 +1292,13 @@ class LmcStatusFragment : Fragment() {
                             )
                             statusSpinnerDialog?.bindOnSpinerListener { item, position ->
                                 binding.apply {
+
+                                    spinnerStatus.text = "Select sub status"
+                                    spinnerStatus.error = null
+                                    fsSubStatus = null
+
                                     spinnerType.text = item
-                                    spinnerStatus.text = "Select Type"
+
                                     fsStatus = item
                                     isFailed = item.contains("failed",true)
                                     isHold = item.contains("hold",true)

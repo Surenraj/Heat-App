@@ -1109,6 +1109,10 @@ class GcStatusFragment : Fragment() {
                                 val status = tfStatus[id]
 
                                 binding.apply {
+                                    spinnerStatus.text = "Select sub status"
+                                    spinnerStatus.error = null
+                                    gcSubStatus = null
+
                                     if(status!!.contains("failed",true)){
                                         toggleVisibility(View.GONE)
                                         isFailed = true
