@@ -13,6 +13,16 @@ import com.thinkgas.heatapp.service.NetworkMonitorService
 class NoInternetActivity : AppCompatActivity() {
 
     lateinit var retryBtn: Button
+
+    override fun onResume() {
+        super.onResume()
+        if (isOnline(this)) {
+            NetworkMonitorService.startService(this)
+            finish()
+        } else {
+            Toast.makeText(this, "No Network Available", Toast.LENGTH_SHORT).show()
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
