@@ -98,7 +98,6 @@ class LoginFragment : Fragment() {
                     if (validateMobileNumber(phoneNumber!!) && phoneNumber != null) {
                         val params = HashMap<String, String>()
                         params["mobile_no"] = phoneNumber!!
-                        params["password"] = ""
                         loginViewModel.getOtpValue(params)
                     } else {
                         etMobile.error = "Invalid mobile number"

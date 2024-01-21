@@ -103,6 +103,8 @@ class GcStatusFragment : Fragment() {
     private var warningCount = 0
 
     private var isFailed = false
+    private var isPassed = false
+    private var isHold = false
 
     var day = 0
     var month: Int = 0
@@ -370,6 +372,7 @@ class GcStatusFragment : Fragment() {
             btnSubmit.setOnClickListener {
                 val params = HashMap<String, String>()
 
+                Log.d("statatdststs", "$isHold -- $isPassed -- $isFailed")
 
                 if (gcStatus.isNullOrBlank()) {
                     spinnerType.error = "Select spinner type"
@@ -382,7 +385,13 @@ class GcStatusFragment : Fragment() {
                     return@setOnClickListener
                 }
 
-                if(isFailed){
+                if (isFailed) {
+
+                    if (etDescription.text.isNullOrEmpty()) {
+                        etDescription.error = "Please Enter Comments"
+                        etDescription.requestFocus()
+                        return@setOnClickListener
+                    }
 
                     gcStatusCode = tpiStatusMap[gcStatus].toString()
                     gcSubStatusCode = tpiSubStatusMap[gcSubStatus].toString()
@@ -404,10 +413,10 @@ class GcStatusFragment : Fragment() {
                     return@setOnClickListener
                 }
 
-                if (gcDate.isNullOrBlank()) {
+                if (gcDate.isNullOrBlank() && isPassed) {
                     spinnerDate.error = "Select any date"
                     spinnerDate.requestFocus()
-                    gcDate = ""
+                    return@setOnClickListener
                 }
 //
 //                if(gcNumber.isNullOrBlank()){
@@ -441,45 +450,86 @@ class GcStatusFragment : Fragment() {
 //                }
 
 
-                if(gcAttachmentCount == 0){
+                if (gcAttachmentCount == 0) {
                     tvAttachments.error = "LMC Alignment Image required"
                     tvAttachments.requestFocus()
                 }
 
-                if(rccCount == 0){
+                if (rccCount == 0) {
                     tvRcc.error = "RCC Guard Image required"
                     tvRcc.requestFocus()
                 }
 
-                if(warningCount == 0){
+                if (warningCount == 0) {
                     tvWarning.error = "Warning plate required"
                     tvWarning.requestFocus()
+                }
+
+                if (isPassed) {
+                    if (gcAttachmentCount == 0) {
+                        tvAttachments.error = "LMC Alignment Image required"
+                        tvAttachments.requestFocus()
+                        return@setOnClickListener
+                    }
+
+                    if (rccCount == 0) {
+                        tvRcc.error = "RCC Guard Image required"
+                        tvRcc.requestFocus()
+                        return@setOnClickListener
+                    }
+
+                    if (warningCount == 0) {
+                        tvWarning.error = "Warning plate required"
+                        tvWarning.requestFocus()
+                        return@setOnClickListener
+                    }
+
+                    if (AppCache.latitude == 0.0 || AppCache.longitude == 0.0) {
+                        tvLocation.error = "Select Location"
+                        tvLocation.requestFocus()
+                        return@setOnClickListener
+                    }
+                }
+
+                if (isHold) {
+                    if (tvDateTime.text.isNullOrEmpty() || tvDateTime.text == "Select Date & Time") {
+                        tvDateTime.error = "Select Follow up Data & Time"
+                        tvDateTime.requestFocus()
+                        return@setOnClickListener
+                    }
+
+                    if (etDescription.text.isNullOrEmpty()) {
+                        etDescription.error = "Please Enter Comments"
+                        etDescription.requestFocus()
+                        return@setOnClickListener
+                    }
+                    return@setOnClickListener
                 }
 
                 gcStatusCode = tpiStatusMap[gcStatus].toString()
                 gcSubStatusCode = tpiSubStatusMap[gcSubStatus].toString()
                 params["application_number"] = args.appNo.toString()
                 params["bp_number"] = args.bpNo.toString()
-                    params["customer_info"] = args.customerName.toString()
-                    params["status_type_id"] = gcStatusCode.toString()
-                    params["status_type"] = gcStatus.toString()
-                    params["sub_status_id"] = gcSubStatusCode.toString()
-                    params["sub_status"] = gcSubStatus.toString()
-                    params["gc_date"] = gcDate.toString()
-                    params["gc_number"] = ""
-                    params["potential"] = gcPotential.toString()
-                    params["registered_customer_application_list"] = ""
-                    params["lmc_status"] = lmcStatus.toString()
-                    params["approval_status"] = "Nil"
-                    params["comments"] = ""
-                    params["lmc_gc_alignment"]= lmcGcAlignment.toString()
-                    params["gc_type"]= gcType.toString()
-                    params["fs_session_id"] = args.sessionId.toString()
-                    params["gc_contractor"] = ""
-                    params["gc_supervisor"] = ""
-                    params["location"] = "${AppCache.latitude} ${AppCache.longitude}"
-                    params["description"] = etDescription.text.toString()
-                    params["follow_up_date"] = tvDateTime.text.toString()
+                params["customer_info"] = args.customerName.toString()
+                params["status_type_id"] = gcStatusCode.toString()
+                params["status_type"] = gcStatus.toString()
+                params["sub_status_id"] = gcSubStatusCode.toString()
+                params["sub_status"] = gcSubStatus.toString()
+                params["gc_date"] = gcDate.toString()
+                params["gc_number"] = ""
+                params["potential"] = gcPotential.toString()
+                params["registered_customer_application_list"] = ""
+                params["lmc_status"] = lmcStatus.toString()
+                params["approval_status"] = "Nil"
+                params["comments"] = ""
+                params["lmc_gc_alignment"] = lmcGcAlignment.toString()
+                params["gc_type"] = gcType.toString()
+                params["fs_session_id"] = args.sessionId.toString()
+                params["gc_contractor"] = ""
+                params["gc_supervisor"] = ""
+                params["location"] = "${AppCache.latitude} ${AppCache.longitude}"
+                params["description"] = etDescription.text.toString()
+                params["follow_up_date"] = tvDateTime.text.toString()
 
                 viewModel.submitGc(params)
 
@@ -1113,13 +1163,21 @@ class GcStatusFragment : Fragment() {
                                     spinnerStatus.error = null
                                     gcSubStatus = null
 
-                                    if(status!!.contains("failed",true)){
-                                        toggleVisibility(View.GONE)
-                                        isFailed = true
-                                    }else{
-                                        toggleVisibility(View.VISIBLE)
-                                        isFailed = false
+                                    when (status!!) {
+                                        "hold" -> {
+                                            isHold = true
+                                            toggleVisibility(View.VISIBLE)
+                                        }
+                                        "done", "passed" -> {
+                                            isPassed = true
+                                            toggleVisibility(View.VISIBLE)
+                                        }
+                                        else -> {
+                                            toggleVisibility(View.GONE)
+                                            isFailed = true
+                                        }
                                     }
+
                                     spinnerType.text = item
                                     spinnerType.error = null
                                     spinnerStatus.text = "Select Type"
@@ -1153,10 +1211,34 @@ class GcStatusFragment : Fragment() {
 //                                val potential = tpiPotentialMap.entries.find { it.value == args.potentialId }?.key
                                 val potential = args.potentialId
 
+                                when (args.status) {
+                                    "hold" -> {
+                                        isHold = true
+                                    }
+                                    "done", "passed" -> {
+                                        isPassed = true
+                                    }
+                                    else -> {
+                                        isFailed = true
+                                    }
+                                }
+
                                 binding.apply {
                                     spinnerType.text = statusType
                                     if(subStatus!=null){
                                         spinnerStatus.text = subStatus
+
+                                        when (args.status) {
+                                            "hold" -> {
+                                                isHold = true
+                                            }
+                                            "done", "passed" -> {
+                                                isPassed = true
+                                            }
+                                            else -> {
+                                                isFailed = true
+                                            }
+                                        }
 
                                     }
                                     if(potential!=null){
