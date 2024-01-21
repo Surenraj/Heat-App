@@ -110,5 +110,32 @@
     <string name="nozzle_brass_125">Nozzle Brass (125) <font color='#FF0000'>*</font></string>
     <string name="channel_name">HEAT APP</string>
     <string name="channel_description">HEAT APP</string>
+    <string name="customer_name">Customer Name <font color='#FF0000'>*</font></string>
+    <string name="mobile_number">Mobile Number <font color='#FF0000'>*</font></string>
+    <string name="tower_no">Tower No <font color='#FF0000'>*</font></string>
+    <string name="door_no">Door No <font color='#FF0000'>*</font></string>
+    <string name="floor">Floor <font color='#FF0000'>*</font></string>
+    <string name="floor_facing">Floor Facing <font color='#FF0000'>*</font></string>
+    <string name="gasification">Gasification <font color='#FF0000'>*</font></string>
+    <string name="geographical_area">Geographical Area <font color='#FF0000'>*</font></string>
+    <string name="zone">Zone <font color='#FF0000'>*</font></string>
+    <string name="charge_area">Charge Area <font color='#FF0000'>*</font></string>
+    <string name="colony">Colony <font color='#FF0000'>*</font></string>
+    <string name="district">District <font color='#FF0000'>*</font></string>
+    <string name="tehsil_mandal_taluka">Tehsil/Mandal/Taluka <font color='#FF0000'>*</font></string>
+    <string name="city">City <font color='#FF0000'>*</font></string>
+    <string name="area">Area <font color='#FF0000'>*</font></string>
+    <string name="pincode">Pincode <font color='#FF0000'>*</font></string>
+    <string name="landmark">Landmark <font color='#FF0000'>*</font></string>
+    <string name="state">State <font color='#FF0000'>*</font></string>
+    <string name="gc_status">GC Status <font color='#FF0000'>*</font></string>
+    <string name="gc_date">GC Date <font color='#FF0000'>*</font></string>
+    <string name="gc_potential">GC Potential <font color='#FF0000'>*</font></string>
+    <string name="consent_taken">Consent Taken <font color='#FF0000'>*</font></string>
+    <string name="warning_plate_available">Warning Plate available <font color='#FF0000'>*</font></string>
+    <string name="location">Location <font color='#FF0000'>*</font></string>
+    <string name="un_registered_gc_image">Un Registered GC Image <font color='#FF0000'>*</font></string>
+    <string name="warning_plate_upload">Warning Plate Upload <font color='#FF0000'>*</font></string>
+    <string name="consent_form_upload">Consent Form Upload <font color='#FF0000'>*</font></string>
 
 </resources>

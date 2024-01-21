@@ -10,13 +10,21 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.ResolveInfo
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.provider.MediaStore
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -45,12 +53,22 @@ import com.thinkgas.heatapp.data.remote.model.SubState
 import com.thinkgas.heatapp.databinding.FragmentRegistrationBinding
 import com.thinkgas.heatapp.databinding.LayoutViewImageBinding
 import com.thinkgas.heatapp.ui.common.adapters.ViewAttachmentAdapter
-import com.thinkgas.heatapp.utils.*
+import com.thinkgas.heatapp.utils.AppUtils
+import com.thinkgas.heatapp.utils.Constants
+import com.thinkgas.heatapp.utils.Status
+import com.thinkgas.heatapp.utils.getFileName
+import com.thinkgas.heatapp.utils.getFileSize
 import dagger.hilt.android.AndroidEntryPoint
 import `in`.galaxyofandroid.spinerdialog.SpinnerDialog
-import java.io.*
+import java.io.BufferedOutputStream
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.OutputStream
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+
 
 @AndroidEntryPoint
 class RegistrationFragment : Fragment() {
@@ -842,7 +860,7 @@ class RegistrationFragment : Fragment() {
                     return@setOnClickListener
                 }
 
-                if(etFloor.text.isNullOrBlank()){
+                if(etFloor.text.isNullOrBlank() || etFloor.text == "Select Floor"){
                     etFloor.error = "Enter Floor number"
                     etFloor.requestFocus()
                     return@setOnClickListener
@@ -959,6 +977,22 @@ class RegistrationFragment : Fragment() {
                         return@setOnClickListener
                     }
 
+                }
+
+                if (hasConsent){
+                    if (consentCount == 0){
+                        tvConsentAttachment.error = "Upload consent image"
+                        tvConsentAttachment.requestFocus()
+                        return@setOnClickListener
+                    }
+                }
+
+                if (hasWarning){
+                    if (warningCount == 0){
+                        tvWarningForm.error = "Upload warning plate image"
+                        tvWarningForm.requestFocus()
+                        return@setOnClickListener
+                    }
                 }
 
                 val params = HashMap<String, String>()
@@ -2747,7 +2781,16 @@ class RegistrationFragment : Fragment() {
                                     binding.rvConsent.adapter = consentAdapter
                                     consentAdapter!!.notifyDataSetChanged()
                                     binding.tvConsentAttachment.error = null
-                                    binding.tvConsentAttachment.text = "Consent Form Upload (${consentAdapter!!.itemCount})"
+
+                                    val wordToSpan: Spannable =
+                                        SpannableString("Consent Form Upload * (${consentAdapter!!.itemCount})")
+                                    wordToSpan.setSpan(
+                                        ForegroundColorSpan(Color.RED),
+                                        20,
+                                        22,
+                                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                                    )
+                                    binding.tvConsentAttachment.text = wordToSpan
                                     consentCount = consentAdapter!!.itemCount
 
                                 }
@@ -2761,7 +2804,17 @@ class RegistrationFragment : Fragment() {
                                     binding.rvWarning.adapter = warningAdapter
                                     warningAdapter!!.notifyDataSetChanged()
                                     binding.tvWarningForm.error = null
-                                    binding.tvWarningForm.text = "Warning Plate Upload (${warningAdapter!!.itemCount})"
+
+                                    val wordToSpan: Spannable =
+                                        SpannableString("Warning Plate Upload * (${warningAdapter!!.itemCount})")
+                                    wordToSpan.setSpan(
+                                        ForegroundColorSpan(Color.RED),
+                                        21,
+                                        23,
+                                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                                    )
+                                    binding.tvWarningForm.text = wordToSpan
+
                                     warningCount = warningAdapter!!.itemCount
                                 }
                                 Constants.UN_REG_GC_IMAGE->{
@@ -2774,40 +2827,96 @@ class RegistrationFragment : Fragment() {
                                     binding.rvUnregistred.adapter = unRegAdapter
                                     unRegAdapter!!.notifyDataSetChanged()
                                     binding.tvUnregistered.error = null
-                                    binding.tvUnregistered.text = "Un Registered GC Image (${unRegAdapter!!.itemCount})"
+                                    val wordToSpan: Spannable =
+                                        SpannableString("Un Registered GC Image * (${unRegAdapter!!.itemCount})")
+                                    wordToSpan.setSpan(
+                                        ForegroundColorSpan(Color.RED),
+                                        23,
+                                        25,
+                                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                                    )
+                                    binding.tvUnregistered.text = wordToSpan
                                     unregCount = unRegAdapter!!.itemCount
                                 }
                                 else -> {}
                             }
 
                             if(warningAdapter == null){
-                                binding.tvWarningForm.text = "Warning Plate (0)"
+                                val wordToSpan: Spannable =
+                                    SpannableString("Warning Plate Upload * (0)")
+                                wordToSpan.setSpan(
+                                    ForegroundColorSpan(Color.RED),
+                                    21,
+                                    23,
+                                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                                )
+                                binding.tvWarningForm.text = wordToSpan
                                 warningCount = 0
                             }
 
                             if(unRegAdapter == null){
-                                binding.tvUnregistered.text = "Un Registered GC Image (0)"
+                                val wordToSpan: Spannable =
+                                    SpannableString("Un Registered GC Image * (0)")
+                                wordToSpan.setSpan(
+                                    ForegroundColorSpan(Color.RED),
+                                    23,
+                                    25,
+                                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                                )
+                                binding.tvUnregistered.text = wordToSpan
                                 unregCount = 0
                             }
 
                             if(consentAdapter == null){
-                                binding.tvConsentAttachment.text = "Consent Form Upload (0)"
+                                val wordToSpan: Spannable =
+                                    SpannableString("Consent Form Upload * (0)")
+                                wordToSpan.setSpan(
+                                    ForegroundColorSpan(Color.RED),
+                                    20,
+                                    22,
+                                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                                )
+                                binding.tvConsentAttachment.text = wordToSpan
                                 consentCount = 0
                             }
 
                         } else {
                             if(warningAdapter == null){
-                                binding.tvWarningForm.text = "Warning Plate (0)"
+                                val wordToSpan: Spannable =
+                                    SpannableString("Warning Plate Upload * (0)")
+                                wordToSpan.setSpan(
+                                    ForegroundColorSpan(Color.RED),
+                                    21,
+                                    23,
+                                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                                )
+                                binding.tvWarningForm.text = wordToSpan
                                 warningCount = 0
                             }
 
                             if(unRegAdapter == null){
-                                binding.tvUnregistered.text = "Un Registered GC Image (0)"
+                                val wordToSpan: Spannable =
+                                    SpannableString("Un Registered GC Image * (0)")
+                                wordToSpan.setSpan(
+                                    ForegroundColorSpan(Color.RED),
+                                    23,
+                                    25,
+                                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                                )
+                                binding.tvUnregistered.text = wordToSpan
                                 unregCount = 0
                             }
 
                             if(consentAdapter == null){
-                                binding.tvConsentAttachment.text = "Consent Form Upload (0)"
+                                val wordToSpan: Spannable =
+                                    SpannableString("Consent Form Upload * (0)")
+                                wordToSpan.setSpan(
+                                    ForegroundColorSpan(Color.RED),
+                                    20,
+                                    22,
+                                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                                )
+                                binding.tvConsentAttachment.text = wordToSpan
                                 consentCount = 0
                             }
                         }

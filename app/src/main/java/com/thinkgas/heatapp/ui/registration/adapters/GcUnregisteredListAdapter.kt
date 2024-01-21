@@ -47,7 +47,7 @@ class GcUnregisteredListAdapter(var context: Context,
                 tvMobile.setOnClickListener {
                     callListener(item.mobileNo)
                 }
-                ivStatus.setOnClickListener {
+                gcUnregCard.setOnClickListener {
                     clickListener(item)
                 }
 
