@@ -650,7 +650,7 @@
             android:layout_marginTop="8dp"
             app:backgroundTint="@null"
             android:background="@drawable/et_form_bg"
-            android:text="Select Date "
+            android:text="Select Date"
             android:layout_marginHorizontal="15dp"
 
             android:focusable="true"
@@ -686,7 +686,6 @@
             android:background="@drawable/bg_spinner"
             android:text="Select Potential"
             android:layout_marginHorizontal="15dp"
-
             android:focusable="true"
             android:paddingHorizontal="5dp"
             android:textColor="#545454"

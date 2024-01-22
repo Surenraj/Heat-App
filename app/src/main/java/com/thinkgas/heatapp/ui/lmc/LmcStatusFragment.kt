@@ -419,6 +419,14 @@ class LmcStatusFragment : Fragment() {
                     return@setOnClickListener
                 }
 
+                if (isHold && hasFollowUp) {
+                    if(tvDateTime.text.isBlank() || tvDateTime.text.equals("Select Date & Time")){
+                        tvDateTime.error = "Please select date"
+                        tvDateTime.requestFocus()
+                        return@setOnClickListener
+                    }
+                }
+
                 if(args.status == "pending") {
                     fsStatusCode = tpiStatusMap[fsStatus].toString()
                     fsSubStatusCode = tpiSubStatusMap[fsSubStatus].toString()

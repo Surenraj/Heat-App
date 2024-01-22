@@ -234,14 +234,6 @@ class GcStatusFragment : Fragment() {
                 }
             }
 
-//            if(args.type == "gc_unreg"){
-//                cvDetails.visibility = View.GONE
-//                tvWarning.visibility = View.GONE
-//                ivWarning.visibility = View.GONE
-//                rvWarning.visibility = View.GONE
-//                tfTitle.text = "UN REGISTERED CUSTOMER"
-//            }
-
             tvMobile.setOnClickListener {
                 val i = Intent(Intent.ACTION_DIAL)
                 val p = "tel:" + args.mobile
@@ -328,26 +320,42 @@ class GcStatusFragment : Fragment() {
 //            }
 
             if(args.status == "hold" || args.status == "done" || (args.statusTypeId != 0 && args.status!= "failed")){
-                if(args.lmcGcAlignment != null && args.lmcGcAlignment != "-1"){
-                    lmcGcAlignment = args.lmcGcAlignment!!.toInt()
-                }
+                var _lmcGcAlignment = -1
+                var _lmcStatus = -1
+                var _gcType = -1
+                var isValid = true
 
-                if(args.lmcStatus != null && args.lmcStatus != "-1"){
-                    lmcStatus = args.lmcStatus!!.toInt()
-                }
+               try {
+                   _lmcGcAlignment = args.lmcGcAlignment!!.toInt()
+                   _lmcStatus = args.lmcStatus!!.toInt()
+                   _gcType = args.gcType!!.toInt()
 
-                if(args.gcType != null && args.gcType != "-1"){
-                    gcType = args.gcType!!.toInt()
-                }
+               }catch (e: NumberFormatException) {
+                   isValid = false
+                   println(" issue on parsing $e")
+               }
 
-                updateView(args.status.toString())
+                if (isValid) {
+                    if (args.lmcGcAlignment != null && args.lmcGcAlignment != "-1") {
+                        lmcGcAlignment = _lmcGcAlignment
+                    }
+
+                    if (args.lmcStatus != null && args.lmcStatus != "-1") {
+                        lmcStatus = _lmcStatus
+                    }
+
+                    if (args.gcType != null && args.gcType != "-1") {
+                        gcType = _gcType
+                    }
+
+                    updateView(args.status.toString())
 //                if(args.lmcGcAlignment == "0")  rgCsTwo.check(rgCsTwo.getChildAt(1).id) else rgCsTwo.check(rgCsTwo.getChildAt(0).id)
 //
 //                if(args.lmcStatus == "0")  rgCsThree.check(rgCsThree.getChildAt(1).id) else rgCsThree.check(rgCsThree.getChildAt(0).id)
 //
 //                if(args.gcType == "0")  rgCsFour.check(rgCsFour.getChildAt(1).id) else rgCsFour.check(rgCsFour.getChildAt(0).id)
 //
-
+                }
 
             }
 
@@ -371,9 +379,6 @@ class GcStatusFragment : Fragment() {
 
             btnSubmit.setOnClickListener {
                 val params = HashMap<String, String>()
-
-                Log.d("statatdststs", "$isHold -- $isPassed -- $isFailed")
-
                 if (gcStatus.isNullOrBlank()) {
                     spinnerType.error = "Select spinner type"
                     spinnerType.requestFocus()
@@ -385,8 +390,45 @@ class GcStatusFragment : Fragment() {
                     return@setOnClickListener
                 }
 
-                if (isFailed) {
+                if (isPassed) {
+                    if (gcDate.isNullOrBlank() || spinnerDate.text.equals("Select Date")) {
+                        spinnerDate.error = "Select any date"
+                        spinnerDate.requestFocus()
+                        return@setOnClickListener
+                    }
 
+                    if (gcPotential.isNullOrBlank() || gcPotential.toString() == "Select Potential") {
+                        spinnerPotential.error = "Select Potential"
+                        spinnerPotential.requestFocus()
+                        return@setOnClickListener
+                    }
+
+                    if (gcAttachmentCount == 0) {
+                        tvAttachments.error = "LMC Alignment Image required"
+                        tvAttachments.requestFocus()
+                        return@setOnClickListener
+                    }
+
+                    if (rccCount == 0) {
+                        tvRcc.error = "RCC Guard Image required"
+                        tvRcc.requestFocus()
+                        return@setOnClickListener
+                    }
+
+                    if (warningCount == 0) {
+                        tvWarning.error = "Warning plate required"
+                        tvWarning.requestFocus()
+                        return@setOnClickListener
+                    }
+
+                    if (AppCache.latitude == 0.0 || AppCache.longitude == 0.0) {
+                        tvLocation.error = "Select Location"
+                        tvLocation.requestFocus()
+                        return@setOnClickListener
+                    }
+                }
+
+                if (isFailed) {
                     if (etDescription.text.isNullOrEmpty()) {
                         etDescription.error = "Please Enter Comments"
                         etDescription.requestFocus()
@@ -413,11 +455,6 @@ class GcStatusFragment : Fragment() {
                     return@setOnClickListener
                 }
 
-                if (gcDate.isNullOrBlank() && isPassed) {
-                    spinnerDate.error = "Select any date"
-                    spinnerDate.requestFocus()
-                    return@setOnClickListener
-                }
 //
 //                if(gcNumber.isNullOrBlank()){
 //                    etLine.error = "Enter GC Line Number"
@@ -425,11 +462,7 @@ class GcStatusFragment : Fragment() {
 //                    return@setOnClickListener
 //                }
 
-                if (gcPotential.isNullOrBlank()) {
-                    spinnerPotential.error = "Select Potential"
-                    spinnerPotential.requestFocus()
-                    gcPotential = ""
-                }
+
 
 //                if(gcApplication.isNullOrBlank()){
 //                    etApplication.error = "Enter GC application number"
@@ -463,32 +496,6 @@ class GcStatusFragment : Fragment() {
                 if (warningCount == 0) {
                     tvWarning.error = "Warning plate required"
                     tvWarning.requestFocus()
-                }
-
-                if (isPassed) {
-                    if (gcAttachmentCount == 0) {
-                        tvAttachments.error = "LMC Alignment Image required"
-                        tvAttachments.requestFocus()
-                        return@setOnClickListener
-                    }
-
-                    if (rccCount == 0) {
-                        tvRcc.error = "RCC Guard Image required"
-                        tvRcc.requestFocus()
-                        return@setOnClickListener
-                    }
-
-                    if (warningCount == 0) {
-                        tvWarning.error = "Warning plate required"
-                        tvWarning.requestFocus()
-                        return@setOnClickListener
-                    }
-
-                    if (AppCache.latitude == 0.0 || AppCache.longitude == 0.0) {
-                        tvLocation.error = "Select Location"
-                        tvLocation.requestFocus()
-                        return@setOnClickListener
-                    }
                 }
 
                 if (isHold) {
@@ -1158,12 +1165,14 @@ class GcStatusFragment : Fragment() {
                                 val id = tpiStatusMap[item]
                                 val status = tfStatus[id]
 
+                                Log.d("asasasasasas", status!!)
+
                                 binding.apply {
                                     spinnerStatus.text = "Select sub status"
                                     spinnerStatus.error = null
                                     gcSubStatus = null
 
-                                    when (status!!) {
+                                    when (status.toString().toLowerCase()) {
                                         "hold" -> {
                                             isHold = true
                                             toggleVisibility(View.VISIBLE)
@@ -1172,12 +1181,12 @@ class GcStatusFragment : Fragment() {
                                             isPassed = true
                                             toggleVisibility(View.VISIBLE)
                                         }
-                                        else -> {
+                                        "failed" -> {
                                             toggleVisibility(View.GONE)
                                             isFailed = true
                                         }
                                     }
-
+                                    Log.d("statatdststs", "$isHold -- $isPassed -- $isFailed")
                                     spinnerType.text = item
                                     spinnerType.error = null
                                     spinnerStatus.text = "Select Type"
@@ -1211,14 +1220,14 @@ class GcStatusFragment : Fragment() {
 //                                val potential = tpiPotentialMap.entries.find { it.value == args.potentialId }?.key
                                 val potential = args.potentialId
 
-                                when (args.status) {
+                                when (args.status.toString().toLowerCase()) {
                                     "hold" -> {
                                         isHold = true
                                     }
                                     "done", "passed" -> {
                                         isPassed = true
                                     }
-                                    else -> {
+                                    "failed" -> {
                                         isFailed = true
                                     }
                                 }
@@ -1228,14 +1237,14 @@ class GcStatusFragment : Fragment() {
                                     if(subStatus!=null){
                                         spinnerStatus.text = subStatus
 
-                                        when (args.status) {
+                                        when (args.status.toString().toLowerCase()) {
                                             "hold" -> {
                                                 isHold = true
                                             }
                                             "done", "passed" -> {
                                                 isPassed = true
                                             }
-                                            else -> {
+                                            "failed" -> {
                                                 isFailed = true
                                             }
                                         }

@@ -248,7 +248,7 @@
                     android:layout_marginTop="8dp"
                     app:backgroundTint="@null"
                     android:background="@drawable/et_form_bg"
-                    android:text="Select Date "
+                    android:text="Select Date"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:paddingHorizontal="5dp"

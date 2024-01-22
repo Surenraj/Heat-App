@@ -109,7 +109,9 @@ class RegistrationFragment : Fragment() {
 
 
     private var hasConsent = false
+    private var isConsentRadioTapped = false
     private var hasWarning = false
+    private var isWarningPlateRadioTapped = false
     private var mobile : String? = null
 
     private  var consentAdapter: ViewAttachmentAdapter? = null
@@ -285,7 +287,7 @@ class RegistrationFragment : Fragment() {
 
             rgConsent.setOnCheckedChangeListener { radioGroup, i ->
 //                hasConsent = if(rbConsentYes.id == i) true else false
-
+                isConsentRadioTapped = true
                 if(rbConsentYes.id == i) {
                     tvConsentAttachment.visibility = View.VISIBLE
                     ivConsent.visibility = View.VISIBLE
@@ -302,6 +304,7 @@ class RegistrationFragment : Fragment() {
 
             rgWarning.setOnCheckedChangeListener { radioGroup, i ->
 //                hasWarning = if(rbWarningYes.id == i) true else false
+                isWarningPlateRadioTapped = true
 
                 if(rbWarningYes.id == i) {
                     tvWarningForm.visibility = View.VISIBLE
@@ -940,7 +943,7 @@ class RegistrationFragment : Fragment() {
                     return@setOnClickListener
                 }
 
-                if(spinnerGcStatus.text.isNullOrBlank()){
+                if(spinnerGcStatus.text.isNullOrBlank() || spinnerGcStatus.text.equals("Select GC status")){
                     spinnerGcStatus.error = "Enter GC Status"
                     spinnerGcStatus.requestFocus()
                     return@setOnClickListener
@@ -949,9 +952,25 @@ class RegistrationFragment : Fragment() {
                 gcStatusCode = tpiStatusMap[spinnerGcStatus.text.toString()].toString()
 
                 if(!isFailed){
-                    if(spinnerDate.text.isNullOrBlank()){
+                    if(spinnerDate.text.isNullOrBlank() || spinnerDate.text.equals("Select Date")){
                         spinnerDate.error = "Enter GC Date"
                         spinnerDate.requestFocus()
+                        return@setOnClickListener
+                    }
+
+                    if (spinnerPotential.text.isNullOrBlank() || spinnerPotential.text.equals("Select Potential")) {
+                        spinnerPotential.error = "Select Potential"
+                        spinnerPotential.requestFocus()
+                        return@setOnClickListener
+                    }
+
+                    if (!isConsentRadioTapped) {
+                        Toast.makeText(requireContext(), "Select Consent Taken", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
+
+                    if (!isWarningPlateRadioTapped) {
+                        Toast.makeText(requireContext(), "Select Warning Plate available", Toast.LENGTH_SHORT).show()
                         return@setOnClickListener
                     }
 

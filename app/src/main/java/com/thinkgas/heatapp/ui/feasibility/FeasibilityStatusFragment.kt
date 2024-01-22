@@ -104,6 +104,8 @@ class FeasibilityStatusFragment : Fragment() {
     private var attachmentCount = 0
     private var isometricDrawingCount = 0
     private var isFailed = false
+    private var isPassed = false
+    private var isHold = false
 
 //    private lateinit var viewAttachmentAdapter: ViewAttachmentAdapter
     private var isometricAdapter: ViewAttachmentAdapter? = null
@@ -306,6 +308,14 @@ class FeasibilityStatusFragment : Fragment() {
                     return@setOnClickListener
                 }
 
+                if (isHold) {
+                    if (tvDateTime.text.isNullOrEmpty() || tvDateTime.text.equals("Select Date & Time")) {
+                        tvDateTime.error = "Select Date & Time"
+                        tvDateTime.requestFocus()
+                        return@setOnClickListener
+                    }
+                }
+
                 fsStatusCode = tpiStatusMap[fsStatus].toString()
                 fsSubStatusCode = tpiSubStatusMap[fsSubStatus].toString()
                 fsPipelineCode = tpiPipelineMap[fsPipeline].toString()
@@ -398,7 +408,8 @@ class FeasibilityStatusFragment : Fragment() {
                     params["gi_pipelength"] = etPipeLength.text.toString()
                     params["gc_status"] = fsGC!!
                     params["follow_up_date"] = tvDateTime.text.toString()
-                }else{
+                }
+                else{
                     if (etDescription.text.isNullOrBlank()){
                         etDescription.error = "Enter comments"
                         etDescription.requestFocus()
@@ -846,6 +857,18 @@ class FeasibilityStatusFragment : Fragment() {
                                 val id = tpiStatusMap[item]
                                 val status = tfStatus[id]
 
+                                when (status.toString().toLowerCase()) {
+                                    "hold" -> {
+                                        isHold = true
+                                    }
+                                    "done", "passed" -> {
+                                        isPassed = true
+                                    }
+                                    "failed" -> {
+                                        isFailed = true
+                                    }
+                                }
+
                                 binding.apply {
                                     spinnerStatus.text = "Select sub status"
                                     spinnerStatus.error = null
@@ -934,6 +957,18 @@ class FeasibilityStatusFragment : Fragment() {
                                 val statusType = tpiStatusMap.entries.find { it.value == args.statusTypeId }?.key
                                 val subStatus = tpiSubStatus.entries.find { it.value == args.subStatusId }?.key
                                 val pipeline = tpiPipelineMap.entries.find { it.value == args.pipeLineId }?.key
+
+                                when (args.status.toLowerCase()) {
+                                    "hold" -> {
+                                        isHold = true
+                                    }
+                                    "done", "passed" -> {
+                                        isPassed = true
+                                    }
+                                    "failed" -> {
+                                        isFailed = true
+                                    }
+                                }
 
                                 binding.apply {
                                     spinnerType.text = statusType

@@ -410,11 +410,6 @@ class NgApprovalFragment : Fragment() {
             btnSubmit.setOnClickListener {
 
                 if(!isFailed){
-                    if(lmcExtension.isNullOrBlank()){
-                        spinnerLmcExtension.error = "Select LMC Extension/Modification"
-                        spinnerLmcExtension.requestFocus()
-                        return@setOnClickListener
-                    }
 
                     if(rfcStatus.isNullOrBlank()){
                         spinnerRfcStatus.error = "Select RFC Status"
@@ -427,8 +422,11 @@ class NgApprovalFragment : Fragment() {
                         return@setOnClickListener
                     }
 
-//                    drsNumber = etDrsNo.text.toString()
-//                    srNumber = etSrNo.text.toString()
+                    if(lmcExtension.isNullOrBlank()){
+                        spinnerLmcExtension.error = "Select LMC Extension/Modification"
+                        spinnerLmcExtension.requestFocus()
+                        return@setOnClickListener
+                    }
 
                     if(mmtStatus == "1"){
 
@@ -442,7 +440,6 @@ class NgApprovalFragment : Fragment() {
                             Toast.makeText(requireContext(), "Select leakage testing", Toast.LENGTH_SHORT).show()
                             return@setOnClickListener
                         }
-
                         if(gasPressure.isNullOrBlank()){
                             etLiveGas.error = "Enter gas pressure"
                             etLiveGas.requestFocus()
@@ -486,36 +483,28 @@ class NgApprovalFragment : Fragment() {
 
                         if(nozzle65Length.isNullOrBlank()){
                             spinnerNb65.error = "Select size(65)"
+                            spinnerNb65.requestFocus()
                             return@setOnClickListener
                         }
 
                         if(nozzle90Length.isNullOrBlank()){
                             spinnerNb90.error = "Select size(90)"
+                            spinnerNb90.requestFocus()
                             return@setOnClickListener
                         }
 
                         if(nozzle110Length.isNullOrBlank()){
                             spinnerNb110.error = "Select size(110)"
+                            spinnerNb110.requestFocus()
                             return@setOnClickListener
                         }
 
                         if(nozzle125Length.isNullOrBlank()){
                             spinnerNb125.error = "Select size(125)"
+                            spinnerNb125.requestFocus()
                             return@setOnClickListener
                         }
                     }
-
-//                    if(drsNumber.isNullOrBlank()){
-//                        etDrsNo.error = "Select date"
-//                        etDrsNo.requestFocus()
-//                        return@setOnClickListener
-//                    }
-
-//                    if(srNumber.isNullOrBlank()){
-//                        etSrNo.error = "Select date"
-//                        etSrNo.requestFocus()
-//                        return@setOnClickListener
-//                    }
 
                     if(conversionDate.isNullOrBlank()){
                         tvConversationDate.error = "Select date"
@@ -534,10 +523,10 @@ class NgApprovalFragment : Fragment() {
                     params["rfc_status"] = rfcStatus
                     params["mmt_testing"] = mmtStatus
                     params["leakage_testing"] = leakageStatus ?: ""
-                    params["gas_pressure"] = gasPressure ?: "Enter Gas pressure"
-                    params["meter_reading"] = finalReading ?: "Enter final reading"
-                    params["burner_type"] = burnerType ?: "Select burner type"
-                    params["hose_pipe"] = hoseLength ?: "Select hose length"
+                    params["gas_pressure"] = gasPressure
+                    params["meter_reading"] = finalReading
+                    params["burner_type"] = burnerType
+                    params["hose_pipe"] = hoseLength
                     params["nozzle_65"] = nozzle65Length ?: ""
                     params["nozzle_90"] = nozzle90Length ?: ""
                     params["nozzle_110"] = nozzle110Length ?: ""
@@ -1320,19 +1309,59 @@ class NgApprovalFragment : Fragment() {
                                     lmcWoFemaleMeter = withoutMeter.woFemaleMeter
                                     lmcWoMeterNumber = withoutMeter.woMeterNo
                                     lmcWoRegulatorNumber = withoutMeter.woRegulatorNo
-                                    etLiveGas.setText(installationDetails.gasPressure  ?: "Enter Gas Pressure")
-                                    etDrsNo.setText(installationDetails.drsNumber ?: "Enter DRS No")
-                                    etSrNo.setText(installationDetails.srNumber ?: "Enter SR No")
-                                    etGiUnion.setText(installationDetails.giUnion ?: "Enter GI Union")
-                                    etDescription.setText(installationDetails.comment ?: "Enter comments")
-                                    tvDateTime.text = installationDetails.followupDate ?: "Select Follow Up date"
-                                    etMeterReading.setText(installationDetails.meterReading)
-                                    spinnerBurnerType.text = installationDetails.burnerType ?: "Select Burner"
-                                    spinnerHose.text = installationDetails.hosePipe ?: "Select Hose length"
-                                    spinnerNb65.text = installationDetails.nozzle65 ?: "Size(65)"
-                                    spinnerNb90.text = installationDetails.nozzle90 ?: "Size(90)"
-                                    spinnerNb110.text = installationDetails.nozzle110 ?: "Size(110)"
-                                    spinnerNb125.text = installationDetails.nozzle125 ?: "Size(125)"
+
+                                    if (!installationDetails.gasPressure.isNullOrEmpty()) {
+                                        etLiveGas.setText(installationDetails.gasPressure)
+                                    }
+
+                                    if (!installationDetails.drsNumber.isNullOrEmpty()) {
+                                        etDrsNo.setText(installationDetails.drsNumber)
+                                    }
+
+                                    if (!installationDetails.srNumber.isNullOrEmpty()) {
+                                        etSrNo.setText(installationDetails.srNumber)
+                                    }
+
+                                    if (!installationDetails.giUnion.isNullOrEmpty()) {
+                                        etGiUnion.setText(installationDetails.giUnion)
+                                    }
+
+                                    if (!installationDetails.comment.isNullOrEmpty()) {
+                                        etDescription.setText(installationDetails.comment)
+                                    }
+
+                                    if (!installationDetails.followupDate.isNullOrEmpty()) {
+                                        tvDateTime.text = installationDetails.followupDate
+                                    }
+
+                                    if (!installationDetails.meterReading.isNullOrEmpty()) {
+                                        etMeterReading.setText(installationDetails.meterReading)
+                                    }
+
+                                    if (!installationDetails.burnerType.isNullOrEmpty()) {
+                                        spinnerBurnerType.text = installationDetails.burnerType
+                                    }
+
+                                    if (!installationDetails.hosePipe.isNullOrEmpty()) {
+                                        spinnerHose.text = installationDetails.hosePipe
+                                    }
+
+                                    if (!installationDetails.nozzle65.isNullOrEmpty()) {
+                                        spinnerNb65.text = installationDetails.nozzle65
+                                    }
+
+                                    if (!installationDetails.nozzle90.isNullOrEmpty()) {
+                                        spinnerNb90.text = installationDetails.nozzle90
+                                    }
+
+                                    if (!installationDetails.nozzle110.isNullOrEmpty()) {
+                                        spinnerNb110.text = installationDetails.nozzle110
+                                    }
+
+                                    if (!installationDetails.nozzle125.isNullOrEmpty()) {
+                                        spinnerNb125.text = installationDetails.nozzle125
+                                    }
+
                                 }
 
                                 if ((installationDetails.rfcStatus?.lowercase() == "failed") || (installationDetails.rfcStatus?.lowercase() == "passed")) {
