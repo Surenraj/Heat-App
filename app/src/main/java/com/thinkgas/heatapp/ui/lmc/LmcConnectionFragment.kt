@@ -897,6 +897,14 @@ class LmcConnectionFragment : Fragment() {
                             etGi2.requestFocus()
                             return@setOnClickListener
                         }
+
+                        if (lmcGi3.isNullOrBlank()) {
+                            etGi2.error = "Enter value"
+                            etGi2.requestFocus()
+                            return@setOnClickListener
+                        }
+
+
                         if (lmcGi4.isNullOrBlank()) {
                             etGi4.error = "Enter value"
                             etGi4.requestFocus()

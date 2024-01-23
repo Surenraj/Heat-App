@@ -413,11 +413,15 @@ class LmcStatusFragment : Fragment() {
                     return@setOnClickListener
                 }
 
+                spinnerType.error = null
+
                 if(fsSubStatus.isNullOrBlank()){
                     spinnerStatus.error = "Please Select substatus"
                     spinnerStatus.requestFocus()
                     return@setOnClickListener
                 }
+
+                spinnerStatus.error = null
 
                 if (isHold && hasFollowUp) {
                     if(tvDateTime.text.isBlank() || tvDateTime.text.equals("Select Date & Time")){
@@ -426,6 +430,8 @@ class LmcStatusFragment : Fragment() {
                         return@setOnClickListener
                     }
                 }
+
+                tvDateTime.error = null
 
                 if(args.status == "pending") {
                     fsStatusCode = tpiStatusMap[fsStatus].toString()
@@ -444,11 +450,15 @@ class LmcStatusFragment : Fragment() {
                         return@setOnClickListener
                     }
 
+                    tvDateTime.error = null
+
                     if(etDescription.text.isBlank()){
                         etDescription.error = "Please enter comments"
                         etDescription.requestFocus()
                         return@setOnClickListener
                     }
+
+                    etDescription.error = null
 
                     val params = HashMap<String,String>()
                     params["lmc_session_id"]=args.sessionId
@@ -474,6 +484,9 @@ class LmcStatusFragment : Fragment() {
                         etDescription.requestFocus()
                         return@setOnClickListener
                     }
+
+                    etDescription.error = null
+
                     val params = HashMap<String,String>()
                     params["lmc_session_id"]=args.sessionId
                     params["application_number"] = args.appNo
@@ -500,18 +513,21 @@ class LmcStatusFragment : Fragment() {
                             spinnerType.requestFocus()
                             return@setOnClickListener
                         }
+                        spinnerType.error = null
 
                         if(fsSubStatus.isNullOrBlank()){
                             spinnerStatus.error = "Please Select substatus"
                             spinnerStatus.requestFocus()
                             return@setOnClickListener
                         }
+                        spinnerStatus.error = null
 
                         if(lmcExecution.isNullOrBlank()){
                             spinnerLmc.error = "Please Select LMC Execution"
                             spinnerLmc.requestFocus()
                             return@setOnClickListener
                         }
+                        spinnerLmc.error = null
 
                         val directions =
                             LmcStatusFragmentDirections.actionLmcStatusFragmentToLmcConnectionFragment(
@@ -540,11 +556,15 @@ class LmcStatusFragment : Fragment() {
                             return@setOnClickListener
                         }
 
+                        tvDateTime.error = null
+
                         if (etDescription.text.isNullOrBlank()) {
                             etDescription.error = "Please enter description"
                             etDescription.requestFocus()
                             return@setOnClickListener
                         }
+
+                        etDescription.error = null
 
 //                        if(attachmentCount == 0){
 //                            tvAttachments.error = "Please add attachments"
