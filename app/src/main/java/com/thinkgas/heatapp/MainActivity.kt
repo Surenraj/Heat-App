@@ -16,10 +16,10 @@ class MainActivity : BaseActivity() {
     val delay = 2000L
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen().setKeepOnScreenCondition { keepSplashOnScreen }
+//        installSplashScreen().setKeepOnScreenCondition { keepSplashOnScreen }
         //FirebaseApp.initializeApp(this)
         FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
-        Handler(Looper.getMainLooper()).postDelayed({ keepSplashOnScreen = false }, delay)
+//        Handler(Looper.getMainLooper()).postDelayed({ keepSplashOnScreen = false }, delay)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
