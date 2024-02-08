@@ -208,7 +208,7 @@ class LmcHomeFragment : Fragment() {
     }
 
     private fun setDialog(show: Boolean) {
-        if (show) dialog!!.show() else dialog!!.dismiss()
+        if (show) dialog?.show() else dialog?.dismiss()
     }
 
 }

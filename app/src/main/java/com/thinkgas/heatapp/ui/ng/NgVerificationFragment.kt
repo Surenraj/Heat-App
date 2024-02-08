@@ -567,9 +567,9 @@ class NgVerificationFragment : Fragment()
                 }
             )
             .into(imageLayout?.ivSourceImage!!)
-        imageLayout?.tvImageTitle!!.text = attachment.fileName
-        imageLayout?.btnDelete!!.visibility = View.VISIBLE
-        imageLayout?.ivBack!!.setOnClickListener {
+        imageLayout?.tvImageTitle?.text = attachment.fileName
+        imageLayout?.btnDelete?.visibility = View.VISIBLE
+        imageLayout?.ivBack?.setOnClickListener {
             imageDialog?.dismiss()
         }
         val deleteParams = HashMap<String,String>()

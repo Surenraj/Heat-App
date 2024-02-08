@@ -178,7 +178,7 @@ class LmcConnectionFragment : Fragment() {
 
             }
 
-            if(args.lmcExecution != null && args.lmcExecution!!.contains("without",true))
+            if(args.lmcExecution != null && args.lmcExecution?.contains("without",true) == true)
             {
                 tvMeterDetails.visibility = View.GONE
                 spinnerMeter.visibility = View.GONE
@@ -573,48 +573,48 @@ class LmcConnectionFragment : Fragment() {
                 lmcProperty = args.propertyType
                 lmcGas = args.gasType
 
-                etGiClamp.setText(args.lmcConnectionModel!!.lmcGiClamp)
-                etMlcClamp.setText(args.lmcConnectionModel!!.lmcMlcClamp)
-                etGiMf.setText(args.lmcConnectionModel!!.lmcGiMfElbow)
-                etGiFf.setText(args.lmcConnectionModel!!.lmcGiFfElbow)
-                etGi2.setText(args.lmcConnectionModel!!.lmcGi2)
-                etGi3.setText(args.lmcConnectionModel!!.lmcGi3)
-                etGi4.setText(args.lmcConnectionModel!!.lmcGi4)
-                etGi6.setText(args.lmcConnectionModel!!.lmcGi6)
-                etGi8.setText(args.lmcConnectionModel!!.lmcGi8)
-                etGiTee.setText(args.lmcConnectionModel!!.lmcGiTee)
-                etMlcTee.setText(args.lmcConnectionModel!!.lmcMlcTee)
-                etGiSocket.setText(args.lmcConnectionModel!!.lmcGiSocket)
-                etMlcMale.setText(args.lmcConnectionModel!!.lmcMaleUnion)
-                etMlcFemale.setText(args.lmcConnectionModel!!.lmcFemaleUnion)
-                etMeterBracket.setText(args.lmcConnectionModel!!.lmcMeterBracket)
-                etMeterSticker.setText(args.lmcConnectionModel!!.lmcMeterSticker)
-                etPlateMarker.setText(args.lmcConnectionModel!!.lmcPlateMarker)
-                etAdaptorGi.setText(args.lmcConnectionModel!!.lmcAdaptorGI)
-                etAdaptorReg.setText(args.lmcConnectionModel!!.lmcAdaptorReg)
-                etAdaptorMeter.setText(args.lmcConnectionModel!!.lmcAdaptorMeter)
-                etFemaleUnion.setText(args.lmcConnectionModel!!.lmcFemaleMeter)
-                lmcGiClamp = args.lmcConnectionModel!!.lmcGiClamp
-                lmcMlcClamp = args.lmcConnectionModel!!.lmcMlcClamp
-                lmcGiMfElbow = args.lmcConnectionModel!!.lmcGiMfElbow
-                lmcGiFfElbow = args.lmcConnectionModel!!.lmcGiFfElbow
-                lmcGi2 = args.lmcConnectionModel!!.lmcGi2
-                lmcGi3 = args.lmcConnectionModel!!.lmcGi3
-                lmcGi4 = args.lmcConnectionModel!!.lmcGi4
-                lmcGi6 = args.lmcConnectionModel!!.lmcGi6
-                lmcGi8 = args.lmcConnectionModel!!.lmcGi8
-                lmcGiTee = args.lmcConnectionModel!!.lmcGiTee
-                lmcMlcTee = args.lmcConnectionModel!!.lmcMlcTee
-                lmcGiSocket = args.lmcConnectionModel!!.lmcGiSocket
-                lmcMaleUnion = args.lmcConnectionModel!!.lmcMaleUnion
-                lmcFemaleUnion = args.lmcConnectionModel!!.lmcFemaleUnion
-                lmcMeterBracket = args.lmcConnectionModel!!.lmcMeterBracket
-                lmcMeterSticker = args.lmcConnectionModel!!.lmcMeterSticker
-                lmcPlateMarker = args.lmcConnectionModel!!.lmcPlateMarker
-                lmcAdaptorGI = args.lmcConnectionModel!!.lmcAdaptorGI
-                lmcAdaptorReg = args.lmcConnectionModel!!.lmcAdaptorReg
-                lmcAdaptorMeter = args.lmcConnectionModel!!.lmcAdaptorMeter
-                lmcFemaleMeter = args.lmcConnectionModel!!.lmcFemaleMeter
+                etGiClamp.setText(args.lmcConnectionModel?.lmcGiClamp)
+                etMlcClamp.setText(args.lmcConnectionModel?.lmcMlcClamp)
+                etGiMf.setText(args.lmcConnectionModel?.lmcGiMfElbow)
+                etGiFf.setText(args.lmcConnectionModel?.lmcGiFfElbow)
+                etGi2.setText(args.lmcConnectionModel?.lmcGi2)
+                etGi3.setText(args.lmcConnectionModel?.lmcGi3)
+                etGi4.setText(args.lmcConnectionModel?.lmcGi4)
+                etGi6.setText(args.lmcConnectionModel?.lmcGi6)
+                etGi8.setText(args.lmcConnectionModel?.lmcGi8)
+                etGiTee.setText(args.lmcConnectionModel?.lmcGiTee)
+                etMlcTee.setText(args.lmcConnectionModel?.lmcMlcTee)
+                etGiSocket.setText(args.lmcConnectionModel?.lmcGiSocket)
+                etMlcMale.setText(args.lmcConnectionModel?.lmcMaleUnion)
+                etMlcFemale.setText(args.lmcConnectionModel?.lmcFemaleUnion)
+                etMeterBracket.setText(args.lmcConnectionModel?.lmcMeterBracket)
+                etMeterSticker.setText(args.lmcConnectionModel?.lmcMeterSticker)
+                etPlateMarker.setText(args.lmcConnectionModel?.lmcPlateMarker)
+                etAdaptorGi.setText(args.lmcConnectionModel?.lmcAdaptorGI)
+                etAdaptorReg.setText(args.lmcConnectionModel?.lmcAdaptorReg)
+                etAdaptorMeter.setText(args.lmcConnectionModel?.lmcAdaptorMeter)
+                etFemaleUnion.setText(args.lmcConnectionModel?.lmcFemaleMeter)
+                lmcGiClamp = args.lmcConnectionModel?.lmcGiClamp
+                lmcMlcClamp = args.lmcConnectionModel?.lmcMlcClamp
+                lmcGiMfElbow = args.lmcConnectionModel?.lmcGiMfElbow
+                lmcGiFfElbow = args.lmcConnectionModel?.lmcGiFfElbow
+                lmcGi2 = args.lmcConnectionModel?.lmcGi2
+                lmcGi3 = args.lmcConnectionModel?.lmcGi3
+                lmcGi4 = args.lmcConnectionModel?.lmcGi4
+                lmcGi6 = args.lmcConnectionModel?.lmcGi6
+                lmcGi8 = args.lmcConnectionModel?.lmcGi8
+                lmcGiTee = args.lmcConnectionModel?.lmcGiTee
+                lmcMlcTee = args.lmcConnectionModel?.lmcMlcTee
+                lmcGiSocket = args.lmcConnectionModel?.lmcGiSocket
+                lmcMaleUnion = args.lmcConnectionModel?.lmcMaleUnion
+                lmcFemaleUnion = args.lmcConnectionModel?.lmcFemaleUnion
+                lmcMeterBracket = args.lmcConnectionModel?.lmcMeterBracket
+                lmcMeterSticker = args.lmcConnectionModel?.lmcMeterSticker
+                lmcPlateMarker = args.lmcConnectionModel?.lmcPlateMarker
+                lmcAdaptorGI = args.lmcConnectionModel?.lmcAdaptorGI
+                lmcAdaptorReg = args.lmcConnectionModel?.lmcAdaptorReg
+                lmcAdaptorMeter = args.lmcConnectionModel?.lmcAdaptorMeter
+                lmcFemaleMeter = args.lmcConnectionModel?.lmcFemaleMeter
 
             }
 
@@ -655,7 +655,7 @@ class LmcConnectionFragment : Fragment() {
                     lmcAdaptorMeter = etAdaptorMeter.text.toString()
                     lmcFemaleMeter = etFemaleUnion.text.toString()
 
-                    if (args.lmcExecution!!.contains("without",true))
+                    if (args.lmcExecution?.contains("without",true) == true)
                     {
                         if (lmcType.isNullOrBlank()) {
                             spinnerRfc.error = "Select LMC Type"

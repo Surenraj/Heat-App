@@ -271,7 +271,7 @@ class LmcStatusFragment : Fragment() {
 
             imageLayout = LayoutViewImageBinding.inflate(LayoutInflater.from(requireActivity()))
             imageDialog = Dialog(requireActivity(), R.style.list_dialog_style)
-            imageDialog!!.setContentView(imageLayout!!.root)
+            imageLayout?.root?.let { imageDialog?.setContentView(it) }
 
             spinnerType.setOnClickListener {
                 statusSpinnerDialog?.showSpinerDialog()
@@ -332,8 +332,8 @@ class LmcStatusFragment : Fragment() {
                     cbFollowUp.visibility = View.GONE
                     tvFollowText.visibility = View.GONE
 
-                    isFailed = args.statusType!!.contains("failed",true)
-                    isHold = args.statusType!!.contains("hold",true)
+                    isFailed = args.statusType?.contains("failed",true) == true
+                    isHold = args.statusType?.contains("hold",true) == true
 
                     val statusList = mutableListOf<String>()
                     tpiMap[args.statusType]?.forEach {
@@ -355,7 +355,7 @@ class LmcStatusFragment : Fragment() {
 
 
 
-                    if(args.statusType!!.contains("failed",true)){
+                    if(args.statusType?.contains("failed",true) == true){
                         btnSubmit.text ="SUBMIT"
                         isFailed = true
                         spinnerLmc.visibility = View.GONE
@@ -364,7 +364,7 @@ class LmcStatusFragment : Fragment() {
                         etDescription.visibility = View.VISIBLE
                     }
 
-                    if(args.statusType!!.contains("hold",true)){
+                    if(args.statusType?.contains("hold",true) == true){
                         btnSubmit.text ="SUBMIT"
                         isHold = true
                         cbFollowUp.visibility = View.VISIBLE
@@ -675,9 +675,9 @@ class LmcStatusFragment : Fragment() {
                                         {attachment ->  deleteItemClicked(attachment) }
                                     )
                                     binding.rvAttachment.adapter = viewAttachmentAdapter
-                                    viewAttachmentAdapter!!.notifyDataSetChanged()
+                                    viewAttachmentAdapter?.notifyDataSetChanged()
                                     binding.tvAttachments.error = null
-                                    binding.tvAttachments.text = "Attachments (${viewAttachmentAdapter!!.itemCount})"
+                                    binding.tvAttachments.text = "Attachments (${viewAttachmentAdapter?.itemCount ?: 0})"
                                     attachmentCount = viewAttachmentAdapter!!.itemCount
 
                                 }

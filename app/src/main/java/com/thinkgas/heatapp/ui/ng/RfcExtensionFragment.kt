@@ -104,8 +104,8 @@ class RfcExtensionFragment : Fragment() {
         binding.apply {
 
             etMeterCompany.setOnClickListener {
-                companySpinnerDialog!!.showSpinerDialog()
-                companySpinnerDialog!!.setCancellable(true)
+                companySpinnerDialog?.showSpinerDialog()
+                companySpinnerDialog?.setCancellable(true)
             }
 
             if(AppCache.isTpi){

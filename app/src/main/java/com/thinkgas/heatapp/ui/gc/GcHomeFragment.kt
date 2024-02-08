@@ -179,27 +179,29 @@ class GcHomeFragment : Fragment() {
                             setDialog(true)
                         }
                         Status.SUCCESS -> {
-                            if (it.data!!.agentList.isNotEmpty()) {
-                                val data = it.data
-                                holdNo = data.agentList[0].hold.toString()
-                                doneNo = data.agentList[0].done.toString()
-                                pendingNo = data.agentList[0].pending.toString()
-                                unclaimedNo = data.agentList[0].unClaimed.toString()
-                                failedNo = data.agentList[0].failed.toString()
-                                declinedNo = data.agentList[0].declined.toString()
-                                approvedNo = data.agentList[0].approved.toString()
+                            if (it.data != null) {
+                                if (it.data.agentList.isNotEmpty()) {
+                                    val data = it.data
+                                    holdNo = data.agentList[0].hold.toString()
+                                    doneNo = data.agentList[0].done.toString()
+                                    pendingNo = data.agentList[0].pending.toString()
+                                    unclaimedNo = data.agentList[0].unClaimed.toString()
+                                    failedNo = data.agentList[0].failed.toString()
+                                    declinedNo = data.agentList[0].declined.toString()
+                                    approvedNo = data.agentList[0].approved.toString()
 
-                                binding.apply {
-                                    tvHoldNum.text = holdNo
-                                    tvDoneNum.text = doneNo
-                                    tvPendingNum.text = pendingNo
-                                    tvClaimNum.text = unclaimedNo
-                                    tvFaileNum.text = failedNo
-                                    tvApprovedNum.text = approvedNo
-                                    tvDeclinedNum.text = declinedNo
+                                    binding.apply {
+                                        tvHoldNum.text = holdNo
+                                        tvDoneNum.text = doneNo
+                                        tvPendingNum.text = pendingNo
+                                        tvClaimNum.text = unclaimedNo
+                                        tvFaileNum.text = failedNo
+                                        tvApprovedNum.text = approvedNo
+                                        tvDeclinedNum.text = declinedNo
+                                    }
                                 }
+                                setDialog(false)
                             }
-                            setDialog(false)
                         }
                         Status.ERROR -> {
                             setDialog(false)
@@ -216,6 +218,6 @@ class GcHomeFragment : Fragment() {
     }
 
     private fun setDialog(show: Boolean) {
-        if (show) dialog!!.show() else dialog!!.dismiss()
+        if (show) dialog?.show() else dialog?.dismiss()
     }
 }

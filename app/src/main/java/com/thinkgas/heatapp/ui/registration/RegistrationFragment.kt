@@ -1330,8 +1330,8 @@ class RegistrationFragment : Fragment() {
                             legalEntity.addAll(it.data.entityList)
                             val gaList = mutableListOf<String>()
                             it.data.entityList.forEach {
-                                it.gaIdList!!.forEach {
-                                    gaList.add(it!!.gaName!!)
+                                it.gaIdList?.forEach {
+                                    it?.gaName?.let { it1 -> gaList.add(it1) }
                                 }
                             }
 

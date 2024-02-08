@@ -339,36 +339,36 @@ class NgApprovalFragment : Fragment() {
             }
 
             spinnerLmcExtension.setOnClickListener {
-                lmcExtensionSpinner!!.showSpinerDialog()
-                lmcExtensionSpinner!!.setCancellable(true)
+                lmcExtensionSpinner?.showSpinerDialog()
+                lmcExtensionSpinner?.setCancellable(true)
             }
 
 
             spinnerBurnerType.setOnClickListener {
-                burnerSpinner!!.showSpinerDialog()
-                burnerSpinner!!.setCancellable(true)
+                burnerSpinner?.showSpinerDialog()
+                burnerSpinner?.setCancellable(true)
             }
 
             spinnerHose.setOnClickListener {
-                hoseSpinner!!.showSpinerDialog()
-                hoseSpinner!!.setCancellable(true)
+                hoseSpinner?.showSpinerDialog()
+                hoseSpinner?.setCancellable(true)
             }
 
             spinnerNb65.setOnClickListener {
-                nozzleSpinner65!!.showSpinerDialog()
-                nozzleSpinner65!!.setCancellable(true)
+                nozzleSpinner65?.showSpinerDialog()
+                nozzleSpinner65?.setCancellable(true)
             }
             spinnerNb90.setOnClickListener {
-                nozzleSpinner90!!.showSpinerDialog()
-                nozzleSpinner90!!.setCancellable(true)
+                nozzleSpinner90?.showSpinerDialog()
+                nozzleSpinner90?.setCancellable(true)
             }
             spinnerNb110.setOnClickListener {
-                nozzleSpinner110!!.showSpinerDialog()
-                nozzleSpinner110!!.setCancellable(true)
+                nozzleSpinner110?.showSpinerDialog()
+                nozzleSpinner110?.setCancellable(true)
             }
             spinnerNb125.setOnClickListener {
-                nozzleSpinner125!!.showSpinerDialog()
-                nozzleSpinner125!!.setCancellable(true)
+                nozzleSpinner125?.showSpinerDialog()
+                nozzleSpinner125?.setCancellable(true)
             }
 
             val rfcList = arrayListOf<String>("Passed","Hold","Failed")
@@ -381,8 +381,8 @@ class NgApprovalFragment : Fragment() {
 
 
             spinnerRfcStatus.setOnClickListener {
-                rfcStatusSpinner!!.showSpinerDialog()
-                rfcStatusSpinner!!.setCancellable(true)
+                rfcStatusSpinner?.showSpinerDialog()
+                rfcStatusSpinner?.setCancellable(true)
 
             }
 
@@ -717,8 +717,8 @@ class NgApprovalFragment : Fragment() {
                     }
                     Status.SUCCESS->{
                         setDialog(false)
-                        if(it.data?.error!!) {
-                            Toast.makeText(requireContext(), it.data!!.message, Toast.LENGTH_SHORT)
+                        if(it.data?.error == true) {
+                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT)
                                 .show()
                         }else {
                             binding.signature.isEnabled = false

@@ -24,33 +24,38 @@ class GcUnregisteredListAdapter(var context: Context,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(context: Context, item: Agent?, clickListener: (Agent) -> Unit, navigateListener: (String, String) -> Unit, callListener: (String) -> Unit) {
             binding.apply {
-                tvName.text = item!!.customerName
-                tvAddress.text = item.landmark
-                tvMobile.text = item.mobileNo
-                tvGcNo.text = item.gcUnregNumber
+                if (item != null) {
+                    tvName.text = item.customerName
+                    tvAddress.text = item.landmark
+                    tvMobile.text = item.mobileNo
+                    tvGcNo.text = item.gcUnregNumber
+
+                    val distance = AppCache.latitude?.let {
+                        AppCache.longitude?.let { it1 ->
+                            AppUtils.distanceInKms(
+                                it,
+                                it1,
+                                item.latitude.toDouble(),
+                                item.longitude.toDouble()
+                            )
+                        }
+                    }
 
 
+                    val content = SpannableString("${distance?.toInt()} kms away")
+                    content.setSpan(UnderlineSpan(), 0, content.length, 0)
+                    tvNearby.text = content
+                    tvNearby.setOnClickListener {
+                        navigateListener(item.latitude, item.longitude)
+                    }
 
-                val distance= AppUtils.distanceInKms(AppCache.latitude!!,
-                    AppCache.longitude!!,
-                    item.latitude.toDouble(),
-                    item.longitude.toDouble()
-                )
-
-                val content = SpannableString("${distance.toInt()} kms away")
-                content.setSpan(UnderlineSpan(), 0, content.length, 0)
-                tvNearby.text = content
-                tvNearby.setOnClickListener {
-                    navigateListener(item.latitude,item.longitude)
+                    tvMobile.setOnClickListener {
+                        callListener(item.mobileNo)
+                    }
+                    gcUnregCard.setOnClickListener {
+                        clickListener(item)
+                    }
                 }
-
-                tvMobile.setOnClickListener {
-                    callListener(item.mobileNo)
-                }
-                gcUnregCard.setOnClickListener {
-                    clickListener(item)
-                }
-
 
             }
 

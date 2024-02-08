@@ -250,7 +250,7 @@ class GcStatusFragment : Fragment() {
 
             imageLayout = LayoutViewImageBinding.inflate(LayoutInflater.from(requireActivity()))
             imageDialog = Dialog(requireActivity(), R.style.list_dialog_style)
-            imageDialog!!.setContentView(imageLayout!!.root)
+            imageLayout?.root?.let { imageDialog?.setContentView(it) }
 
             ivAttachments.setOnClickListener {
                 imageType = GcImageType.GC_ATTACHMENT
@@ -326,9 +326,9 @@ class GcStatusFragment : Fragment() {
                 var isValid = true
 
                try {
-                   _lmcGcAlignment = args.lmcGcAlignment!!.toInt()
-                   _lmcStatus = args.lmcStatus!!.toInt()
-                   _gcType = args.gcType!!.toInt()
+                   _lmcGcAlignment = args.lmcGcAlignment?.toInt() ?: 0
+                   _lmcStatus = args.lmcStatus?.toInt() ?: 0
+                   _gcType = args.gcType?.toInt() ?: 0
 
                }catch (e: NumberFormatException) {
                    isValid = false
@@ -583,18 +583,23 @@ class GcStatusFragment : Fragment() {
                     }
                     Status.SUCCESS -> {
                         setDialog(false)
-                        if (!it.data!!.error) {
-                            Toast.makeText(
-                                requireContext(),
-                                it.data.message,
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            findNavController().popBackStack(R.id.gcHomeFragment,false)
-                        } else {
-                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT)
-                                .show()
+                        if (it.data != null) {
+                            if (!it.data.error) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    it.data.message,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                findNavController().popBackStack(R.id.gcHomeFragment, false)
+                            } else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    it.data.message,
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                            }
                         }
-
                     }
                     Status.ERROR -> {
                         setDialog(false)
@@ -688,12 +693,18 @@ class GcStatusFragment : Fragment() {
                     }
                     Status.SUCCESS->{
                         setDialog(false)
-                        if(!it.data!!.error){
-                            if(args.type == "gc_unreg"){
-                               gcItemClicked(it.data.gcNumber)
-                            }else findNavController().popBackStack(R.id.dashboardFragment,false)
+                        if (it.data != null) {
+                            if (!it.data.error) {
+                                if (args.type == "gc_unreg") {
+                                    gcItemClicked(it.data.gcNumber)
+                                } else findNavController().popBackStack(
+                                    R.id.dashboardFragment,
+                                    false
+                                )
+                            }
+                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT)
+                                .show()
                         }
-                        Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT).show()
                     }
                     Status.ERROR->{
                         setDialog(false)
@@ -706,21 +717,21 @@ class GcStatusFragment : Fragment() {
     private fun gcItemClicked(number:String) {
        dialogBinding = GcUnregDialogBinding.inflate(LayoutInflater.from(requireContext()))
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-        dialogBinding!!.tvName.text = number
+        dialogBinding?.tvName?.text = number
         builder.setCancelable(false)
-        builder.setView(dialogBinding!!.root)
+        builder.setView(dialogBinding?.root)
         val alert = builder.create()
         alert.show()
-        dialogBinding!!.btnNo.visibility = View.GONE
+        dialogBinding?.btnNo?.visibility = View.GONE
 
         if(warningCount > 0){
-            dialogBinding!!.apply {
+            dialogBinding?.apply {
                 btnYes.text = "Close"
                 tvMobileTitle.visibility = View.GONE
             }
         }
 
-        dialogBinding!!.btnYes.setOnClickListener {
+        dialogBinding?.btnYes?.setOnClickListener {
             if (warningCount > 0){
                 alert.dismiss()
                 findNavController().popBackStack(R.id.gcUnregisteredListFragment,false)
@@ -734,7 +745,7 @@ class GcStatusFragment : Fragment() {
 
         }
 
-        dialogBinding!!.btnNo.setOnClickListener {
+        dialogBinding?.btnNo?.setOnClickListener {
             alert.dismiss()
             findNavController().popBackStack(R.id.gcUnregisteredListFragment,false)
         }
@@ -809,10 +820,10 @@ class GcStatusFragment : Fragment() {
                                         {attachment ->  deleteItemClicked(attachment) }
                                     )
                                     binding.rvAttachment.adapter = gcAdapter
-                                    gcAdapter!!.notifyDataSetChanged()
+                                    gcAdapter?.notifyDataSetChanged()
                                     binding.tvAttachments.error = null
-                                    binding.tvAttachments.text = "LMC Alignment Image (${gcAdapter!!.itemCount})"
-                                    gcAttachmentCount = gcAdapter!!.itemCount
+                                    binding.tvAttachments.text = "LMC Alignment Image (${gcAdapter?.itemCount})"
+                                    gcAttachmentCount = gcAdapter?.itemCount ?: 0
 //                                    if(hasGcPlate){
 //                                        dialogBinding!!.btnYes.visibility = View.GONE
 //                                        dialogBinding!!.btnNo.visibility = View.VISIBLE
@@ -830,10 +841,10 @@ class GcStatusFragment : Fragment() {
                                         {attachment ->  deleteItemClicked(attachment) }
                                     )
                                     binding.rvRcc.adapter = rccAdapter
-                                    rccAdapter!!.notifyDataSetChanged()
+                                    rccAdapter?.notifyDataSetChanged()
                                     binding.tvRcc.error = null
-                                    binding.tvRcc.text = "Rcc Guard (${rccAdapter!!.itemCount})"
-                                    rccCount = rccAdapter!!.itemCount
+                                    binding.tvRcc.text = "Rcc Guard (${rccAdapter?.itemCount ?: 0})"
+                                    rccCount = rccAdapter?.itemCount ?: 0
                                 }
                                 Constants.WARNING_PLATE_GC->{
                                     warningAdapter = ViewAttachmentAdapter(
@@ -843,10 +854,10 @@ class GcStatusFragment : Fragment() {
                                         {attachment ->  deleteItemClicked(attachment) }
                                     )
                                     binding.rvWarning.adapter = warningAdapter
-                                    warningAdapter!!.notifyDataSetChanged()
+                                    warningAdapter?.notifyDataSetChanged()
                                     binding.tvWarning.error = null
-                                    binding.tvWarning.text = "Warning Plate (${warningAdapter!!.itemCount})"
-                                    warningCount = warningAdapter!!.itemCount
+                                    binding.tvWarning.text = "Warning Plate (${warningAdapter?.itemCount ?: 0})"
+                                    warningCount = warningAdapter?.itemCount ?: 0
                                 }
 //                                Constants.WARNING_PLATE->{
 //                                    if(args.type == "gc_unreg"){
@@ -949,9 +960,9 @@ class GcStatusFragment : Fragment() {
                 }
             )
             .into(imageLayout?.ivSourceImage!!)
-        imageLayout?.tvImageTitle!!.text = attachment.fileName
-        imageLayout?.btnDelete!!.visibility = View.VISIBLE
-        imageLayout?.ivBack!!.setOnClickListener {
+        imageLayout?.tvImageTitle?.text = attachment.fileName
+        imageLayout?.btnDelete?.visibility = View.VISIBLE
+        imageLayout?.ivBack?.setOnClickListener {
             imageDialog?.dismiss()
         }
         val deleteParams = HashMap<String,String>()
@@ -961,7 +972,7 @@ class GcStatusFragment : Fragment() {
         deleteParams["type"] = attachment.type
         deleteParams["image"] = attachment.fileName
 
-        imageLayout?.btnDelete!!.setOnClickListener {
+        imageLayout?.btnDelete?.setOnClickListener {
             val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
             builder.setCancelable(false)
             builder.setTitle("Delete Attachment")
@@ -974,17 +985,23 @@ class GcStatusFragment : Fragment() {
 
                             when(it.status){
                                 Status.SUCCESS->{
-                                    if(!it.data!!.error){
-                                        imageDialog!!.dismiss()
-                                        binding.rvAttachment.adapter = null
-                                        gcAdapter = null
-                                        binding.rvRcc.adapter = null
-                                        rccAdapter = null
-                                        binding.rvWarning.adapter = null
-                                        warningAdapter = null
-                                        getAttachmentList()
+                                    if (it.data != null) {
+                                        if (!it.data.error) {
+                                            imageDialog?.dismiss()
+                                            binding.rvAttachment.adapter = null
+                                            gcAdapter = null
+                                            binding.rvRcc.adapter = null
+                                            rccAdapter = null
+                                            binding.rvWarning.adapter = null
+                                            warningAdapter = null
+                                            getAttachmentList()
+                                        }
+                                        Toast.makeText(
+                                            requireContext(),
+                                            it.data.message,
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                     }
-                                    Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT).show()
                                 }
                                 Status.LOADING->{
 
@@ -1112,202 +1129,216 @@ class GcStatusFragment : Fragment() {
                     }
                     Status.SUCCESS -> {
                         setDialog(false)
-                        if (!it.data!!.error) {
-                            it.data.tpiList.forEach { tpi ->
-                                tpiStatusMap[tpi.statusType] = tpi.id
-                                tpiMap[tpi.statusType] = tpi.subStateList
-                                tfStatus[tpi.id] = tpi.status
-                            }
-
-                            it.data.tpiList.forEach {tpi->
-                                tpi.subStateList.forEach {
-                                    tpiSubStatus[it.subStatusType] = it.subId
+                        if (it.data != null) {
+                            if (!it.data.error) {
+                                it.data.tpiList.forEach { tpi ->
+                                    tpiStatusMap[tpi.statusType] = tpi.id
+                                    tpiMap[tpi.statusType] = tpi.subStateList
+                                    tfStatus[tpi.id] = tpi.status
                                 }
-                            }
-                            val list = mutableListOf<String>()
-                            tpiStatusMap.keys.forEach {
-                                list.add(it)
-                            }
-                            it.data.potentialList.forEach { potential ->
-                                tpiPotentialMap[potential.potentialType] = potential.id
-                            }
 
-                            val potentialList = mutableListOf<String>()
-                            tpiPotentialMap.keys.forEach {
-                                potentialList.add(it)
-                            }
-
-
-                            potentialSpinnerDialog = SpinnerDialog(
-                                activity,
-                                potentialList as java.util.ArrayList<String>,
-                                "Select Category",
-                                "Close"
-                            )
-
-
-                            potentialSpinnerDialog?.bindOnSpinerListener { potential, _ ->
-                                binding.apply {
-                                    spinnerPotential.text = potential
-                                    spinnerPotential.error = null
-
-                                    gcPotential = potential
-                                }
-                            }
-
-                            statusSpinnerDialog = SpinnerDialog(
-                                activity,
-                                list as ArrayList<String>,
-                                "Select Status Type",
-                                "Close"
-                            )
-                            statusSpinnerDialog?.bindOnSpinerListener { item, position ->
-                                val id = tpiStatusMap[item]
-                                val status = tfStatus[id]
-
-                                Log.d("asasasasasas", status!!)
-
-                                binding.apply {
-                                    spinnerStatus.text = "Select sub status"
-                                    spinnerStatus.error = null
-                                    gcSubStatus = null
-
-                                    when (status.toString().toLowerCase()) {
-                                        "hold" -> {
-                                            isHold = true
-                                            toggleVisibility(View.VISIBLE)
-                                        }
-                                        "done", "passed" -> {
-                                            isPassed = true
-                                            toggleVisibility(View.VISIBLE)
-                                        }
-                                        "failed" -> {
-                                            toggleVisibility(View.GONE)
-                                            isFailed = true
-                                        }
+                                it.data.tpiList.forEach { tpi ->
+                                    tpi.subStateList.forEach {
+                                        tpiSubStatus[it.subStatusType] = it.subId
                                     }
-                                    Log.d("statatdststs", "$isHold -- $isPassed -- $isFailed")
-                                    spinnerType.text = item
-                                    spinnerType.error = null
-                                    spinnerStatus.text = "Select Type"
-                                    gcStatus = item
+                                }
+                                val list = mutableListOf<String>()
+                                tpiStatusMap.keys.forEach {
+                                    list.add(it)
+                                }
+                                it.data.potentialList.forEach { potential ->
+                                    tpiPotentialMap[potential.potentialType] = potential.id
+                                }
 
-                                    updateView(item.toString())
+                                val potentialList = mutableListOf<String>()
+                                tpiPotentialMap.keys.forEach {
+                                    potentialList.add(it)
                                 }
-                                val statusList = mutableListOf<String>()
-                                tpiMap[item]?.forEach {
-                                    statusList.add(it.subStatusType)
-                                    tpiSubStatusMap[it.subStatusType] = it.subId
-                                }
-                                subStatusSpinner = SpinnerDialog(
+
+
+                                potentialSpinnerDialog = SpinnerDialog(
                                     activity,
-                                    statusList as ArrayList<String>,
+                                    potentialList as java.util.ArrayList<String>,
+                                    "Select Category",
+                                    "Close"
+                                )
+
+
+                                potentialSpinnerDialog?.bindOnSpinerListener { potential, _ ->
+                                    binding.apply {
+                                        spinnerPotential.text = potential
+                                        spinnerPotential.error = null
+
+                                        gcPotential = potential
+                                    }
+                                }
+
+                                statusSpinnerDialog = SpinnerDialog(
+                                    activity,
+                                    list as ArrayList<String>,
                                     "Select Status Type",
                                     "Close"
                                 )
-                                subStatusSpinner?.bindOnSpinerListener { itemNew, _ ->
+                                statusSpinnerDialog?.bindOnSpinerListener { item, position ->
+                                    val id = tpiStatusMap[item]
+                                    val status = tfStatus[id]
+
+                                    Log.d("asasasasasas", status!!)
+
                                     binding.apply {
-                                        spinnerStatus.text = itemNew
+                                        spinnerStatus.text = "Select sub status"
                                         spinnerStatus.error = null
-                                        gcSubStatus = itemNew
-                                    }
-                                }
-                            }
+                                        gcSubStatus = null
 
-                            if(args.status == "hold" || args.status == "done" || args.status == "failed" || args.statusTypeId != 0){
-                                val statusType = tpiStatusMap.entries.find { it.value == args.statusTypeId }?.key
-                                val subStatus = tpiSubStatus.entries.find { it.value == args.subStatusId }?.key
-//                                val potential = tpiPotentialMap.entries.find { it.value == args.potentialId }?.key
-                                val potential = args.potentialId
-
-                                when (args.status.toString().toLowerCase()) {
-                                    "hold" -> {
-                                        isHold = true
-                                    }
-                                    "done", "passed" -> {
-                                        isPassed = true
-                                    }
-                                    "failed" -> {
-                                        isFailed = true
-                                    }
-                                }
-
-                                binding.apply {
-                                    spinnerType.text = statusType
-                                    if(subStatus!=null){
-                                        spinnerStatus.text = subStatus
-
-                                        when (args.status.toString().toLowerCase()) {
+                                        when (status.toString().toLowerCase()) {
                                             "hold" -> {
                                                 isHold = true
+                                                toggleVisibility(View.VISIBLE)
                                             }
+
                                             "done", "passed" -> {
                                                 isPassed = true
+                                                toggleVisibility(View.VISIBLE)
                                             }
+
                                             "failed" -> {
+                                                toggleVisibility(View.GONE)
                                                 isFailed = true
                                             }
                                         }
+                                        Log.d("statatdststs", "$isHold -- $isPassed -- $isFailed")
+                                        spinnerType.text = item
+                                        spinnerType.error = null
+                                        spinnerStatus.text = "Select Type"
+                                        gcStatus = item
 
+                                        updateView(item.toString())
                                     }
-                                    if(potential!=null){
-                                        spinnerPotential.text = potential
+                                    val statusList = mutableListOf<String>()
+                                    tpiMap[item]?.forEach {
+                                        statusList.add(it.subStatusType)
+                                        tpiSubStatusMap[it.subStatusType] = it.subId
                                     }
+                                    subStatusSpinner = SpinnerDialog(
+                                        activity,
+                                        statusList as ArrayList<String>,
+                                        "Select Status Type",
+                                        "Close"
+                                    )
+                                    subStatusSpinner?.bindOnSpinerListener { itemNew, _ ->
+                                        binding.apply {
+                                            spinnerStatus.text = itemNew
+                                            spinnerStatus.error = null
+                                            gcSubStatus = itemNew
+                                        }
+                                    }
+                                }
+
+                                if (args.status == "hold" || args.status == "done" || args.status == "failed" || args.statusTypeId != 0) {
+                                    val statusType =
+                                        tpiStatusMap.entries.find { it.value == args.statusTypeId }?.key
+                                    val subStatus =
+                                        tpiSubStatus.entries.find { it.value == args.subStatusId }?.key
+//                                val potential = tpiPotentialMap.entries.find { it.value == args.potentialId }?.key
+                                    val potential = args.potentialId
+
+                                    when (args.status.toString().toLowerCase()) {
+                                        "hold" -> {
+                                            isHold = true
+                                        }
+
+                                        "done", "passed" -> {
+                                            isPassed = true
+                                        }
+
+                                        "failed" -> {
+                                            isFailed = true
+                                        }
+                                    }
+
+                                    binding.apply {
+                                        spinnerType.text = statusType
+                                        if (subStatus != null) {
+                                            spinnerStatus.text = subStatus
+
+                                            when (args.status.toString().toLowerCase()) {
+                                                "hold" -> {
+                                                    isHold = true
+                                                }
+
+                                                "done", "passed" -> {
+                                                    isPassed = true
+                                                }
+
+                                                "failed" -> {
+                                                    isFailed = true
+                                                }
+                                            }
+
+                                        }
+                                        if (potential != null) {
+                                            spinnerPotential.text = potential
+                                        }
 
 //                                    etSupervisor.setText(args.gcSupervisor)
 //                                    etContractor.setText(args.gcContractor)
 //                                    etLine.setText(args.gcNumber)
-                                    spinnerDate.text = args.gcDate
-                                    etApplication.setText(args.gcApplication)
+                                        spinnerDate.text = args.gcDate
+                                        etApplication.setText(args.gcApplication)
 
-                                    updateView(statusType.toString())
+                                        updateView(statusType.toString())
 
-                                    etDescription.setText(args.description)
-                                    tvDateTime.text = args.folloUpDate
-                                }
-                                gcStatusCode = args.statusTypeId.toString()
-                                gcStatus=statusType
-                                gcSubStatus=subStatus
-                                gcSubStatusCode=args.subStatusId.toString()
-                                gcPotential=potential
-                                gcDate = args.gcDate
-                                gcApplication = args.gcApplication
-                                gcNumber = args.gcNumber
-                                gcSupervisor = args.gcSupervisor
-                                gcContractor = args.gcContractor
-
-
-
-                                if(args.status == "failed"){
-                                    toggleVisibility(View.GONE)
-                                    isFailed = true
-                                }
-
-                                val statusList = mutableListOf<String>()
-                                tpiMap[statusType]?.forEach {
-                                    statusList.add(it.subStatusType)
-                                    tpiSubStatusMap[it.subStatusType] = it.subId
-                                }
-                                subStatusSpinner = SpinnerDialog(
-                                    activity,
-                                    statusList as ArrayList<String>,
-                                    "Select Status Type",
-                                    "Close"
-                                )
-
-                                subStatusSpinner?.bindOnSpinerListener { itemNew, _ ->
-                                    binding.apply {
-                                        spinnerStatus.text = itemNew
-                                        spinnerStatus.error = null
-                                        gcSubStatus = itemNew
+                                        etDescription.setText(args.description)
+                                        tvDateTime.text = args.folloUpDate
                                     }
+                                    gcStatusCode = args.statusTypeId.toString()
+                                    gcStatus = statusType
+                                    gcSubStatus = subStatus
+                                    gcSubStatusCode = args.subStatusId.toString()
+                                    gcPotential = potential
+                                    gcDate = args.gcDate
+                                    gcApplication = args.gcApplication
+                                    gcNumber = args.gcNumber
+                                    gcSupervisor = args.gcSupervisor
+                                    gcContractor = args.gcContractor
+
+
+
+                                    if (args.status == "failed") {
+                                        toggleVisibility(View.GONE)
+                                        isFailed = true
+                                    }
+
+                                    val statusList = mutableListOf<String>()
+                                    tpiMap[statusType]?.forEach {
+                                        statusList.add(it.subStatusType)
+                                        tpiSubStatusMap[it.subStatusType] = it.subId
+                                    }
+                                    subStatusSpinner = SpinnerDialog(
+                                        activity,
+                                        statusList as ArrayList<String>,
+                                        "Select Status Type",
+                                        "Close"
+                                    )
+
+                                    subStatusSpinner?.bindOnSpinerListener { itemNew, _ ->
+                                        binding.apply {
+                                            spinnerStatus.text = itemNew
+                                            spinnerStatus.error = null
+                                            gcSubStatus = itemNew
+                                        }
+                                    }
+
                                 }
 
+                            } else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Please try again",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
                             }
-
-                        } else {
-                            Toast.makeText(requireContext(), "Please try again", Toast.LENGTH_SHORT)
-                                .show()
                         }
                     }
                     Status.ERROR -> {
@@ -1395,34 +1426,41 @@ class GcStatusFragment : Fragment() {
                                     else -> {}
                                 }
                             }else{
-                                val request = GcUploadRequestModel(
-                                    status = "1", mobile = args.gcModel!!.mobileNumber, sessionId = args.sessionId.toString()
+                                val request = args.gcModel?.let { it1 ->
+                                    GcUploadRequestModel(
+                                        status = "1", mobile = it1.mobileNumber, sessionId = args.sessionId.toString()
 
-                                )
-                                when (imageType) {
-                                    GcImageType.GC_ATTACHMENT -> {
-                                        viewModel.uploadGcAttachment(
-                                            request,
-                                            file,
-                                            Constants.LMC_GC_ALIGNMENT_IMAGE_FILE
-                                        )
-                                    }
-                                    GcImageType.WARNING_PLATE -> {
-                                        viewModel.uploadGcAttachment(
-                                            request,
-                                            file,
-                                            Constants.WARNING_PLATE_FILE
-                                        )
-                                    }
-                                    GcImageType.RCC -> {
-                                        viewModel.uploadGcAttachment(
-                                            request,
-                                            file,
-                                            Constants.RCC_GUARD_PHOTO_GROUND_FILE
-                                        )
+                                    )
+                                }
+                                if (request != null) {
+                                    when (imageType) {
+                                        GcImageType.GC_ATTACHMENT -> {
+                                            viewModel.uploadGcAttachment(
+                                                request,
+                                                file,
+                                                Constants.LMC_GC_ALIGNMENT_IMAGE_FILE
+                                            )
+                                        }
 
+                                        GcImageType.WARNING_PLATE -> {
+                                            viewModel.uploadGcAttachment(
+                                                request,
+                                                file,
+                                                Constants.WARNING_PLATE_FILE
+                                            )
+                                        }
+
+                                        GcImageType.RCC -> {
+                                            viewModel.uploadGcAttachment(
+                                                request,
+                                                file,
+                                                Constants.RCC_GUARD_PHOTO_GROUND_FILE
+                                            )
+
+                                        }
+
+                                        else -> {}
                                     }
-                                    else -> {}
                                 }
                             }
                             setUploadObserver()
@@ -1533,7 +1571,7 @@ class GcStatusFragment : Fragment() {
 
                     }
                     Status.SUCCESS->{
-                        Toast.makeText(requireContext(), it.data!!.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_SHORT).show()
                         binding.signature.isEnabled = false
                         binding.btnClear.visibility =  View.GONE
                         binding.btnSignature.visibility = View.GONE
@@ -1677,8 +1715,8 @@ class GcStatusFragment : Fragment() {
                     }
                     Status.SUCCESS->{
                         setDialog(false)
-                        if(it.data?.error!!) {
-                            Toast.makeText(requireContext(), it.data!!.message, Toast.LENGTH_SHORT)
+                        if(it.data?.error == true) {
+                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT)
                                 .show()
                         }
                         getAttachmentList()
@@ -1741,7 +1779,7 @@ class GcStatusFragment : Fragment() {
     }
 
     private fun setDialog(show: Boolean) {
-        if (show) dialog!!.show() else dialog!!.dismiss()
+        if (show) dialog?.show() else dialog?.dismiss()
     }
 
 }

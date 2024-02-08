@@ -191,7 +191,7 @@ class LmcFinalFragment : Fragment() {
             rgHd.setOnCheckedChangeListener { radioGroup, i ->
                 holeDrilled = if(rbHdYes.id == i) 1 else 0
             }
-            rgMcv.setOnCheckedChangeListener { radioGroup, i ->
+            rgMcv.setOnCheckedChangeListener { _, i ->
                 mcvTesting = if(rbMcvYes.id == i) 1 else 0
             }
 //            rgCsOne.setOnCheckedChangeListener { radioGroup, i ->
@@ -203,52 +203,52 @@ class LmcFinalFragment : Fragment() {
 
             if(args.status == "hold" || args.status == "done"){
                 if(args.tfAvail != null && args.tfAvail != "-1"){
-                    tfAvail = args.tfAvail!!.toInt()
+                    tfAvail = args.tfAvail?.toInt() ?: 0
                 }
                 if(args.holeDrilled != null  && args.holeDrilled != "-1"){
-                    holeDrilled = args.holeDrilled!!.toInt()
+                    holeDrilled = args.holeDrilled?.toInt() ?: 0
                 }
                 if(args.mcvTesting != null && args.mcvTesting != "-1"){
-                    mcvTesting = args.mcvTesting!!.toInt()
+                    mcvTesting = args.mcvTesting?.toInt() ?: 0
                 }
                 if(args.acTape != null && args.acTape != "-1"){
-                    acTape = args.acTape!!.toInt()
+                    acTape = args.acTape?.toInt() ?: 0
                 }
                 args.apply {
                     if(pvcSleeve != null && pvcSleeve != "-1"){
-                        pvcAvail = pvcSleeve!!.toInt()
+                        pvcAvail = pvcSleeve.toInt()
                     }
 
                     if(meterInstallation != null && meterInstallation != "-1"){
-                        meterAvail = meterInstallation!!.toInt()
+                        meterAvail = meterInstallation.toInt()
                     }
 
                     if(clamping != null && clamping != "-1"){
-                        clampingAvail = clamping!!.toInt()
+                        clampingAvail = clamping.toInt()
                     }
 
                     if(gmTesting != null && gmTesting != "-1"){
-                        gasAvail = gmTesting!!.toInt()
+                        gasAvail = gmTesting.toInt()
                     }
 
                     if(coh != null && coh != "-1"){
-                        cohAvail = coh!!.toInt()
+                        cohAvail = coh.toInt()
                     }
 
                     if(painting != null &&  painting != "-1"){
-                        paintingAvail = painting!!.toInt()
+                        paintingAvail = painting.toInt()
                     }
 
                     if(connectivity != null && connectivity != "-1"){
-                        connectivityAvail = connectivity!!.toInt()
+                        connectivityAvail = connectivity.toInt()
                     }
 
                     if(endCap != null && endCap != "-1"){
-                        ecAvail = endCap!!.toInt()
+                        ecAvail = endCap.toInt()
                     }
 
                     if(areagassified != null && areagassified != "-1"){
-                        agAvail = areagassified!!.toInt()
+                        agAvail = areagassified.toInt()
                     }
 //                    if(custStatus != null && custStatus != "-1"){
 //                        csOne = custStatus!!.toInt()
@@ -396,7 +396,7 @@ class LmcFinalFragment : Fragment() {
 
             imageLayout = LayoutViewImageBinding.inflate(LayoutInflater.from(requireActivity()))
             imageDialog = Dialog(requireActivity(), R.style.list_dialog_style)
-            imageDialog!!.setContentView(imageLayout!!.root)
+            imageLayout?.root?.let { imageDialog?.setContentView(it) }
 
             getAttachmentList()
             setupAttachmentObserver()
@@ -524,27 +524,27 @@ class LmcFinalFragment : Fragment() {
                 params["comments"] = ""
                 params["extra_mlc_length"] = args.extraMlLength.toString()
                 params["lmc_execution"] = args.lmcExecution.toString()
-                params["gi_clamp"] = args.lmcConnectionModel!!.lmcGiClamp.toString()
-                params["mlc_clamp"] = args.lmcConnectionModel!!.lmcMlcClamp.toString()
-                params["gi_MF_elbow"] = args.lmcConnectionModel!!.lmcGiMfElbow.toString()
-                params["gi_FF_elbow"] = args.lmcConnectionModel!!.lmcGiFfElbow.toString()
-                params["gi_2_nipple"] = args.lmcConnectionModel!!.lmcGi2.toString()
-                params["gi_3_nipple"] = args.lmcConnectionModel!!.lmcGi3.toString()
-                params["gi_4_nipple"] = args.lmcConnectionModel!!.lmcGi4.toString()
-                params["gi_6_nipple"] = args.lmcConnectionModel!!.lmcGi6.toString()
-                params["gi_8_nipple"] = args.lmcConnectionModel!!.lmcGi8.toString()
-                params["gi_tee"] = args.lmcConnectionModel!!.lmcGiTee.toString()
-                params["mlc_tee"] = args.lmcConnectionModel!!.lmcMlcTee.toString()
-                params["gi_socket"] = args.lmcConnectionModel!!.lmcGiSocket.toString()
-                params["mlc_male_union"] = args.lmcConnectionModel!!.lmcMaleUnion.toString()
-                params["mlc_female_union"] = args.lmcConnectionModel!!.lmcFemaleUnion.toString()
-                params["meter_bracket"] = args.lmcConnectionModel!!.lmcMeterBracket.toString()
-                params["meter_sticker"] = args.lmcConnectionModel!!.lmcMeterSticker.toString()
-                params["plate_marker"] = args.lmcConnectionModel!!.lmcPlateMarker.toString()
-                params["adaptor_GI_to_reg"] = args.lmcConnectionModel!!.lmcAdaptorGI.toString()
-                params["adaptor_reg_to_meter"] = args.lmcConnectionModel!!.lmcAdaptorReg.toString()
-                params["adaptor_meter_to_GI_pipe"] = args.lmcConnectionModel!!.lmcAdaptorMeter.toString()
-                params["female_union_meter_MLC_pipe"] = args.lmcConnectionModel!!.lmcFemaleMeter.toString()
+                params["gi_clamp"] = args.lmcConnectionModel?.lmcGiClamp.toString()
+                params["mlc_clamp"] = args.lmcConnectionModel?.lmcMlcClamp.toString()
+                params["gi_MF_elbow"] = args.lmcConnectionModel?.lmcGiMfElbow.toString()
+                params["gi_FF_elbow"] = args.lmcConnectionModel?.lmcGiFfElbow.toString()
+                params["gi_2_nipple"] = args.lmcConnectionModel?.lmcGi2.toString()
+                params["gi_3_nipple"] = args.lmcConnectionModel?.lmcGi3.toString()
+                params["gi_4_nipple"] = args.lmcConnectionModel?.lmcGi4.toString()
+                params["gi_6_nipple"] = args.lmcConnectionModel?.lmcGi6.toString()
+                params["gi_8_nipple"] = args.lmcConnectionModel?.lmcGi8.toString()
+                params["gi_tee"] = args.lmcConnectionModel?.lmcGiTee.toString()
+                params["mlc_tee"] = args.lmcConnectionModel?.lmcMlcTee.toString()
+                params["gi_socket"] = args.lmcConnectionModel?.lmcGiSocket.toString()
+                params["mlc_male_union"] = args.lmcConnectionModel?.lmcMaleUnion.toString()
+                params["mlc_female_union"] = args.lmcConnectionModel?.lmcFemaleUnion.toString()
+                params["meter_bracket"] = args.lmcConnectionModel?.lmcMeterBracket.toString()
+                params["meter_sticker"] = args.lmcConnectionModel?.lmcMeterSticker.toString()
+                params["plate_marker"] = args.lmcConnectionModel?.lmcPlateMarker.toString()
+                params["adaptor_GI_to_reg"] = args.lmcConnectionModel?.lmcAdaptorGI.toString()
+                params["adaptor_reg_to_meter"] = args.lmcConnectionModel?.lmcAdaptorReg.toString()
+                params["adaptor_meter_to_GI_pipe"] = args.lmcConnectionModel?.lmcAdaptorMeter.toString()
+                params["female_union_meter_MLC_pipe"] = args.lmcConnectionModel?.lmcFemaleMeter.toString()
                 lmcStatusViewModel.submitLmc(params)
 
                 setupObserver()
@@ -851,10 +851,10 @@ class LmcFinalFragment : Fragment() {
                                         {attachment ->  deleteItemClicked(attachment) }
                                     )
                                     binding.rvIsometric.adapter = isometricAdapter
-                                    binding.tvIsometric.text = "Isometric Drawing (${isometricAdapter!!.itemCount})"
+                                    binding.tvIsometric.text = "Isometric Drawing (${isometricAdapter?.itemCount ?: 0})"
                                     binding.tvIsometric.error = null
-                                    isometricAdapter!!.notifyDataSetChanged()
-                                    isometricDrawingCount = isometricAdapter!!.itemCount
+                                    isometricAdapter?.notifyDataSetChanged()
+                                    isometricDrawingCount = isometricAdapter?.itemCount ?: 0
                                 }
                                 Constants.LMC_DRAWING_FILE->{
                                     drawingAdapter = ViewAttachmentAdapter(
@@ -864,10 +864,10 @@ class LmcFinalFragment : Fragment() {
                                         {attachment ->  deleteItemClicked(attachment) }
                                     )
                                     binding.rvDrawing.adapter = drawingAdapter
-                                    binding.tvDrawing.text = "PPT Gauge Image  (${drawingAdapter!!.itemCount})"
+                                    binding.tvDrawing.text = "PPT Gauge Image  (${drawingAdapter?.itemCount ?: 0})"
                                     binding.tvDrawing.error = null
-                                    drawingAdapter!!.notifyDataSetChanged()
-                                    drawingCount = drawingAdapter!!.itemCount
+                                    drawingAdapter?.notifyDataSetChanged()
+                                    drawingCount = drawingAdapter?.itemCount ?: 0
 
                                 }
                                 Constants.LMC_INSTALLATION_FILE->{
@@ -878,10 +878,10 @@ class LmcFinalFragment : Fragment() {
                                         {attachment ->  deleteItemClicked(attachment) }
                                     )
                                     binding.rvInstallation.adapter = installationAdapter
-                                    binding.tvInstallation.text = "Installation Documents (${installationAdapter!!.itemCount})"
+                                    binding.tvInstallation.text = "Installation Documents (${installationAdapter?.itemCount ?: 0})"
                                     binding.tvInstallation.error = null
-                                    installationAdapter!!.notifyDataSetChanged()
-                                    installationCount = installationAdapter!!.itemCount
+                                    installationAdapter?.notifyDataSetChanged()
+                                    installationCount = installationAdapter?.itemCount ?: 0
                                 }
 //                                Constants.LMC_SELFIE_WITH_METER->{
 //                                    selfieAdapter = ViewAttachmentAdapter(
@@ -904,11 +904,11 @@ class LmcFinalFragment : Fragment() {
                                         {attachment ->  deleteItemClicked(attachment) }
                                     )
                                     binding.rvSignature.adapter = signatureAdapter
-                                    binding.tvCustomer.text = "Customer Signature (${signatureAdapter!!.itemCount})"
+                                    binding.tvCustomer.text = "Customer Signature (${signatureAdapter?.itemCount ?: 0})"
                                     binding.tvCustomer.error = null
-                                    signatureAdapter!!.notifyDataSetChanged()
-                                    signatureCount = signatureAdapter!!.itemCount
-                                    if(signatureAdapter!!.itemCount>0){
+                                    signatureAdapter?.notifyDataSetChanged()
+                                    signatureCount = signatureAdapter?.itemCount ?: 0
+                                    if((signatureAdapter?.itemCount ?: 0) > 0){
                                         binding.apply {
                                             signature.visibility = View.GONE
                                             btnSignature.visibility = View.GONE
@@ -1018,9 +1018,9 @@ class LmcFinalFragment : Fragment() {
                 }
             )
             .into(imageLayout?.ivSourceImage!!)
-        imageLayout?.tvImageTitle!!.text = attachment.fileName
-        imageLayout?.btnDelete!!.visibility = View.VISIBLE
-        imageLayout?.ivBack!!.setOnClickListener {
+        imageLayout?.tvImageTitle?.text = attachment.fileName
+        imageLayout?.btnDelete?.visibility = View.VISIBLE
+        imageLayout?.ivBack?.setOnClickListener {
             imageDialog?.dismiss()
         }
         val deleteParams = HashMap<String,String>()
@@ -1030,7 +1030,7 @@ class LmcFinalFragment : Fragment() {
         deleteParams["type"] = attachment.type
         deleteParams["image"] = attachment.fileName
 
-        imageLayout?.btnDelete!!.setOnClickListener {
+        imageLayout?.btnDelete?.setOnClickListener {
             val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
             builder.setCancelable(false)
             builder.setTitle("Delete Attachment")
@@ -1042,21 +1042,27 @@ class LmcFinalFragment : Fragment() {
                         if(it != null){
 
                             when(it.status){
-                                Status.SUCCESS->{
-                                    if(!it.data!!.error){
-                                        imageDialog!!.dismiss()
+                                Status.SUCCESS-> {
+                                    if (it.data != null) {
+                                        if (!it.data.error) {
+                                            imageDialog?.dismiss()
 //                                        binding.rvAttachment.adapter = null
-                                        binding.rvDrawing.adapter = null
-                                        binding.rvIsometric.adapter = null
-                                        binding.rvInstallation.adapter = null
-                                        binding.rvSignature.adapter = null
-                                        drawingAdapter = null
-                                        installationAdapter = null
-                                        isometricAdapter = null
-                                        signatureAdapter = null
-                                        getAttachmentList()
+                                            binding.rvDrawing.adapter = null
+                                            binding.rvIsometric.adapter = null
+                                            binding.rvInstallation.adapter = null
+                                            binding.rvSignature.adapter = null
+                                            drawingAdapter = null
+                                            installationAdapter = null
+                                            isometricAdapter = null
+                                            signatureAdapter = null
+                                            getAttachmentList()
+                                        }
+                                        Toast.makeText(
+                                            requireContext(),
+                                            it.data.message,
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                     }
-                                    Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT).show()
                                 }
                                 Status.LOADING->{
 
@@ -1247,8 +1253,8 @@ class LmcFinalFragment : Fragment() {
                                 btnClear.visibility = View.GONE
                             }
                         }
-                        if(it.data?.error!!) {
-                            Toast.makeText(requireContext(), it.data!!.message, Toast.LENGTH_SHORT)
+                        if(it.data?.error == true) {
+                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT)
                                 .show()
                         }
                         getAttachmentList()
@@ -1323,7 +1329,7 @@ class LmcFinalFragment : Fragment() {
     }
 
     private fun setDialog(show: Boolean) {
-        if (show) dialog!!.show() else dialog!!.dismiss()
+        if (show) dialog?.show() else dialog?.dismiss()
     }
 
 }
