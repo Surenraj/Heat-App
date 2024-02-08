@@ -111,6 +111,8 @@
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:visibility="gone"
+        android:textColor="#707070"
+        android:textColorHint="#80707070"
         app:layout_constraintEnd_toEndOf="@id/et_mobile"
         app:layout_constraintStart_toStartOf="@id/et_mobile"
         app:layout_constraintTop_toBottomOf="@id/et_password" />
