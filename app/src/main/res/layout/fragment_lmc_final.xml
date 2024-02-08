@@ -1,0 +1,1030 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <ImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/profile_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_back" />
+
+        <ImageView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/iv_back"
+            android:padding="5dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
+            android:background="@drawable/back_button_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="LMC Connection"
+            android:textAllCaps="true"
+
+            android:textColor="#ee5222"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_back"
+            app:layout_constraintEnd_toStartOf="@id/iv_profile"
+            app:layout_constraintStart_toEndOf="@id/iv_back"
+            app:layout_constraintTop_toTopOf="@id/iv_back" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_status"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="20dp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/iv_back"
+            app:layout_constraintTop_toBottomOf="@id/iv_back">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/vgl_50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <TextView
+                    android:id="@+id/tv_pvc_sleeve"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/pvc_sleeve"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_meter_installation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/meter_installation"
+                    android:textColor="#545454"
+
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/vgl_50"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RadioGroup
+                    android:id="@+id/rg_pvc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_pvc_sleeve">
+
+                    <RadioButton
+                        android:id="@+id/rb_pvc_avail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Avail"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_pvc_na"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Not Available"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/rg_mi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="@id/tv_meter_installation"
+                    app:layout_constraintTop_toBottomOf="@id/tv_meter_installation">
+
+                    <RadioButton
+                        android:id="@+id/rb_mi_avail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Done"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_mi_na"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Not Done"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/tv_clamping"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#545454"
+
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/clamping_gi_pvc"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rg_pvc" />
+
+                <TextView
+                    android:id="@+id/tv_gmt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/gas_meter_testing"
+                    android:textSize="16sp"
+                    android:textColor="#545454"
+
+                    app:layout_constraintStart_toStartOf="@id/vgl_50"
+                    app:layout_constraintTop_toTopOf="@id/tv_clamping" />
+
+                <RadioGroup
+                    android:id="@+id/rg_clamping"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_clamping">
+
+                    <RadioButton
+                        android:id="@+id/rb_clamping_done"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Done"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_clamping_nd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Not Done"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/rg_gmt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="@id/tv_gmt"
+                    app:layout_constraintTop_toBottomOf="@id/tv_gmt">
+
+                    <RadioButton
+                        android:id="@+id/rb_gmt_done"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Done"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_gmt_nd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Not Done"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/tv_coh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/cementing_of_holes"
+                    android:textSize="16sp"
+                    android:textColor="#545454"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rg_clamping" />
+
+                <TextView
+                    android:id="@+id/tv_painting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/painting_of_gi_pipe"
+                    android:textSize="16sp"
+                    android:textColor="#545454"
+
+                    app:layout_constraintStart_toStartOf="@id/vgl_50"
+                    app:layout_constraintTop_toTopOf="@id/tv_coh" />
+
+                <RadioGroup
+                    android:id="@+id/rg_coh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_coh">
+
+                    <RadioButton
+                        android:id="@+id/rb_coh_done"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Done"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_coh_nd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Not Done"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/rg_painting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="@id/tv_painting"
+                    app:layout_constraintTop_toBottomOf="@id/tv_painting">
+
+                    <RadioButton
+                        android:id="@+id/rb_painting_done"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Done"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_painting_nd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Not Done"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/tv_tf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/tf_avail"
+                    android:textColor="#545454"
+
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rg_coh" />
+
+                <TextView
+                    android:id="@+id/tv_connectivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/connectivity"
+                    android:textColor="#545454"
+
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/vgl_50"
+                    app:layout_constraintTop_toTopOf="@id/tv_tf" />
+
+                <RadioGroup
+                    android:id="@+id/rg_tf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_tf">
+
+                    <RadioButton
+                        android:id="@+id/rb_tf_done"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Done"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_tf_nd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Not Done"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/rg_connectivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="@id/tv_connectivity"
+                    app:layout_constraintTop_toBottomOf="@id/tv_connectivity">
+
+                    <RadioButton
+                        android:id="@+id/rb_connectivity_done"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Done"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_connectivity_nd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Not Done"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/tv_ec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/end_cap"
+                    android:textColor="#545454"
+
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rg_tf" />
+
+                <TextView
+                    android:id="@+id/tv_ag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/area_gassified"
+                    android:textSize="16sp"
+                    android:textColor="#545454"
+
+                    app:layout_constraintStart_toStartOf="@id/vgl_50"
+                    app:layout_constraintTop_toTopOf="@id/tv_ec" />
+
+                <RadioGroup
+                    android:id="@+id/rg_ec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_ec">
+
+                    <RadioButton
+                        android:id="@+id/rb_ec_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Yes"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_ec_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="No"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/rg_ag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="@id/tv_ag"
+                    app:layout_constraintTop_toBottomOf="@id/tv_ag">
+
+                    <RadioButton
+                        android:id="@+id/rb_ag_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Yes"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_ag_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="No"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/tv_hole_drilled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/hole_drilled"
+                    android:textSize="16sp"
+                    android:textColor="#545454"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rg_ec" />
+
+                <TextView
+                    android:id="@+id/tv_mcv_testing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/mcv_testing"
+                    android:textSize="16sp"
+                    android:textColor="#545454"
+
+                    app:layout_constraintStart_toStartOf="@id/vgl_50"
+                    app:layout_constraintTop_toTopOf="@id/tv_hole_drilled" />
+
+                <RadioGroup
+                    android:id="@+id/rg_hd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_hole_drilled">
+
+                    <RadioButton
+                        android:id="@+id/rb_hd_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Yes"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_hd_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="No"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/rg_mcv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="@id/tv_mcv_testing"
+                    app:layout_constraintTop_toBottomOf="@id/tv_mcv_testing">
+
+                    <RadioButton
+                        android:id="@+id/rb_mcv_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Yes"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_mcv_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="No"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/tv_tape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="Anti Corrosion Tape"
+                    android:textSize="16sp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#545454"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rg_hd"/>
+
+                <RadioGroup
+                    android:id="@+id/rg_tape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_tape">
+
+                    <RadioButton
+                        android:id="@+id/rb_tape_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Applied"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_tape_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="Not Applied"
+                        android:textColor="#545454"
+                        android:textSize="12sp" />
+                </RadioGroup>
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_customer_title"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/rg_tape"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    android:text="Customer Satisfaction"-->
+<!--                    android:textAllCaps="true"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:fontFamily="@font/barlow_semibold"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textColor="#EE5222"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/view_line"-->
+<!--                    android:background="#1A80A8"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tv_customer_title"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_brief"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/view_line"-->
+<!--                    android:text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."-->
+<!--                    android:fontFamily="@font/barlow_regular"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_cs_one"-->
+<!--                    android:text="@string/cs_one"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tv_brief"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    android:fontFamily="@font/barlow_regular"-->
+<!--                    android:textSize="12sp"-->
+<!--                    android:layout_marginTop="15dp"-->
+<!--                    android:textColor="#545454"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content" />-->
+
+<!--                <RadioGroup-->
+<!--                    android:id="@+id/rg_cs_one"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/tv_cs_one"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tv_cs_one">-->
+
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/rb_cs_one_yes"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:checked="true"-->
+<!--                        android:fontFamily="@font/barlow_regular"-->
+<!--                        android:text="Yes"-->
+<!--                        android:textColor="#545454"-->
+<!--                        android:textSize="12sp" />-->
+
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/rb_cs_one_no"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/barlow_regular"-->
+<!--                        android:text="No"-->
+<!--                        android:textColor="#545454"-->
+<!--                        android:textSize="12sp" />-->
+
+
+<!--                </RadioGroup>-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_cs_two"-->
+<!--                    android:text="@string/cs_two"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/rg_cs_one"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    android:fontFamily="@font/barlow_regular"-->
+<!--                    android:textSize="12sp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:textColor="#545454"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content" />-->
+
+<!--                <RadioGroup-->
+<!--                    android:id="@+id/rg_cs_two"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/tv_cs_two"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tv_cs_two">-->
+
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/rb_cs_two_yes"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:checked="true"-->
+<!--                        android:fontFamily="@font/barlow_regular"-->
+<!--                        android:text="Yes"-->
+<!--                        android:textColor="#545454"-->
+<!--                        android:textSize="12sp" />-->
+
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/rb_cs_two_no"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/barlow_regular"-->
+<!--                        android:text="No"-->
+<!--                        android:textColor="#545454"-->
+<!--                        android:textSize="12sp" />-->
+
+
+<!--                </RadioGroup>-->
+
+                <View
+                    android:id="@+id/view_line_1"
+                    android:background="#1A80A8"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rg_tape"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <TextView
+                    android:id="@+id/tv_isometric"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/isometric_0"
+                    android:textColor="#545454"
+                    android:focusableInTouchMode="true"
+                    android:focusable="true"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_up_24"
+                    app:layout_constraintEnd_toStartOf="@id/iv_isometric"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_line_1"
+                    android:fontFamily="@font/poppins_bold"
+                    app:layout_goneMarginBottom="32dp"/>
+
+                <ImageView
+                    android:id="@+id/iv_isometric"
+                    android:src="@drawable/ic_baseline_photo_camera_24"
+                    app:layout_constraintTop_toTopOf="@id/tv_isometric"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="10dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_isometric"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_isometric"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:isScrollContainer="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_isometric"
+                    tools:listitem="@layout/photo_list_item" />
+
+                <TextView
+                    android:id="@+id/tv_installation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/installation_0"
+                    android:textColor="#545454"
+                    android:focusableInTouchMode="true"
+                    android:focusable="true"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_up_24"
+                    app:layout_constraintEnd_toStartOf="@id/iv_installation"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_isometric"
+                    android:fontFamily="@font/poppins_bold"
+                    app:layout_goneMarginBottom="32dp"/>
+
+                <ImageView
+                    android:id="@+id/iv_installation"
+                    android:src="@drawable/ic_baseline_photo_camera_24"
+                    app:layout_constraintTop_toTopOf="@id/tv_installation"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="10dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_installation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_installation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:isScrollContainer="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_installation"
+                    tools:listitem="@layout/photo_list_item" />
+
+                <TextView
+                    android:id="@+id/tv_drawing"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/drawing_0"
+                    android:textColor="#545454"
+                    android:focusableInTouchMode="true"
+                    android:focusable="true"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_up_24"
+                    app:layout_constraintEnd_toStartOf="@id/iv_drawing"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_installation"
+                    android:fontFamily="@font/poppins_bold"
+                    app:layout_goneMarginBottom="32dp"/>
+
+                <ImageView
+                    android:id="@+id/iv_drawing"
+                    android:src="@drawable/ic_baseline_photo_camera_24"
+                    app:layout_constraintTop_toTopOf="@id/tv_drawing"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="10dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_drawing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_drawing"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:isScrollContainer="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_drawing"
+                    tools:listitem="@layout/photo_list_item" />
+
+
+                <TextView
+                    android:id="@+id/tv_customer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textColor="#545454"
+                    android:focusableInTouchMode="true"
+                    android:focusable="true"
+                    android:text="@string/customer_signature_0"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_up_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_drawing"
+                    android:fontFamily="@font/poppins_bold"
+                    app:layout_goneMarginBottom="32dp"/>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_signature"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:isScrollContainer="false"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_customer"
+                    tools:listitem="@layout/layout_attachments_item" />
+
+
+                <com.github.gcacace.signaturepad.views.SignaturePad
+                    android:id="@+id/signature"
+                    android:saveEnabled="false"
+                    app:layout_constraintTop_toBottomOf="@id/rv_signature"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btn_signature"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/signature_background"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="200dp" />
+
+                <Button
+                    android:id="@+id/btn_signature"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/edit_icon_bg"
+                    app:backgroundTint="@null"
+                    android:text="Sign"
+                    android:textAllCaps="false"
+                    android:textColor="#545454"
+                    android:textSize="11dp"
+                    android:fontFamily="@font/barlow_semibold"
+                    app:layout_constraintBottom_toTopOf="@id/btn_clear"
+                    app:layout_constraintTop_toTopOf="@id/signature"
+                    app:layout_constraintStart_toEndOf="@id/signature"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/btn_clear"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/edit_icon_bg"
+                    app:backgroundTint="@null"
+                    android:text="Clear"
+                    android:textAllCaps="false"
+                    android:textSize="11dp"
+                    android:textColor="#545454"
+                    android:fontFamily="@font/barlow_semibold"
+                    app:layout_constraintTop_toBottomOf="@id/btn_signature"
+                    app:layout_constraintBottom_toBottomOf="@id/signature"
+                    app:layout_constraintStart_toEndOf="@id/signature"
+                    app:layout_constraintEnd_toEndOf="@id/btn_signature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <CheckBox
+                    android:id="@+id/cb_acknowledge"
+                    app:layout_constraintTop_toBottomOf="@id/signature"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:clickable="false"
+                    android:checked="true"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tv_acknowledge"
+                    app:layout_constraintTop_toTopOf="@id/cb_acknowledge"
+                    app:layout_constraintStart_toEndOf="@id/cb_acknowledge"
+                    app:layout_constraintBottom_toBottomOf="@id/cb_acknowledge"
+                    android:text="@string/acknowledge"
+                    android:textSize="11sp"
+                    android:textColor="#545454"
+                    android:fontFamily="@font/barlow_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+                <Button
+                    android:id="@+id/btn_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/submit_btn_background"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:text="SUBMIT"
+                    android:textColor="@color/white"
+                    android:textSize="19sp"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cb_acknowledge" />
+
+                <Button
+                    android:id="@+id/btn_approve"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/submit_btn_background"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:text="Approve"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    android:visibility="gone"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toStartOf="@id/btn_decline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_submit" />
+
+                <Button
+                    android:id="@+id/btn_decline"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/submit_btn_background"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:text="Decline"
+                    android:visibility="gone"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    app:backgroundTint="@null"
+                    app:layout_constraintStart_toEndOf="@id/btn_approve"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_submit" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

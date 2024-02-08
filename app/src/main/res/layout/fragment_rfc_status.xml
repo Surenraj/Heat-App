@@ -1,0 +1,1720 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/profile_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_back" />
+
+    <ImageView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/iv_back"
+        android:padding="5dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
+        android:background="@drawable/back_button_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        app:layout_constraintStart_toEndOf="@id/iv_back"
+        app:layout_constraintEnd_toStartOf="@id/iv_profile"
+        app:layout_constraintTop_toTopOf="@id/iv_back"
+        app:layout_constraintBottom_toBottomOf="@id/iv_back"
+        android:textSize="20sp"
+        android:text="RFC Status"
+        android:textAllCaps="true"
+
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="#ee5222"
+        android:layout_width="0dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:paddingStart="5dp"
+        android:gravity="center"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_back"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_status"
+            android:layout_marginHorizontal="15dp"
+            app:cardCornerRadius="20dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@color/white"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintTop_toBottomOf="@id/iv_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_customer_details"
+                android:layout_width="match_parent"
+                android:padding="10dp"
+                android:layout_height="match_parent">
+
+                <View
+                    android:id="@+id/view_line"
+                    android:background="#1A80A8"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <TextView
+                    android:id="@+id/tv_customer_info"
+                    app:layout_constraintTop_toBottomOf="@id/view_line"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="Customer Information"
+                    android:textAllCaps="true"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:textSize="16sp"
+                    android:textColor="#EE5222"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:id="@+id/view_line_1"
+                    android:background="#1A80A8"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_customer_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+
+                <LinearLayout
+                    android:id="@+id/ll_customer_info"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/view_line_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="BP Number"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_1"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_bp_no"
+                            android:text="BP12377898"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_1"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Application No."
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_2"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_aplication_no"
+                            android:text="10015665"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_2"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Customer Name"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_3"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_customer_name"
+                            android:text="Karthikeyan"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_3"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Mobile"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_4"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_mobile_no"
+                            android:text="9841095322"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Email"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_5"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_email"
+                            android:text="abc@abc.com"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_5"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Address"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_6"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_address"
+                            android:text="NO.88. Arcot Road,Vijayashanti Towers, VAdapalani,Chennai-26"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_6"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view_line_2"
+                    android:background="#1A80A8"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll_customer_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <TextView
+                    android:id="@+id/tv_installation_details"
+                    app:layout_constraintTop_toBottomOf="@id/view_line_2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="Installation Details"
+                    android:textAllCaps="true"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:textSize="16sp"
+                    android:textColor="#EE5222"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:id="@+id/view_line_3"
+                    android:background="#1A80A8"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_installation_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+
+                <LinearLayout
+                    android:id="@+id/ll_installation_details"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/view_line_3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="RFC Type"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_7"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_rfc_type"
+                            android:text="Gasified"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_7"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Contractor Name"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_8"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_contractor_name"
+                            android:text="Venkatesh"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_8"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Supervisor Name"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_9"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_supervisor_name"
+                            android:text="Karthikeyan"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_9"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:id="@+id/cl_sr_no"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content">-->
+
+<!--                        <TextView-->
+<!--                            android:text="SR Number"-->
+<!--                            android:fontFamily="@font/barlow_regular"-->
+<!--                            android:textSize="12sp"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_colon_33"-->
+<!--                            android:text=":"-->
+<!--                            android:fontFamily="@font/barlow_regular"-->
+<!--                            android:textSize="12sp"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintHorizontal_bias="0.4"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_sr_no"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginStart="20dp"-->
+<!--                            android:fontFamily="@font/barlow_regular"-->
+<!--                            android:text="17"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:textSize="12sp"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintStart_toEndOf="@id/tv_colon_33"-->
+<!--                            app:layout_constraintTop_toTopOf="parent" />-->
+
+
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:id="@+id/cl_drs_no"-->
+
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content">-->
+
+<!--                        <TextView-->
+<!--                            android:text="DRS Number"-->
+<!--                            android:fontFamily="@font/barlow_regular"-->
+<!--                            android:textSize="12sp"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_colon_34"-->
+<!--                            android:text=":"-->
+<!--                            android:fontFamily="@font/barlow_regular"-->
+<!--                            android:textSize="12sp"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintHorizontal_bias="0.4"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_drs_no"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginStart="20dp"-->
+<!--                            android:fontFamily="@font/barlow_regular"-->
+<!--                            android:text=""-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:textSize="12sp"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintStart_toEndOf="@id/tv_colon_34"-->
+<!--                            app:layout_constraintTop_toTopOf="parent" />-->
+
+
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/cl_meter_make"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Meter Make"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_10"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_meter_make"
+                            android:text="17"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_10"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/cl_meter_typer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Meter Type"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_11"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_meter_type"
+                            android:text="Nirmal"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_11"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/cl_meter_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Meter No"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_12"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_meter_no"
+                            android:text="98765036"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_12"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/cl_initial_reading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Initial Reading"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_13"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_initial_reading"
+                            android:text="0.2"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_13"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:id="@+id/cl_type_nr"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content">-->
+
+<!--                        <TextView-->
+<!--                            android:text="Type N/R"-->
+<!--                            android:fontFamily="@font/barlow_regular"-->
+<!--                            android:textSize="12sp"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_colon_14"-->
+<!--                            android:text=":"-->
+<!--                            android:fontFamily="@font/barlow_regular"-->
+<!--                            android:textSize="12sp"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintHorizontal_bias="0.4"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_type_nr"-->
+<!--                            android:text="98765036"-->
+<!--                            android:fontFamily="@font/barlow_regular"-->
+<!--                            android:textSize="12sp"-->
+<!--                            android:layout_marginStart="20dp"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:maxLines="2"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toEndOf="@id/tv_colon_14"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content" />-->
+
+
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/cl_regulator_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Regulator No."
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_15"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_regulator_no"
+                            android:text="98765036"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_15"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="GI Length"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_16"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_gi_installation"
+                            android:text="98765036"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_16"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="MLC Length"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_17"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_cu_installation"
+                            android:text="98765036"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_17"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="IV Qty."
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_18"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_iv_no"
+                            android:text="98765036"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_18"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="AV Qty."
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_19"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_av_no"
+                            android:text="98765036"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_19"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="PVC Sleeve"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_20"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_pvc_sleeve"
+                            android:text="98765036"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_20"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:text="Extra Pipe Length"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_21"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_extra_pl"
+                            android:text="98765036"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_21"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Clamping"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_22"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_clamping"
+                            android:text="98765036"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_22"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Meter Installation"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_23"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_meter_installation"
+                            android:text="98765036"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_23"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Cementing of Holes"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_24"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_coh"
+                            android:text="98765036"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_24"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Painting of GI Pipe"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_25"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_painting"
+                            android:text="98765036"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_25"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="GC Status"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_26"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_gas_type"
+                            android:text="98765036"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_26"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Property Type"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_27"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_property_type"
+                            android:text="98765036"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_27"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="TF/GC Available"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_28"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_tf_avail"
+                            android:text="98765036"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_28"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Connectivity"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_29"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_connectivity"
+                            android:text="98765036"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_29"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="End Cap"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_30"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_ec"
+                            android:text="98765036"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_30"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="LMC Alignment"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_31"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_hd"
+                            android:text="98765036"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_31"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="MCV Testing"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_colon_32"
+                            android:text=":"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.4"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_mcv_testing"
+                            android:text="98765036"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textSize="12sp"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:maxLines="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_colon_32"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/submit_btn_background"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:text="NEXT"
+                    android:layout_marginBottom="20dp"
+                    android:textColor="@color/white"
+                    android:textSize="19sp"
+                    app:backgroundTint="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll_installation_details" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

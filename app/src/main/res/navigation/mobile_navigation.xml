@@ -1,0 +1,1735 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.thinkgas.heatapp.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.thinkgas.heatapp.ui.dashboard.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_dashboardFragment_to_feasibilityHomeFragment"
+            app:destination="@id/feasibilityHomeFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_lmcHomeFragment"
+            app:destination="@id/lmcHomeFragment" />
+        <argument
+            android:name="session_id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_rfcHomeFragment"
+            app:destination="@id/rfcHomeFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_gcHomeFragment"
+            app:destination="@id/gcHomeFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_gcUnregisteredListFragment"
+            app:destination="@id/gcUnregisteredListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/feasibilityHomeFragment"
+        android:name="com.thinkgas.heatapp.ui.feasibility.FeasibilityHomeFragment"
+        android:label="FeasibilityHomeFragment">
+        <action
+            android:id="@+id/action_feasibilityHomeFragment_to_feasibilityListFragment"
+            app:destination="@id/feasibilityListFragment" />
+        <argument
+            android:name="session_id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_feasibilityHomeFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/lmcHomeFragment"
+        android:name="com.thinkgas.heatapp.ui.lmc.LmcHomeFragment"
+        android:label="fragment_lmc_home"
+        tools:layout="@layout/fragment_lmc_home">
+        <action
+            android:id="@+id/action_lmcHomeFragment_to_lmcListFragment"
+            app:destination="@id/lmcListFragment" />
+        <argument
+            android:name="sessionId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_lmcHomeFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/feasibilityListFragment"
+        android:name="com.thinkgas.heatapp.ui.feasibility.FeasibilityListFragment"
+        android:label="FeasibilityListFragment">
+        <action
+            android:id="@+id/action_feasibilityListFragment_to_feasibilityStatusFragment"
+            app:destination="@id/feasibilityStatusFragment" />
+        <argument
+            android:name="sessionId"
+            app:argType="string" />
+        <argument
+            android:name="status"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_feasibilityListFragment_to_mapFragment2"
+            app:destination="@id/mapFragment2" />
+        <action
+            android:id="@+id/action_feasibilityListFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/feasibilityStatusFragment"
+        android:name="com.thinkgas.heatapp.ui.feasibility.FeasibilityStatusFragment"
+        android:label="FeasibilityStatusFragment">
+        <argument
+            android:name="customerName"
+            app:argType="string" />
+        <argument
+            android:name="mobile"
+            app:argType="string" />
+        <argument
+            android:name="address"
+            app:argType="string" />
+        <argument
+            android:name="sessionId"
+            app:argType="string" />
+        <argument
+            android:name="appNo"
+            app:argType="string" />
+        <argument
+            android:name="bpNo"
+            app:argType="string" />
+        <argument
+            android:name="status"
+            app:argType="string" />
+        <argument
+            android:name="statusTypeId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="subStatusId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="pipeLineId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="description"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="riserStatus"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="Yes" />
+        <argument
+            android:name="riserLength"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="0" />
+        <argument
+            android:name="pipeLength"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="0" />
+        <argument
+            android:name="gcStatus"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="followUpDate"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <action
+            android:id="@+id/action_feasibilityStatusFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="srNo"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="drsNo"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="mlcLength"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/lmcListFragment"
+        android:name="com.thinkgas.heatapp.ui.lmc.LmcListFragment"
+        android:label="LmcListFragment">
+        <argument
+            android:name="sessionId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_lmcListFragment_to_lmcStatusFragment"
+            app:destination="@id/lmcStatusFragment" />
+        <argument
+            android:name="status"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_lmcListFragment_to_lmcConnectionFragment"
+            app:destination="@id/lmcConnectionFragment" />
+        <action
+            android:id="@+id/action_lmcListFragment_to_mapFragment2"
+            app:destination="@id/mapFragment2" />
+        <action
+            android:id="@+id/action_lmcListFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/lmcStatusFragment"
+        android:name="com.thinkgas.heatapp.ui.lmc.LmcStatusFragment"
+        android:label="LmcStatusFragment">
+        <action
+            android:id="@+id/action_lmcStatusFragment_to_lmcConnectionFragment"
+            app:destination="@id/lmcConnectionFragment" />
+        <argument
+            android:name="customerName"
+            app:argType="string" />
+        <argument
+            android:name="mobile"
+            app:argType="string" />
+        <argument
+            android:name="address"
+            app:argType="string" />
+        <argument
+            android:name="sessionId"
+            app:argType="string" />
+        <argument
+            android:name="appNo"
+            app:argType="string" />
+        <argument
+            android:name="bpNo"
+            app:argType="string" />
+        <argument
+            android:name="tpiId"
+            app:argType="string" />
+        <argument
+            android:name="firstName"
+            app:argType="string" />
+        <argument
+            android:name="middleName"
+            app:argType="string" />
+        <argument
+            android:name="lastName"
+            app:argType="string" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="status"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="statusId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="subStatusId"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="followUpDate"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="lmcType"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="meterDetails"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="meterNo"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="meterType"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="initialReading"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="regNo"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="giNo"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="cuNo"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="avNo"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="ivNo"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="pipeLength"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="propertyType"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="gasType"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="pvcSleeve"
+            app:nullable="true"
+            app:argType="string"
+            android:defaultValue="-1" />
+        <argument
+            android:name="meterInstallation"
+            app:nullable="true"
+            app:argType="string"
+            android:defaultValue="-1" />
+        <argument
+            android:name="gmTesting"
+            app:nullable="true"
+            app:argType="string"
+            android:defaultValue="-1" />
+        <argument
+            android:name="coh"
+            app:nullable="true"
+            app:argType="string"
+            android:defaultValue="-1" />
+        <argument
+            android:name="clamping"
+            app:nullable="true"
+            app:argType="string"
+            android:defaultValue="-1" />
+        <argument
+            android:name="painting"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="tfAvail"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="connectivity"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="endCap"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="areagassified"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="holeDrilled"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="mcvTesting"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="custStatus"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="convStatus"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="statusType"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="substatus"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="meterSerialNo"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <action
+            android:id="@+id/action_lmcStatusFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="confirmStatus"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="extraGiLength"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="extxraMlLength"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="acTape"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="-1" />
+        <argument
+            android:name="description"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="lmcExecution"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="0" />
+        <argument
+            android:name="lmcConnectionModel"
+            app:argType="com.thinkgas.heatapp.data.remote.model.LmcConnectionModel"
+            app:nullable="true" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/lmcConnectionFragment"
+        android:name="com.thinkgas.heatapp.ui.lmc.LmcConnectionFragment"
+        android:label="LmcConnectionFragment">
+        <action
+            android:id="@+id/action_lmcConnectionFragment_to_lmcFinalFragment"
+            app:destination="@id/lmcFinalFragment" />
+        <action
+            android:id="@+id/action_lmcConnectionFragment_to_scannerFragment"
+            app:destination="@id/scannerFragment" />
+        <argument
+            android:name="lmcStatusType"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcSubStatus"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="appNo"
+            app:argType="string" />
+        <argument
+            android:name="bpNo"
+            app:argType="string" />
+        <argument
+            android:name="customerInfo"
+            app:argType="string" />
+        <argument
+            android:name="tpiId"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="sessionId"
+            app:argType="string" />
+        <argument
+            android:name="mobile"
+            app:argType="string" />
+        <argument
+            android:name="firstName"
+            app:argType="string" />
+        <argument
+            android:name="middleName"
+            app:argType="string" />
+        <argument
+            android:name="lastName"
+            app:argType="string" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="status"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="statusId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="subStatusId"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="followUpDate"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="lmcType"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string"/>
+        <argument
+            android:name="meterDetails"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="meterNo"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="meterType"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="initialReading"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="regNo"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="giNo"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="cuNo"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="avNo"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="ivNo"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="pipeLength"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="propertyType"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="gasType"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="pvcSleeve"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="meterInstallation"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="gmTesting"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="coh"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="clamping"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="painting"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="tfAvail"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="connectivity"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="endCap"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="areagassified"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="holeDrilled"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="mcvTesting"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="custStatus"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="convStatus"
+            app:nullable="true"
+            android:defaultValue="-1"
+            app:argType="string" />
+        <argument
+            android:name="statusType"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="subStatus"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="meterSerialNo"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <action
+            android:id="@+id/action_lmcConnectionFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="confirmStatus"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="extraGiLength"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="extraMlLength"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="acTape"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="-1" />
+        <argument
+            android:name="lmcExecution"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="0" />
+        <argument
+            android:name="lmcConnectionModel"
+            app:argType="com.thinkgas.heatapp.data.remote.model.LmcConnectionModel"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/lmcFinalFragment"
+        android:name="com.thinkgas.heatapp.ui.lmc.LmcFinalFragment"
+        android:label="LmcFinalFragment">
+        <argument
+            android:name="appNo"
+            app:argType="string" />
+        <argument
+            android:name="bpNo"
+            app:argType="string" />
+        <argument
+            android:name="tpiId"
+            app:argType="string" />
+        <argument android:name="customerInfo"
+            app:argType="string" />
+        <argument
+            android:name="statusType"
+            app:argType="string"
+            app:nullable="true" />
+        <argument android:name="subStatus"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="status"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="followUpDate"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="description"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcType"
+            app:argType="string" />
+        <argument
+            android:name="meterDetails"
+            app:argType="string" />
+        <argument
+            android:name="meterNo"
+            app:argType="string" />
+        <argument
+            android:name="meterType"
+            app:argType="string" />
+        <argument
+            android:name="initialReading"
+            app:argType="string" />
+        <argument
+            android:name="regulatorNo"
+            app:argType="string" />
+        <argument
+            android:name="giMeter"
+            app:argType="string" />
+        <argument
+            android:name="cuMeter"
+            app:argType="string" />
+        <argument
+            android:name="avNo"
+            app:argType="string" />
+        <argument android:name="pipeLength"
+            app:argType="string" />
+        <argument
+            android:name="propertyType"
+            app:argType="string" />
+        <argument
+            android:name="gasType"
+            app:argType="string" />
+        <argument
+            android:name="sessionId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_lmcFinalFragment_to_lmcListFragment"
+            app:destination="@id/lmcListFragment"
+            app:popUpTo="@id/lmcListFragment" />
+        <argument
+            android:name="ivNo"
+            app:argType="string" />
+        <argument
+            android:name="pvcSleeve"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="meterInstallation"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="gmTesting"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="coh"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="clamping"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="painting"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="tfAvail"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="connectivity"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="endCap"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="areagassified"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="holeDrilled"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="mcvTesting"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="custStatus"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="convStatus"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="meterSerialNo"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_lmcFinalFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="confirmStatus"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="extraGiLength"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="extraMlLength"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="acTape"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="lmcConnectionModel"
+            app:argType="com.thinkgas.heatapp.data.remote.model.LmcConnectionModel"
+            app:nullable="true" />
+        <argument
+            android:name="lmcExecution"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+<!--    <fragment-->
+<!--        android:id="@+id/feasibilityClaimFragment"-->
+<!--        android:name="com.thinkgas.heatapp.ui.feasibility.FeasibilityClaimFragment"-->
+<!--        android:label="FeasibilityClaimFragment" />-->
+    <fragment
+        android:id="@+id/rfcHomeFragment"
+        android:name="com.thinkgas.heatapp.ui.rfc.RfcHomeFragment"
+        android:label="RfcHomeFragment" >
+        <action
+            android:id="@+id/action_rfcHomeFragment_to_rfcClaimFragment"
+            app:destination="@id/rfcClaimFragment" />
+        <action
+            android:id="@+id/action_rfcHomeFragment_to_rfcListFragment"
+            app:destination="@id/rfcListFragment" />
+        <argument
+            android:name="session_id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_rfcHomeFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/rfcClaimFragment"
+        android:name="com.thinkgas.heatapp.ui.rfc.RfcClaimFragment"
+        android:label="RfcClaimFragment" />
+    <fragment
+        android:id="@+id/rfcListFragment"
+        android:name="com.thinkgas.heatapp.ui.rfc.RfcListFragment"
+        android:label="RfcListFragment" >
+        <action
+            android:id="@+id/action_rfcListFragment_to_rfcStatusFragment"
+            app:destination="@id/rfcStatusFragment" />
+        <argument
+            android:name="sessionId"
+            app:argType="string" />
+        <argument
+            android:name="status"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_rfcListFragment_to_mapFragment2"
+            app:destination="@id/mapFragment2" />
+        <action
+            android:id="@+id/action_rfcListFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/rfcStatusFragment"
+        android:name="com.thinkgas.heatapp.ui.rfc.RfcStatusFragment"
+        android:label="RfcStatusFragment" >
+        <action
+            android:id="@+id/action_rfcStatusFragment_to_rfcApprovalFragment"
+            app:destination="@id/rfcApprovalFragment" />
+        <argument
+            android:name="sessionId"
+            app:argType="string" />
+        <argument
+            android:name="appNo"
+            app:argType="string" />
+        <argument
+            android:name="bpNo"
+            app:argType="string" />
+        <argument
+            android:name="tpiId"
+            app:argType="string" />
+        <argument
+            android:name="customerInfo"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_rfcStatusFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="status"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/rfcApprovalFragment"
+        android:name="com.thinkgas.heatapp.ui.rfc.RfcApprovalFragment"
+        android:label="RfcApprovalFragment" >
+        <action
+            android:id="@+id/action_rfcApprovalFragment_to_ngApprovalFragment"
+            app:destination="@id/ngApprovalFragment" />
+        <argument
+            android:name="appNo"
+            app:argType="string" />
+        <argument
+            android:name="bpNo"
+            app:argType="string" />
+        <argument
+            android:name="sessionId"
+            app:argType="string" />
+        <argument
+            android:name="tpiId"
+            app:argType="string" />
+        <argument
+            android:name="customerInfo"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_rfcApprovalFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="status"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/ngApprovalFragment"
+        android:name="com.thinkgas.heatapp.ui.ng.NgApprovalFragment"
+        android:label="NgApprovalFragment" >
+        <argument
+            android:name="appNo"
+            app:argType="string" />
+        <argument
+            android:name="sessionId"
+            app:argType="string" />
+        <argument
+            android:name="tpiId"
+            app:argType="string" />
+        <argument
+            android:name="customerInfo"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_ngApprovalFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_ngApprovalFragment_to_rfcExtensionFragment"
+            app:destination="@id/rfcExtensionFragment" />
+        <action
+            android:id="@+id/action_ngApprovalFragment_to_ngVerificationFragment"
+            app:destination="@id/ngVerificationFragment" />
+        <action
+            android:id="@+id/action_ngApprovalFragment_to_ngVerificationFragment2"
+            app:destination="@id/ngVerificationFragment" />
+        <argument
+            android:name="status"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/ngVerificationFragment"
+        android:name="com.thinkgas.heatapp.ui.ng.NgVerificationFragment"
+        android:label="NgVerificationFragment" >
+        <argument
+            android:name="bpNo"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="jmrNo"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="assignedDate"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="initialReading"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="burnerDetails"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="workDate"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="appNo"
+            app:argType="string" />
+        <argument
+            android:name="sessionId"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="tpiId"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument android:name="customerInfo"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="meterStatus"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="statusId"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="conversionDate"
+            app:argType="string" />
+
+        <argument
+            android:name="rfcStatus"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+
+        <argument
+            android:name="mmtStatus"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+
+        <argument
+            android:name="leakageStatus"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+
+        <argument
+            android:name="gasPressure"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+
+        <argument
+            android:name="finalReading"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+
+        <argument
+            android:name="burnerType"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+
+        <argument
+            android:name="hoseLength"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+
+        <argument
+            android:name="ng65Length"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="ng90Length"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="ng110Length"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="ng125Length"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_ngVerificationFragment_to_rfcHomeFragment"
+            app:destination="@id/rfcHomeFragment"
+            app:popUpTo="@id/rfcHomeFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_ngVerificationFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="false" />
+        <argument
+            android:name="acknowledgeId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="drsNumber"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="srNumber"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="lmcGiClamp"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcMlcClamp"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcGiMfElbow"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcGiFfElbow"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcGi2"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcGi3"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcGi4"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcGi6"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcGi8"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcGiTee"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcMlcTee"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcGiSocket"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcMaleUnion"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcFemaleUnion"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcMeterBracket"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcMeterSticker"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcPlateMarker"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcAdaptorGI"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcAdaptorReg"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcAdaptorMeter"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcFemaleMeter"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcMeterNo"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcRegulatorNo"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcGiLength"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcMlcLength"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcAvQty"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcIvQty"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcExtraGiLength"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcExtraMlcLength"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcMeterCompany"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcInitialReading"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcWoMeterBracket"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcWoMeterSticker"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcWoAdaptorGI"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcWoAdaptorReg"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcWoAdaptorMeter"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcWoFemaleMeter"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcWoMeterNumber"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcWoRegulatorNumber"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcExtension"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="giUnion"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/scannerFragment"
+        android:name="com.thinkgas.heatapp.ui.lmc.scanner.ScannerFragment"
+        android:label="ScannerFragment" >
+        <action
+            android:id="@+id/action_scannerFragment_to_lmcConnectionFragment"
+            app:destination="@id/lmcConnectionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment2"
+        android:name="com.thinkgas.heatapp.ui.maps.MapFragment"
+        android:label="MapFragment" >
+        <argument
+            android:name="latitude"
+            app:argType="string" />
+        <argument
+            android:name="longitude"
+            app:argType="string" />
+        <argument
+            android:name="type"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="default" />
+    </fragment>
+    <fragment
+        android:id="@+id/gcHomeFragment"
+        android:name="com.thinkgas.heatapp.ui.gc.GcHomeFragment"
+        android:label="GcHomeFragment" >
+        <action
+            android:id="@+id/action_gcHomeFragment_to_gcListFragment"
+            app:destination="@id/gcListFragment" />
+        <argument
+            android:name="session_id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_gcHomeFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/gcListFragment"
+        android:name="com.thinkgas.heatapp.ui.gc.GcListFragment"
+        android:label="GcListFragment" >
+        <argument
+            android:name="sessionId"
+            app:argType="string" />
+        <argument
+            android:name="status"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_gcListFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_gcListFragment_to_gcStatusFragment"
+            app:destination="@id/gcStatusFragment" />
+        <action
+            android:id="@+id/action_gcListFragment_to_mapFragment2"
+            app:destination="@id/mapFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/gcStatusFragment"
+        android:name="com.thinkgas.heatapp.ui.gc.GcStatusFragment"
+        android:label="GcStatusFragment" >
+        <action
+            android:id="@+id/action_gcStatusFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <argument
+            android:name="customerName"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="mobile"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="address"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="sessionId"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="appNo"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="bpNo"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="status"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="statusTypeId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="subStatusId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="potentialId"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="gcDate"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="gcNumber"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="description"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="folloUpDate"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="gcApplication"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcStatus"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="gcType"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="lmcGcAlignment"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="gcContractor"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="gcSupervisor"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="gcModel"
+            app:argType="com.thinkgas.heatapp.data.remote.model.GcUnregisterModel"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="type"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_gcStatusFragment_to_mapFragment2"
+            app:destination="@id/mapFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.thinkgas.heatapp.ui.registration.RegistrationFragment"
+        android:label="RegistrationFragment" >
+        <argument
+            android:name="sessionId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_registrationFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_registrationFragment_to_gcStatusFragment"
+            app:destination="@id/gcStatusFragment" />
+        <argument
+            android:name="gcUnregModel"
+            app:argType="com.thinkgas.heatapp.data.remote.model.GcUnregisterListModel"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_registrationFragment_to_mapFragment2"
+            app:destination="@id/mapFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/gcUnregisteredListFragment"
+        android:name="com.thinkgas.heatapp.ui.registration.GcUnregisteredListFragment"
+        android:label="fragment_gc_unregistered_list"
+        tools:layout="@layout/fragment_gc_unregistered_list" >
+        <argument
+            android:name="sessionId"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_gcUnregisteredListFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_gcUnregisteredListFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_gcUnregisteredListFragment_to_mapFragment2"
+            app:destination="@id/mapFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/rfcExtensionFragment"
+        android:name="com.thinkgas.heatapp.ui.ng.RfcExtensionFragment"
+        android:label="RfcExtensionFragment" >
+        <argument
+            android:name="acknowledgeId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="drsNumber"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="srNumber"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="bpNo"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="jmrNo"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="assignedDate"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="initialReading"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="burnerDetails"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="workDate"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument android:name="customerInfo"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="meterStatus"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="statusId"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="conversionDate"
+            app:argType="string" />
+
+        <argument
+            android:name="rfcStatus"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+
+        <argument
+            android:name="mmtStatus"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+
+        <argument
+            android:name="leakageStatus"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+
+        <argument
+            android:name="gasPressure"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+
+        <argument
+            android:name="finalReading"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+
+        <argument
+            android:name="burnerType"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+
+        <argument
+            android:name="hoseLength"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+
+        <argument
+            android:name="ng65Length"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="ng90Length"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="ng110Length"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="ng125Length"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+
+        <argument
+            android:name="appNo"
+            app:argType="string" />
+        <argument
+            android:name="sessionId"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="tpiId"
+            app:nullable="true"
+            android:defaultValue="null"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_rfcExtensionFragment_to_ngVerificationFragment"
+            app:destination="@id/ngVerificationFragment" />
+        <argument
+            android:name="lmcExtension"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="giUnion"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+</navigation>

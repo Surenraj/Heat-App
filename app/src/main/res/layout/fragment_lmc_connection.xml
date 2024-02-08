@@ -1,0 +1,1370 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <ImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/profile_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_back" />
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/back_button_background"
+            android:padding="5dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="LMC Connection"
+            android:textAllCaps="true"
+            android:textColor="#ee5222"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_back"
+            app:layout_constraintEnd_toStartOf="@id/iv_profile"
+            app:layout_constraintStart_toEndOf="@id/iv_back"
+            app:layout_constraintTop_toTopOf="@id/iv_back" />
+
+        <TextView
+            android:id="@+id/tv_customer_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/barlow_semibold"
+            android:text="Customer Details"
+            android:textColor="#1a80a8"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/iv_back"
+            app:layout_constraintTop_toBottomOf="@id/iv_back" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_customer_details"
+            app:strokeColor="#f17048"
+            app:strokeWidth="1dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <EditText
+                    android:id="@+id/et_first_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="First Name"
+                    android:inputType="textPersonName"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toStartOf="@id/et_middle_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/et_middle_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="Middle Name"
+                    android:inputType="textPersonName"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toStartOf="@id/et_last_name"
+                    app:layout_constraintStart_toEndOf="@id/et_first_name"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/et_last_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="Last Name"
+                    android:inputType="textPersonName"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_middle_name"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/et_mobile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="Mobile"
+                    android:inputType="phone"
+                    android:maxLength="15"
+                    android:enabled="false"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toStartOf="@id/et_email"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_first_name" />
+
+                <EditText
+                    android:id="@+id/et_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_mobile"
+                    app:layout_constraintTop_toTopOf="@id/et_mobile" />
+
+                <Button
+                    android:id="@+id/btn_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/submit_btn_background"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:padding="0dp"
+                    android:text="Update"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_mobile" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_status"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/cv_details"
+            app:layout_constraintStart_toStartOf="@id/cv_details"
+            app:layout_constraintTop_toBottomOf="@id/cv_details">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/tv_rfc_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/lmc_type"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/spinner_rfc"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_spinner"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="5dp"
+                    android:text="Select Type"
+                    android:textColor="#545454"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_rfc_type" />
+
+                <TextView
+                    android:id="@+id/tv_meter_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/meter_details"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/spinner_rfc" />
+
+                <TextView
+                    android:id="@+id/spinner_meter"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_spinner"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="5dp"
+                    android:text="Select Meter"
+                    android:textColor="#545454"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_meter_details" />
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tv_meter_no"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="10dp"-->
+                <!--                    android:textColor="#545454"-->
+                <!--                    android:fontFamily="@font/barlow_regular"-->
+                <!--                    android:text="@string/meter_number"-->
+                <!--                    android:textSize="16sp"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/spinner_meter" />-->
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/spinner_meter_no"-->
+                <!--                    android:layout_width="0dp"-->
+                <!--                    android:layout_height="48dp"-->
+                <!--                    android:layout_marginTop="8dp"-->
+                <!--                    android:background="@drawable/bg_spinner"-->
+                <!--                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"-->
+                <!--                    android:gravity="center_vertical"-->
+                <!--                    android:focusableInTouchMode="true"-->
+                <!--                    android:focusable="true"-->
+                <!--                    android:paddingHorizontal="5dp"-->
+                <!--                    android:textColor="#545454"-->
+                <!--                    android:text="Select Meter No."-->
+                <!--                    app:backgroundTint="@null"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/tv_meter_no" />-->
+
+                <TextView
+                    android:id="@+id/tv_meter_id_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/meter_number"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/spinner_meter" />
+
+                <EditText
+                    android:id="@+id/tv_meter_id"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/bg_spinner"
+                    android:gravity="center_vertical"
+                    android:hint="Meter Number"
+                    android:visibility="visible"
+                    android:enabled="false"
+                    android:clickable="false"
+                    android:paddingHorizontal="5dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toStartOf="@id/iv_qr"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_meter_id_text" />
+
+                <ImageView
+                    android:id="@+id/iv_qr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:src="@drawable/barcode_new"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_meter_id"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_meter_id" />
+
+                <TextView
+                    android:id="@+id/tv_meter_type_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/meter_type"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_qr" />
+
+                <EditText
+                    android:id="@+id/tv_meter_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_spinner"
+                    android:gravity="center_vertical"
+                    android:hint="Meter Type"
+                    android:paddingHorizontal="5dp"
+                    android:text="G1.6"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_meter_type_text" />
+
+                <TextView
+                    android:id="@+id/tv_initial_meter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/initial_meter"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_meter_type" />
+
+                <EditText
+                    android:id="@+id/et_initial_meter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="Initial Meter Reading"
+                    android:inputType="text"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/et_regulator_no"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_initial_meter" />
+
+                <TextView
+                    android:id="@+id/tv_regulator_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/regulator_number"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/et_regulator_no"
+                    app:layout_constraintTop_toBottomOf="@id/tv_meter_type" />
+
+                <EditText
+                    android:id="@+id/et_regulator_no"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="Regulator no."
+                    android:inputType="text"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_initial_meter"
+                    app:layout_constraintTop_toBottomOf="@id/tv_regulator_number" />
+
+                <TextView
+                    android:id="@+id/tv_gi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/gi_installation"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_regulator_no" />
+
+                <EditText
+                    android:id="@+id/et_gi_installation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="GI Length (In Meters)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/et_cu_installation"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_gi" />
+
+                <TextView
+                    android:id="@+id/tv_cu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/cu_installation"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/et_cu_installation"
+                    app:layout_constraintTop_toBottomOf="@id/et_regulator_no" />
+
+                <EditText
+                    android:id="@+id/et_cu_installation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="MLC Length ( In Metres )"
+                    android:inputType="numberDecimal"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_gi_installation"
+                    app:layout_constraintTop_toTopOf="@id/et_gi_installation" />
+
+                <TextView
+                    android:id="@+id/tv_extra_gi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="Extra GI Length"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_gi_installation" />
+
+                <TextView
+                    android:id="@+id/et_extra_gl_length"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="Extra GI Length (In Meters)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textIsSelectable="false"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/et_extra_mlc_length"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_extra_gi" />
+
+                <TextView
+                    android:id="@+id/tv_extra_cu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="Extra MLC length"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/et_extra_mlc_length"
+                    app:layout_constraintTop_toBottomOf="@id/et_cu_installation" />
+
+                <TextView
+                    android:id="@+id/et_extra_mlc_length"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="Extra MLC Length ( In Metres )"
+                    android:inputType="numberDecimal"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textIsSelectable="false"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_extra_gl_length"
+                    app:layout_constraintTop_toTopOf="@id/et_extra_gl_length" />
+
+                <TextView
+                    android:id="@+id/tv_av"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/av_no"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_extra_gl_length" />
+
+                <EditText
+                    android:id="@+id/et_av_no"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="No. of AV"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/et_iv_no"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_av" />
+
+                <TextView
+                    android:id="@+id/tv_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/iv_no"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/et_iv_no"
+                    app:layout_constraintTop_toBottomOf="@id/et_extra_gl_length" />
+
+                <EditText
+                    android:id="@+id/et_iv_no"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="No. of IV"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_av_no"
+                    app:layout_constraintTop_toBottomOf="@id/tv_iv" />
+
+                <TextView
+                    android:id="@+id/tv_gi_clamp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/gi_clamp"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_av_no" />
+
+                <EditText
+                    android:id="@+id/et_gi_clamp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="GI Clamp"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/et_mlc_clamp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_gi_clamp" />
+
+                <TextView
+                    android:id="@+id/tv_mlc_clamp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/mlc_clamp"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/et_mlc_clamp"
+                    app:layout_constraintTop_toBottomOf="@id/et_av_no" />
+
+                <EditText
+                    android:id="@+id/et_mlc_clamp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="MLC Clamp"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_gi_clamp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_mlc_clamp" />
+
+                <TextView
+                    android:id="@+id/tv_gi_mf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/gi_m_f_elbow"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_gi_clamp" />
+
+                <EditText
+                    android:id="@+id/et_gi_mf"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="GI M/F Clamp"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/et_gi_ff"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_gi_mf" />
+
+                <TextView
+                    android:id="@+id/tv_gi_ff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/gi_f_f_elbow"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/et_gi_ff"
+                    app:layout_constraintTop_toBottomOf="@id/et_mlc_clamp" />
+
+                <EditText
+                    android:id="@+id/et_gi_ff"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="GI F/F Elbow"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_gi_mf"
+                    app:layout_constraintTop_toBottomOf="@id/tv_gi_ff" />
+
+                <TextView
+                    android:id="@+id/tv_gi_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/gi_2_nipple"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_gi_ff" />
+
+                <EditText
+                    android:id="@+id/et_gi_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="GI 2' Nipple"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/et_gi_3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_gi_2" />
+
+                <TextView
+                    android:id="@+id/tv_gi_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/gi_3_nipple"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/et_gi_3"
+                    app:layout_constraintTop_toBottomOf="@id/et_gi_ff" />
+
+                <EditText
+                    android:id="@+id/et_gi_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="GI 3' Nipple"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_gi_2"
+                    app:layout_constraintTop_toBottomOf="@id/tv_gi_3" />
+
+                <TextView
+                    android:id="@+id/tv_gi_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/gi_4_nipple"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_gi_2" />
+
+                <EditText
+                    android:id="@+id/et_gi_4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="GI 4' Nipple"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/et_gi_6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_gi_4" />
+
+                <TextView
+                    android:id="@+id/tv_gi_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/gi_6_nipple"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/et_gi_6"
+                    app:layout_constraintTop_toBottomOf="@id/et_gi_3" />
+
+                <EditText
+                    android:id="@+id/et_gi_6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="GI 6' Nipple"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_gi_4"
+                    app:layout_constraintTop_toBottomOf="@id/tv_gi_6" />
+
+                <TextView
+                    android:id="@+id/tv_gi_8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/gi_8_nipple"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_gi_4" />
+
+                <EditText
+                    android:id="@+id/et_gi_8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="GI 8' Nipple"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/et_gi_tee"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_gi_8" />
+
+                <TextView
+                    android:id="@+id/tv_gi_tee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/gi_tee"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/et_gi_tee"
+                    app:layout_constraintTop_toBottomOf="@id/et_gi_6" />
+
+                <EditText
+                    android:id="@+id/et_gi_tee"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="GI Tee"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_gi_8"
+                    app:layout_constraintTop_toBottomOf="@id/tv_gi_tee" />
+
+                <TextView
+                    android:id="@+id/tv_mlc_tee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/mlc_tee"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_gi_8" />
+
+                <EditText
+                    android:id="@+id/et_mlc_tee"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="MLC Tee"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/et_gi_socket"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_mlc_tee" />
+
+                <TextView
+                    android:id="@+id/tv_gi_socket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/gi_socket"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/et_gi_socket"
+                    app:layout_constraintTop_toBottomOf="@id/et_gi_tee" />
+
+                <EditText
+                    android:id="@+id/et_gi_socket"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="GI Socket"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_mlc_tee"
+                    app:layout_constraintTop_toBottomOf="@id/tv_gi_socket" />
+
+                <TextView
+                    android:id="@+id/tv_mlc_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/mlc_male_union"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_mlc_tee" />
+
+                <EditText
+                    android:id="@+id/et_mlc_male"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="MLC Male Union"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/et_mlc_female"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_mlc_male" />
+
+                <TextView
+                    android:id="@+id/tv_mlc_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/mlc_female_union"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/et_mlc_female"
+                    app:layout_constraintTop_toBottomOf="@id/et_gi_socket" />
+
+                <EditText
+                    android:id="@+id/et_mlc_female"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="MLC Female Union"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_mlc_male"
+                    app:layout_constraintTop_toBottomOf="@id/tv_mlc_female" />
+
+                <TextView
+                    android:id="@+id/tv_meter_bracket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/meter_bracket"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_mlc_male" />
+
+                <EditText
+                    android:id="@+id/et_meter_bracket"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="Meter Bracket"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/et_meter_sticker"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_meter_bracket" />
+
+                <TextView
+                    android:id="@+id/tv_meter_sticker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/meter_sticker"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/et_meter_sticker"
+                    app:layout_constraintTop_toBottomOf="@id/et_mlc_female" />
+
+                <EditText
+                    android:id="@+id/et_meter_sticker"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="Meter Sticker"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_meter_bracket"
+                    app:layout_constraintTop_toBottomOf="@id/tv_meter_sticker" />
+
+                <TextView
+                    android:id="@+id/tv_plate_marker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/plate_marker"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_meter_bracket" />
+
+                <EditText
+                    android:id="@+id/et_plate_marker"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="Plate Marker"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/et_adaptor_gi"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_plate_marker" />
+
+                <TextView
+                    android:id="@+id/tv_adaptor_gi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/adaptor_gi_to_reg"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/et_adaptor_gi"
+                    app:layout_constraintTop_toBottomOf="@id/et_meter_sticker" />
+
+                <EditText
+                    android:id="@+id/et_adaptor_gi"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="Adopt GI to Reg."
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_plate_marker"
+                    app:layout_constraintTop_toBottomOf="@id/tv_adaptor_gi" />
+
+                <TextView
+                    android:id="@+id/tv_adaptor_reg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/adaptor_reg_to_meter"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_plate_marker" />
+
+                <EditText
+                    android:id="@+id/et_adaptor_reg"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="Adopt Reg. to Meter"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/et_adaptor_meter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_adaptor_reg" />
+
+                <TextView
+                    android:id="@+id/tv_adaptor_meter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/adaptor_meter_to_gi_pipe"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/et_adaptor_meter"
+                    app:layout_constraintTop_toBottomOf="@id/et_adaptor_gi" />
+
+                <EditText
+                    android:id="@+id/et_adaptor_meter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="Adopt Meter to GI Pipe"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_adaptor_reg"
+                    app:layout_constraintTop_toBottomOf="@id/tv_adaptor_meter" />
+
+                <TextView
+                    android:id="@+id/tv_female_union"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/female_union_meter_to_mlc_pipe"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_adaptor_reg" />
+
+                <EditText
+                    android:id="@+id/et_female_union"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/et_form_bg"
+                    android:ellipsize="end"
+                    android:hint="Female Union Meter to MLC Pipe"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:padding="15dp"
+                    android:textColor="#545454"
+                    android:textColorHint="#80545454"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_female_union" />
+
+                <TextView
+                    android:id="@+id/tv_property_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/property_type"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_female_union" />
+
+                <TextView
+                    android:id="@+id/tv_gas_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:text="@string/gas_type"
+                    android:textColor="#545454"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/spinner_gas"
+                    app:layout_constraintTop_toBottomOf="@id/et_female_union" />
+
+                <TextView
+                    android:id="@+id/spinner_property"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_spinner"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="5dp"
+                    android:text="Select Type"
+                    android:textColor="#545454"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toStartOf="@id/spinner_gas"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_property_type" />
+
+                <TextView
+                    android:id="@+id/spinner_gas"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/bg_spinner"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="5dp"
+                    android:text="Select Type"
+                    android:textColor="#545454"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/spinner_property"
+                    app:layout_constraintTop_toTopOf="@id/spinner_property" />
+
+
+                <Button
+                    android:id="@+id/btn_Next"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/submit_btn_background"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:text="NEXT"
+                    android:textColor="@color/white"
+                    android:textSize="19sp"
+                    app:backgroundTint="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/spinner_property" />
+
+                <com.budiyev.android.codescanner.CodeScannerView
+                    android:id="@+id/scanner_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

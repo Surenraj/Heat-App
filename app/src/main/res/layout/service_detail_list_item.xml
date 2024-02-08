@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cv_pending"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    android:layout_marginHorizontal="15dp"
+    android:layout_marginTop="10dp"
+    app:cardCornerRadius="20dp"
+    app:strokeColor="#f17048"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_assign_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/barlow_regular"
+            android:textColor="#545454"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Assign Date : 16-03-2021 14:21:21" />
+
+        <TextView
+            android:id="@+id/tv_mobile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:drawableStart="@drawable/ic_baseline_contact_phone_24"
+            android:drawablePadding="5dp"
+            android:fontFamily="@font/barlow_semibold"
+            android:gravity="center_vertical"
+            android:textColor="#545454"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/vgl_60"
+            app:layout_constraintStart_toStartOf="@id/tv_assign_date"
+            app:layout_constraintTop_toBottomOf="@id/tv_assign_date"
+            tools:text="9841095322" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:drawableStart="@drawable/ic_baseline_person_24"
+            android:drawablePadding="5dp"
+            android:fontFamily="@font/barlow_semibold"
+            android:gravity="center_vertical"
+            android:textColor="#545454"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/vgl_60"
+            app:layout_constraintStart_toStartOf="@id/tv_assign_date"
+            app:layout_constraintTop_toBottomOf="@id/tv_mobile"
+            tools:text="Karthikeyan Gokulnath" />
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:paddingEnd="5dp"
+            android:layout_marginBottom="10dp"
+            android:drawableStart="@drawable/ic_baseline_location_city_24"
+            android:fontFamily="@font/barlow_regular"
+            android:gravity="start"
+            android:maxEms="12"
+            android:minLines="3"
+            android:textSize="12sp"
+            android:textColor="#545454"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/vgl_60"
+            app:layout_constraintStart_toStartOf="@id/tv_assign_date"
+            app:layout_constraintTop_toBottomOf="@id/tv_name"
+            tools:text="No. 88, Arcot Road, Vijayashanthi Towers, Block 2, Vadapalani,Chennai - 600026." />
+
+        <ImageView
+            android:id="@+id/iv_status"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_pending_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_tpi"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"
+            android:src="@drawable/ic_supervisor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_status" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vgl_60"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.6" />
+
+        <TextView
+            android:id="@+id/tv_app_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:drawableStart="@drawable/ic_baseline_text_snippet_24"
+            android:drawablePadding="5dp"
+            android:fontFamily="@font/barlow_semibold"
+            android:gravity="center"
+            android:textColor="#545454"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/vgl_60"
+            app:layout_constraintTop_toTopOf="@id/tv_mobile"
+            tools:text="10000000000" />
+
+        <TextView
+            android:id="@+id/tv_bp_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_content_paste_24"
+            android:drawablePadding="5dp"
+            app:layout_constraintHorizontal_bias="0"
+            android:fontFamily="@font/barlow_semibold"
+            android:gravity="center"
+            android:textColor="#545454"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/vgl_60"
+            app:layout_constraintTop_toTopOf="@id/tv_name"
+            tools:text="BP-100000000" />
+
+        <TextView
+            android:id="@+id/tv_gc_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_gc"
+            android:drawablePadding="5dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintHorizontal_bias="0"
+            android:fontFamily="@font/barlow_semibold"
+            android:gravity="center"
+            android:textColor="#545454"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/vgl_60"
+            app:layout_constraintTop_toBottomOf="@id/tv_bp_no"
+            tools:text="BP-100000000" />
+
+
+        <TextView
+            android:id="@+id/tv_nearby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_near_me_24"
+            android:drawablePadding="5dp"
+            android:fontFamily="@font/barlow_semibold"
+            android:gravity="center"
+            android:textColor="#545454"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/vgl_60"
+            app:layout_constraintTop_toBottomOf="@id/tv_gc_no"
+            tools:text="5 kms away" />
+
+        <TextView
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="10dp"
+            android:paddingVertical="5dp"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:paddingHorizontal="5dp"
+            android:background="@drawable/tpi_btn_background"
+            android:fontFamily="@font/barlow_medium"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:textColor="#3e92b3"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_tpi_info"
+            app:layout_constraintStart_toEndOf="@id/vgl_60"
+            app:layout_constraintTop_toBottomOf="@id/tv_nearby"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/btn_tpi_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/tpi_btn_background"
+            android:fontFamily="@font/barlow_medium"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
+            app:layout_goneMarginBottom="10dp"
+            android:text="Start Job"
+            android:textAllCaps="false"
+            android:textColor="#3e92b3"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/btn_cancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_cancel"
+            app:layout_constraintTop_toTopOf="@id/btn_cancel"
+            tools:visibility="visible" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

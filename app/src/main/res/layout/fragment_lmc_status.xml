@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <ImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/profile_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_back" />
+
+        <ImageView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/iv_back"
+            android:padding="5dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
+            android:background="@drawable/back_button_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingStart="5dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="LMC Status"
+            android:id="@+id/lmc_status"
+            android:textColor="#ee5222"
+            android:textAllCaps="true"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_back"
+            app:layout_constraintEnd_toStartOf="@id/iv_profile"
+            app:layout_constraintStart_toEndOf="@id/iv_back"
+            app:layout_constraintTop_toTopOf="@id/iv_back" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_back"
+            app:strokeColor="#f17048"
+            app:strokeWidth="1dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_app_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_baseline_text_snippet_24"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:gravity="center"
+                    android:textColor="#545454"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toStartOf="@id/tv_bp_no"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="9dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="10000000000" />
+
+                <TextView
+                    android:id="@+id/tv_bp_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_baseline_content_paste_24"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:gravity="center"
+                    android:layout_marginEnd="13dp"
+                    android:textColor="#545454"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_app_no"
+                    app:layout_constraintTop_toTopOf="@id/tv_app_no"
+                    tools:text="BP-100000000" />
+
+                <TextView
+                    android:id="@+id/tv_mobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="9dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:textColor="#545454"
+                    android:textSize="14sp"
+                    android:drawableStart="@drawable/ic_baseline_contact_phone_24"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="5dp"
+                    app:layout_constraintEnd_toStartOf="@id/tv_name"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_app_no"
+                    tools:text="9841095322" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="13dp"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:textColor="#545454"
+                    android:textSize="14sp"
+                    android:gravity="center_vertical"
+                    android:drawableStart="@drawable/ic_baseline_person_24"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_mobile"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_mobile"
+                    app:layout_constraintTop_toTopOf="@id/tv_mobile"
+                    tools:text="Karthikeyan Gokulnath" />
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="21dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:maxEms="12"
+                    android:textColor="#707070"
+                    android:gravity="end"
+                    android:minLines="3"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/tv_name"
+                    app:layout_constraintTop_toBottomOf="@id/tv_name"
+                    tools:text="No. 88, Arcot Road, Vijayashanthi Towers,Block 2, Vadapalani,Chennai - 600026." />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_status"
+            android:layout_marginHorizontal="15dp"
+            app:cardCornerRadius="20dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/cv_details"
+            app:layout_constraintStart_toStartOf="@id/cv_details"
+            app:layout_constraintEnd_toEndOf="@id/cv_details"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:padding="10dp"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_status_type"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/status_type"
+                    android:textColor="#545454"
+                    android:fontFamily="@font/barlow_regular"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/spinner_type"
+                    app:layout_constraintTop_toBottomOf="@id/tv_status_type"
+                    android:layout_marginTop="8dp"
+                    app:backgroundTint="@null"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:textColor="#545454"
+                    android:background="@drawable/bg_spinner"
+                    android:text="Select Type"
+                    android:paddingHorizontal="5dp"
+                    android:gravity="center_vertical"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp" />
+
+                <TextView
+                    android:id="@+id/tv_sub_status"
+                    app:layout_constraintTop_toBottomOf="@id/spinner_type"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/sub_status"
+                    android:textColor="#545454"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/spinner_status"
+                    app:layout_constraintTop_toBottomOf="@id/tv_sub_status"
+                    android:layout_marginTop="8dp"
+                    app:backgroundTint="@null"
+                    android:background="@drawable/bg_spinner"
+                    android:text="Select sub status"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:paddingHorizontal="5dp"
+                    android:textColor="#545454"
+                    android:gravity="center_vertical"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp" />
+
+                <TextView
+                    android:id="@+id/tv_lmc_execution"
+                    app:layout_constraintTop_toBottomOf="@id/spinner_status"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/lmc_execution"
+                    android:textColor="#545454"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/spinner_lmc"
+                    app:layout_constraintTop_toBottomOf="@id/tv_lmc_execution"
+                    android:layout_marginTop="8dp"
+                    app:backgroundTint="@null"
+                    android:background="@drawable/bg_spinner"
+                    android:text="Select LMC Execution"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:paddingHorizontal="5dp"
+                    android:textColor="#545454"
+                    android:gravity="center_vertical"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp" />
+
+
+                <CheckBox
+                    android:id="@+id/cb_follow_up"
+                    app:layout_constraintTop_toBottomOf="@id/spinner_lmc"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_follow_text"
+                    android:layout_width="wrap_content"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tv_follow_text"
+                    app:layout_constraintTop_toTopOf="@id/cb_follow_up"
+                    app:layout_constraintStart_toEndOf="@id/cb_follow_up"
+                    app:layout_constraintBottom_toBottomOf="@id/cb_follow_up"
+                    android:text="Enable Follow up date and time"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    android:textColor="#545454"
+                    android:fontFamily="@font/barlow_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:id="@+id/tv_follow_title"
+                    app:layout_constraintTop_toBottomOf="@id/cb_follow_up"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/follow_up_date_and_time"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#545454"
+                    tools:visibility="visible"
+                    android:fontFamily="@font/barlow_regular"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tv_date_time"
+                    app:layout_constraintTop_toBottomOf="@id/tv_follow_title"
+                    android:layout_marginTop="8dp"
+                    app:backgroundTint="@null"
+                    android:background="@drawable/bg_spinner"
+                    android:text="Select Date &amp; Time"
+                    android:paddingHorizontal="5dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    android:textColor="#545454"
+                    android:gravity="center_vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp" />
+
+                <TextView
+                    android:id="@+id/tv_description"
+                    app:layout_constraintTop_toBottomOf="@id/tv_date_time"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/description"
+                    android:textColor="#545454"
+                    tools:visibility="visible"
+
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/barlow_regular"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/et_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/description_background"
+                    android:ellipsize="end"
+                    android:gravity="start"
+                    android:hint="Description"
+                    android:maxLines="4"
+                    android:padding="5dp"
+                    android:textSize="14sp"
+                    android:textColorHint="#80545454"
+                    android:textColor="#545454"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_description" />
+
+                <TextView
+                    android:id="@+id/tv_attachments"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/attachments_0"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    tools:visibility="visible"
+                    android:visibility="gone"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_up_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_description"
+                    android:fontFamily="@font/poppins_bold"
+                    app:layout_goneMarginBottom="32dp"/>
+
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_attachment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:isScrollContainer="false"
+                    tools:visibility="visible"
+                    android:visibility="gone"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_attachments"
+                    tools:listitem="@layout/layout_attachments_item" />
+
+                <Button
+                    android:id="@+id/btn_upload"
+                    app:layout_constraintTop_toBottomOf="@id/rv_attachment"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:text="Upload Photos"
+                    app:backgroundTint="@null"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+
+                    android:textColor="#545454"
+                    android:background="@drawable/uploaad_btn_background"
+                    android:drawablePadding="20dp"
+                    android:drawableEnd="@drawable/ic_baseline_photo_camera_24"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/btn_submit"
+                    app:layout_constraintTop_toBottomOf="@id/btn_upload"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:text="NEXT"
+                    app:backgroundTint="@null"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:textColor="@color/white"
+                    android:textSize="19sp"
+                    android:background="@drawable/submit_btn_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                android:id="@+id/btn_approve"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/submit_btn_background"
+                android:fontFamily="@font/barlow_semibold"
+                android:text="Approve"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                android:visibility="gone"
+                app:backgroundTint="@null"
+                app:layout_constraintEnd_toStartOf="@id/btn_decline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_submit" />
+
+                <Button
+                    android:id="@+id/btn_decline"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/submit_btn_background"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:text="Decline"
+                    android:visibility="gone"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    app:backgroundTint="@null"
+                    app:layout_constraintStart_toEndOf="@id/btn_approve"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_submit" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
