@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="layout" name="items_view">@layout/new_items_view</item>
+    <item type="layout" name="dialog_layout">@layout/new_dialog_layout</item>
+</resources>
+
