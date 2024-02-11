@@ -482,22 +482,6 @@ class GcStatusFragment : Fragment() {
 //                    return@setOnClickListener
 //                }
 
-
-                if (gcAttachmentCount == 0) {
-                    tvAttachments.error = "LMC Alignment Image required"
-                    tvAttachments.requestFocus()
-                }
-
-                if (rccCount == 0) {
-                    tvRcc.error = "RCC Guard Image required"
-                    tvRcc.requestFocus()
-                }
-
-                if (warningCount == 0) {
-                    tvWarning.error = "Warning plate required"
-                    tvWarning.requestFocus()
-                }
-
                 if (isHold) {
                     if (tvDateTime.text.isNullOrEmpty() || tvDateTime.text == "Select Date & Time") {
                         tvDateTime.error = "Select Follow up Data & Time"
@@ -510,7 +494,6 @@ class GcStatusFragment : Fragment() {
                         etDescription.requestFocus()
                         return@setOnClickListener
                     }
-                    return@setOnClickListener
                 }
 
                 gcStatusCode = tpiStatusMap[gcStatus].toString()
@@ -1193,16 +1176,22 @@ class GcStatusFragment : Fragment() {
                                         when (status.toString().toLowerCase()) {
                                             "hold" -> {
                                                 isHold = true
+                                                isPassed = false
+                                                isFailed = false
                                                 toggleVisibility(View.VISIBLE)
                                             }
 
                                             "done", "passed" -> {
+                                                isHold = false
                                                 isPassed = true
+                                                isFailed = false
                                                 toggleVisibility(View.VISIBLE)
                                             }
 
                                             "failed" -> {
                                                 toggleVisibility(View.GONE)
+                                                isHold = false
+                                                isPassed = false
                                                 isFailed = true
                                             }
                                         }
