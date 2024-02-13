@@ -860,12 +860,18 @@ class FeasibilityStatusFragment : Fragment() {
                                 when (status.toString().toLowerCase()) {
                                     "hold" -> {
                                         isHold = true
+                                        isPassed = false
+                                        isFailed = false
                                     }
                                     "done", "passed" -> {
                                         isPassed = true
+                                        isHold = false
+                                        isFailed = false
                                     }
                                     "failed" -> {
                                         isFailed = true
+                                        isPassed = false
+                                        isHold = false
                                     }
                                 }
 
@@ -961,12 +967,18 @@ class FeasibilityStatusFragment : Fragment() {
                                 when (args.status.toLowerCase()) {
                                     "hold" -> {
                                         isHold = true
+                                        isPassed = false
+                                        isFailed = false
                                     }
                                     "done", "passed" -> {
                                         isPassed = true
+                                        isHold = false
+                                        isFailed = false
                                     }
                                     "failed" -> {
                                         isFailed = true
+                                        isPassed = false
+                                        isHold = false
                                     }
                                 }
 

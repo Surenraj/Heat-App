@@ -1234,14 +1234,18 @@ class GcStatusFragment : Fragment() {
                                     when (args.status.toString().toLowerCase()) {
                                         "hold" -> {
                                             isHold = true
+                                            isPassed = false
+                                            isFailed = false
                                         }
-
                                         "done", "passed" -> {
                                             isPassed = true
+                                            isHold = false
+                                            isFailed = false
                                         }
-
                                         "failed" -> {
                                             isFailed = true
+                                            isPassed = false
+                                            isHold = false
                                         }
                                     }
 
@@ -1253,14 +1257,18 @@ class GcStatusFragment : Fragment() {
                                             when (args.status.toString().toLowerCase()) {
                                                 "hold" -> {
                                                     isHold = true
+                                                    isPassed = false
+                                                    isFailed = false
                                                 }
-
                                                 "done", "passed" -> {
                                                     isPassed = true
+                                                    isHold = false
+                                                    isFailed = false
                                                 }
-
                                                 "failed" -> {
                                                     isFailed = true
+                                                    isPassed = false
+                                                    isHold = false
                                                 }
                                             }
 

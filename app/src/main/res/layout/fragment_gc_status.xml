@@ -614,6 +614,7 @@
                     android:layout_marginTop="16dp"
                     android:text="LMC &amp; GC Alignment"
                     android:focusable="true"
+                    android:textColor="#545454"
                     android:focusableInTouchMode="true"
                     android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_up_24"
                     app:layout_constraintEnd_toStartOf="@id/iv_attachments"
