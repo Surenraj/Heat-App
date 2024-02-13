@@ -441,12 +441,12 @@ class GcStatusFragment : Fragment() {
                     params["application_number"] = args.appNo.toString()
                     params["bp_number"] = args.bpNo.toString()
                     params["customer_info"] = args.customerName.toString()
-                    params["status_type_id"] = gcStatusCode!!
-                    params["status_type"] = gcStatus!!
-                    params["sub_status_id"] = gcSubStatusCode!!
-                    params["sub_status"] = gcSubStatus!!
+                    params["status_type_id"] = gcStatusCode ?: ""
+                    params["status_type"] = gcStatus ?: ""
+                    params["sub_status_id"] = gcSubStatusCode ?: ""
+                    params["sub_status"] = gcSubStatus ?: ""
                     params["description"] = etDescription.text.toString()
-                    params["follow_up_date"] = tvDateTime.text.toString()
+                    params["follow_up_date"] = if (tvDateTime.text.equals("Select Date & Time")) "" else (tvDateTime.text.toString())
                     params["fs_session_id"] = args.sessionId.toString()
                     params["approval_status"] = "Nil"
                     params["comments"] = ""
@@ -519,7 +519,7 @@ class GcStatusFragment : Fragment() {
                 params["gc_supervisor"] = ""
                 params["location"] = "${AppCache.latitude} ${AppCache.longitude}"
                 params["description"] = etDescription.text.toString()
-                params["follow_up_date"] = tvDateTime.text.toString()
+                params["follow_up_date"] = if (tvDateTime.text.equals("Select Date & Time")) "" else (tvDateTime.text.toString())
 
                 viewModel.submitGc(params)
 

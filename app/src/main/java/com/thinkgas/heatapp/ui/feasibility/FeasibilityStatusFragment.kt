@@ -407,7 +407,7 @@ class FeasibilityStatusFragment : Fragment() {
                     params["riser_length"] = etRiserLength.text.toString()
                     params["gi_pipelength"] = etPipeLength.text.toString()
                     params["gc_status"] = fsGC!!
-                    params["follow_up_date"] = tvDateTime.text.toString()
+                    params["follow_up_date"] = if (tvDateTime.text.equals("Select Date & Time")) "" else (tvDateTime.text.toString())
                 }
                 else{
                     if (etDescription.text.isNullOrBlank()){
@@ -429,7 +429,7 @@ class FeasibilityStatusFragment : Fragment() {
                     params["fs_session_id"] = args.sessionId
                     params["approval_status"] = "Nil"
                     params["comments"] = ""
-                    params["follow_up_date"] = tvDateTime.text.toString()
+                    params["follow_up_date"] = if (tvDateTime.text.equals("Select Date & Time")) "" else (tvDateTime.text.toString())
 //                    params["riser_status"]=fsRiser!!
 //                    params["riser_length"] = etRiserLength.text.toString()
 //                    params["gi_pipelength"] = etPipeLength.text.toString()

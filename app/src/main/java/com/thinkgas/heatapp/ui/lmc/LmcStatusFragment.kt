@@ -471,7 +471,7 @@ class LmcStatusFragment : Fragment() {
                     params["tpi_id"] = args.tpiId
                     params["approval_status"] = "Nil"
                     params["comments"] = "Nil"
-                    params["follow_up_date"] = tvDateTime.text.toString()
+                    params["follow_up_date"] = if (tvDateTime.text.equals("Select Date & Time")) "" else (tvDateTime.text.toString())
                     params["description"] = etDescription.text.toString()
                     viewModel.submitLmc(params)
                     setupSubmitObserver()
@@ -579,7 +579,7 @@ class LmcStatusFragment : Fragment() {
                         params["status_type"] = fsStatus!!
                         params["sub_status_id"] = fsSubStatusCode!!
                         params["sub_status"] = fsSubStatus!!
-                        params["follow_up_date"] = dateTime!!
+                        params["follow_up_date"] = if (dateTime.toString() == "Select Date & Time") "" else (dateTime.toString())
                         params["description"] = etDescription.text.toString()
                         params["lmc_session_id"] = args.sessionId
 

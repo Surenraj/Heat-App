@@ -1022,7 +1022,7 @@ class LmcConnectionFragment : Fragment() {
                     params["sub_status_id"] = subStatusId
                     params["sub_status"] = args.lmcSubStatus.toString()
                     params["tpi_id"] = args.tpiId
-                    params["follow_up_date"] = args.followUpDate.toString()
+                    params["follow_up_date"] = if (args.followUpDate.toString() == "Select Date & Time") "" else (args.followUpDate.toString())
                     params["description"] = args.description.toString()
                     params["lmc_type"] = lmcType.toString()
                     params["meter_details"] = lmcMeterDetail.toString()

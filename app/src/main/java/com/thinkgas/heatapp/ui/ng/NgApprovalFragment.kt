@@ -609,7 +609,7 @@ class NgApprovalFragment : Fragment() {
                     params["rfc_approval_status"] = "Nil"
                     params["rfc_comments"] = ""
 //                    params["mmt_testing"] = "0"
-                    params["follow_up_date"] = tvDateTime.text.toString()
+                    params["follow_up_date"] = if (tvDateTime.text.equals("Select Date & Time")) "" else (tvDateTime.text.toString())
                     params["comments"] = etDescription.text.toString()
 //                    params["extension_modication_of_lmc"] = lmcExtension!!
 
