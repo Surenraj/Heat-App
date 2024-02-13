@@ -264,9 +264,12 @@ class FeasibilityStatusFragment : Fragment() {
 //                ivAttachments.visibility = View.GONE
                 ivIsometric.visibility = View.GONE
                 btnSubmit.visibility = View.GONE
-                if(args.status == "done" || args.status == "failed") {
+                if(args.status == "done") {
                     btnApprove.visibility = View.VISIBLE
                     btnDecline.visibility = View.VISIBLE
+                } else {
+                    btnApprove.visibility = View.GONE
+                    btnDecline.visibility = View.GONE
                 }
                 spinnerType.isEnabled = false
                 spinnerType.setTextColor(Color.parseColor("#545454"))

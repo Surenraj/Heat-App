@@ -1223,7 +1223,7 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun setUpObserver() {
-        viewModel.tpiListResponse.observe(viewLifecycleOwner) {
+        viewModel.tpiListResponse.observe(viewLifecycleOwner) { it ->
             if (it != null) {
                 when (it.status) {
                     Status.LOADING -> {
@@ -1327,20 +1327,22 @@ class RegistrationFragment : Fragment() {
                                 }
                             }
 
-                            legalEntity.addAll(it.data.entityList)
-                            val gaList = mutableListOf<String>()
-                            it.data.entityList.forEach {
-                                it.gaIdList?.forEach {
-                                    it?.gaName?.let { it1 -> gaList.add(it1) }
+                            if (!it.data.entityList.isNullOrEmpty()) {
+                                legalEntity.addAll(it.data.entityList)
+                                val gaList = mutableListOf<String>()
+                                it.data.entityList.forEach {
+                                    it.gaIdList?.forEach {
+                                        it?.gaName?.let { it1 -> gaList.add(it1) }
+                                    }
                                 }
-                            }
 
-                            gaSpinnerDialog = SpinnerDialog(
-                                activity,
-                                gaList as ArrayList<String>,
-                                "Select GA",
-                                "Close"
-                            )
+                                gaSpinnerDialog = SpinnerDialog(
+                                    activity,
+                                    gaList as ArrayList<String>,
+                                    "Select GA",
+                                    "Close"
+                                )
+                            }
 
                             gaSpinnerDialog?.bindOnSpinerListener { item, position ->
                                 val zonalList = mutableListOf<String>()

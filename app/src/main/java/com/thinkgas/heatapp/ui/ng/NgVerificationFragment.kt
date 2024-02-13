@@ -150,8 +150,8 @@ class NgVerificationFragment : Fragment()
               btnSubmit.visibility = View.GONE
               cbAcknowledge.visibility = View.GONE
               tvAcknowledge.visibility = View.GONE
-              btnApprove.visibility = View.VISIBLE
-              btnDecline.visibility = View.VISIBLE
+//              btnApprove.visibility = View.VISIBLE
+//              btnDecline.visibility = View.VISIBLE
                 ivLiveGas.visibility = View.GONE
                 ivService.visibility = View.GONE
                 ivSelfie.visibility = View.GONE

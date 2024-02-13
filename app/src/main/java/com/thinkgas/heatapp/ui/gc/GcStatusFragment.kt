@@ -278,9 +278,12 @@ class GcStatusFragment : Fragment() {
                 ivIsometric.visibility = View.GONE
                 ivWarning.visibility = View.GONE
                 btnSubmit.visibility = View.GONE
-                if(args.status == "done" || args.status == "failed") {
+                if(args.status == "done") {
                     btnApprove.visibility = View.VISIBLE
                     btnDecline.visibility = View.VISIBLE
+                } else {
+                    btnApprove.visibility = View.GONE
+                    btnDecline.visibility = View.GONE
                 }
                 spinnerType.isEnabled = false
                 spinnerType.setTextColor(Color.parseColor("#545454"))
@@ -1166,8 +1169,6 @@ class GcStatusFragment : Fragment() {
                                     val id = tpiStatusMap[item]
                                     val status = tfStatus[id]
 
-                                    Log.d("asasasasasas", status!!)
-
                                     binding.apply {
                                         spinnerStatus.text = "Select sub status"
                                         spinnerStatus.error = null
@@ -1195,7 +1196,6 @@ class GcStatusFragment : Fragment() {
                                                 isFailed = true
                                             }
                                         }
-                                        Log.d("statatdststs", "$isHold -- $isPassed -- $isFailed")
                                         spinnerType.text = item
                                         spinnerType.error = null
                                         spinnerStatus.text = "Select Type"
