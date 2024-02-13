@@ -13,6 +13,7 @@ import com.thinkgas.heatapp.data.cache.AppCache
 import com.thinkgas.heatapp.data.remote.model.Agent
 import com.thinkgas.heatapp.databinding.ServiceDetailListItemBinding
 import com.thinkgas.heatapp.utils.AppUtils
+import kotlin.math.log
 
 
 class FeasibilityListAdapter(var context: Context,
@@ -39,87 +40,96 @@ class FeasibilityListAdapter(var context: Context,
                  infoListener: (Agent) -> Unit) {
 
             binding.apply {
-                tvName.text = item!!.customerName
-                tvAddress.text = item.address
-                tvMobile.text = item.mobileNo
+                if (item != null) {
+                    tvName.text = item.customerName
+                    tvAddress.text = item.address
+                    tvMobile.text = item.mobileNo
 //                tvAssignDate.text = item.claimedDate
-                tvAppNo.text = item.applicationNumber
-                tvBpNo.text = item.bpnumber
-                tvAssignDate.text = "Assign Date : ${item.claimedDate}"
-                tvGcNo.text = item.gcNumber
+                    tvAppNo.text = item.applicationNumber
+                    tvBpNo.text = item.bpnumber
+                    tvAssignDate.text = "Assign Date : ${item.claimedDate}"
+                    tvGcNo.text = item.gcNumber
 
-                tvMobile.setOnClickListener {
-                    callListener(item.mobileNo)
-                }
-
-                val distance= AppUtils.distanceInKms(
-                    AppCache.latitude!!,
-                    AppCache.longitude!!,
-                    item.latitude.toDouble(),
-                    item.longitude.toDouble()
-                )
-                val content = SpannableString("${distance.toInt()} kms away")
-                content.setSpan(UnderlineSpan(), 0, content.length, 0)
-                tvNearby.text = content
-                tvNearby.setOnClickListener {
-                    navigateListener(item.latitude,item.longitude)
-                }
-                cvPending.setOnClickListener {
-                    if(status == "approved" || status == "declined"){
-                        return@setOnClickListener
+                    tvMobile.setOnClickListener {
+                        callListener(item.mobileNo)
                     }
-                    if(status == "pending") {
-                        if (AppCache.isTpi && (item.tpiApprovalStatus == "Unclaim" || item.tpiApprovalStatus == null)) {
+
+                    if ((item.latitude != "null" && item.longitude != "null") && (item.latitude != null && item.longitude != null)) {
+                        val distance = AppCache.latitude?.let {
+                            AppCache.longitude?.let { it1 ->
+                                AppUtils.distanceInKms(
+                                    it,
+                                    it1,
+                                    item.latitude.toDouble(),
+                                    item.longitude.toDouble()
+                                )
+                            }
+                        }
+                        val content = SpannableString("${distance?.toInt()} kms away")
+                        content.setSpan(UnderlineSpan(), 0, content.length, 0)
+                        tvNearby.text = content
+                        tvNearby.setOnClickListener {
+                            navigateListener(item.latitude, item.longitude)
+                        }
+                    }
+
+                    cvPending.setOnClickListener {
+                        if (status == "approved" || status == "declined") {
                             return@setOnClickListener
                         }
-                    }
-                    if(!isClaimable){
-                        clickListener(item)
-                    }
-                }
-
-                if(isClaimable && !AppCache.isTpi){
-                    btnTpiInfo.visibility = View.VISIBLE
-                    btnCancel.visibility = View.VISIBLE
-                }else{
-                    btnTpiInfo.visibility = View.VISIBLE
-                    btnTpiInfo.text = "TPI Info"
-                }
-
-                if(AppCache.isTpi){
-                    ivTpi.visibility = View.VISIBLE
-                    if(status == "pending"){
-                        btnTpiInfo.visibility = View.VISIBLE
-                        if(item.tpiApprovalStatus == "Claim"){
-                            btnTpiInfo.text = "Unclaim"
-                        }else{
-                            btnTpiInfo.text = "Claim"
+                        if (status == "pending") {
+                            if (AppCache.isTpi && (item.tpiApprovalStatus == "Unclaim" || item.tpiApprovalStatus == null)) {
+                                return@setOnClickListener
+                            }
                         }
-                    }else{
-                        btnTpiInfo.visibility = View.GONE
+                        if (!isClaimable) {
+                            clickListener(item)
+                        }
                     }
-                }
 
-                ivTpi.setOnClickListener {
-                    supervisorListener(item)
-                }
-
-                btnTpiInfo.setOnClickListener {
-                    if(AppCache.isTpi){
-                        claimListener(item)
-                        return@setOnClickListener
+                    if (isClaimable && !AppCache.isTpi) {
+                        btnTpiInfo.visibility = View.VISIBLE
+                        btnCancel.visibility = View.VISIBLE
+                    } else {
+                        btnTpiInfo.visibility = View.VISIBLE
+                        btnTpiInfo.text = "TPI Info"
                     }
-                    if(isClaimable && !AppCache.isTpi) {
-                        claimListener(item)
-                    }else{
-                        infoListener(item)
+
+                    if (AppCache.isTpi) {
+                        ivTpi.visibility = View.VISIBLE
+                        if (status == "pending") {
+                            btnTpiInfo.visibility = View.VISIBLE
+                            if (item.tpiApprovalStatus == "Claim") {
+                                btnTpiInfo.text = "Unclaim"
+                            } else {
+                                btnTpiInfo.text = "Claim"
+                            }
+                        } else {
+                            btnTpiInfo.visibility = View.GONE
+                        }
                     }
-                }
 
-                btnCancel.setOnClickListener {
-                    cancelListener(item)
-                }
+                    ivTpi.setOnClickListener {
+                        supervisorListener(item)
+                    }
 
+                    btnTpiInfo.setOnClickListener {
+                        if (AppCache.isTpi) {
+                            claimListener(item)
+                            return@setOnClickListener
+                        }
+                        if (isClaimable && !AppCache.isTpi) {
+                            claimListener(item)
+                        } else {
+                            infoListener(item)
+                        }
+                    }
+
+                    btnCancel.setOnClickListener {
+                        cancelListener(item)
+                    }
+
+                }
             }
 
         }

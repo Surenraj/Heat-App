@@ -30,25 +30,24 @@ class GcUnregisteredListAdapter(var context: Context,
                     tvMobile.text = item.mobileNo
                     tvGcNo.text = item.gcUnregNumber
 
-                    val distance = AppCache.latitude?.let {
-                        AppCache.longitude?.let { it1 ->
-                            AppUtils.distanceInKms(
-                                it,
-                                it1,
-                                item.latitude.toDouble(),
-                                item.longitude.toDouble()
-                            )
+                    if ((item.latitude != "null" && item.longitude != "null") && (item.latitude != null && item.longitude != null)) {
+                        val distance = AppCache.latitude?.let {
+                            AppCache.longitude?.let { it1 ->
+                                AppUtils.distanceInKms(
+                                    it,
+                                    it1,
+                                    item.latitude.toDouble(),
+                                    item.longitude.toDouble()
+                                )
+                            }
+                        }
+                        val content = SpannableString("${distance?.toInt()} kms away")
+                        content.setSpan(UnderlineSpan(), 0, content.length, 0)
+                        tvNearby.text = content
+                        tvNearby.setOnClickListener {
+                            navigateListener(item.latitude, item.longitude)
                         }
                     }
-
-
-                    val content = SpannableString("${distance?.toInt()} kms away")
-                    content.setSpan(UnderlineSpan(), 0, content.length, 0)
-                    tvNearby.text = content
-                    tvNearby.setOnClickListener {
-                        navigateListener(item.latitude, item.longitude)
-                    }
-
                     tvMobile.setOnClickListener {
                         callListener(item.mobileNo)
                     }

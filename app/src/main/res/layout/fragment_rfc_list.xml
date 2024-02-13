@@ -56,6 +56,7 @@
         android:layoutDirection="rtl"
         app:queryHint="Search"
         app:iconifiedByDefault="false"
+        android:theme="@style/ThemeOverlay.SearchView"
         app:closeIcon="@drawable/ic_baseline_close_24"
         app:searchIcon="@drawable/ic_baseline_search_24"
         android:layout_width="match_parent"

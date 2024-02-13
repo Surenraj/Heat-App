@@ -1020,8 +1020,8 @@ class NgVerificationFragment : Fragment()
                 params["rfc_status"] = args.rfcStatus
                 params["mmt_testing"] = args.mmtStatus
                 params["leakage_testing"] = args.leakageStatus
-                params["gas_pressure"] = args.gasPressure ?: "Enter gas pressure"
-                params["meter_reading"] = args.finalReading ?: "Enter final reading"
+                params["gas_pressure"] = args.gasPressure ?: ""
+                params["meter_reading"] = args.finalReading ?: ""
                 params["burner_type"] = args.burnerType
                 params["hose_pipe"] = args.hoseLength
                 params["nozzle_65"] = args.ng65Length

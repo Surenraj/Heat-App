@@ -19,6 +19,7 @@
             android:id="@+id/et_comment"
             android:gravity="start"
             android:padding="5dp"
+            android:textColor="#545454"
             android:layout_margin="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

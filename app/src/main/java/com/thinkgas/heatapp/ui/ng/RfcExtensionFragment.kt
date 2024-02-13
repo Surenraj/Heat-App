@@ -411,8 +411,8 @@ class RfcExtensionFragment : Fragment() {
                     params["rfc_status"] = args.rfcStatus.toString()
                     params["mmt_testing"] = args.mmtStatus.toString()
                     params["leakage_testing"] = args.leakageStatus.toString()
-                    params["gas_pressure"] = args.gasPressure ?: "Enter gas pressure"
-                    params["meter_reading"] = args.finalReading ?: "Enter final reading"
+                    params["gas_pressure"] = args.gasPressure ?: ""
+                    params["meter_reading"] = args.finalReading ?: ""
                     params["burner_type"] = args.burnerType.toString()
                     params["hose_pipe"] = args.hoseLength.toString()
                     params["nozzle_65"] = args.ng65Length.toString()
@@ -538,8 +538,8 @@ class RfcExtensionFragment : Fragment() {
                     params["rfc_status"] = args.rfcStatus.toString()
                     params["mmt_testing"] = args.mmtStatus.toString()
                     params["leakage_testing"] = args.leakageStatus.toString()
-                    params["gas_pressure"] = args.gasPressure ?: "Enter gas pressure"
-                    params["meter_reading"] = args.finalReading ?: "Enter final reading"
+                    params["gas_pressure"] = args.gasPressure ?: ""
+                    params["meter_reading"] = args.finalReading ?: ""
                     params["burner_type"] = args.burnerType.toString()
                     params["hose_pipe"] = args.hoseLength.toString()
                     params["nozzle_65"] = args.ng65Length.toString()

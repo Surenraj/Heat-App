@@ -67,4 +67,9 @@
         <item name="cornerSizeBottomRight">0dp</item>
         <item name="cornerSizeBottomLeft">0dp</item>
     </style>
+
+    <style name="ThemeOverlay.SearchView" parent="">
+        <item name="android:editTextColor">#545454</item>
+        <item name="android:textColorHint">#545454</item>
+    </style>
 </resources>

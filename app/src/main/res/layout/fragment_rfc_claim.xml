@@ -55,7 +55,8 @@
         app:closeIcon="@drawable/ic_baseline_close_24"
         app:searchIcon="@drawable/ic_baseline_search_24"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.SearchView"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list"
