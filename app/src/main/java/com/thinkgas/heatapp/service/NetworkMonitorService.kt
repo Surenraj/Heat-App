@@ -17,10 +17,8 @@ import com.thinkgas.heatapp.MainActivity
 import com.thinkgas.heatapp.R
 import com.thinkgas.heatapp.noInternet.NoInternetActivity
 
-
 class NetworkMonitorService : Service() {
     private lateinit var notificationManager: NotificationManager
-
 
     override fun onBind(intent: Intent?): IBinder? {
         throw UnsupportedOperationException()
@@ -29,25 +27,26 @@ class NetworkMonitorService : Service() {
     override fun onCreate() {
         super.onCreate()
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        makeForeground()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Companion.stopService(this)
+        createServiceNotificationChannel()
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        makeForeground()
         Thread { monitorNetwork(this) }.start()
         return START_STICKY
     }
 
-    override fun onTaskRemoved(rootIntent: Intent?) {
-        super.onTaskRemoved(rootIntent)
-        Companion.stopService(this)
+    override fun onDestroy() {
+        super.onDestroy()
+        stopForeground(true)
     }
 
-    fun monitorNetwork(context: Context) {
+    override fun onTaskRemoved(rootIntent: Intent?) {
+        super.onTaskRemoved(rootIntent)
+        stopSelf()
+    }
+
+    private fun monitorNetwork(context: Context) {
         while (true) {
             val isNetworkActive = isOnline(this)
 
@@ -66,8 +65,6 @@ class NetworkMonitorService : Service() {
         val pendingIntent = PendingIntent.getActivity(
             this, 0, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
-
-        createServiceNotificationChannel()
 
         val notification: Notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("Heat App")
@@ -93,7 +90,7 @@ class NetworkMonitorService : Service() {
         notificationManager.createNotificationChannel(channel)
     }
 
-    fun isOnline(context: Context): Boolean {
+    private fun isOnline(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         if (connectivityManager != null) {
@@ -115,7 +112,6 @@ class NetworkMonitorService : Service() {
     companion object {
         private const val ONGOING_NOTIFICATION_ID = 101
         private const val CHANNEL_ID = "1001"
-
 
         fun startService(context: Context) {
             val intent = Intent(context, NetworkMonitorService::class.java)
