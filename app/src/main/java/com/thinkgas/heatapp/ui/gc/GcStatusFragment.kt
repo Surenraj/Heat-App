@@ -424,11 +424,11 @@ class GcStatusFragment : Fragment() {
                         return@setOnClickListener
                     }
 
-                    if (AppCache.latitude == 0.0 || AppCache.longitude == 0.0) {
-                        tvLocation.error = "Select Location"
-                        tvLocation.requestFocus()
-                        return@setOnClickListener
-                    }
+//                    if (AppCache.latitude == 0.0 || AppCache.longitude == 0.0) {
+//                        tvLocation.error = "Select Location"
+//                        tvLocation.requestFocus()
+//                        return@setOnClickListener
+//                    }
                 }
 
                 if (isFailed) {
