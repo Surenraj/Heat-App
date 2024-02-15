@@ -126,23 +126,28 @@ class LoginFragment : Fragment() {
                         setDialog(true)
                     }
                     Status.SUCCESS -> {
-                        if (!it.data!!.error) {
+                        if (it.data != null) {
                             val data = it.data
-                            otp = data.otp
-                            binding.apply {
-                                etMobile.visibility = View.GONE
+                            if (!it.data.error) {
+                                otp = data.otp
+                                binding.apply {
+                                    etMobile.visibility = View.GONE
 //                                etPassword.visibility = View.GONE
-                                etOtp.visibility = View.VISIBLE
-                                btnLogin.text = "Verify OTP"
+                                    etOtp.visibility = View.VISIBLE
+                                    btnLogin.text = "Verify OTP"
+                                }
+                                Toast.makeText(requireContext(), data.message, Toast.LENGTH_SHORT)
+                                    .show()
+                            } else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    data.message,
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
                             }
-                            Toast.makeText(requireContext(), data.message, Toast.LENGTH_SHORT)
-                                .show()
-                        } else {
-                            Toast.makeText(requireContext(), "Invalid password", Toast.LENGTH_SHORT)
-                                .show()
+                            setDialog(false)
                         }
-                        setDialog(false)
-
                     }
                     Status.ERROR -> {
                         setDialog(false)

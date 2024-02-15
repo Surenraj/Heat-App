@@ -8,7 +8,7 @@ import retrofit2.http.*
 
 interface TpiApiService {
 
-    @POST("getOtp_heat_app.php")
+    @POST("getOtp_heat_app_n.php")
     @FormUrlEncoded
     suspend fun getOtp(@FieldMap params: Map<String, String>): Response<LoginResponseModel>
 
