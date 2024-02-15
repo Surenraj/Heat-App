@@ -7,6 +7,7 @@ import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
+import android.provider.Settings
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
@@ -47,7 +48,7 @@ class LoginFragment : Fragment() {
         }
     }
 
-    @SuppressLint("CommitPrefEdits")
+    @SuppressLint("CommitPrefEdits", "HardwareIds")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -95,9 +96,11 @@ class LoginFragment : Fragment() {
                 {
                     phoneNumber = etMobile.text.toString()
                     val password = ""
-                    if (validateMobileNumber(phoneNumber!!) && phoneNumber != null) {
+                    if (validateMobileNumber(phoneNumber.toString()) && phoneNumber != null) {
                         val params = HashMap<String, String>()
-                        params["mobile_no"] = phoneNumber!!
+                        params["mobile_no"] = phoneNumber.toString()
+                        val deviceId: String = Settings.Secure.getString(context?.contentResolver, Settings.Secure.ANDROID_ID)
+                        params["device_id"] = deviceId
                         loginViewModel.getOtpValue(params)
                     } else {
                         etMobile.error = "Invalid mobile number"
