@@ -28,8 +28,8 @@ object AppModule
 
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://164.52.205.22/heat_app_api_prod/")
-//            .baseUrl("https://heat.think-gas.com/heat_app_api_prod/")
+//            .baseUrl("http://164.52.205.22/heat_app_api_prod/")
+            .baseUrl("https://heat.think-gas.com/heat_app_api_prod/")
             //.baseUrl("https://heat.think-gas.com/heat_app_api_build_dev/")
             .client(client)
             .build()

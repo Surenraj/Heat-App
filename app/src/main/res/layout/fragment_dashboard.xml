@@ -12,7 +12,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        android:src="@drawable/agp_horizontal_logo"
+        android:src="@drawable/tg_logo"
         android:layout_width="200dp"
         android:layout_height="30dp" />
 
