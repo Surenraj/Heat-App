@@ -77,7 +77,11 @@
         <service
             android:name=".service.NetworkMonitorService"
             android:exported="true"
-            android:stopWithTask="true"></service>
+            android:stopWithTask="true"/>
+
+        <service android:name=".service.LocationMonitorService"
+            android:exported="true"
+            android:stopWithTask="true"/>
     </application>
 
 </manifest>
