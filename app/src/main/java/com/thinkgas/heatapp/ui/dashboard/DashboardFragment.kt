@@ -9,6 +9,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Location
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
@@ -65,12 +67,13 @@ class DashboardFragment : Fragment() {
     private var currentLocation: Location? = null
     private var settingsClient: SettingsClient? = null
 
-    var latitude:Double? = 0.0
-    var longitude:Double? = 0.0
+    var latitude: Double? = 0.0
+    var longitude: Double? = 0.0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View {
+        savedInstanceState: Bundle?
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         categoryList.clear()
@@ -96,7 +99,13 @@ class DashboardFragment : Fragment() {
         categoryList.add(TpiCategory("Riser", R.drawable.ic_riser, "reg_riser"))
         categoryList.add(TpiCategory("RFC/NG", R.drawable.ic_rfc_ng_icon, "reg_rfc"))
         categoryList.add(TpiCategory("GC", R.drawable.ic_gc_icon, "reg_gc"))
-        categoryList.add(TpiCategory("Add GC Unregistered Customer", R.drawable.ic_registration, "reg_add_gc"))
+        categoryList.add(
+            TpiCategory(
+                "Add GC Unregistered Customer",
+                R.drawable.ic_registration,
+                "reg_add_gc"
+            )
+        )
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         settingsClient = LocationServices.getSettingsClient(requireActivity())
@@ -114,12 +123,9 @@ class DashboardFragment : Fragment() {
 
         requestLocationPermissionLauncher =
             registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
-                if (granted)
-                {
+                if (granted) {
                     getCurrentLocation()
-                }
-                else
-                {
+                } else {
                     requestPermissions(Manifest.permission.ACCESS_FINE_LOCATION)
                 }
             }
@@ -131,13 +137,15 @@ class DashboardFragment : Fragment() {
                 logoutBuilder.setMessage("Are you sure want to log out?")
                 logoutBuilder.setCancelable(false)
                 logoutBuilder.setPositiveButton("Yes") { _, i ->
-                    val preferences = activity?.getSharedPreferences("TPI_PREFS",
+                    val preferences = activity?.getSharedPreferences(
+                        "TPI_PREFS",
                         Context.MODE_PRIVATE
                     )
                     val editor: SharedPreferences.Editor = preferences!!.edit()
                     editor.clear()
                     editor.apply()
-                    val directions = DashboardFragmentDirections.actionDashboardFragmentToLoginFragment()
+                    val directions =
+                        DashboardFragmentDirections.actionDashboardFragmentToLoginFragment()
                     findNavController().navigate(directions)
 
                 }
@@ -151,27 +159,35 @@ class DashboardFragment : Fragment() {
             }
         }
 
-        locationSetting = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) {
-            when (it.resultCode) {
-                Activity.RESULT_OK -> {
-                    getCurrentLocation()
-                    locationDialog?.show()
-                }
-                Activity.RESULT_CANCELED -> {
-                    requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-                    Toast.makeText(requireContext(), "Please turn on the location", Toast.LENGTH_SHORT).show()
+        locationSetting =
+            registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) {
+                when (it.resultCode) {
+                    Activity.RESULT_OK -> {
+                        getCurrentLocation()
+                        locationDialog?.show()
+                    }
 
+                    Activity.RESULT_CANCELED -> {
+                        requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+                        Toast.makeText(
+                            requireContext(),
+                            "Please turn on the location",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                    }
                 }
             }
-        }
 
         requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
 
-        locationPermissionSetting = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        locationPermissionSetting =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 when (it.resultCode) {
                     Activity.RESULT_OK -> {
                         requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
                     }
+
                     Activity.RESULT_CANCELED -> {
                         requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
                     }
@@ -186,14 +202,11 @@ class DashboardFragment : Fragment() {
         locationBuilder.setView(R.layout.location_progress)
         locationDialog = locationBuilder.create()
 
-        if(AppCache.latitude!!.equals(0.0) && AppCache.longitude!!.equals(0.0))
-        {
+        if (AppCache.latitude!!.equals(0.0) && AppCache.longitude!!.equals(0.0)) {
             locationDialog?.show()
         }
-        mLocationCallback = object : LocationCallback()
-        {
-            override fun onLocationResult(locationResult: LocationResult)
-            {
+        mLocationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult) {
                 super.onLocationResult(locationResult)
                 locationDialog?.dismiss()
                 locationResult.lastLocation.let { location ->
@@ -203,37 +216,40 @@ class DashboardFragment : Fragment() {
             }
         }
 
-        viewModel.getProfileResponse(args.sessionId)
-
-        viewModel.profileResponse.observe(viewLifecycleOwner) { it ->
-            if (it != null) {
-                when (it.status) {
-                    Status.SUCCESS -> {
-                        if (!it.data!!.error) {
-                            var tempList: MutableList<TpiCategory> = mutableListOf()
-                            var tempList1: List<TpiCategory> = mutableListOf()
-                            AppCache.isTpi = it.data.heatAppUserDetails.isTpi
-                            val editor: SharedPreferences.Editor = activity?.getSharedPreferences("TPI_PREFS",
-                                Context.MODE_PRIVATE
-                            )!!.edit()
-                            editor.putString("mobile", it.data.heatAppUserDetails.mobile)
-                            editor.apply()
-                            binding.apply {
-                                tvName.text = it.data.heatAppUserDetails.agentName
-                                tvJoinDate.text = "Member since ${it.data.heatAppUserDetails.dateOfJoining}"
-                                it.data.heatAppUserDetails.rolesPermission.forEach { roles ->
-                                    rolesList.add(roles.logRoles)
-                                }
+        if (isOnline(requireContext())) {
+            viewModel.getProfileResponse(args.sessionId)
+            viewModel.profileResponse.observe(viewLifecycleOwner) { it ->
+                if (it != null) {
+                    when (it.status) {
+                        Status.SUCCESS -> {
+                            if (!it.data!!.error) {
+                                var tempList: MutableList<TpiCategory> = mutableListOf()
+                                var tempList1: List<TpiCategory> = mutableListOf()
+                                AppCache.isTpi = it.data.heatAppUserDetails.isTpi
+                                val editor: SharedPreferences.Editor =
+                                    activity?.getSharedPreferences(
+                                        "TPI_PREFS",
+                                        Context.MODE_PRIVATE
+                                    )!!.edit()
+                                editor.putString("mobile", it.data.heatAppUserDetails.mobile)
+                                editor.apply()
+                                binding.apply {
+                                    tvName.text = it.data.heatAppUserDetails.agentName
+                                    tvJoinDate.text =
+                                        "Member since ${it.data.heatAppUserDetails.dateOfJoining}"
+                                    it.data.heatAppUserDetails.rolesPermission.forEach { roles ->
+                                        rolesList.add(roles.logRoles)
+                                    }
 
 //                                tvJoinDate.text = it.data.heatAppUserDetails.
 
-                                rolesList.forEach {
-                                    categoryList.forEach { category ->
-                                        if (category.id == it) {
-                                            tempList.add(category)
+                                    rolesList.forEach {
+                                        categoryList.forEach { category ->
+                                            if (category.id == it) {
+                                                tempList.add(category)
+                                            }
                                         }
                                     }
-                                }
 
 //                                if(!AppCache.isTpi) {
 //                                    tempList.add(
@@ -245,41 +261,46 @@ class DashboardFragment : Fragment() {
 //                                    )
 //                                }
 
-                                dashboardAdapter = DashboardAdapter(
-                                    requireContext(),
-                                    tempList
-                                ) { data: TpiCategory ->
-                                    listItemClicked(data)
+                                    dashboardAdapter = DashboardAdapter(
+                                        requireContext(),
+                                        tempList
+                                    ) { data: TpiCategory ->
+                                        listItemClicked(data)
+                                    }
+                                    binding.rvCategory.adapter = dashboardAdapter
                                 }
-                                binding.rvCategory.adapter = dashboardAdapter
-                            }
 
-                        } else {
-                            Toast.makeText(
-                                requireContext(),
-                                "Error fetching user profile",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            } else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Error fetching user profile",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                            setDialog(false)
                         }
-                        setDialog(false)
-                    }
-                    Status.LOADING -> {
-                        setDialog(true)
-                    }
-                    Status.ERROR -> {
-                        setDialog(false)
+
+                        Status.LOADING -> {
+                            setDialog(true)
+                        }
+
+                        Status.ERROR -> {
+                            setDialog(false)
+                        }
                     }
                 }
             }
+        }else {
+            Toast.makeText(requireContext(),"No Internet connection",Toast.LENGTH_SHORT).show()
         }
         return binding.root
     }
 
-    private fun requestPermissions(permission: String)
-    {
+    private fun requestPermissions(permission: String) {
         val displayRational = ActivityCompat.shouldShowRequestPermissionRationale(
             requireActivity(),
-            permission)
+            permission
+        )
         if (!displayRational) {
             Toast.makeText(
                 requireActivity(),
@@ -297,15 +318,12 @@ class DashboardFragment : Fragment() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
             locationPermissionSetting.launch(intent)
-        }
-        else
-        {
+        } else {
             requestLocationPermissionLauncher.launch(permission)
         }
     }
 
-    private fun getCurrentLocation()
-    {
+    private fun getCurrentLocation() {
         settingsClient?.let { settings ->
             locationRequest = LocationRequest.create()
             locationRequest.interval = TimeUnit.SECONDS.toMillis(2)
@@ -341,13 +359,13 @@ class DashboardFragment : Fragment() {
                                     .build()
                             locationSetting.launch(intentSenderRequest)
                         }
+
                         LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {}
                     }
                 }
         }
 
     }
-
 
 
     private fun listItemClicked(data: TpiCategory) {
@@ -359,21 +377,31 @@ class DashboardFragment : Fragment() {
                     )
                 findNavController().navigate(directions)
             }
+
             "LMC" -> {
-                val directions = DashboardFragmentDirections.actionDashboardFragmentToLmcHomeFragment(args.sessionId)
+                val directions =
+                    DashboardFragmentDirections.actionDashboardFragmentToLmcHomeFragment(args.sessionId)
                 findNavController().navigate(directions)
             }
-            "RFC/NG"->{
-                val directions = DashboardFragmentDirections.actionDashboardFragmentToRfcHomeFragment(args.sessionId)
+
+            "RFC/NG" -> {
+                val directions =
+                    DashboardFragmentDirections.actionDashboardFragmentToRfcHomeFragment(args.sessionId)
                 findNavController().navigate(directions)
-                
+
             }
-            "GC"->{
-                val directions = DashboardFragmentDirections.actionDashboardFragmentToGcHomeFragment(args.sessionId)
+
+            "GC" -> {
+                val directions =
+                    DashboardFragmentDirections.actionDashboardFragmentToGcHomeFragment(args.sessionId)
                 findNavController().navigate(directions)
             }
-            "Add GC Unregistered Customer"->{
-                val directions = DashboardFragmentDirections.actionDashboardFragmentToGcUnregisteredListFragment(args.sessionId)
+
+            "Add GC Unregistered Customer" -> {
+                val directions =
+                    DashboardFragmentDirections.actionDashboardFragmentToGcUnregisteredListFragment(
+                        args.sessionId
+                    )
                 findNavController().navigate(directions)
             }
         }
@@ -389,6 +417,26 @@ class DashboardFragment : Fragment() {
         dialog!!.dismiss()
         locationDialog?.dismiss()
 
+    }
+
+
+    private fun isOnline(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (connectivityManager != null) {
+            val capabilities =
+                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+            if (capabilities != null) {
+                if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                    return true
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                    return true
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+                    return true
+                }
+            }
+        }
+        return false
     }
 
 }
