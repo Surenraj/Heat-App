@@ -42,9 +42,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".noInternet.NoInternetActivity"
+            android:name=".supportActivities.NoInternetActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".supportActivities.EnableLocationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <activity
             android:name=".base.BaseActivity"
             android:exported="false" />
@@ -77,11 +83,12 @@
         <service
             android:name=".service.NetworkMonitorService"
             android:exported="true"
-            android:stopWithTask="true"/>
+            android:stopWithTask="true" />
 
-        <service android:name=".service.LocationMonitorService"
+        <service
+            android:name=".service.LocationMonitorService"
             android:exported="true"
-            android:stopWithTask="true"/>
+            android:stopWithTask="true" />
     </application>
 
 </manifest>

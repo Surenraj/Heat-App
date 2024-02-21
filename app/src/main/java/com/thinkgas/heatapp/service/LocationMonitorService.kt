@@ -14,6 +14,8 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.thinkgas.heatapp.MainActivity
 import com.thinkgas.heatapp.R
+import com.thinkgas.heatapp.supportActivities.EnableLocationActivity
+import com.thinkgas.heatapp.supportActivities.NoInternetActivity
 
 class LocationMonitorService: Service() {
 
@@ -36,7 +38,7 @@ class LocationMonitorService: Service() {
         }
     }
 
-    var isLocationEnabled: Boolean = false
+    private var isLocationEnabled: Boolean = false
     private lateinit var notificationManager: NotificationManager
 
     override fun onCreate() {
@@ -51,7 +53,7 @@ class LocationMonitorService: Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         makeForeground()
-        Thread { monitorLocation() }.start()
+        Thread { monitorLocation(this) }.start()
         return START_STICKY
     }
     private fun createServiceNotificationChannel() {
@@ -86,7 +88,7 @@ class LocationMonitorService: Service() {
         startForeground(ONGOING_NOTIFICATION_ID, notification)
     }
 
-    private fun monitorLocation() {
+    private fun monitorLocation(context: Context) {
         while (true) {
             isLocationEnabled = isLocationEnabled()
 
@@ -95,6 +97,9 @@ class LocationMonitorService: Service() {
                     "LocationMonitor",
                     "Location Enabled: ${isLocationEnabled()}"
                 )
+                val intent = Intent(context, EnableLocationActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
                 break
             }
             Thread.sleep(1000)

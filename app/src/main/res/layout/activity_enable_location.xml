@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".supportActivities.NoInternetActivity">
+    tools:context=".supportActivities.EnableLocationActivity">
 
     <ImageView
         android:layout_width="@dimen/_200sdp"
         android:layout_height="@dimen/_200sdp"
-        android:src="@drawable/no_internet"/>
+        android:src="@drawable/location_icon"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:fontFamily="@font/barlow_semibold"
-        android:text="No Internet Connection"
-        android:textSize="@dimen/_18sdp" />
+        android:layout_marginTop="@dimen/_15sdp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Allow location permission"
+        android:textSize="@dimen/_17sdp" />
 
     <Button
-        android:id="@+id/btn_retry"
+        android:id="@+id/btn_enable"
         android:layout_width="wrap_content"
         android:background="@drawable/login_btn_bg"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:text="Retry" />
 
 </LinearLayout>

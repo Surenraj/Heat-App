@@ -14,7 +14,7 @@ import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.thinkgas.heatapp.MainActivity
 import com.thinkgas.heatapp.R
-import com.thinkgas.heatapp.noInternet.NoInternetActivity
+import com.thinkgas.heatapp.supportActivities.NoInternetActivity
 
 class NetworkMonitorService : Service() {
     private lateinit var notificationManager: NotificationManager

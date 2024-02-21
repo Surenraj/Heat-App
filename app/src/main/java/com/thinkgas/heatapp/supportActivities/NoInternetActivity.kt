@@ -1,4 +1,4 @@
-package com.thinkgas.heatapp.noInternet
+package com.thinkgas.heatapp.supportActivities
 
 import android.content.Context
 import android.net.ConnectivityManager

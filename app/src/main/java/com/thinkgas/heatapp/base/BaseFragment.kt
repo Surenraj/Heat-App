@@ -12,7 +12,6 @@ open class BaseFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        NetworkUtils.handleNetworkType(requireContext())
         return inflater.inflate(R.layout.fragment_base, container, false)
     }
 }
