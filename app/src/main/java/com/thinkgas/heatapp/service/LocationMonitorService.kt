@@ -36,6 +36,13 @@ class LocationMonitorService: Service() {
             val intent = Intent(context, LocationMonitorService::class.java)
             context.stopService(intent)
         }
+
+        @JvmStatic
+        fun isLocationEnabled(context: Context): Boolean {
+            val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                    locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+        }
     }
 
     private var isLocationEnabled: Boolean = false
@@ -90,12 +97,12 @@ class LocationMonitorService: Service() {
 
     private fun monitorLocation(context: Context) {
         while (true) {
-            isLocationEnabled = isLocationEnabled()
+            isLocationEnabled = isLocationEnabled(this)
 
             if (!isLocationEnabled) {
                 Log.d(
                     "LocationMonitor",
-                    "Location Enabled: ${isLocationEnabled()}"
+                    "Location Enabled: ${isLocationEnabled(this)}"
                 )
                 val intent = Intent(context, EnableLocationActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
@@ -104,12 +111,5 @@ class LocationMonitorService: Service() {
             }
             Thread.sleep(1000)
         }
-    }
-
-    private fun isLocationEnabled(): Boolean {
-        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
-            LocationManager.NETWORK_PROVIDER
-        )
     }
 }

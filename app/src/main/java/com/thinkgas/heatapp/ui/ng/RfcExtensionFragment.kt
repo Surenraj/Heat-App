@@ -1,5 +1,6 @@
 package com.thinkgas.heatapp.ui.ng
 
+import android.Manifest
 import `in`.galaxyofandroid.spinerdialog.SpinnerDialog
 import android.app.AlertDialog
 import android.app.Dialog
@@ -11,13 +12,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.thinkgas.heatapp.R
 import com.thinkgas.heatapp.data.cache.AppCache
 import com.thinkgas.heatapp.databinding.FragmentRfcExtensionBinding
+import com.thinkgas.heatapp.ui.lmc.LmcConnectionFragment
+import com.thinkgas.heatapp.ui.lmc.LmcConnectionFragmentDirections
+import com.thinkgas.heatapp.ui.rfc.RfcViewModel
 import com.thinkgas.heatapp.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.ArrayList
@@ -31,41 +39,40 @@ class RfcExtensionFragment : Fragment() {
     private val args by navArgs<RfcExtensionFragmentArgs>()
     var companySpinnerDialog: SpinnerDialog? = null
 
-
-
-
     companion object {
-        var lmcGiClamp:String? = null
-        var lmcMlcClamp:String? = null
-        var lmcGiMfElbow:String? = null
-        var lmcGiFfElbow:String? = null
-        var lmcGi2:String? = null
-        var lmcGi3:String? = null
-        var lmcGi4:String? = null
-        var lmcGi6:String? = null
-        var lmcGi8:String? = null
-        var lmcGiTee:String? = null
-        var lmcMlcTee:String? = null
-        var lmcGiSocket:String? = null
-        var lmcMaleUnion:String? = null
-        var lmcFemaleUnion:String? = null
-        var lmcMeterBracket:String? = null
-        var lmcMeterSticker:String? = null
-        var lmcPlateMarker:String? = null
-        var lmcAdaptorGI:String? = null
-        var lmcAdaptorReg:String? = null
-        var lmcAdaptorMeter:String? = null
-        var lmcFemaleMeter:String? = null
-        var lmcMeterNo:String? = null
-        var lmcRegulatorNo:String? = null
-        var lmcGiLength:String? = null
-        var lmcMlcLength:String? = null
-        var lmcAvQty:String? = null
-        var lmcIvQty:String? = null
-        var lmcExtraGiLength:String? = null
-        var lmcExtraMlcLength:String? = null
-        var lmcMeterCompany:String? = null
-        var lmcInitialReading:String? = null
+        var qrValue: String? = null
+        var qrError: String? = null
+        var lmcGiClamp: String? = null
+        var lmcMlcClamp: String? = null
+        var lmcGiMfElbow: String? = null
+        var lmcGiFfElbow: String? = null
+        var lmcGi2: String? = null
+        var lmcGi3: String? = null
+        var lmcGi4: String? = null
+        var lmcGi6: String? = null
+        var lmcGi8: String? = null
+        var lmcGiTee: String? = null
+        var lmcMlcTee: String? = null
+        var lmcGiSocket: String? = null
+        var lmcMaleUnion: String? = null
+        var lmcFemaleUnion: String? = null
+        var lmcMeterBracket: String? = null
+        var lmcMeterSticker: String? = null
+        var lmcPlateMarker: String? = null
+        var lmcAdaptorGI: String? = null
+        var lmcAdaptorReg: String? = null
+        var lmcAdaptorMeter: String? = null
+        var lmcFemaleMeter: String? = null
+        var lmcMeterNo: String? = null
+        var lmcRegulatorNo: String? = null
+        var lmcGiLength: String? = null
+        var lmcMlcLength: String? = null
+        var lmcAvQty: String? = null
+        var lmcIvQty: String? = null
+        var lmcExtraGiLength: String? = null
+        var lmcExtraMlcLength: String? = null
+        var lmcMeterCompany: String? = null
+        var lmcInitialReading: String? = null
 
 
     }
@@ -78,7 +85,7 @@ class RfcExtensionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentRfcExtensionBinding.inflate(inflater,container,false)
+        _binding = FragmentRfcExtensionBinding.inflate(inflater, container, false)
 
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         builder.setView(R.layout.progress)
@@ -92,10 +99,10 @@ class RfcExtensionFragment : Fragment() {
         viewModel.getTpiListTypes(paramsTpi)
         setUpTpiObserver()
 
-        val params = HashMap<String,String>()
+        val params = HashMap<String, String>()
         params["application_number"] = args.appNo
         params["session_id"] = args.sessionId.toString()
-        params["is_tpi"] = if(AppCache.isTpi) "1" else "0"
+        params["is_tpi"] = if (AppCache.isTpi) "1" else "0"
 
 
         viewModel.getNgApprovalList(params)
@@ -108,7 +115,7 @@ class RfcExtensionFragment : Fragment() {
                 companySpinnerDialog?.setCancellable(true)
             }
 
-            if(AppCache.isTpi){
+            if (AppCache.isTpi) {
                 etGiClamp.isEnabled = false
                 etGiClamp.setTextColor(Color.parseColor("#545454"))
                 etMlcClamp.isEnabled = false
@@ -172,13 +179,13 @@ class RfcExtensionFragment : Fragment() {
 
                 override fun afterTextChanged(p0: Editable?) {
                     if (p0 != null) {
-                        if(p0.isNotBlank()){
+                        if (p0.isNotBlank()) {
                             val length = p0.toString().toFloat()
-                            if(length > 12f){
+                            if (length > 12f) {
 //                                etGiInstallation.setText("15")
-                                lmcExtraGiLength = "${length-12}"
+                                lmcExtraGiLength = "${length - 12}"
                                 etExtraGlLength.setText(lmcExtraGiLength)
-                            }else {
+                            } else {
                                 lmcExtraGiLength = "0"
                                 etExtraGlLength.setText(lmcExtraGiLength)
                             }
@@ -192,7 +199,13 @@ class RfcExtensionFragment : Fragment() {
                 findNavController().navigateUp()
             }
 
-            etCuInstallation.addTextChangedListener(object: TextWatcher{
+            ivQr.setOnClickListener {
+                requestCameraPermission.launch(
+                    Manifest.permission.CAMERA
+                )
+            }
+
+            etCuInstallation.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
                 }
@@ -203,12 +216,12 @@ class RfcExtensionFragment : Fragment() {
 
                 override fun afterTextChanged(p0: Editable?) {
                     if (p0 != null) {
-                        if(p0.isNotBlank()){
+                        if (p0.isNotBlank()) {
                             val length = p0.toString().toFloat()
-                            if(length > 12f){
-                                lmcExtraMlcLength = "${length-12}"
+                            if (length > 12f) {
+                                lmcExtraMlcLength = "${length - 12}"
                                 etExtraMlcLength.setText(lmcExtraMlcLength)
-                            }else {
+                            } else {
                                 lmcExtraMlcLength = "0"
                                 etExtraMlcLength.setText(lmcExtraMlcLength)
                             }
@@ -220,10 +233,8 @@ class RfcExtensionFragment : Fragment() {
 
 
             btnNext.setOnClickListener {
-                if (isLmcModified)
-                {
-                    if (!hasMeter)
-                    {
+                if (isLmcModified) {
+                    if (!hasMeter) {
                         if (etGiInstallation.text.isBlank()) {
                             etGiInstallation.error = "Enter GI Length"
                             etGiInstallation.requestFocus()
@@ -446,8 +457,7 @@ class RfcExtensionFragment : Fragment() {
                     params["female_union_meter_MLC_pipe"] = etFemaleUnion.text.toString()
                     params["extension_modication_of_lmc"] = args.lmcExtension.toString()
 
-                    if (!hasMeter)
-                    {
+                    if (!hasMeter) {
                         params["wo_gi_length"] = etGiInstallation.text.toString()
                         params["wo_mlc_length"] = etCuInstallation.text.toString()
                         params["wo_extra_gi"] = etExtraGlLength.text.toString()
@@ -464,9 +474,7 @@ class RfcExtensionFragment : Fragment() {
                     viewModel.updateRfcNg(params)
                     setupNgObserver()
 
-                }
-                else
-                {
+                } else {
                     if (etMeterCompany.text.isBlank()) {
                         etMeterCompany.error = "Enter Meter Company"
                         etMeterCompany.requestFocus()
@@ -565,21 +573,132 @@ class RfcExtensionFragment : Fragment() {
                     setupNgObserver()
                 }
             }
+
+            if (qrValue != null) {
+                lmcMeterNo = qrValue
+                etMeterNo.text = qrValue
+            }
+            if (qrError != null) {
+                Toast.makeText(requireContext(), qrError, Toast.LENGTH_SHORT).show()
+            }
         }
 
+        setObjectValueToFields()
         return binding.root
     }
 
+    private val requestCameraPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (!granted) {
+                Toast.makeText(
+                    requireContext(),
+                    "Camera permission is needed to scan code",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                updateObjectValue()
+                val directions =
+                    RfcExtensionFragmentDirections.actionRfcHomeFragmentToScannerFragment(
+                        fragmentName = "RfcExtensionFragment"
+                    )
+                findNavController().navigate(directions)
+            }
+
+        }
+
+    private fun updateObjectValue() {
+        binding.apply {
+            lmcGiClamp = etGiClamp.text.toString()
+            println("giiiiii 08 $lmcGiClamp")
+            lmcMlcClamp = etMlcClamp.text.toString()
+            lmcGiMfElbow = etGiMf.text.toString()
+            lmcGiFfElbow = etGiFf.text.toString()
+            lmcGi2 = etGi2.text.toString()
+            lmcGi3 = etGi3.text.toString()
+            lmcGi4 = etGi4.text.toString()
+            lmcGi6 = etGi6.text.toString()
+            lmcGi8 = etGi8.text.toString()
+            lmcGiTee = etGiTee.text.toString()
+            lmcMlcTee = etMlcTee.text.toString()
+            lmcGiSocket = etGiSocket.text.toString()
+            lmcMaleUnion = etMlcMale.text.toString()
+            lmcFemaleUnion = etMlcFemale.text.toString()
+            lmcMeterNo = etMeterNo.text.toString()
+            lmcRegulatorNo = etRegulatorNo.text.toString()
+            lmcMeterCompany = etMeterCompany.text.toString()
+            lmcInitialReading = etInitialMeter.text.toString()
+            lmcMeterBracket = etMeterBracket.text.toString()
+            lmcMeterSticker = etMeterSticker.text.toString()
+            lmcPlateMarker = etPlateMarker.text.toString()
+            lmcAdaptorGI = etAdaptorGi.text.toString()
+            lmcAdaptorReg = etAdaptorReg.text.toString()
+            lmcAdaptorMeter = etAdaptorMeter.text.toString()
+            lmcFemaleMeter = etFemaleUnion.text.toString()
+            lmcGiLength = etGiInstallation.text.toString()
+            lmcMlcLength = etCuInstallation.text.toString()
+        }
+    }
+
+    private fun setObjectValueToFields() {
+        binding.apply {
+            setViewTextValue(etGiClamp, lmcGiClamp)
+            println("giiiiiiiiii  ${etGiClamp.text} --- $lmcGiClamp ")
+            setViewTextValue(etMlcClamp, lmcMlcClamp)
+            setViewTextValue(etGiMf, lmcGiMfElbow)
+            setViewTextValue(etGiFf, lmcGiFfElbow)
+            setViewTextValue(etGi2, lmcGi2)
+            setViewTextValue(etGi3, lmcGi3)
+            setViewTextValue(etGi4, lmcGi4)
+            setViewTextValue(etGi6, lmcGi6)
+            setViewTextValue(etGi8, lmcGi8)
+            setViewTextValue(etGiTee, lmcGiTee)
+            setViewTextValue(etMlcTee, lmcMlcTee)
+            setViewTextValue(etGiSocket, lmcGiSocket)
+            setViewTextValue(etMlcMale, lmcMaleUnion)
+            setViewTextValue(etMlcFemale, lmcFemaleUnion)
+            setViewTextValue(etMeterNo, lmcMeterNo)
+            setViewTextValue(etRegulatorNo, lmcRegulatorNo)
+            setViewTextValue(etMeterCompany, lmcMeterCompany)
+            setViewTextValue(etInitialMeter, lmcInitialReading)
+            setViewTextValue(etMeterBracket, lmcMeterBracket)
+            setViewTextValue(etMeterSticker, lmcMeterSticker)
+            setViewTextValue(etPlateMarker, lmcPlateMarker)
+            setViewTextValue(etAdaptorGi, lmcAdaptorGI)
+            setViewTextValue(etAdaptorReg, lmcAdaptorReg)
+            setViewTextValue(etAdaptorMeter, lmcAdaptorMeter)
+            setViewTextValue(etFemaleUnion, lmcFemaleMeter)
+            setViewTextValue(etGiInstallation, lmcGiLength)
+            setViewTextValue(etCuInstallation, lmcMlcLength)
+        }
+    }
+
+    private fun setViewTextValue(view: View, value: String?) {
+        when (view) {
+            is EditText -> {
+                if (!value.isNullOrEmpty()) {
+                    view.setText(value)
+                }
+            }
+
+            is TextView -> {
+                if (!value.isNullOrEmpty()) {
+                    view.text = value
+                }
+            }
+        }
+    }
+
     private fun setupNgObserver() {
-        viewModel.rfcNgUpdateResponse.observe(viewLifecycleOwner){
-            if(it!=null){
-                when(it.status){
-                    Status.LOADING->{
+        viewModel.rfcNgUpdateResponse.observe(viewLifecycleOwner) {
+            if (it != null) {
+                when (it.status) {
+                    Status.LOADING -> {
                         setDialog(true)
                     }
-                    Status.SUCCESS->{
+
+                    Status.SUCCESS -> {
                         setDialog(false)
-                        if(!it.data!!.error){
+                        if (!it.data!!.error) {
                             binding.apply {
                                 val directions =
                                     RfcExtensionFragmentDirections.actionRfcExtensionFragmentToNgVerificationFragment(
@@ -651,7 +770,7 @@ class RfcExtensionFragment : Fragment() {
                                         lmcWoRegulatorNumber = etRegulatorNo.text.toString(),
                                         lmcExtension = args.lmcExtension,
                                         giUnion = args.giUnion
-                                        )
+                                    )
                                 findNavController().navigate(directions)
                                 Toast.makeText(
                                     requireContext(),
@@ -659,11 +778,13 @@ class RfcExtensionFragment : Fragment() {
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
-                        }else{
-                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT)
+                                .show()
                         }
                     }
-                    Status.ERROR->{
+
+                    Status.ERROR -> {
                         setDialog(false)
                     }
                 }
@@ -672,27 +793,36 @@ class RfcExtensionFragment : Fragment() {
     }
 
     private fun setUpObserver() {
-        viewModel.ngApprovalResponse.observe(viewLifecycleOwner){
-            if(it!=null){
-                when(it.status){
-                    Status.LOADING->{
+        viewModel.ngApprovalResponse.observe(viewLifecycleOwner) {
+            if (it != null) {
+                when (it.status) {
+                    Status.LOADING -> {
                         setDialog(true)
                     }
-                    Status.SUCCESS->{
+
+                    Status.SUCCESS -> {
                         setDialog(false)
-                        if(!it.data!!.error!!){
-                            val customerInfo= it.data.customerInfo!!
+                        if (!it.data!!.error!!) {
+                            val customerInfo = it.data.customerInfo!!
                             val installationDetails = it.data.customerInfo.installationDetails
-                            if(customerInfo.lmcExtensionWithMeter!!.lmcMeterStatus!!.contains("with meter",true)){
-                                 hasMeter = true
+                            if (customerInfo.lmcExtensionWithMeter!!.lmcMeterStatus!!.contains(
+                                    "with meter",
+                                    true
+                                )
+                            ) {
+                                hasMeter = true
                             }
-                            if(customerInfo.lmcExtensionWithMeter.lmcModification!!.contains("yes",true)){
+                            if (customerInfo.lmcExtensionWithMeter.lmcModification!!.contains(
+                                    "yes",
+                                    true
+                                )
+                            ) {
                                 isLmcModified = true
                             }
                             val lmcWithMeter = customerInfo.lmcExtensionWithMeter
                             val lmcWithoutMeter = customerInfo.lmcExtensionWithoutMeter
-                            if(isLmcModified){
-                                if(hasMeter){
+                            if (isLmcModified) {
+                                if (hasMeter) {
                                     binding.apply {
                                         cvWoMeter.visibility = View.GONE
                                         tvMeterCompany.visibility = View.GONE
@@ -707,53 +837,59 @@ class RfcExtensionFragment : Fragment() {
                                     binding.apply {
                                         lmcWithMeter.apply {
                                             lmcGiClamp = giClamp
-                                            etGiClamp.setText(giClamp)
+                                            setViewTextValue(etGiClamp, giClamp)
                                             lmcMlcClamp = mlcClamp
-                                            etMlcClamp.setText(mlcClamp)
+                                            setViewTextValue(etMlcClamp, mlcClamp)
                                             lmcGiMfElbow = giMfElbow
-                                            etGiMf.setText(giMfElbow)
+                                            setViewTextValue(etGiMf, giMfElbow)
                                             lmcGiFfElbow = giFfElbow
-                                            etGiFf.setText(giFfElbow)
+                                            setViewTextValue(etGiFf, giFfElbow)
                                             lmcGi2 = gi2Nipple
-                                            etGi2.setText(gi2Nipple)
+                                            setViewTextValue(etGi2, gi2Nipple)
                                             lmcGi3 = gi3Nipple
-                                            etGi3.setText(gi3Nipple)
+                                            setViewTextValue(etGi3, gi3Nipple)
                                             lmcGi4 = gi4Nipple
-                                            etGi4.setText(gi4Nipple)
+                                            setViewTextValue(etGi4, gi4Nipple)
                                             lmcGi6 = gi6Nipple
-                                            etGi6.setText(gi6Nipple)
+                                            setViewTextValue(etGi6, gi6Nipple)
                                             lmcGi8 = gi8Nipple
-                                            etGi8.setText(gi8Nipple)
+                                            setViewTextValue(etGi8, gi8Nipple)
                                             lmcGiTee = giTee
-                                            etGiTee.setText(giTee)
+                                            setViewTextValue(etGiTee, giTee)
                                             lmcMlcTee = mlcTee
-                                            etMlcTee.setText(mlcTee)
+                                            setViewTextValue(etMlcTee, mlcTee)
                                             lmcGiSocket = giSocket
-                                            etGiSocket.setText(giSocket)
+                                            setViewTextValue(etGiSocket, giSocket)
                                             lmcMaleUnion = mlcMaleUnion
-                                            etMlcMale.setText(mlcMaleUnion)
+                                            setViewTextValue(etMlcMale, mlcMaleUnion)
                                             lmcFemaleUnion = mlcFemaleUnion
-                                            etMlcFemale.setText(mlcFemaleUnion)
-//                                        lmcMeterBracket = meterBracket
-//                                        lmcMeterSticker = meterSticker
+                                            setViewTextValue(etMlcFemale, mlcFemaleUnion)
+
                                             lmcMeterNo = meterNo
-                                            etMeterNo.setText(meterNo)
+                                            setViewTextValue(etMeterNo, meterNo)
+
                                             lmcRegulatorNo = regulatorNo
-                                            etRegulatorNo.setText(regulatorNo)
+                                            setViewTextValue(etRegulatorNo, regulatorNo)
+
                                             lmcPlateMarker = plateMarker
-                                            etPlateMarker.setText(plateMarker)
+                                            setViewTextValue(etPlateMarker, plateMarker)
+
                                             lmcAdaptorGI = adaptorGi
-                                            etAdaptorGi.setText(adaptorGi)
+                                            setViewTextValue(etAdaptorGi, adaptorGi)
+
                                             lmcAdaptorReg = adaptorReg
-                                            etAdaptorReg.setText(adaptorReg)
+                                            setViewTextValue(etAdaptorReg, adaptorReg)
+
                                             lmcAdaptorMeter = adaptorMeter
-                                            etAdaptorMeter.setText(adaptorMeter)
+                                            setViewTextValue(etAdaptorMeter, adaptorMeter)
+
                                             lmcFemaleMeter = femaleUnion
-                                            etFemaleUnion.setText(femaleUnion)
+                                            setViewTextValue(etFemaleUnion, femaleUnion)
+
                                         }
                                     }
 
-                                }else{
+                                } else {
 
                                     binding.apply {
                                         cvWoMeter.visibility = View.VISIBLE
@@ -770,79 +906,87 @@ class RfcExtensionFragment : Fragment() {
                                     binding.apply {
                                         lmcWithMeter.apply {
                                             lmcGiClamp = giClamp
-                                            etGiClamp.setText(giClamp)
+                                            setViewTextValue(etGiClamp, giClamp)
                                             lmcMlcClamp = mlcClamp
-                                            etMlcClamp.setText(mlcClamp)
+                                            setViewTextValue(etMlcClamp, mlcClamp)
                                             lmcGiMfElbow = giMfElbow
-                                            etGiMf.setText(giMfElbow)
+                                            setViewTextValue(etGiMf, giMfElbow)
                                             lmcGiFfElbow = giFfElbow
-                                            etGiFf.setText(giFfElbow)
+                                            setViewTextValue(etGiFf, giFfElbow)
                                             lmcGi2 = gi2Nipple
-                                            etGi2.setText(gi2Nipple)
+                                            setViewTextValue(etGi2, gi2Nipple)
                                             lmcGi3 = gi3Nipple
-                                            etGi3.setText(gi3Nipple)
+                                            setViewTextValue(etGi3, gi3Nipple)
                                             lmcGi4 = gi4Nipple
-                                            etGi4.setText(gi4Nipple)
+                                            setViewTextValue(etGi4, gi4Nipple)
                                             lmcGi6 = gi6Nipple
-                                            etGi6.setText(gi6Nipple)
+                                            setViewTextValue(etGi6, gi6Nipple)
                                             lmcGi8 = gi8Nipple
-                                            etGi8.setText(gi8Nipple)
+                                            setViewTextValue(etGi8, gi8Nipple)
                                             lmcGiTee = giTee
-                                            etGiTee.setText(giTee)
+                                            setViewTextValue(etGiTee, giTee)
                                             lmcMlcTee = mlcTee
-                                            etMlcTee.setText(mlcTee)
+                                            setViewTextValue(etMlcTee, mlcTee)
                                             lmcGiSocket = giSocket
-                                            etGiSocket.setText(giSocket)
+                                            setViewTextValue(etGiSocket, giSocket)
                                             lmcMaleUnion = mlcMaleUnion
-                                            etMlcMale.setText(mlcMaleUnion)
+                                            setViewTextValue(etMlcMale, mlcMaleUnion)
                                             lmcFemaleUnion = mlcFemaleUnion
-                                            etMlcFemale.setText(mlcFemaleUnion)
+                                            setViewTextValue(etMlcFemale, mlcFemaleUnion)
+
                                             lmcMeterNo = meterNo
-                                            etMeterNo.setText(meterNo)
+                                            setViewTextValue(etMeterNo, meterNo)
+
                                             lmcRegulatorNo = regulatorNo
-                                            etRegulatorNo.setText(regulatorNo)
+                                            setViewTextValue(etRegulatorNo, regulatorNo)
+
                                             lmcPlateMarker = plateMarker
-                                            etPlateMarker.setText(plateMarker)
+                                            setViewTextValue(etPlateMarker, plateMarker)
+
                                             lmcAdaptorGI = adaptorGi
-                                            etAdaptorGi.setText(adaptorGi)
+                                            setViewTextValue(etAdaptorGi, adaptorGi)
+
                                             lmcAdaptorReg = adaptorReg
-                                            etAdaptorReg.setText(adaptorReg)
+                                            setViewTextValue(etAdaptorReg, adaptorReg)
+
                                             lmcAdaptorMeter = adaptorMeter
-                                            etAdaptorMeter.setText(adaptorMeter)
+                                            setViewTextValue(etAdaptorMeter, adaptorMeter)
+
                                             lmcFemaleMeter = femaleUnion
-                                            etFemaleUnion.setText(femaleUnion)
+                                            setViewTextValue(etFemaleUnion, femaleUnion)
 
                                         }
 
                                         lmcWithoutMeter?.apply {
 
                                             lmcGiLength = woGiLength
-                                            etGiInstallation.setText(woGiLength)
+                                            setViewTextValue(etGiInstallation, woGiLength)
                                             lmcMlcLength = woMlcLength
-                                            etCuInstallation.setText(woMlcLength)
+                                            setViewTextValue(etCuInstallation, woMlcLength)
                                             lmcExtraGiLength = woExtraGi
-                                            etExtraGlLength.setText(woExtraGi)
+                                            setViewTextValue(etExtraGlLength, woExtraGi)
                                             lmcExtraMlcLength = woExtraMlc
-                                            etExtraMlcLength.setText(woExtraMlc)
+                                            setViewTextValue(etExtraMlcLength, woExtraMlc)
                                             lmcIvQty = woIvNo
-                                            etIvNo.setText(woIvNo)
+                                            setViewTextValue(etIvNo, woIvNo)
                                             lmcAvQty = woAvNo
-                                            etAvNo.setText(woAvNo)
+                                            setViewTextValue(etAvNo, woAvNo)
                                             lmcMeterCompany = woMeterCompany
-                                            etMeterCompany.setText(woMeterCompany)
+                                            setViewTextValue(etMeterCompany, woMeterCompany)
                                             lmcInitialReading = woInitialReading
-                                            etInitialMeter.setText(woInitialReading)
+                                            setViewTextValue(etInitialMeter, woInitialReading)
                                             lmcMeterBracket = woMeterBracket
-                                            etMeterBracket.setText(woMeterBracket)
+                                            setViewTextValue(etMeterBracket, woMeterBracket)
                                             lmcMeterSticker = woMeterSticker
-                                            etMeterSticker.setText(woMeterSticker)
+                                            setViewTextValue(etMeterSticker, woMeterSticker)
+
 
                                         }
 
                                     }
 
                                 }
-                            }else{
+                            } else {
 
                                 binding.apply {
                                     cvWoMeter.visibility = View.GONE
@@ -880,28 +1024,29 @@ class RfcExtensionFragment : Fragment() {
 
                                 lmcWithoutMeter?.apply {
                                     lmcMeterCompany = woMeterCompany
-                                    binding.etMeterCompany.setText(woMeterCompany)
+                                    setViewTextValue(binding.etMeterCompany, woMeterCompany)
                                     lmcInitialReading = woInitialReading
-                                    binding.etInitialMeter.setText(woInitialReading)
+                                    setViewTextValue(binding.etInitialMeter, woInitialReading)
                                 }
+
                                 binding.apply {
                                     lmcWithoutMeter?.apply {
                                         lmcMeterBracket = woMeterBracket
-                                        etMeterBracket.setText(woMeterBracket)
+                                        setViewTextValue(etMeterBracket, woMeterBracket)
                                         lmcMeterSticker = woMeterSticker
-                                        etMeterSticker.setText(woMeterSticker)
+                                        setViewTextValue(etMeterSticker, woMeterSticker)
                                         lmcMeterNo = woMeterNo
-                                        etMeterNo.setText(woMeterNo)
+                                        setViewTextValue(etMeterNo, woMeterNo)
                                         lmcRegulatorNo = woRegulatorNo
-                                        etRegulatorNo.setText(woRegulatorNo)
+                                        setViewTextValue(etRegulatorNo, woRegulatorNo)
                                         lmcAdaptorGI = woAdaptorGi
-                                        etAdaptorGi.setText(woAdaptorGi)
+                                        setViewTextValue(etAdaptorGi, woAdaptorGi)
                                         lmcAdaptorReg = woAdaptorReg
-                                        etAdaptorReg.setText(woAdaptorReg)
+                                        setViewTextValue(etAdaptorReg, woAdaptorReg)
                                         lmcAdaptorMeter = woAdaptorMeter
-                                        etAdaptorMeter.setText(woAdaptorMeter)
+                                        setViewTextValue(etAdaptorMeter, woAdaptorMeter)
                                         lmcFemaleMeter = woFemaleMeter
-                                        etFemaleUnion.setText(woFemaleMeter)
+                                        setViewTextValue(etFemaleUnion, woFemaleMeter)
                                     }
                                 }
 
@@ -909,7 +1054,8 @@ class RfcExtensionFragment : Fragment() {
 
                         }
                     }
-                    Status.ERROR->{
+
+                    Status.ERROR -> {
                         setDialog(false)
                     }
                 }
@@ -924,6 +1070,7 @@ class RfcExtensionFragment : Fragment() {
                     Status.LOADING -> {
                         setDialog(true)
                     }
+
                     Status.SUCCESS -> {
                         setDialog(false)
                         if (!it.data!!.error) {
@@ -959,6 +1106,7 @@ class RfcExtensionFragment : Fragment() {
                                 .show()
                         }
                     }
+
                     Status.ERROR -> {
                         setDialog(false)
                         Toast.makeText(requireContext(), "Error fetching data", Toast.LENGTH_SHORT)
@@ -970,9 +1118,55 @@ class RfcExtensionFragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (qrValue != null) {
+            lmcMeterNo = qrValue
+            binding.etMeterNo.text = qrValue
+        }
+
+        setObjectValueToFields()
+    }
 
     private fun setDialog(show: Boolean) {
-        if (show) dialog!!.show() else dialog!!.dismiss()
+        if (show) dialog?.show() else dialog?.dismiss()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        qrValue = null
+        qrError = null
+        lmcGiClamp = null
+        lmcMlcClamp = null
+        lmcGiMfElbow = null
+        lmcGiFfElbow = null
+        lmcGi2 = null
+        lmcGi3 = null
+        lmcGi4 = null
+        lmcGi6 = null
+        lmcGi8 = null
+        lmcGiTee = null
+        lmcMlcTee = null
+        lmcGiSocket = null
+        lmcMaleUnion = null
+        lmcFemaleUnion = null
+        lmcMeterBracket = null
+        lmcMeterSticker = null
+        lmcPlateMarker = null
+        lmcAdaptorGI = null
+        lmcAdaptorReg = null
+        lmcAdaptorMeter = null
+        lmcFemaleMeter = null
+        lmcMeterNo = null
+        lmcRegulatorNo = null
+        lmcGiLength = null
+        lmcMlcLength = null
+        lmcAvQty = null
+        lmcIvQty = null
+        lmcExtraGiLength = null
+        lmcExtraMlcLength = null
+        lmcMeterCompany = null
+        lmcInitialReading = null
     }
 
 }

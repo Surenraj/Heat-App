@@ -473,7 +473,12 @@
             app:destination="@id/lmcFinalFragment" />
         <action
             android:id="@+id/action_lmcConnectionFragment_to_scannerFragment"
-            app:destination="@id/scannerFragment" />
+            app:destination="@id/scannerFragment">
+            <argument
+                android:name="fragmentName"
+                app:argType="string"
+                app:nullable="true"/>
+        </action>
         <argument
             android:name="lmcStatusType"
             app:argType="string"
@@ -1581,6 +1586,16 @@
         android:id="@+id/rfcExtensionFragment"
         android:name="com.thinkgas.heatapp.ui.ng.RfcExtensionFragment"
         android:label="RfcExtensionFragment" >
+
+        <action
+            android:id="@+id/action_rfcHomeFragment_to_scannerFragment"
+            app:destination="@id/scannerFragment">
+            <argument
+                android:name="fragmentName"
+                app:argType="string"
+                app:nullable="true" />
+        </action>
+
         <argument
             android:name="acknowledgeId"
             app:argType="string"

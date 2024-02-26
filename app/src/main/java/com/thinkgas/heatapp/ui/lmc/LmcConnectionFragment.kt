@@ -1359,14 +1359,14 @@ class LmcConnectionFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                val directions = LmcConnectionFragmentDirections.actionLmcConnectionFragmentToScannerFragment()
+                val directions = LmcConnectionFragmentDirections.actionLmcConnectionFragmentToScannerFragment(fragmentName = "LmcConnectionFragment")
                 findNavController().navigate(directions)
             }
 
         }
 
     private fun setDialog(show: Boolean) {
-        if (show) dialog!!.show() else dialog!!.dismiss()
+        if (show) dialog?.show() else dialog?.dismiss()
     }
 
 

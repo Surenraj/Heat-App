@@ -17,7 +17,7 @@ class EnableLocationActivity : AppCompatActivity() {
     private lateinit var enableBtn: Button
     override fun onResume() {
         super.onResume()
-        if (isLocationEnabled()) {
+        if (LocationMonitorService.isLocationEnabled(this)) {
             LocationMonitorService.startService(this)
             finish()
         } else {
@@ -32,7 +32,7 @@ class EnableLocationActivity : AppCompatActivity() {
         enableBtn = findViewById(R.id.btn_enable)
 
         enableBtn.setOnClickListener {
-            if (isLocationEnabled()) {
+            if (LocationMonitorService.isLocationEnabled(this)) {
                 NetworkMonitorService.startService(this)
                 finish()
             } else {
@@ -44,12 +44,5 @@ class EnableLocationActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         LocationMonitorService.startService(this)
-    }
-
-    private fun isLocationEnabled(): Boolean {
-        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
-            LocationManager.NETWORK_PROVIDER
-        )
     }
 }

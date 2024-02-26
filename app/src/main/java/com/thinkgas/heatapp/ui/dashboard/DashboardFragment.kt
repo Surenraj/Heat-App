@@ -39,6 +39,9 @@ import com.thinkgas.heatapp.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.TimeUnit
 import com.thinkgas.heatapp.R
+import com.thinkgas.heatapp.service.LocationMonitorService
+import com.thinkgas.heatapp.service.NetworkMonitorService
+import com.thinkgas.heatapp.supportActivities.EnableLocationActivity
 import `in`.galaxyofandroid.spinerdialog.BuildConfig
 import java.util.*
 
@@ -126,7 +129,12 @@ class DashboardFragment : Fragment() {
                 if (granted) {
                     getCurrentLocation()
                 } else {
-                    requestPermissions(Manifest.permission.ACCESS_FINE_LOCATION)
+                    if (!LocationMonitorService.isLocationEnabled(requireContext())) {
+//                        val intent = Intent(context, EnableLocationActivity::class.java)
+//                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//                        startActivity(intent)
+                        requestPermissions(Manifest.permission.ACCESS_FINE_LOCATION)
+                    }
                 }
             }
 
@@ -202,8 +210,10 @@ class DashboardFragment : Fragment() {
         locationBuilder.setView(R.layout.location_progress)
         locationDialog = locationBuilder.create()
 
-        if (AppCache.latitude!!.equals(0.0) && AppCache.longitude!!.equals(0.0)) {
-            locationDialog?.show()
+        if (AppCache.latitude?.equals(0.0) == true && AppCache.longitude?.equals(0.0) == true) {
+            if (!LocationMonitorService.isLocationEnabled(requireContext())) {
+                locationDialog?.show()
+            }
         }
         mLocationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
@@ -304,7 +314,7 @@ class DashboardFragment : Fragment() {
         if (!displayRational) {
             Toast.makeText(
                 requireActivity(),
-                "Location Permisssion is required",
+                "Location Permission is required",
                 Toast.LENGTH_LONG
             ).show()
 
@@ -408,13 +418,13 @@ class DashboardFragment : Fragment() {
     }
 
     private fun setDialog(show: Boolean) {
-        if (show) dialog!!.show() else dialog!!.dismiss()
+        if (show) dialog?.show() else dialog?.dismiss()
     }
 
 
     override fun onDestroy() {
         super.onDestroy()
-        dialog!!.dismiss()
+        dialog?.dismiss()
         locationDialog?.dismiss()
 
     }
