@@ -719,15 +719,17 @@
                     android:id="@+id/lv_et_meter_no"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:weightSum="10"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/et_regulator_no"
-                    app:layout_constraintTop_toBottomOf="@id/tv_meter_no">
+                    app:layout_constraintTop_toBottomOf="@id/tv_meter_no"
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <TextView
                         android:id="@+id/et_meter_no"
                         android:background="@drawable/et_form_bg"
-                        android:layout_width="100dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="8"
                         android:layout_marginTop="10dp"
                         android:textColorHint="#80545454"
                         android:fontFamily="@font/barlow_regular"
@@ -737,9 +739,10 @@
 
                     <ImageView
                         android:id="@+id/iv_qr"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_13sdp"
+                        android:layout_weight="2"
+                        android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:src="@drawable/barcode_new" />
                 </LinearLayout>
@@ -748,33 +751,32 @@
                     android:id="@+id/tv_regulator_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:textColor="#545454"
+                    android:layout_marginTop="8dp"
                     android:fontFamily="@font/barlow_regular"
                     android:text="@string/regulator_no"
+                    android:textColor="#545454"
                     android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="@id/et_regulator_no"
-                    app:layout_constraintTop_toBottomOf="@id/et_mlc_female" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lv_et_meter_no" />
 
                 <EditText
+                    android:id="@+id/et_regulator_no"
                     android:background="@drawable/et_form_bg"
-                    app:layout_constraintStart_toEndOf="@id/lv_et_meter_no"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_regulator_no"
                     android:hint="Regulator No."
                     android:textSize="16sp"
                     android:padding="15dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="8dp"
                     android:inputType="text"
-                    android:id="@+id/et_regulator_no"
                     android:textColor="#545454"
                     android:textColorHint="#80545454"
                     android:maxLength="15"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_regulator_no"/>
 
                 <TextView
                     android:id="@+id/tv_meter_company"
@@ -786,7 +788,7 @@
                     android:text="@string/meter_company"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/lv_et_meter_no" />
+                    app:layout_constraintTop_toBottomOf="@id/et_regulator_no" />
 
                 <TextView
                     android:background="@drawable/bg_spinner"
@@ -817,8 +819,8 @@
                     android:fontFamily="@font/barlow_regular"
                     android:text="@string/initial_meter_reading"
                     android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="@id/et_initial_meter"
-                    app:layout_constraintTop_toBottomOf="@id/lv_et_meter_no" />
+                    app:layout_constraintStart_toEndOf="@id/et_meter_company"
+                    app:layout_constraintTop_toBottomOf="@id/et_regulator_no" />
 
                 <EditText
                     android:background="@drawable/et_form_bg"
