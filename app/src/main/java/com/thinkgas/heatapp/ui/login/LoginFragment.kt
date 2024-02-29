@@ -95,10 +95,16 @@ class LoginFragment : Fragment() {
                 if (btnLogin.text.contains("login", true))
                 {
                     phoneNumber = etMobile.text.toString()
-                    val password = ""
+                    val password = etPassword.text.toString()
                     if (validateMobileNumber(phoneNumber.toString()) && phoneNumber != null) {
+                        if (password.isNullOrEmpty()) {
+                            etPassword.error = "Enter Password"
+                            etPassword.requestFocus()
+                            return@setOnClickListener
+                        }
                         val params = HashMap<String, String>()
                         params["mobile_no"] = phoneNumber.toString()
+                        params["password"] = password
                         val deviceId: String = Settings.Secure.getString(context?.contentResolver, Settings.Secure.ANDROID_ID)
                         params["device_id"] = deviceId
                         loginViewModel.getOtpValue(params)
