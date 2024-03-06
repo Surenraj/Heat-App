@@ -91,7 +91,7 @@
         android:paddingStart="20dp"
         android:maxLines="1"
         android:maxLength="20"
-        android:visibility="gone"
+        android:visibility="visible"
         android:paddingEnd="20dp"
         app:layout_constraintEnd_toEndOf="@id/et_mobile"
         app:layout_constraintStart_toStartOf="@id/et_mobile"

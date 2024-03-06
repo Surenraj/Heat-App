@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -62,24 +63,34 @@ class LoginFragment : Fragment() {
 
         binding.apply {
             etMobile.transformationMethod = HideReturnsTransformationMethod.getInstance()
-            etPassword.setOnTouchListener(object : View.OnTouchListener{
+            etPassword.setOnTouchListener(object : View.OnTouchListener {
                 override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
-                    if(p1?.action == MotionEvent.ACTION_UP) {
-                        if(p1?.rawX!! >= etPassword.right - etPassword.compoundDrawables[2].bounds.width() - etPassword.paddingRight) {
+                    if (p1?.action == MotionEvent.ACTION_UP) {
+                        if (p1?.rawX!! >= etPassword.right - etPassword.compoundDrawables[2].bounds.width() - etPassword.paddingRight) {
                             // your action for drawable click event
                             passwordFlag = !passwordFlag
-                            if(passwordFlag) {
+                            if (passwordFlag) {
 //                                etPassword.inputType = InputType.TYPE_CLASS_TEXT
 //                                etPassword.setText(etPassword.text)
-                                etPassword.setCompoundDrawablesWithIntrinsicBounds(null,null,ContextCompat.getDrawable(requireContext(),
-                                    R.drawable.ic__hide_eye),null)
-                                etPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
-                            }else{
+                                etPassword.setCompoundDrawablesWithIntrinsicBounds(
+                                    null, null, ContextCompat.getDrawable(
+                                        requireContext(),
+                                        R.drawable.ic__hide_eye
+                                    ), null
+                                )
+                                etPassword.transformationMethod =
+                                    HideReturnsTransformationMethod.getInstance()
+                            } else {
 //                                etPassword.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
 //                                etPassword.setText(etPassword.text)
-                                etPassword.setCompoundDrawablesWithIntrinsicBounds(null,null,ContextCompat.getDrawable(requireContext(),
-                                    R.drawable.ic_baseline_remove_red_eye_24),null)
-                                etPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                                etPassword.setCompoundDrawablesWithIntrinsicBounds(
+                                    null, null, ContextCompat.getDrawable(
+                                        requireContext(),
+                                        R.drawable.ic_baseline_remove_red_eye_24
+                                    ), null
+                                )
+                                etPassword.transformationMethod =
+                                    PasswordTransformationMethod.getInstance()
 
                             }
                             etPassword.setSelection(etPassword.text.length)
@@ -91,33 +102,77 @@ class LoginFragment : Fragment() {
 
             })
 
+            /** Login with mobile number and otp flow */
+//            btnLogin.setOnClickListener {
+//                if (btnLogin.text.contains("login", true))
+//                {
+//                    phoneNumber = etMobile.text.toString()
+//                    val password = ""
+//                    if (validateMobileNumber(phoneNumber.toString()) && phoneNumber != null) {
+//                        val params = HashMap<String, String>()
+//                        params["mobile_no"] = phoneNumber.toString()
+//                        val deviceId: String = Settings.Secure.getString(context?.contentResolver, Settings.Secure.ANDROID_ID)
+//                        params["device_id"] = deviceId
+//                        loginViewModel.getOtpValue(params)
+//                    } else {
+//                        etMobile.error = "Invalid mobile number"
+//                        etMobile.requestFocus()
+//                    }
+//                } else {
+//                    if (otp != 0 && phoneNumber != null) {
+//                        if(etOtp.text.isBlank() || etOtp.text.length < 4){
+//                            etOtp.error = "Enter Valid OTP"
+//                            etOtp.requestFocus()
+//                            return@setOnClickListener
+//                        }
+//                        val params = HashMap<String, String>()
+//                        params["mobile"] = phoneNumber!!
+//                        params["otp"] = etOtp.text.toString()
+//                        loginViewModel.validateOtpValue(params)
+//                    }
+//                }
+//            }
+//        }
+
+
+            /** Login flow with mobile number, password and otp */
             btnLogin.setOnClickListener {
-                if (btnLogin.text.contains("login", true))
-                {
+                if (btnLogin.text.contains("login", true)) {
                     phoneNumber = etMobile.text.toString()
-                    val password = ""
+                    val password = etPassword.text.toString()
+
                     if (validateMobileNumber(phoneNumber.toString()) && phoneNumber != null) {
+                        if (password.isNullOrEmpty()) {
+                            etPassword.error = "Please enter password"
+                            etPassword.requestFocus()
+                            return@setOnClickListener
+                        }
+
                         val params = HashMap<String, String>()
                         params["mobile_no"] = phoneNumber.toString()
-                        val deviceId: String = Settings.Secure.getString(context?.contentResolver, Settings.Secure.ANDROID_ID)
+                        val deviceId: String = Settings.Secure.getString(
+                            context?.contentResolver,
+                            Settings.Secure.ANDROID_ID
+                        )
                         params["device_id"] = deviceId
+                        params["password"] = password
                         loginViewModel.getOtpValue(params)
                     } else {
                         etMobile.error = "Invalid mobile number"
                         etMobile.requestFocus()
                     }
                 } else {
-                    if (otp != 0 && phoneNumber != null) {
-                        if(etOtp.text.isBlank() || etOtp.text.length < 4){
-                            etOtp.error = "Enter Valid OTP"
-                            etOtp.requestFocus()
-                            return@setOnClickListener
-                        }
-                        val params = HashMap<String, String>()
-                        params["mobile"] = phoneNumber!!
-                        params["otp"] = etOtp.text.toString()
-                        loginViewModel.validateOtpValue(params)
-                    }
+//                    if (otp != 0 && phoneNumber != null) {   ---> /** Login with mobile number and otp flow */
+//                        if (etOtp.text.isBlank() || etOtp.text.length < 4) {
+//                            etOtp.error = "Enter Valid OTP"
+//                            etOtp.requestFocus()
+//                            return@setOnClickListener
+//                        }
+//                        val params = HashMap<String, String>()
+//                        params["mobile"] = phoneNumber!!
+//                        params["otp"] = etOtp.text.toString()
+//                        loginViewModel.validateOtpValue(params)
+//                    }
                 }
             }
         }
@@ -134,13 +189,24 @@ class LoginFragment : Fragment() {
                             if (!it.data.error) {
                                 otp = data.otp
                                 binding.apply {
-                                    etMobile.visibility = View.GONE
-//                                etPassword.visibility = View.GONE
-                                    etOtp.visibility = View.VISIBLE
-                                    btnLogin.text = "Verify OTP"
+                                    /** Login with mobile number and otp flow */
+//                                    etMobile.visibility = View.GONE
+//                                    etPassword.visibility = View.GONE
+//                                    etOtp.visibility = View.VISIBLE
+//                                    btnLogin.text = "Verify OTP"
+
+                                    /** Login flow with mobile number, password and otp */
+                                    etOtp.visibility = View.GONE
+
+                                    val params = HashMap<String, String>()
+                                    params["mobile"] = etMobile.text.toString()
+                                    params["otp"] = otp.toString()
+                                    loginViewModel.validateOtpValue(params)
+
+                                    /***************************************/
                                 }
-                                Toast.makeText(requireContext(), data.message, Toast.LENGTH_SHORT)
-                                    .show()
+//                                Toast.makeText(requireContext(), data.message, Toast.LENGTH_SHORT)
+//                                    .show()  --> /** Login with mobile number and otp flow */
                             } else {
                                 Toast.makeText(
                                     requireContext(),
@@ -152,6 +218,7 @@ class LoginFragment : Fragment() {
                             setDialog(false)
                         }
                     }
+
                     Status.ERROR -> {
                         setDialog(false)
                         Toast.makeText(requireContext(), "Error Signing in..", Toast.LENGTH_SHORT)
@@ -167,13 +234,17 @@ class LoginFragment : Fragment() {
                     Status.LOADING -> {
                         setDialog(true)
                     }
+
                     Status.SUCCESS -> {
                         if (!it.data!!.error) {
-                            Toast.makeText(requireContext(), "Login Successful", Toast.LENGTH_SHORT).show()
-                            val editor: SharedPreferences.Editor = activity?.getSharedPreferences("TPI_PREFS", MODE_PRIVATE)!!.edit()
+                            Toast.makeText(requireContext(), "Login Successful", Toast.LENGTH_SHORT)
+                                .show()
+                            val editor: SharedPreferences.Editor =
+                                activity?.getSharedPreferences("TPI_PREFS", MODE_PRIVATE)!!.edit()
                             editor.putString("session_id", it.data.sessionId)
                             editor.apply()
-                            val directions = LoginFragmentDirections.actionLoginFragmentToDashboardFragment(it.data.sessionId)
+                            val directions =
+                                LoginFragmentDirections.actionLoginFragmentToDashboardFragment(it.data.sessionId)
                             findNavController().navigate(directions)
                         } else {
                             Toast.makeText(
@@ -184,6 +255,7 @@ class LoginFragment : Fragment() {
                         }
                         setDialog(false)
                     }
+
                     Status.ERROR -> {
                         setDialog(false)
                     }
