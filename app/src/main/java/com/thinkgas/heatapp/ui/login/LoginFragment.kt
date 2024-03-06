@@ -120,7 +120,7 @@ class LoginFragment : Fragment() {
                             return@setOnClickListener
                         }
                         val params = HashMap<String, String>()
-                        params["mobile"] = phoneNumber!!
+                        params["mobile"] = phoneNumber.toString()
                         params["otp"] = etOtp.text.toString()
                         loginViewModel.validateOtpValue(params)
                     }
