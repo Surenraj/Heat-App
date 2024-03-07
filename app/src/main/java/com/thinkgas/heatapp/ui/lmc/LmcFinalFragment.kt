@@ -301,8 +301,9 @@ class LmcFinalFragment : Fragment() {
 
             if(AppCache.isTpi){
                 btnSubmit.visibility = View.GONE
-//                btnApprove.visibility = View.VISIBLE
-//                btnDecline.visibility = View.VISIBLE
+                btnApprove.visibility = View.VISIBLE
+                btnDecline.visibility = View.VISIBLE
+
                 signature.visibility = View.GONE
                 btnSignature.visibility = View.GONE
                 btnClear.visibility = View.GONE
