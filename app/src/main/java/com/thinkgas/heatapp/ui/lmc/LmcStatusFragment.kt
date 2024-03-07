@@ -73,7 +73,6 @@ class LmcStatusFragment : Fragment() {
     private var dialog: Dialog? = null
 
 
-
     private lateinit var cameraActions: ActivityResultLauncher<Intent>
     private var photoURI: Uri? = null
 
@@ -84,14 +83,14 @@ class LmcStatusFragment : Fragment() {
 //    private var tpiStatusMap: MutableMap<String, Int> = mutableMapOf()
 //    private var tpiSubStatusMap: MutableMap<String, Int> = mutableMapOf()
 
-    companion object{
+    companion object {
         var fsStatus: String? = null
         var fsStatusCode: String? = null
         var fsSubStatus: String? = null
         var fsSubStatusCode: String? = null
         var lmcExecution: String? = null
-        var dateTime:String? = null
-        var description:String? = null
+        var dateTime: String? = null
+        var description: String? = null
         var attachmentFlag = false
     }
 
@@ -130,44 +129,49 @@ class LmcStatusFragment : Fragment() {
 
         binding.apply {
 
-            when(args.status){
-                "pending"->{
-                    if(AppCache.isTpi){
+            when (args.status) {
+                "pending" -> {
+                    if (AppCache.isTpi) {
                         lmcStatus.text = "Supervisor LMC Claimed"
-                    }else {
+                    } else {
                         lmcStatus.text = "LMC Pending"
                     }
                 }
-                "hold"->{
-                    if(AppCache.isTpi){
+
+                "hold" -> {
+                    if (AppCache.isTpi) {
                         lmcStatus.text = "Supervisor LMC Hold"
-                    }else {
+                    } else {
                         lmcStatus.text = "LMC Hold"
                     }
                 }
-                "done"->{
-                    if(AppCache.isTpi){
+
+                "done" -> {
+                    if (AppCache.isTpi) {
                         lmcStatus.text = "LMC Approval Pending"
-                    }else {
+                    } else {
                         lmcStatus.text = "LMC Done"
                     }
                 }
-                "unclaimed"->{
-                    if(AppCache.isTpi){
+
+                "unclaimed" -> {
+                    if (AppCache.isTpi) {
                         lmcStatus.text = "Supervisor LMC Unclaimed"
-                    }else {
+                    } else {
                         lmcStatus.text = "LMC Unclaimed"
                     }
 
                 }
-                "failed"->{
+
+                "failed" -> {
                     lmcStatus.text = "LMC Failed"
                 }
-                "approved"->{
+
+                "approved" -> {
                     lmcStatus.text = "LMC Approved"
                 }
 
-                "declined"->{
+                "declined" -> {
                     lmcStatus.text = "LMC Declined"
                 }
             }
@@ -178,9 +182,15 @@ class LmcStatusFragment : Fragment() {
                 )
             }
 
-            val downDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_down_24)
+            val downDrawable = ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.ic_baseline_keyboard_arrow_down_24
+            )
             val upDrawable =
-                ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_up_24)
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_keyboard_arrow_up_24
+                )
 
             tvAttachments.setOnClickListener {
                 if (!attachmentFlag) {
@@ -211,13 +221,15 @@ class LmcStatusFragment : Fragment() {
                 logoutBuilder.setMessage("Are you sure want to log out?")
                 logoutBuilder.setCancelable(false)
                 logoutBuilder.setPositiveButton("Yes") { dialogInterface, i ->
-                    val preferences = activity?.getSharedPreferences("TPI_PREFS",
+                    val preferences = activity?.getSharedPreferences(
+                        "TPI_PREFS",
                         Context.MODE_PRIVATE
                     )
                     val editor: SharedPreferences.Editor = preferences!!.edit()
                     editor.clear()
                     editor.apply()
-                    val directions = LmcStatusFragmentDirections.actionLmcStatusFragmentToLoginFragment()
+                    val directions =
+                        LmcStatusFragmentDirections.actionLmcStatusFragmentToLoginFragment()
                     findNavController().navigate(directions)
                 }
                 logoutBuilder.setNegativeButton("No") { dialogInterface, i ->
@@ -231,15 +243,15 @@ class LmcStatusFragment : Fragment() {
             ivBack.setOnClickListener {
                 findNavController().navigateUp()
             }
-            if(fsStatus != null){
+            if (fsStatus != null) {
                 spinnerType.text = fsStatus
             }
 
-            if(fsSubStatus != null){
+            if (fsSubStatus != null) {
                 spinnerStatus.text = fsSubStatus
             }
 
-            if(lmcExecution != null){
+            if (lmcExecution != null) {
                 spinnerLmc.text = lmcExecution
             }
 
@@ -306,16 +318,17 @@ class LmcStatusFragment : Fragment() {
                 month = calendar.get(Calendar.MONTH)
                 year = calendar.get(Calendar.YEAR)
                 val datePickerDialog =
-                    DatePickerDialog(requireContext(), dateListener, year, month,day)
+                    DatePickerDialog(requireContext(), dateListener, year, month, day)
                 datePickerDialog.datePicker.minDate = Date().time
                 datePickerDialog.show()
             }
 
-            if(args.status == "hold" || args.status == "done" || args.status == "failed"){
+            if (args.status == "hold" || args.status == "done" || args.status == "failed") {
                 val statusType = tpiStatusMap.entries.find {
                     it.value == (args.statusId?.toInt() ?: 0)
                 }?.key
-                val subStatus = tpiSubStatusMap.entries.find { it.value == args.subStatusId?.toInt() }?.key
+                val subStatus =
+                    tpiSubStatusMap.entries.find { it.value == args.subStatusId?.toInt() }?.key
 
                 binding.apply {
                     fsStatus = args.statusType
@@ -332,8 +345,8 @@ class LmcStatusFragment : Fragment() {
                     cbFollowUp.visibility = View.GONE
                     tvFollowText.visibility = View.GONE
 
-                    isFailed = args.statusType?.contains("failed",true) == true
-                    isHold = args.statusType?.contains("hold",true) == true
+                    isFailed = args.statusType?.contains("failed", true) == true
+                    isHold = args.statusType?.contains("hold", true) == true
 
                     val statusList = mutableListOf<String>()
                     tpiMap[args.statusType]?.forEach {
@@ -355,8 +368,8 @@ class LmcStatusFragment : Fragment() {
 
 
 
-                    if(args.statusType?.contains("failed",true) == true){
-                        btnSubmit.text ="SUBMIT"
+                    if (args.statusType?.contains("failed", true) == true) {
+                        btnSubmit.text = "SUBMIT"
                         isFailed = true
                         spinnerLmc.visibility = View.GONE
                         tvLmcExecution.visibility = View.GONE
@@ -364,8 +377,8 @@ class LmcStatusFragment : Fragment() {
                         etDescription.visibility = View.VISIBLE
                     }
 
-                    if(args.statusType?.contains("hold",true) == true){
-                        btnSubmit.text ="SUBMIT"
+                    if (args.statusType?.contains("hold", true) == true) {
+                        btnSubmit.text = "SUBMIT"
                         isHold = true
                         cbFollowUp.visibility = View.VISIBLE
                         tvFollowText.visibility = View.VISIBLE
@@ -381,18 +394,11 @@ class LmcStatusFragment : Fragment() {
 
             }
 
-            if(AppCache.isTpi){
-                btnSubmit.visibility = View.GONE
-                if(args.status == "failed"){
-                    btnSubmit.visibility = View.GONE
-                    btnApprove.visibility = View.GONE
-                    btnDecline.visibility = View.GONE
-                }
+            if (AppCache.isTpi) {
+                btnSubmit.visibility = View.VISIBLE
+                btnApprove.visibility = View.GONE
+                btnDecline.visibility = View.GONE
 
-                if (args.status == "done") {
-                    btnApprove.visibility = View.VISIBLE
-                    btnDecline.visibility = View.VISIBLE
-                }
                 btnSubmit.text = "Next"
                 spinnerType.isEnabled = false
                 spinnerType.setTextColor(Color.parseColor("#545454"))
@@ -413,7 +419,7 @@ class LmcStatusFragment : Fragment() {
 
             btnSubmit.setOnClickListener {
 
-                if(fsStatus.isNullOrBlank()){
+                if (fsStatus.isNullOrBlank()) {
                     spinnerType.error = "Please Select status"
                     spinnerType.requestFocus()
                     return@setOnClickListener
@@ -421,7 +427,7 @@ class LmcStatusFragment : Fragment() {
 
                 spinnerType.error = null
 
-                if(fsSubStatus.isNullOrBlank()){
+                if (fsSubStatus.isNullOrBlank()) {
                     spinnerStatus.error = "Please Select substatus"
                     spinnerStatus.requestFocus()
                     return@setOnClickListener
@@ -430,7 +436,7 @@ class LmcStatusFragment : Fragment() {
                 spinnerStatus.error = null
 
                 if (isHold && hasFollowUp) {
-                    if(tvDateTime.text.isBlank() || tvDateTime.text.equals("Select Date & Time")){
+                    if (tvDateTime.text.isBlank() || tvDateTime.text.equals("Select Date & Time")) {
                         tvDateTime.error = "Please select date"
                         tvDateTime.requestFocus()
                         return@setOnClickListener
@@ -439,18 +445,22 @@ class LmcStatusFragment : Fragment() {
 
                 tvDateTime.error = null
 
-                if(args.status == "pending") {
+                if (args.status == "pending") {
                     fsStatusCode = tpiStatusMap[fsStatus].toString()
                     fsSubStatusCode = tpiSubStatusMap[fsSubStatus].toString()
                 }
 
-                if(isHold && !AppCache.isTpi){
-                    if(!cbFollowUp.isChecked){
-                        Toast.makeText(requireContext(), "Please provide follow up details.", Toast.LENGTH_SHORT).show()
+                if (isHold && !AppCache.isTpi) {
+                    if (!cbFollowUp.isChecked) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Please provide follow up details.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         return@setOnClickListener
                     }
 
-                    if(tvDateTime.text.isBlank()){
+                    if (tvDateTime.text.isBlank()) {
                         tvDateTime.error = "Please select date"
                         tvDateTime.requestFocus()
                         return@setOnClickListener
@@ -458,7 +468,7 @@ class LmcStatusFragment : Fragment() {
 
                     tvDateTime.error = null
 
-                    if(etDescription.text.isBlank()){
+                    if (etDescription.text.isBlank()) {
                         etDescription.error = "Please enter comments"
                         etDescription.requestFocus()
                         return@setOnClickListener
@@ -466,8 +476,8 @@ class LmcStatusFragment : Fragment() {
 
                     etDescription.error = null
 
-                    val params = HashMap<String,String>()
-                    params["lmc_session_id"]=args.sessionId
+                    val params = HashMap<String, String>()
+                    params["lmc_session_id"] = args.sessionId
                     params["application_number"] = args.appNo
                     params["bp_number"] = args.bpNo
                     params["status_type_id"] = fsStatusCode!!
@@ -477,15 +487,16 @@ class LmcStatusFragment : Fragment() {
                     params["tpi_id"] = args.tpiId
                     params["approval_status"] = "Nil"
                     params["comments"] = "Nil"
-                    params["follow_up_date"] = if (tvDateTime.text.equals("Select Date & Time")) "" else (tvDateTime.text.toString())
+                    params["follow_up_date"] =
+                        if (tvDateTime.text.equals("Select Date & Time")) "" else (tvDateTime.text.toString())
                     params["description"] = etDescription.text.toString()
                     viewModel.submitLmc(params)
                     setupSubmitObserver()
                     return@setOnClickListener
                 }
 
-                if((isFailed) && !AppCache.isTpi){
-                    if(etDescription.text.isBlank()){
+                if ((isFailed) && !AppCache.isTpi) {
+                    if (etDescription.text.isBlank()) {
                         etDescription.error = "Please enter comments"
                         etDescription.requestFocus()
                         return@setOnClickListener
@@ -493,8 +504,8 @@ class LmcStatusFragment : Fragment() {
 
                     etDescription.error = null
 
-                    val params = HashMap<String,String>()
-                    params["lmc_session_id"]=args.sessionId
+                    val params = HashMap<String, String>()
+                    params["lmc_session_id"] = args.sessionId
                     params["application_number"] = args.appNo
                     params["bp_number"] = args.bpNo
                     params["status_type_id"] = fsStatusCode!!
@@ -511,24 +522,24 @@ class LmcStatusFragment : Fragment() {
                     return@setOnClickListener
                 }
 
-                if(args.status == "pending") {
+                if (args.status == "pending") {
                     if (!hasFollowUp) {
 
-                        if(fsStatus.isNullOrBlank()){
+                        if (fsStatus.isNullOrBlank()) {
                             spinnerType.error = "Please Select status"
                             spinnerType.requestFocus()
                             return@setOnClickListener
                         }
                         spinnerType.error = null
 
-                        if(fsSubStatus.isNullOrBlank()){
+                        if (fsSubStatus.isNullOrBlank()) {
                             spinnerStatus.error = "Please Select substatus"
                             spinnerStatus.requestFocus()
                             return@setOnClickListener
                         }
                         spinnerStatus.error = null
 
-                        if(lmcExecution.isNullOrBlank()){
+                        if (lmcExecution.isNullOrBlank()) {
                             spinnerLmc.error = "Please Select LMC Execution"
                             spinnerLmc.requestFocus()
                             return@setOnClickListener
@@ -585,7 +596,8 @@ class LmcStatusFragment : Fragment() {
                         params["status_type"] = fsStatus!!
                         params["sub_status_id"] = fsSubStatusCode!!
                         params["sub_status"] = fsSubStatus!!
-                        params["follow_up_date"] = if (dateTime.toString() == "Select Date & Time") "" else (dateTime.toString())
+                        params["follow_up_date"] =
+                            if (dateTime.toString() == "Select Date & Time") "" else (dateTime.toString())
                         params["description"] = etDescription.text.toString()
                         params["lmc_session_id"] = args.sessionId
 
@@ -598,7 +610,7 @@ class LmcStatusFragment : Fragment() {
 
 
 
-                if(args.status == "hold" || args.status == "done" || args.status == "failed"){
+                if (args.status == "hold" || args.status == "done" || args.status == "failed") {
 
                     val directions =
                         LmcStatusFragmentDirections.actionLmcStatusFragmentToLmcConnectionFragment(
@@ -664,47 +676,51 @@ class LmcStatusFragment : Fragment() {
         getAttachmentList()
 
         viewModel.viewAttachmentResponse.observeForever {
-            if(it.data!=null){
-                when(it.status){
-                    Status.LOADING->{
+            if (it.data != null) {
+                when (it.status) {
+                    Status.LOADING -> {
                         setDialog(true)
                     }
-                    Status.SUCCESS->{
+
+                    Status.SUCCESS -> {
                         setDialog(false)
-                        if(!it.data.error){
-                            when(it.data.type){
-                                Constants.LMC_FOLLOW_UP_FILE->{
+                        if (!it.data.error) {
+                            when (it.data.type) {
+                                Constants.LMC_FOLLOW_UP_FILE -> {
                                     viewAttachmentAdapter = ViewAttachmentAdapter(
                                         requireContext(),
                                         it.data.attachmentList,
-                                        {attachment ->  attachmentItemClicked(attachment) },
-                                        {attachment ->  deleteItemClicked(attachment) }
+                                        { attachment -> attachmentItemClicked(attachment) },
+                                        { attachment -> deleteItemClicked(attachment) }
                                     )
                                     binding.rvAttachment.adapter = viewAttachmentAdapter
                                     viewAttachmentAdapter?.notifyDataSetChanged()
                                     binding.tvAttachments.error = null
-                                    binding.tvAttachments.text = "Attachments (${viewAttachmentAdapter?.itemCount ?: 0})"
+                                    binding.tvAttachments.text =
+                                        "Attachments (${viewAttachmentAdapter?.itemCount ?: 0})"
                                     attachmentCount = viewAttachmentAdapter!!.itemCount
 
                                 }
+
                                 else -> {}
                             }
 
-                            if(viewAttachmentAdapter == null){
+                            if (viewAttachmentAdapter == null) {
                                 binding.tvAttachments.text = "Attachments (0)"
                                 attachmentCount = 0
                             }
 
                         } else {
 
-                            if(viewAttachmentAdapter == null){
+                            if (viewAttachmentAdapter == null) {
                                 binding.tvAttachments.text = "Attachments (0)"
                                 attachmentCount = 0
                             }
 
                         }
                     }
-                    Status.ERROR->{
+
+                    Status.ERROR -> {
                         setDialog(false)
                     }
                 }
@@ -714,29 +730,47 @@ class LmcStatusFragment : Fragment() {
 
         cameraActions =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                if (it.resultCode == Activity.RESULT_OK && photoURI!=null) {
+                if (it.resultCode == Activity.RESULT_OK && photoURI != null) {
 
                     photoURI.let { uri ->
                         val parcelFileDescriptor =
                             requireActivity().contentResolver.openFileDescriptor(uri!!, "r", null)
                                 ?: return@registerForActivityResult
                         val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
-                        val timeStamp: String = SimpleDateFormat("dd-MM-yyy HH:mm:ss").format(Date())
-                        lateinit var file:File
-                        if(it.data != null && it.data?.data != null){
-                            file = File(requireActivity().externalCacheDir,requireActivity().contentResolver.getFileName(it.data?.data!!))
-                            var bitmap =  MediaStore.Images.Media.getBitmap(requireActivity().contentResolver,it.data?.data!!)
-                            val location = AppUtils.getAddress(AppCache.latitude!!,AppCache.longitude!!,requireContext())
+                        val timeStamp: String =
+                            SimpleDateFormat("dd-MM-yyy HH:mm:ss").format(Date())
+                        lateinit var file: File
+                        if (it.data != null && it.data?.data != null) {
+                            file = File(
+                                requireActivity().externalCacheDir,
+                                requireActivity().contentResolver.getFileName(it.data?.data!!)
+                            )
+                            var bitmap = MediaStore.Images.Media.getBitmap(
+                                requireActivity().contentResolver,
+                                it.data?.data!!
+                            )
+                            val location = AppUtils.getAddress(
+                                AppCache.latitude!!,
+                                AppCache.longitude!!,
+                                requireContext()
+                            )
                             val imageText = "$timeStamp \n $location"
                             var result = drawTextToBitmap(bitmap!!, text = imageText)
                             val os: OutputStream = BufferedOutputStream(FileOutputStream(file))
                             result?.compress(Bitmap.CompressFormat.JPEG, 10, os)
 //                            inputStream.copyTo(os)
                             os.close()
-                        }else{
-                            file = File(requireActivity().externalCacheDir,requireActivity().contentResolver.getFileName(uri))
+                        } else {
+                            file = File(
+                                requireActivity().externalCacheDir,
+                                requireActivity().contentResolver.getFileName(uri)
+                            )
                             var bitmap = getBitmap(file.path)
-                            val location = AppUtils.getAddress(AppCache.latitude!!,AppCache.longitude!!,requireContext())
+                            val location = AppUtils.getAddress(
+                                AppCache.latitude!!,
+                                AppCache.longitude!!,
+                                requireContext()
+                            )
                             val imageText = "$timeStamp \n $location"
                             var result = drawTextToBitmap(bitmap!!, text = imageText)
 
@@ -752,10 +786,14 @@ class LmcStatusFragment : Fragment() {
                             val fileList = ArrayList<File>()
                             fileList.add(file)
 
-                            val request=UploadRequestModel(
+                            val request = UploadRequestModel(
                                 bpNumber = args.bpNo, appNo = args.appNo, sessionId = args.sessionId
                             )
-                            viewModel.uploadAttachment(request,file,Constants.LMC_FOLLOW_UP_FILE_TYPE)
+                            viewModel.uploadAttachment(
+                                request,
+                                file,
+                                Constants.LMC_FOLLOW_UP_FILE_TYPE
+                            )
                             setUploadObserver()
                             Toast.makeText(
                                 requireActivity(),
@@ -794,7 +832,7 @@ class LmcStatusFragment : Fragment() {
 
     }
 
-    private fun submitLmcApproval(status:String){
+    private fun submitLmcApproval(status: String) {
         val dialogBinding = CommentDialogBinding.inflate(LayoutInflater.from(requireContext()))
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         builder.setCancelable(true)
@@ -802,10 +840,10 @@ class LmcStatusFragment : Fragment() {
         val alert = builder.create()
         alert.show()
         dialogBinding.apply {
-            if(status.equals("Approved")){
+            if (status.equals("Approved")) {
                 etComment.visibility = View.GONE
                 btnSubmit.text = "Approve"
-            }else{
+            } else {
                 btnSubmit.text = status
             }
 
@@ -813,25 +851,27 @@ class LmcStatusFragment : Fragment() {
                 signature.clear()
             }
             btnSignature.setOnClickListener {
-                if(signature.isEmpty){
-                    Toast.makeText(requireContext(), "Please add signature", Toast.LENGTH_SHORT).show()
+                if (signature.isEmpty) {
+                    Toast.makeText(requireContext(), "Please add signature", Toast.LENGTH_SHORT)
+                        .show()
                     return@setOnClickListener
                 }
-                val bitmap=signature.signatureBitmap
+                val bitmap = signature.signatureBitmap
                 val fileName: String = SimpleDateFormat("DDMMyyyy_HHmmss").format(Date())
                 val file = File(requireActivity().externalCacheDir, "$fileName.jpg")
                 val os: OutputStream = BufferedOutputStream(FileOutputStream(file))
                 bitmap?.compress(Bitmap.CompressFormat.JPEG, 50, os)
                 os.close()
-                val request= UploadRequestModel(
+                val request = UploadRequestModel(
                     bpNumber = args.bpNo, appNo = args.appNo, sessionId = args.sessionId
                 )
-                viewModel.uploadAttachment(request,file, Constants.LMC_TPI_SIGNATURE_FILE)
+                viewModel.uploadAttachment(request, file, Constants.LMC_TPI_SIGNATURE_FILE)
                 setSignatureObserver(dialogBinding)
             }
             btnSubmit.setOnClickListener {
-                if(signature.isEnabled){
-                    Toast.makeText(requireContext(), "Signature is needed", Toast.LENGTH_SHORT).show()
+                if (signature.isEnabled) {
+                    Toast.makeText(requireContext(), "Signature is needed", Toast.LENGTH_SHORT)
+                        .show()
                     return@setOnClickListener
                 }
                 val params = java.util.HashMap<String, String>()
@@ -860,16 +900,20 @@ class LmcStatusFragment : Fragment() {
                     Status.LOADING -> {
                         setDialog(true)
                     }
+
                     Status.SUCCESS -> {
                         setDialog(false)
-                        if(!it.data.error){
-                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT).show()
-                            findNavController().popBackStack(R.id.lmcHomeFragment,false)
-                        }else{
-                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT).show()
+                        if (!it.data.error) {
+                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT)
+                                .show()
+                            findNavController().popBackStack(R.id.lmcHomeFragment, false)
+                        } else {
+                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT)
+                                .show()
                         }
 
                     }
+
                     Status.ERROR -> {
                         setDialog(false)
                     }
@@ -879,16 +923,17 @@ class LmcStatusFragment : Fragment() {
     }
 
 
-    private fun setSignatureObserver(binding:CommentDialogBinding) {
-        viewModel.uploadResponse.observe(viewLifecycleOwner){
-            if(it!=null){
-                when(it.status){
-                    Status.LOADING->{
+    private fun setSignatureObserver(binding: CommentDialogBinding) {
+        viewModel.uploadResponse.observe(viewLifecycleOwner) {
+            if (it != null) {
+                when (it.status) {
+                    Status.LOADING -> {
                         setDialog(true)
                     }
-                    Status.SUCCESS->{
+
+                    Status.SUCCESS -> {
                         setDialog(false)
-                        if(!it.data?.error!!) {
+                        if (!it.data?.error!!) {
                             binding.apply {
                                 signature.isEnabled = false
                                 btnSignature.visibility = View.GONE
@@ -899,7 +944,8 @@ class LmcStatusFragment : Fragment() {
                         Toast.makeText(requireContext(), it.data!!.message, Toast.LENGTH_SHORT)
                             .show()
                     }
-                    Status.ERROR->{
+
+                    Status.ERROR -> {
                         setDialog(false)
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
 
@@ -908,7 +954,6 @@ class LmcStatusFragment : Fragment() {
             }
         }
     }
-
 
 
     private fun attachmentItemClicked(attachment: Attachment) {
@@ -950,7 +995,7 @@ class LmcStatusFragment : Fragment() {
             imageDialog?.dismiss()
         }
 
-        val deleteParams = HashMap<String,String>()
+        val deleteParams = HashMap<String, String>()
         deleteParams["bp_number"] = args.bpNo
         deleteParams["application_number"] = args.appNo
         deleteParams["session_id"] = args.sessionId
@@ -962,28 +1007,38 @@ class LmcStatusFragment : Fragment() {
             builder.setCancelable(false)
             builder.setTitle("Delete Attachment")
             builder.setMessage("Are you sure want to delete the file?")
-            builder.setPositiveButton("Yes",object : DialogInterface.OnClickListener{
+            builder.setPositiveButton("Yes", object : DialogInterface.OnClickListener {
                 override fun onClick(p0: DialogInterface?, p1: Int) {
                     viewModel.deleteAttachment(deleteParams)
-                    viewModel.deleteAttachmentResponse.observe(viewLifecycleOwner){
-                        if(it != null){
+                    viewModel.deleteAttachmentResponse.observe(viewLifecycleOwner) {
+                        if (it != null) {
 
-                            when(it.status){
-                                Status.SUCCESS->{
-                                    if(!it.data!!.error){
+                            when (it.status) {
+                                Status.SUCCESS -> {
+                                    if (!it.data!!.error) {
                                         imageDialog!!.dismiss()
 //                                        binding.rvAttachment.adapter = null
                                         binding.rvAttachment.adapter = null
                                         viewAttachmentAdapter = null
                                         getAttachmentList()
                                     }
-                                    Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        requireContext(),
+                                        it.data.message,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
-                                Status.LOADING->{
+
+                                Status.LOADING -> {
 
                                 }
-                                Status.ERROR->{
-                                    Toast.makeText(requireContext(), "Failed to delete file", Toast.LENGTH_SHORT).show()
+
+                                Status.ERROR -> {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Failed to delete file",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
 
                                 }
                             }
@@ -992,7 +1047,7 @@ class LmcStatusFragment : Fragment() {
                 }
 
             })
-            builder.setNegativeButton("No",null)
+            builder.setNegativeButton("No", null)
             val alert = builder.create()
             alert.show()
         }
@@ -1013,22 +1068,24 @@ class LmcStatusFragment : Fragment() {
     }
 
 
-    private fun setUploadObserver(){
-        viewModel.uploadResponse.observe(viewLifecycleOwner){
-            if(it!=null){
-                when(it.status){
-                    Status.LOADING->{
+    private fun setUploadObserver() {
+        viewModel.uploadResponse.observe(viewLifecycleOwner) {
+            if (it != null) {
+                when (it.status) {
+                    Status.LOADING -> {
                         setDialog(true)
                     }
-                    Status.SUCCESS->{
+
+                    Status.SUCCESS -> {
                         setDialog(false)
-                        if(it.data?.error!!) {
+                        if (it.data?.error!!) {
                             Toast.makeText(requireContext(), it.data!!.message, Toast.LENGTH_SHORT)
                                 .show()
                         }
                         getAttachmentList()
                     }
-                    Status.ERROR->{
+
+                    Status.ERROR -> {
                         setDialog(false)
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
 
@@ -1061,7 +1118,7 @@ class LmcStatusFragment : Fragment() {
 //        val y: Int = (drawableBitmap.height + bounds.height()) / 5
 
         val x: Int = 20
-        var y: Int = (drawableBitmap.height  - bounds.height()*noOfLines)
+        var y: Int = (drawableBitmap.height - bounds.height() * noOfLines)
 
         val mPaint = Paint()
         mPaint.color = requireContext().getColor(R.color.black_transparent)
@@ -1081,16 +1138,16 @@ class LmcStatusFragment : Fragment() {
     }
 
 
-    fun getBitmap(filePath:String):Bitmap?{
-        var bitmap:Bitmap?=null
-        try{
-            var f:File = File(filePath)
+    fun getBitmap(filePath: String): Bitmap? {
+        var bitmap: Bitmap? = null
+        try {
+            var f: File = File(filePath)
             var options = BitmapFactory.Options()
             options.inPreferredConfig = Bitmap.Config.ARGB_8888
-            bitmap = BitmapFactory.decodeStream(FileInputStream(f),null,options)
-        }catch (e:Exception){
+            bitmap = BitmapFactory.decodeStream(FileInputStream(f), null, options)
+        } catch (e: Exception) {
             Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
-            Log.e("getBitmap: ",e.message.toString() )
+            Log.e("getBitmap: ", e.message.toString())
         }
         return bitmap
     }
@@ -1143,13 +1200,16 @@ class LmcStatusFragment : Fragment() {
 // collect all gallery intents
         val galleryIntent = Intent(Intent.ACTION_GET_CONTENT)
         galleryIntent.type = "image/*"
-        val listGallery: List<ResolveInfo> = requireActivity().packageManager.queryIntentActivities(galleryIntent, 0)
+        val listGallery: List<ResolveInfo> =
+            requireActivity().packageManager.queryIntentActivities(galleryIntent, 0)
         for (res in listGallery) {
             val intent = Intent(galleryIntent)
             intent.component = ComponentName(res.activityInfo.packageName, res.activityInfo.name)
             intent.setPackage(res.activityInfo.packageName)
-            intentList = AppUtils.addIntentsToList(requireContext(),
-                intentList, intent)
+            intentList = AppUtils.addIntentsToList(
+                requireContext(),
+                intentList, intent
+            )
         }
         val takePhotoIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         takePhotoIntent.putExtra("return-data", true)
@@ -1158,12 +1218,14 @@ class LmcStatusFragment : Fragment() {
         )
 //        intentList = addIntentsToList(requireContext(),
 //            intentList, pickIntent)
-        intentList = AppUtils.addIntentsToList(requireContext(),
-            intentList, takePhotoIntent)
+        intentList = AppUtils.addIntentsToList(
+            requireContext(),
+            intentList, takePhotoIntent
+        )
 
         if (intentList.size > 0) {
             chooserIntent = Intent.createChooser(
-                intentList.removeAt(intentList.size-1),
+                intentList.removeAt(intentList.size - 1),
                 "Select Source"
             )
             chooserIntent.putExtra(
@@ -1176,22 +1238,26 @@ class LmcStatusFragment : Fragment() {
     }
 
     private fun setUpFollowUpObserver() {
-        viewModel.followUpResponse.observe(viewLifecycleOwner){
-            if(it.data!=null){
-                when(it.status){
-                    Status.LOADING->{
+        viewModel.followUpResponse.observe(viewLifecycleOwner) {
+            if (it.data != null) {
+                when (it.status) {
+                    Status.LOADING -> {
                         setDialog(true)
                     }
-                    Status.SUCCESS->{
+
+                    Status.SUCCESS -> {
                         setDialog(false)
-                        if (!it.data.error){
-                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT).show()
+                        if (!it.data.error) {
+                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT)
+                                .show()
                             requireActivity().onBackPressed()
-                        }else{
-                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT)
+                                .show()
                         }
                     }
-                    Status.ERROR->{
+
+                    Status.ERROR -> {
                         setDialog(false)
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                     }
@@ -1207,8 +1273,10 @@ class LmcStatusFragment : Fragment() {
         val calendar: Calendar = Calendar.getInstance()
         hour = calendar.get(Calendar.HOUR)
         minute = calendar.get(Calendar.MINUTE)
-        val timePickerDialog = TimePickerDialog(requireContext(), timeListener, hour, minute,
-            true)
+        val timePickerDialog = TimePickerDialog(
+            requireContext(), timeListener, hour, minute,
+            true
+        )
         timePickerDialog.show()
 
     }
@@ -1217,7 +1285,8 @@ class LmcStatusFragment : Fragment() {
         myHour = hr
         myMinute = min
 
-        binding.tvDateTime.text = AppUtils.getFollowUpDateTime("$myDay/$myMonth/$myYear $myHour:$myMinute")
+        binding.tvDateTime.text =
+            AppUtils.getFollowUpDateTime("$myDay/$myMonth/$myYear $myHour:$myMinute")
         dateTime = "$myDay/$myMonth/$myYear $myHour:$myMinute"
     }
 
@@ -1228,16 +1297,20 @@ class LmcStatusFragment : Fragment() {
                     Status.LOADING -> {
                         setDialog(true)
                     }
+
                     Status.SUCCESS -> {
                         setDialog(false)
-                        if(!it.data.error){
-                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT).show()
-                            findNavController().popBackStack(R.id.lmcHomeFragment,false)
-                        }else{
-                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT).show()
+                        if (!it.data.error) {
+                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT)
+                                .show()
+                            findNavController().popBackStack(R.id.lmcHomeFragment, false)
+                        } else {
+                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT)
+                                .show()
                         }
 
                     }
+
                     Status.ERROR -> {
                         setDialog(false)
                     }
@@ -1248,16 +1321,17 @@ class LmcStatusFragment : Fragment() {
 
 
     private fun setUpObserver() {
-        viewModel.tpiListResponse.observeForever{ it ->
+        viewModel.tpiListResponse.observeForever { it ->
             if (it != null) {
                 when (it.status) {
                     Status.LOADING -> {
                         setDialog(true)
                     }
+
                     Status.SUCCESS -> {
                         setDialog(false)
                         if (!it.data!!.error) {
-                            if(args.status == "pending"){
+                            if (args.status == "pending") {
                                 tpiSubStatusMap.clear()
                                 tpiStatusMap.clear()
                             }
@@ -1278,11 +1352,11 @@ class LmcStatusFragment : Fragment() {
                                 list.add(it)
                             }
 
-                            it.data.lmcTypeList.forEach {lmcType->
+                            it.data.lmcTypeList.forEach { lmcType ->
                                 lmcTypeList[lmcType.name] = lmcType.id
                             }
 
-                            it.data.lmcMeterStatusList.forEach { type->
+                            it.data.lmcMeterStatusList.forEach { type ->
                                 lmcMeterStatusList[type.name] = type.id
                             }
 
@@ -1290,13 +1364,13 @@ class LmcStatusFragment : Fragment() {
                                 lmcMeterDetails[lmcType.name] = lmcType.id
                             }
 
-                            it.data.lmcMeterList.forEach { meter->
+                            it.data.lmcMeterList.forEach { meter ->
                                 lmcMeterList[meter.name] = meter.id
                             }
-                            it.data.lmcPropertyList.forEach { property->
+                            it.data.lmcPropertyList.forEach { property ->
                                 lmcPropertyList[property.name] = property.id
                             }
-                            it.data.lmcGasType.forEach { gas->
+                            it.data.lmcGasType.forEach { gas ->
                                 lmcGasType[gas.name] = gas.id
                             }
 
@@ -1334,10 +1408,10 @@ class LmcStatusFragment : Fragment() {
                                     spinnerType.text = item
 
                                     fsStatus = item
-                                    isFailed = item.contains("failed",true)
-                                    isHold = item.contains("hold",true)
+                                    isFailed = item.contains("failed", true)
+                                    isHold = item.contains("hold", true)
                                     fsStatusCode = tpiStatusMap[fsStatus].toString()
-                                    if(isFailed){
+                                    if (isFailed) {
                                         btnSubmit.text = "SUBMIT"
                                         cbFollowUp.visibility = View.GONE
                                         tvFollowText.visibility = View.GONE
@@ -1349,7 +1423,7 @@ class LmcStatusFragment : Fragment() {
 
                                     }
 
-                                    if(isHold){
+                                    if (isHold) {
                                         btnSubmit.text = "SUBMIT"
                                         cbFollowUp.visibility = View.VISIBLE
                                         tvFollowText.visibility = View.VISIBLE
@@ -1360,7 +1434,7 @@ class LmcStatusFragment : Fragment() {
                                         etDescription.visibility = View.VISIBLE
                                     }
 
-                                    if(item.contains("passed",true)){
+                                    if (item.contains("passed", true)) {
                                         btnSubmit.text = "NEXT"
                                         tvLmcExecution.visibility = View.VISIBLE
                                         spinnerLmc.visibility = View.VISIBLE
@@ -1399,6 +1473,7 @@ class LmcStatusFragment : Fragment() {
                                 .show()
                         }
                     }
+
                     Status.ERROR -> {
                         setDialog(false)
                         Toast.makeText(requireContext(), "Error fetching data", Toast.LENGTH_SHORT)

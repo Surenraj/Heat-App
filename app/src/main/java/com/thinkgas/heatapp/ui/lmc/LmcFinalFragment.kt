@@ -85,13 +85,13 @@ class LmcFinalFragment : Fragment() {
     private  var isometricAdapter: ViewAttachmentAdapter? = null
     private  var installationAdapter: ViewAttachmentAdapter? = null
     private  var drawingAdapter: ViewAttachmentAdapter? = null
-//    private lateinit var selfieAdapter: ViewAttachmentAdapter
+    //    private lateinit var selfieAdapter: ViewAttachmentAdapter
     private  var signatureAdapter: ViewAttachmentAdapter? = null
 
     private var installationCount = 0
     private var isometricDrawingCount = 0
     private var drawingCount = 0
-//    private var selfieCount = 0
+    //    private var selfieCount = 0
     private var signatureCount = 0
     private var dialog: Dialog? = null
 
@@ -301,8 +301,9 @@ class LmcFinalFragment : Fragment() {
 
             if(AppCache.isTpi){
                 btnSubmit.visibility = View.GONE
-//                btnApprove.visibility = View.VISIBLE
-//                btnDecline.visibility = View.VISIBLE
+                btnApprove.visibility = View.VISIBLE
+                btnDecline.visibility = View.VISIBLE
+
                 signature.visibility = View.GONE
                 btnSignature.visibility = View.GONE
                 btnClear.visibility = View.GONE

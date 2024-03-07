@@ -48,25 +48,24 @@ import java.util.*
 import kotlin.collections.HashMap
 
 @AndroidEntryPoint
-class NgVerificationFragment : Fragment()
-{
-    private var _binding:FragmentNgVerificationBinding? = null
+class NgVerificationFragment : Fragment() {
+    private var _binding: FragmentNgVerificationBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<NgApprovalViewModel>()
     private val args by navArgs<NgVerificationFragmentArgs>()
 
-    private var acknowledgeId:String? = null
+    private var acknowledgeId: String? = null
     private var photoURI: Uri? = null
     private var imageDialog: Dialog? = null
     private var imageLayout: LayoutViewImageBinding? = null
 
     private lateinit var cameraActions: ActivityResultLauncher<Intent>
     lateinit var currentPhotoPath: String
-    private  var meterAdapter: ViewAttachmentAdapter? = null
-    private  var installationAdapter: ViewAttachmentAdapter? = null
-    private  var serviceAdapter: ViewAttachmentAdapter? = null
-    private  var selfieAdapter: ViewAttachmentAdapter? = null
-    private  var gasAdapter: ViewAttachmentAdapter? = null
+    private var meterAdapter: ViewAttachmentAdapter? = null
+    private var installationAdapter: ViewAttachmentAdapter? = null
+    private var serviceAdapter: ViewAttachmentAdapter? = null
+    private var selfieAdapter: ViewAttachmentAdapter? = null
+    private var gasAdapter: ViewAttachmentAdapter? = null
 
     private var installationCount = 0
     private var meterCount = 0
@@ -86,7 +85,7 @@ class NgVerificationFragment : Fragment()
         var gasFlag = false
     }
 
-    enum class NgImageType{
+    enum class NgImageType {
         METER,
         INSTALLATION,
         SERVICE,
@@ -99,21 +98,21 @@ class NgVerificationFragment : Fragment()
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentNgVerificationBinding.inflate(inflater,container,false)
+        _binding = FragmentNgVerificationBinding.inflate(inflater, container, false)
 
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         builder.setView(R.layout.progress)
         dialog = builder.create()
 
         binding.apply {
-           tvBpNo.text = args.bpNo
-           tvDate.text = args.assignedDate
+            tvBpNo.text = args.bpNo
+            tvDate.text = args.assignedDate
             tvInitial.text = args.finalReading
             tvBurner.text = args.burnerType
             tvWork.text = args.workDate
 //            cbAcknowledge.setOnCheckedChangeListener { view, isChecked ->
-                cbAcknowledge.isChecked = true
-                acknowledgeId = "1"
+            cbAcknowledge.isChecked = true
+            acknowledgeId = "1"
 //            }
 //            if(args.acknowledgeId != null){
 //                acknowledgeId = args.acknowledgeId
@@ -126,13 +125,15 @@ class NgVerificationFragment : Fragment()
                 logoutBuilder.setMessage("Are you sure want to log out?")
                 logoutBuilder.setCancelable(false)
                 logoutBuilder.setPositiveButton("Yes") { dialogInterface, i ->
-                    val preferences = activity?.getSharedPreferences("TPI_PREFS",
+                    val preferences = activity?.getSharedPreferences(
+                        "TPI_PREFS",
                         Context.MODE_PRIVATE
                     )
                     val editor: SharedPreferences.Editor = preferences!!.edit()
                     editor.clear()
                     editor.apply()
-                    val directions = NgVerificationFragmentDirections.actionNgVerificationFragmentToLoginFragment()
+                    val directions =
+                        NgVerificationFragmentDirections.actionNgVerificationFragmentToLoginFragment()
                     findNavController().navigate(directions)
 
                 }
@@ -146,10 +147,12 @@ class NgVerificationFragment : Fragment()
             }
 
 
-            if(AppCache.isTpi){
-              btnSubmit.visibility = View.GONE
-              cbAcknowledge.visibility = View.GONE
-              tvAcknowledge.visibility = View.GONE
+            if (AppCache.isTpi) {
+                btnSubmit.visibility = View.GONE
+                btnApprove.visibility = View.VISIBLE
+                btnDecline.visibility = View.VISIBLE
+                cbAcknowledge.visibility = View.GONE
+                tvAcknowledge.visibility = View.GONE
 //              btnApprove.visibility = View.VISIBLE
 //              btnDecline.visibility = View.VISIBLE
                 ivLiveGas.visibility = View.GONE
@@ -212,33 +215,33 @@ class NgVerificationFragment : Fragment()
 
 
             btnSubmit.setOnClickListener {
-                if(selfieCount == 0){
+                if (selfieCount == 0) {
                     tvSelfie.error = "Attachment Required"
                     tvSelfie.requestFocus()
                     return@setOnClickListener
                 }
 
-                if(meterCount == 0){
+                if (meterCount == 0) {
                     tvMeter.error = "Attachment Required"
                     tvMeter.requestFocus()
                     return@setOnClickListener
                 }
 
-                if(installationCount == 0){
+                if (installationCount == 0) {
                     tvInstallation.error = "Attachment Required"
                     tvInstallation.requestFocus()
                     return@setOnClickListener
                 }
 
-                if(serviceCount == 0){
+                if (serviceCount == 0) {
                     tvService.error = "Attachment Required"
                     tvService.requestFocus()
                     return@setOnClickListener
                 }
 
 
-                if(args.mmtStatus == "1"){
-                    if(gasCount == 0){
+                if (args.mmtStatus == "1") {
+                    if (gasCount == 0) {
                         tvLiveGas.error = "Attachment Required"
                         tvLiveGas.requestFocus()
                         return@setOnClickListener
@@ -246,37 +249,64 @@ class NgVerificationFragment : Fragment()
 
                 }
 
-                if(acknowledgeId.isNullOrBlank()){
-                    Toast.makeText(requireContext(), "Please acknowledge before submitting", Toast.LENGTH_SHORT).show()
+                if (acknowledgeId.isNullOrBlank()) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Please acknowledge before submitting",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     return@setOnClickListener
                 }
                 updateRfcNg()
             }
 
-            cameraActions = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                    if (it.resultCode == Activity.RESULT_OK && photoURI!=null) {
+            cameraActions =
+                registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                    if (it.resultCode == Activity.RESULT_OK && photoURI != null) {
 
                         photoURI.let { uri ->
                             val parcelFileDescriptor =
-                                requireActivity().contentResolver.openFileDescriptor(uri!!, "r", null)
+                                requireActivity().contentResolver.openFileDescriptor(
+                                    uri!!,
+                                    "r",
+                                    null
+                                )
                                     ?: return@registerForActivityResult
                             val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
-                            val timeStamp: String = SimpleDateFormat("dd-MM-yyy HH:mm:ss").format(Date())
-                            lateinit var file:File
-                            if(it.data != null && it.data?.data != null){
-                                file = File(requireActivity().externalCacheDir,requireActivity().contentResolver.getFileName(it.data?.data!!))
-                                var bitmap =  MediaStore.Images.Media.getBitmap(requireActivity().contentResolver,it.data?.data!!)
-                                val location = AppUtils.getAddress(AppCache.latitude!!,AppCache.longitude!!,requireContext())
+                            val timeStamp: String =
+                                SimpleDateFormat("dd-MM-yyy HH:mm:ss").format(Date())
+                            lateinit var file: File
+                            if (it.data != null && it.data?.data != null) {
+                                file = File(
+                                    requireActivity().externalCacheDir,
+                                    requireActivity().contentResolver.getFileName(it.data?.data!!)
+                                )
+                                var bitmap = MediaStore.Images.Media.getBitmap(
+                                    requireActivity().contentResolver,
+                                    it.data?.data!!
+                                )
+                                val location = AppUtils.getAddress(
+                                    AppCache.latitude!!,
+                                    AppCache.longitude!!,
+                                    requireContext()
+                                )
                                 val imageText = "$timeStamp \n $location"
                                 var result = drawTextToBitmap(bitmap!!, text = imageText)
                                 val os: OutputStream = BufferedOutputStream(FileOutputStream(file))
                                 result?.compress(Bitmap.CompressFormat.JPEG, 10, os)
 //                                inputStream.copyTo(os)
                                 os.close()
-                            }else{
-                                file = File(requireActivity().externalCacheDir,requireActivity().contentResolver.getFileName(uri))
+                            } else {
+                                file = File(
+                                    requireActivity().externalCacheDir,
+                                    requireActivity().contentResolver.getFileName(uri)
+                                )
                                 var bitmap = getBitmap(file.path)
-                                val location = AppUtils.getAddress(AppCache.latitude!!,AppCache.longitude!!,requireContext())
+                                val location = AppUtils.getAddress(
+                                    AppCache.latitude!!,
+                                    AppCache.longitude!!,
+                                    requireContext()
+                                )
                                 val imageText = "$timeStamp \n $location"
                                 var result = drawTextToBitmap(bitmap!!, text = imageText)
 
@@ -292,25 +322,52 @@ class NgVerificationFragment : Fragment()
                                 val fileList = ArrayList<File>()
                                 fileList.add(file)
 
-                                val request=UploadRequestModel(
-                                    bpNumber = args.bpNo!!, appNo = args.appNo, sessionId = args.sessionId!!
+                                val request = UploadRequestModel(
+                                    bpNumber = args.bpNo!!,
+                                    appNo = args.appNo,
+                                    sessionId = args.sessionId!!
                                 )
-                                when(imageType){
-                                    NgVerificationFragment.NgImageType.INSTALLATION->{
-                                        viewModel.uploadAttachment(request,file, Constants.NG_INSTALLATION_PHOTO_FILE)
+                                when (imageType) {
+                                    NgVerificationFragment.NgImageType.INSTALLATION -> {
+                                        viewModel.uploadAttachment(
+                                            request,
+                                            file,
+                                            Constants.NG_INSTALLATION_PHOTO_FILE
+                                        )
                                     }
-                                    NgVerificationFragment.NgImageType.METER->{
-                                        viewModel.uploadAttachment(request,file, Constants.NG_METER_PHOTO_FILE)
+
+                                    NgVerificationFragment.NgImageType.METER -> {
+                                        viewModel.uploadAttachment(
+                                            request,
+                                            file,
+                                            Constants.NG_METER_PHOTO_FILE
+                                        )
                                     }
-                                    NgVerificationFragment.NgImageType.SELFIE->{
-                                        viewModel.uploadAttachment(request,file, Constants.NG_SELFIE_WITH_METER_FILE)
+
+                                    NgVerificationFragment.NgImageType.SELFIE -> {
+                                        viewModel.uploadAttachment(
+                                            request,
+                                            file,
+                                            Constants.NG_SELFIE_WITH_METER_FILE
+                                        )
                                     }
-                                    NgVerificationFragment.NgImageType.SERVICE->{
-                                        viewModel.uploadAttachment(request,file, Constants.NG_SERVICE_CARD_FILE)
+
+                                    NgVerificationFragment.NgImageType.SERVICE -> {
+                                        viewModel.uploadAttachment(
+                                            request,
+                                            file,
+                                            Constants.NG_SERVICE_CARD_FILE
+                                        )
                                     }
-                                    NgVerificationFragment.NgImageType.GAS->{
-                                        viewModel.uploadAttachment(request,file, Constants.NG_LIVE_GAS_READING_FILE)
+
+                                    NgVerificationFragment.NgImageType.GAS -> {
+                                        viewModel.uploadAttachment(
+                                            request,
+                                            file,
+                                            Constants.NG_LIVE_GAS_READING_FILE
+                                        )
                                     }
+
                                     else -> {
 
                                     }
@@ -340,11 +397,17 @@ class NgVerificationFragment : Fragment()
                     }
                 }
 
-            val downDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_down_24)
+            val downDrawable = ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.ic_baseline_keyboard_arrow_down_24
+            )
             val upDrawable =
-                ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_up_24)
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_keyboard_arrow_up_24
+                )
 
-            if(args.mmtStatus != "1"){
+            if (args.mmtStatus != "1") {
                 rvLiveGas.visibility = View.GONE
                 tvLiveGas.visibility = View.GONE
                 ivLiveGas.visibility = View.GONE
@@ -468,7 +531,7 @@ class NgVerificationFragment : Fragment()
         return binding.root
     }
 
-    private fun submitNgApproval(status:String){
+    private fun submitNgApproval(status: String) {
         val dialogBinding = CommentDialogBinding.inflate(LayoutInflater.from(requireContext()))
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         builder.setCancelable(true)
@@ -476,38 +539,40 @@ class NgVerificationFragment : Fragment()
         val alert = builder.create()
         alert.show()
         dialogBinding.apply {
-            if(status.equals("Approved")){
+            if (status.equals("Approved")) {
                 etComment.visibility = View.GONE
                 btnSubmit.text = "Approve"
-            }else{
+            } else {
                 btnSubmit.text = status
             }
             btnClear.setOnClickListener {
                 signature.clear()
             }
             btnSignature.setOnClickListener {
-                if(signature.isEmpty){
-                    Toast.makeText(requireContext(), "Please add signature", Toast.LENGTH_SHORT).show()
+                if (signature.isEmpty) {
+                    Toast.makeText(requireContext(), "Please add signature", Toast.LENGTH_SHORT)
+                        .show()
                     return@setOnClickListener
                 }
-                val bitmap=signature.signatureBitmap
+                val bitmap = signature.signatureBitmap
                 val fileName: String = SimpleDateFormat("DDMMyyyy_HHmmss").format(Date())
                 val file = File(requireActivity().externalCacheDir, "$fileName.jpg")
                 val os: OutputStream = BufferedOutputStream(FileOutputStream(file))
                 bitmap?.compress(Bitmap.CompressFormat.JPEG, 50, os)
                 os.close()
-                val request= UploadRequestModel(
+                val request = UploadRequestModel(
                     bpNumber = args.bpNo!!, appNo = args.appNo, sessionId = args.sessionId!!
                 )
                 setUploadObserver(dialogBinding)
-                viewModel.uploadAttachment(request,file,Constants.NG_CUSTOMER_SIGNATURE_FILE)
+                viewModel.uploadAttachment(request, file, Constants.NG_CUSTOMER_SIGNATURE_FILE)
             }
             btnSubmit.setOnClickListener {
-                if(signature.isEnabled){
-                    Toast.makeText(requireContext(), "Signature is needed", Toast.LENGTH_SHORT).show()
+                if (signature.isEnabled) {
+                    Toast.makeText(requireContext(), "Signature is needed", Toast.LENGTH_SHORT)
+                        .show()
                     return@setOnClickListener
                 }
-                val params = HashMap<String,String?>()
+                val params = HashMap<String, String?>()
                 params["application_number"] = args.appNo
                 params["bp_number"] = args.bpNo
                 params["tpi_id"] = args.tpiId
@@ -572,7 +637,7 @@ class NgVerificationFragment : Fragment()
         imageLayout?.ivBack?.setOnClickListener {
             imageDialog?.dismiss()
         }
-        val deleteParams = HashMap<String,String>()
+        val deleteParams = HashMap<String, String>()
         deleteParams["bp_number"] = args.bpNo!!
         deleteParams["application_number"] = args.appNo
         deleteParams["session_id"] = args.sessionId!!
@@ -584,14 +649,14 @@ class NgVerificationFragment : Fragment()
             builder.setCancelable(false)
             builder.setTitle("Delete Attachment")
             builder.setMessage("Are you sure want to delete the file?")
-            builder.setPositiveButton("Yes",object : DialogInterface.OnClickListener{
+            builder.setPositiveButton("Yes", object : DialogInterface.OnClickListener {
                 override fun onClick(p0: DialogInterface?, p1: Int) {
                     viewModel.deleteAttachment(deleteParams)
-                    viewModel.deleteAttachmentResponse.observe(viewLifecycleOwner){
-                        if(it != null){
-                            when(it.status){
-                                Status.SUCCESS->{
-                                    if(!it.data!!.error){
+                    viewModel.deleteAttachmentResponse.observe(viewLifecycleOwner) {
+                        if (it != null) {
+                            when (it.status) {
+                                Status.SUCCESS -> {
+                                    if (!it.data!!.error) {
                                         imageDialog!!.dismiss()
 //                                        binding.rvAttachment.adapter = null
                                         binding.rvInstallation.adapter = null
@@ -607,13 +672,23 @@ class NgVerificationFragment : Fragment()
 
                                         getAttachmentList()
                                     }
-                                    Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        requireContext(),
+                                        it.data.message,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
-                                Status.LOADING->{
+
+                                Status.LOADING -> {
 
                                 }
-                                Status.ERROR->{
-                                    Toast.makeText(requireContext(), "Failed to delete file", Toast.LENGTH_SHORT).show()
+
+                                Status.ERROR -> {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Failed to delete file",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
 
                                 }
                             }
@@ -622,14 +697,15 @@ class NgVerificationFragment : Fragment()
                 }
 
             })
-            builder.setNegativeButton("No",null)
+            builder.setNegativeButton("No", null)
             val alert = builder.create()
             alert.show()
         }
         imageDialog?.show()
     }
 
-    private val requestCameraPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+    private val requestCameraPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
             if (!granted) {
                 Toast.makeText(
                     requireContext(),
@@ -676,13 +752,16 @@ class NgVerificationFragment : Fragment()
 // collect all gallery intents
         val galleryIntent = Intent(Intent.ACTION_GET_CONTENT)
         galleryIntent.type = "image/*"
-        val listGallery: List<ResolveInfo> = requireActivity().packageManager.queryIntentActivities(galleryIntent, 0)
+        val listGallery: List<ResolveInfo> =
+            requireActivity().packageManager.queryIntentActivities(galleryIntent, 0)
         for (res in listGallery) {
             val intent = Intent(galleryIntent)
             intent.component = ComponentName(res.activityInfo.packageName, res.activityInfo.name)
             intent.setPackage(res.activityInfo.packageName)
-            intentList = AppUtils.addIntentsToList(requireContext(),
-                intentList, intent)
+            intentList = AppUtils.addIntentsToList(
+                requireContext(),
+                intentList, intent
+            )
         }
         val takePhotoIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         takePhotoIntent.putExtra("return-data", true)
@@ -691,12 +770,14 @@ class NgVerificationFragment : Fragment()
         )
 //        intentList = addIntentsToList(requireContext(),
 //            intentList, pickIntent)
-        intentList = AppUtils.addIntentsToList(requireContext(),
-            intentList, takePhotoIntent)
+        intentList = AppUtils.addIntentsToList(
+            requireContext(),
+            intentList, takePhotoIntent
+        )
 
         if (intentList.size > 0) {
             chooserIntent = Intent.createChooser(
-                intentList.removeAt(intentList.size-1),
+                intentList.removeAt(intentList.size - 1),
                 "Select Source"
             )
             chooserIntent.putExtra(
@@ -709,22 +790,24 @@ class NgVerificationFragment : Fragment()
     }
 
     private fun setUploadAttchmentObserver() {
-        viewModel.uploadResponse.observe(viewLifecycleOwner){
-            if(it!=null){
-                when(it.status){
-                    Status.LOADING->{
+        viewModel.uploadResponse.observe(viewLifecycleOwner) {
+            if (it != null) {
+                when (it.status) {
+                    Status.LOADING -> {
                         setDialog(true)
                     }
-                    Status.SUCCESS->{
+
+                    Status.SUCCESS -> {
                         setDialog(false)
-                        if (!it.data?.error!!){
+                        if (!it.data?.error!!) {
                             getAttachmentList()
-                        }else {
+                        } else {
                             Toast.makeText(requireContext(), it.data!!.message, Toast.LENGTH_SHORT)
                                 .show()
                         }
                     }
-                    Status.ERROR->{
+
+                    Status.ERROR -> {
                         setDialog(false)
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
 
@@ -757,7 +840,7 @@ class NgVerificationFragment : Fragment()
 //        val y: Int = (drawableBitmap.height + bounds.height()) / 5
 
         val x: Int = 20
-        var y: Int = (drawableBitmap.height  - bounds.height()*noOfLines)
+        var y: Int = (drawableBitmap.height - bounds.height() * noOfLines)
 
         val mPaint = Paint()
         mPaint.color = requireContext().getColor(R.color.black_transparent)
@@ -776,21 +859,21 @@ class NgVerificationFragment : Fragment()
         return drawableBitmap
     }
 
-    fun getBitmap(filePath:String):Bitmap?{
-        var bitmap:Bitmap?=null
-        try{
-            var f:File = File(filePath)
+    fun getBitmap(filePath: String): Bitmap? {
+        var bitmap: Bitmap? = null
+        try {
+            var f: File = File(filePath)
             var options = BitmapFactory.Options()
             options.inPreferredConfig = Bitmap.Config.ARGB_8888
-            bitmap = BitmapFactory.decodeStream(FileInputStream(f),null,options)
-        }catch (e:Exception){
+            bitmap = BitmapFactory.decodeStream(FileInputStream(f), null, options)
+        } catch (e: Exception) {
             Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
-            Log.e("getBitmap: ",e.message.toString() )
+            Log.e("getBitmap: ", e.message.toString())
         }
         return bitmap
     }
 
-    private fun getAttachmentList(){
+    private fun getAttachmentList() {
         val serviceParams = java.util.HashMap<String, String>()
         serviceParams["bp_number"] = args.bpNo!!
         serviceParams["application_number"] = args.appNo
@@ -834,135 +917,145 @@ class NgVerificationFragment : Fragment()
 
     private fun setupAttachmentObserver() {
         viewModel.viewAttachmentResponse.observeForever {
-            if(it.data!=null){
-                when(it.status){
-                    Status.LOADING->{
+            if (it.data != null) {
+                when (it.status) {
+                    Status.LOADING -> {
                         setDialog(true)
                     }
-                    Status.SUCCESS->{
+
+                    Status.SUCCESS -> {
                         setDialog(false)
-                        if(!it.data.error){
-                            when(it.data.type){
-                                Constants.NG_SERVICE_CARD_FILE_TYPE->
-                                {
+                        if (!it.data.error) {
+                            when (it.data.type) {
+                                Constants.NG_SERVICE_CARD_FILE_TYPE -> {
                                     serviceAdapter = ViewAttachmentAdapter(
                                         requireContext(),
                                         it.data.attachmentList,
-                                        {attachment ->  attachmentItemClicked(attachment) },
-                                        {attachment ->  deleteItemClicked(attachment) }
+                                        { attachment -> attachmentItemClicked(attachment) },
+                                        { attachment -> deleteItemClicked(attachment) }
                                     )
                                     binding.rvService.adapter = serviceAdapter
-                                    binding.tvService.text = "Live Stove Gas Image (${serviceAdapter!!.itemCount})"
+                                    binding.tvService.text =
+                                        "Live Stove Gas Image (${serviceAdapter!!.itemCount})"
                                     binding.tvService.error = null
                                     serviceAdapter!!.notifyDataSetChanged()
                                     serviceCount = serviceAdapter!!.itemCount
                                 }
-                                Constants.NG_METER_PHOTO_FILE_TYPE->{
+
+                                Constants.NG_METER_PHOTO_FILE_TYPE -> {
                                     meterAdapter = ViewAttachmentAdapter(
                                         requireContext(),
                                         it.data.attachmentList,
-                                        {attachment ->  attachmentItemClicked(attachment) },
-                                        {attachment ->  deleteItemClicked(attachment) }
+                                        { attachment -> attachmentItemClicked(attachment) },
+                                        { attachment -> deleteItemClicked(attachment) }
                                     )
                                     binding.rvMeter.adapter = meterAdapter
-                                    binding.tvMeter.text = "MMT Gauge Testing Photo (${meterAdapter!!.itemCount})"
+                                    binding.tvMeter.text =
+                                        "MMT Gauge Testing Photo (${meterAdapter!!.itemCount})"
                                     binding.tvMeter.error = null
                                     meterAdapter!!.notifyDataSetChanged()
-                                    meterCount =  meterAdapter!!.itemCount
+                                    meterCount = meterAdapter!!.itemCount
                                 }
-                                Constants.NG_INSTALLATION_PHOTO_FILE_TYPE->{
+
+                                Constants.NG_INSTALLATION_PHOTO_FILE_TYPE -> {
                                     installationAdapter = ViewAttachmentAdapter(
                                         requireContext(),
                                         it.data.attachmentList,
-                                        {attachment ->  attachmentItemClicked(attachment) },
-                                        {attachment ->  deleteItemClicked(attachment) }
+                                        { attachment -> attachmentItemClicked(attachment) },
+                                        { attachment -> deleteItemClicked(attachment) }
                                     )
                                     binding.rvInstallation.adapter = installationAdapter
-                                    binding.tvInstallation.text = "Installation Documents (${installationAdapter!!.itemCount})"
+                                    binding.tvInstallation.text =
+                                        "Installation Documents (${installationAdapter!!.itemCount})"
                                     binding.tvInstallation.error = null
                                     installationAdapter!!.notifyDataSetChanged()
                                     installationCount = installationAdapter!!.itemCount
                                 }
-                                Constants.NG_SELFIE_WITH_METER_FILE_TYPE->{
+
+                                Constants.NG_SELFIE_WITH_METER_FILE_TYPE -> {
                                     selfieAdapter = ViewAttachmentAdapter(
                                         requireContext(),
                                         it.data.attachmentList,
-                                        {attachment ->  attachmentItemClicked(attachment) },
-                                        {attachment ->  deleteItemClicked(attachment) }
+                                        { attachment -> attachmentItemClicked(attachment) },
+                                        { attachment -> deleteItemClicked(attachment) }
                                     )
                                     binding.rvSelfie.adapter = selfieAdapter
-                                    binding.tvSelfie.text = "Selfie with meter (${selfieAdapter!!.itemCount})"
+                                    binding.tvSelfie.text =
+                                        "Selfie with meter (${selfieAdapter!!.itemCount})"
                                     binding.tvSelfie.error = null
                                     selfieAdapter!!.notifyDataSetChanged()
                                     selfieCount = selfieAdapter!!.itemCount
                                 }
-                                Constants.NG_LIVE_GAS_READING_FILE_TYPE->{
+
+                                Constants.NG_LIVE_GAS_READING_FILE_TYPE -> {
                                     gasAdapter = ViewAttachmentAdapter(
                                         requireContext(),
                                         it.data.attachmentList,
-                                        {attachment ->  attachmentItemClicked(attachment) },
-                                        {attachment ->  deleteItemClicked(attachment) }
+                                        { attachment -> attachmentItemClicked(attachment) },
+                                        { attachment -> deleteItemClicked(attachment) }
                                     )
                                     binding.rvLiveGas.adapter = gasAdapter
-                                    binding.tvLiveGas.text = "Final Meter Reading Image (${gasAdapter!!.itemCount})"
+                                    binding.tvLiveGas.text =
+                                        "Final Meter Reading Image (${gasAdapter!!.itemCount})"
                                     binding.tvLiveGas.error = null
                                     gasAdapter!!.notifyDataSetChanged()
                                     gasCount = gasAdapter!!.itemCount
                                 }
                             }
-                            
-                            if(serviceAdapter == null){
+
+                            if (serviceAdapter == null) {
                                 binding.tvService.text = "Live Stove Gas Image (0)"
                                 serviceCount = 0
                             }
 
-                            if(gasAdapter == null){
+                            if (gasAdapter == null) {
                                 binding.tvLiveGas.text = "Final Meter Reading Image (0)"
                                 gasCount = 0
                             }
 
-                            if(meterAdapter == null){
+                            if (meterAdapter == null) {
                                 binding.tvMeter.text = "MMT Gauge Testing Photo (0)"
                                 meterCount = 0
                             }
 
-                            if(installationAdapter == null){
+                            if (installationAdapter == null) {
                                 binding.tvInstallation.text = "Installation Documents (0)"
                                 installationCount = 0
                             }
 
-                            if (selfieAdapter == null){
+                            if (selfieAdapter == null) {
                                 binding.tvSelfie.text = "Selfie with meter (0)"
                                 selfieCount = 0
                             }
                         } else {
-                            if(serviceAdapter == null){
+                            if (serviceAdapter == null) {
                                 binding.tvService.text = "Live Stove Gas Image (0)"
                                 serviceCount = 0
                             }
 
-                            if(gasAdapter == null){
+                            if (gasAdapter == null) {
                                 binding.tvLiveGas.text = "Final Meter Reading Image (0)"
                                 gasCount = 0
                             }
 
-                            if(meterAdapter == null){
+                            if (meterAdapter == null) {
                                 binding.tvMeter.text = "MMT Gauge Testing Photo (0)"
                                 meterCount = 0
                             }
 
-                            if(installationAdapter == null){
+                            if (installationAdapter == null) {
                                 binding.tvInstallation.text = "Installation Documents (0)"
                                 installationCount = 0
                             }
 
-                            if (selfieAdapter == null){
+                            if (selfieAdapter == null) {
                                 binding.tvSelfie.text = "Selfie with meter (0)"
                                 selfieCount = 0
                             }
                         }
                     }
-                    Status.ERROR->{
+
+                    Status.ERROR -> {
                         setDialog(false)
                     }
                 }
@@ -970,7 +1063,7 @@ class NgVerificationFragment : Fragment()
         }
     }
 
-    private fun updateRfcNg(){
+    private fun updateRfcNg() {
         val dialogBinding = CommentDialogBinding.inflate(LayoutInflater.from(requireContext()))
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         builder.setCancelable(true)
@@ -983,29 +1076,31 @@ class NgVerificationFragment : Fragment()
                 signature.clear()
             }
             btnSignature.setOnClickListener {
-                if(signature.isEmpty){
-                    Toast.makeText(requireContext(), "Please add signature", Toast.LENGTH_SHORT).show()
+                if (signature.isEmpty) {
+                    Toast.makeText(requireContext(), "Please add signature", Toast.LENGTH_SHORT)
+                        .show()
                     return@setOnClickListener
                 }
-                val bitmap=signature.signatureBitmap
+                val bitmap = signature.signatureBitmap
                 val fileName: String = SimpleDateFormat("DDMMyyyy_HHmmss").format(Date())
                 val file = File(requireActivity().externalCacheDir, "$fileName.jpg")
                 val os: OutputStream = BufferedOutputStream(FileOutputStream(file))
                 bitmap?.compress(Bitmap.CompressFormat.JPEG, 50, os)
                 os.close()
-                val request= UploadRequestModel(
+                val request = UploadRequestModel(
                     bpNumber = args.bpNo!!, appNo = args.appNo, sessionId = args.sessionId!!
                 )
                 setUploadObserver(dialogBinding)
-                viewModel.uploadAttachment(request,file, Constants.NG_CUSTOMER_SIGNATURE_FILE)
+                viewModel.uploadAttachment(request, file, Constants.NG_CUSTOMER_SIGNATURE_FILE)
             }
             btnSubmit.setOnClickListener {
 
-                if(signature.isEnabled){
-                    Toast.makeText(requireContext(), "Signature is needed", Toast.LENGTH_SHORT).show()
+                if (signature.isEnabled) {
+                    Toast.makeText(requireContext(), "Signature is needed", Toast.LENGTH_SHORT)
+                        .show()
                     return@setOnClickListener
                 }
-                val params = HashMap<String,String?>()
+                val params = HashMap<String, String?>()
                 params["application_number"] = args.appNo
                 params["bp_number"] = args.bpNo
                 params["tpi_id"] = args.tpiId
@@ -1090,21 +1185,24 @@ class NgVerificationFragment : Fragment()
     }
 
     private fun setupNgObserver() {
-        viewModel.rfcNgUpdateResponse.observe(viewLifecycleOwner){
-            if(it!=null){
-                when(it.status){
-                    Status.LOADING->{
+        viewModel.rfcNgUpdateResponse.observe(viewLifecycleOwner) {
+            if (it != null) {
+                when (it.status) {
+                    Status.LOADING -> {
                         setDialog(true)
                     }
-                    Status.SUCCESS->{
+
+                    Status.SUCCESS -> {
                         setDialog(false)
-                        if(!it.data!!.error){
-                            findNavController().popBackStack(R.id.rfcHomeFragment,false)
-                        }else{
-                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT).show()
+                        if (!it.data!!.error) {
+                            findNavController().popBackStack(R.id.rfcHomeFragment, false)
+                        } else {
+                            Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT)
+                                .show()
                         }
                     }
-                    Status.ERROR->{
+
+                    Status.ERROR -> {
                         setDialog(false)
 
                     }
@@ -1113,25 +1211,27 @@ class NgVerificationFragment : Fragment()
         }
     }
 
-    private fun setUploadObserver(binding:CommentDialogBinding){
-        viewModel.uploadResponse.observe(viewLifecycleOwner){
-            if(it!=null){
-                when(it.status){
-                    Status.LOADING->{
+    private fun setUploadObserver(binding: CommentDialogBinding) {
+        viewModel.uploadResponse.observe(viewLifecycleOwner) {
+            if (it != null) {
+                when (it.status) {
+                    Status.LOADING -> {
                         setDialog(true)
                     }
-                    Status.SUCCESS->{
+
+                    Status.SUCCESS -> {
                         setDialog(false)
-                        if(it.data?.error!!) {
+                        if (it.data?.error!!) {
                             Toast.makeText(requireContext(), it.data!!.message, Toast.LENGTH_SHORT)
                                 .show()
-                        }else {
+                        } else {
                             binding.signature.isEnabled = false
                             binding.btnClear.visibility = View.GONE
                             binding.btnSignature.visibility = View.GONE
                         }
                     }
-                    Status.ERROR->{
+
+                    Status.ERROR -> {
                         setDialog(false)
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
 

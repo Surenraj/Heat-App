@@ -609,7 +609,6 @@ class RfcExtensionFragment : Fragment() {
     private fun updateObjectValue() {
         binding.apply {
             lmcGiClamp = etGiClamp.text.toString()
-            println("giiiiii 08 $lmcGiClamp")
             lmcMlcClamp = etMlcClamp.text.toString()
             lmcGiMfElbow = etGiMf.text.toString()
             lmcGiFfElbow = etGiFf.text.toString()

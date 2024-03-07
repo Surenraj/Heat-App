@@ -1,6 +1,5 @@
 package com.thinkgas.heatapp.ui.ng
 
-import `in`.galaxyofandroid.spinerdialog.SpinnerDialog
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
@@ -9,12 +8,11 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -28,13 +26,14 @@ import com.thinkgas.heatapp.utils.AppUtils
 import com.thinkgas.heatapp.utils.Constants
 import com.thinkgas.heatapp.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
+import `in`.galaxyofandroid.spinerdialog.SpinnerDialog
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
 import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.HashMap
+import java.util.Calendar
+import java.util.Date
 
 @AndroidEntryPoint
 class NgApprovalFragment : Fragment() {
@@ -178,7 +177,7 @@ class NgApprovalFragment : Fragment() {
                 rbLeakageNotDone.isEnabled = false
                 etLiveGas.isEnabled = false
                 etMeterReading.isEnabled = false
-               etGiUnion.isEnabled = false
+                etGiUnion.isEnabled = false
                 spinnerBurnerType.isEnabled = false
                 spinnerHose.isEnabled = false
                 spinnerNb65.isEnabled = false
@@ -231,7 +230,7 @@ class NgApprovalFragment : Fragment() {
             }
 
             rfcStatus?.let {
-               spinnerRfcStatus.text = it
+                spinnerRfcStatus.text = it
                 if(it == "Passed"){
                     tvMmtTesting.visibility = View.VISIBLE
                     rgMmt.visibility = View.VISIBLE
@@ -300,33 +299,33 @@ class NgApprovalFragment : Fragment() {
                 when(i){
                     rbMmtDone.id->{
 
-                            tvLeakageTesting.visibility = View.VISIBLE
-                            rgLeakage.visibility = View.VISIBLE
-                            tvLiveGas.visibility = View.VISIBLE
-                            etLiveGas.visibility = View.VISIBLE
-                            cvMeter.visibility = View.VISIBLE
-                            cvSr.visibility = View.VISIBLE
-                            tvBurnerType.visibility = View.VISIBLE
-                            spinnerBurnerType.visibility = View.VISIBLE
-                            tvHoseOptions.visibility = View.VISIBLE
-                            spinnerHose.visibility = View.VISIBLE
-                            clNozzle.visibility = View.VISIBLE
+                        tvLeakageTesting.visibility = View.VISIBLE
+                        rgLeakage.visibility = View.VISIBLE
+                        tvLiveGas.visibility = View.VISIBLE
+                        etLiveGas.visibility = View.VISIBLE
+                        cvMeter.visibility = View.VISIBLE
+                        cvSr.visibility = View.VISIBLE
+                        tvBurnerType.visibility = View.VISIBLE
+                        spinnerBurnerType.visibility = View.VISIBLE
+                        tvHoseOptions.visibility = View.VISIBLE
+                        spinnerHose.visibility = View.VISIBLE
+                        clNozzle.visibility = View.VISIBLE
 
                         mmtStatus = "1"
                     }
                     rbMmtNotDone.id->{
 
-                            tvLeakageTesting.visibility = View.GONE
-                            rgLeakage.visibility = View.GONE
-                            tvLiveGas.visibility = View.GONE
-                            etLiveGas.visibility = View.GONE
-                            cvMeter.visibility = View.GONE
-                            cvSr.visibility = View.GONE
-                            tvBurnerType.visibility = View.GONE
-                            spinnerBurnerType.visibility = View.GONE
-                            tvHoseOptions.visibility = View.GONE
-                            spinnerHose.visibility = View.GONE
-                            clNozzle.visibility = View.GONE
+                        tvLeakageTesting.visibility = View.GONE
+                        rgLeakage.visibility = View.GONE
+                        tvLiveGas.visibility = View.GONE
+                        etLiveGas.visibility = View.GONE
+                        cvMeter.visibility = View.GONE
+                        cvSr.visibility = View.GONE
+                        tvBurnerType.visibility = View.GONE
+                        spinnerBurnerType.visibility = View.GONE
+                        tvHoseOptions.visibility = View.GONE
+                        spinnerHose.visibility = View.GONE
+                        clNozzle.visibility = View.GONE
 
                         mmtStatus = "0"
 
@@ -749,68 +748,68 @@ class NgApprovalFragment : Fragment() {
                             Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT).show()
                             if(!isLmcModified && hasMeter){
                                 val directions = NgApprovalFragmentDirections.actionNgApprovalFragmentToNgVerificationFragment(
-                                bpNo = bpNo!!,
-                                jmrNo = jmrNo!!,
-                                assignedDate = assignedDate!!,
-                                workDate = conversionDate!!,
-                                appNo = args.appNo,
-                                sessionId = args.sessionId,
-                                tpiId = args.tpiId,
-                                customerInfo = args.customerInfo,
-                                conversionDate = conversionDate!!,
-                                rfcStatus = rfcStatus,
-                                mmtStatus = mmtStatus,
-                                leakageStatus = leakageStatus,
-                                gasPressure = gasPressure,
-                                finalReading = finalReading,
-                                burnerType = burnerType,
-                                hoseLength = hoseLength,
-                                ng65Length = nozzle65Length,
-                                ng90Length = nozzle90Length,
-                                ng110Length = nozzle110Length,
-                                ng125Length = nozzle125Length,
-                                acknowledgeId = acknowledgeId,
-                                drsNumber = drsNumber,
-                                srNumber = srNumber,
-                                lmcGiClamp = lmcGiClamp,
-                                lmcMlcClamp = lmcMlcClamp,
-                                lmcGiMfElbow = lmcGiMfElbow,
-                                lmcGiFfElbow = lmcGiFfElbow,
-                                lmcGi2 = lmcGi2,
-                                lmcGi3 = lmcGi3,
-                                lmcGi4 = lmcGi4,
-                                lmcGi6 = lmcGi6,
-                                lmcGi8 = lmcGi8,
-                                lmcGiTee = lmcGiTee,
-                                lmcMlcTee = lmcMlcTee,
-                                lmcGiSocket = lmcGiSocket,
-                                lmcMaleUnion = lmcMaleUnion,
-                                lmcFemaleUnion = lmcFemaleUnion,
-                                lmcMeterBracket = lmcMeterBracket,
-                                lmcMeterSticker = lmcMeterSticker,
-                                lmcPlateMarker = lmcPlateMarker,
-                                lmcAdaptorGI = lmcAdaptorGI,
-                                lmcAdaptorReg = lmcAdaptorReg,
-                                lmcAdaptorMeter = lmcAdaptorMeter,
-                                lmcFemaleMeter = lmcFemaleMeter,
-                                lmcMeterNo = lmcMeterNo,
-                                lmcRegulatorNo = lmcRegulatorNo,
-                                lmcGiLength = lmcGiLength,
-                                lmcMlcLength = lmcMlcLength,
-                                lmcAvQty = lmcAvQty,
-                                lmcIvQty = lmcIvQty,
-                                lmcExtraGiLength = lmcExtraGiLength,
-                                lmcExtraMlcLength = lmcExtraMlcLength,
-                                lmcMeterCompany = lmcMeterCompany,
-                                lmcInitialReading = lmcInitialReading,
-                                lmcWoMeterBracket = lmcWoMeterBracket,
-                                lmcWoMeterSticker = lmcWoMeterSticker,
-                                lmcWoAdaptorGI = lmcWoAdaptorGI,
-                                lmcWoAdaptorReg = lmcWoAdaptorReg,
-                                lmcWoAdaptorMeter = lmcWoAdaptorMeter,
-                                lmcWoFemaleMeter = lmcWoFemaleMeter,
-                                lmcWoMeterNumber = lmcWoMeterNumber,
-                                lmcWoRegulatorNumber = lmcWoRegulatorNumber,
+                                    bpNo = bpNo!!,
+                                    jmrNo = jmrNo!!,
+                                    assignedDate = assignedDate!!,
+                                    workDate = conversionDate!!,
+                                    appNo = args.appNo,
+                                    sessionId = args.sessionId,
+                                    tpiId = args.tpiId,
+                                    customerInfo = args.customerInfo,
+                                    conversionDate = conversionDate!!,
+                                    rfcStatus = rfcStatus,
+                                    mmtStatus = mmtStatus,
+                                    leakageStatus = leakageStatus,
+                                    gasPressure = gasPressure,
+                                    finalReading = finalReading,
+                                    burnerType = burnerType,
+                                    hoseLength = hoseLength,
+                                    ng65Length = nozzle65Length,
+                                    ng90Length = nozzle90Length,
+                                    ng110Length = nozzle110Length,
+                                    ng125Length = nozzle125Length,
+                                    acknowledgeId = acknowledgeId,
+                                    drsNumber = drsNumber,
+                                    srNumber = srNumber,
+                                    lmcGiClamp = lmcGiClamp,
+                                    lmcMlcClamp = lmcMlcClamp,
+                                    lmcGiMfElbow = lmcGiMfElbow,
+                                    lmcGiFfElbow = lmcGiFfElbow,
+                                    lmcGi2 = lmcGi2,
+                                    lmcGi3 = lmcGi3,
+                                    lmcGi4 = lmcGi4,
+                                    lmcGi6 = lmcGi6,
+                                    lmcGi8 = lmcGi8,
+                                    lmcGiTee = lmcGiTee,
+                                    lmcMlcTee = lmcMlcTee,
+                                    lmcGiSocket = lmcGiSocket,
+                                    lmcMaleUnion = lmcMaleUnion,
+                                    lmcFemaleUnion = lmcFemaleUnion,
+                                    lmcMeterBracket = lmcMeterBracket,
+                                    lmcMeterSticker = lmcMeterSticker,
+                                    lmcPlateMarker = lmcPlateMarker,
+                                    lmcAdaptorGI = lmcAdaptorGI,
+                                    lmcAdaptorReg = lmcAdaptorReg,
+                                    lmcAdaptorMeter = lmcAdaptorMeter,
+                                    lmcFemaleMeter = lmcFemaleMeter,
+                                    lmcMeterNo = lmcMeterNo,
+                                    lmcRegulatorNo = lmcRegulatorNo,
+                                    lmcGiLength = lmcGiLength,
+                                    lmcMlcLength = lmcMlcLength,
+                                    lmcAvQty = lmcAvQty,
+                                    lmcIvQty = lmcIvQty,
+                                    lmcExtraGiLength = lmcExtraGiLength,
+                                    lmcExtraMlcLength = lmcExtraMlcLength,
+                                    lmcMeterCompany = lmcMeterCompany,
+                                    lmcInitialReading = lmcInitialReading,
+                                    lmcWoMeterBracket = lmcWoMeterBracket,
+                                    lmcWoMeterSticker = lmcWoMeterSticker,
+                                    lmcWoAdaptorGI = lmcWoAdaptorGI,
+                                    lmcWoAdaptorReg = lmcWoAdaptorReg,
+                                    lmcWoAdaptorMeter = lmcWoAdaptorMeter,
+                                    lmcWoFemaleMeter = lmcWoFemaleMeter,
+                                    lmcWoMeterNumber = lmcWoMeterNumber,
+                                    lmcWoRegulatorNumber = lmcWoRegulatorNumber,
                                     lmcExtension = lmcExtension,
                                     giUnion = giUnion
                                 )
@@ -1246,14 +1245,10 @@ class NgApprovalFragment : Fragment() {
                                     }
                                 }
                                 if(AppCache.isTpi){
-                                    btnSubmit.visibility = View.GONE
-                                    if (installationDetails.rfcStatus == "Failed") {
-                                        btnApprove.visibility = View.GONE
-                                        btnDecline.visibility = View.GONE
-                                    } else {
-                                        btnApprove.visibility = View.VISIBLE
-                                        btnDecline.visibility = View.VISIBLE
-                                    }
+                                    btnSubmit.visibility = View.VISIBLE
+                                    btnApprove.visibility = View.GONE
+                                    btnDecline.visibility = View.GONE
+
                                     tvFollowTitle.visibility = View.GONE
                                     tvDateTime.visibility = View.GONE
                                 }
