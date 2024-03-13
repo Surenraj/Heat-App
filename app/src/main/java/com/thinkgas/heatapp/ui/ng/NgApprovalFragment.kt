@@ -1246,7 +1246,9 @@ class NgApprovalFragment : Fragment() {
                                     }
                                 }
                                 if(AppCache.isTpi){
-                                    btnSubmit.visibility = View.VISIBLE
+                                    if (installationDetails.rfcStatus?.lowercase() == "failed" || installationDetails.rfcStatus?.lowercase() == "hold") {
+                                        btnSubmit.visibility = View.GONE
+                                    }
                                     btnApprove.visibility = View.GONE
                                     btnDecline.visibility = View.GONE
 
