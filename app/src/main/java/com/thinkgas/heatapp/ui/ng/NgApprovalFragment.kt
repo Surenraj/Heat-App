@@ -1,5 +1,6 @@
 package com.thinkgas.heatapp.ui.ng
 
+import `in`.galaxyofandroid.spinerdialog.SpinnerDialog
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
@@ -8,11 +9,12 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -26,14 +28,13 @@ import com.thinkgas.heatapp.utils.AppUtils
 import com.thinkgas.heatapp.utils.Constants
 import com.thinkgas.heatapp.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
-import `in`.galaxyofandroid.spinerdialog.SpinnerDialog
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
+import java.util.*
+import kotlin.collections.HashMap
 
 @AndroidEntryPoint
 class NgApprovalFragment : Fragment() {
@@ -1372,6 +1373,75 @@ class NgApprovalFragment : Fragment() {
                                     tvFollowTitle.visibility = View.GONE
                                     tvDateTime.visibility = View.GONE
                                 }
+                            }
+
+                            val rfcList = arrayListOf("Passed","Hold","Failed")
+                            rfcStatusSpinner = SpinnerDialog(
+                                activity,
+                                rfcList,
+                                "Select RFC Status",
+                                "Close"
+                            )
+
+                            rfcStatusSpinner?.bindOnSpinerListener { item, position ->
+                                binding.apply {
+                                    spinnerRfcStatus.text = item
+                                    spinnerRfcStatus.error = null
+                                    rfcStatus = item
+
+                                    if(item.contains("passed",true)){
+                                        tvDateTitle.visibility = View.VISIBLE
+                                        tvConversationDate.visibility = View.VISIBLE
+                                        tvMmtTesting.visibility =View.VISIBLE
+                                        rgMmt.visibility = View.VISIBLE
+                                        rbMmtDone.isChecked = false
+                                        llFollowUp.visibility = View.GONE
+//                                        tvDrsNo.visibility = View.VISIBLE
+//                                        etDrsNo.visibility = View.VISIBLE
+//                                        tvSrNo.visibility = View.VISIBLE
+//                                        etSrNo.visibility = View.VISIBLE
+                                        tvExtension.visibility = View.VISIBLE
+                                        spinnerLmcExtension.visibility = View.VISIBLE
+                                        isFailed = false
+                                        btnSubmit.text = "NEXT"
+                                    }else{
+                                        tvDateTitle.visibility = View.GONE
+                                        llFollowUp.visibility = View.VISIBLE
+                                        tvMmtTesting.visibility =View.GONE
+                                        tvConversationDate.visibility = View.GONE
+                                        rgMmt.visibility = View.GONE
+//                                        tvDrsNo.visibility = View.GONE
+//                                        etDrsNo.visibility = View.GONE
+//                                        tvSrNo.visibility = View.GONE
+//                                        etSrNo.visibility = View.GONE
+                                        isFailed = true
+                                        btnSubmit.text = "SUBMIT"
+                                        cvSr.visibility = View.GONE
+                                        tvExtension.visibility = View.GONE
+                                        spinnerLmcExtension.visibility = View.GONE
+                                        cvMeter.visibility = View.GONE
+                                        tvLeakageTesting.visibility = View.GONE
+                                        rgLeakage.visibility = View.GONE
+                                        tvLiveGas.visibility = View.GONE
+                                        etLiveGas.visibility = View.GONE
+//                                        tvMeterReading.visibility = View.GONE
+//                                        etMeterReading.visibility = View.GONE
+                                        tvBurnerType.visibility = View.GONE
+                                        spinnerBurnerType.visibility = View.GONE
+                                        tvHoseOptions.visibility = View.GONE
+                                        spinnerHose.visibility = View.GONE
+                                        clNozzle.visibility = View.GONE
+                                    }
+
+                                    if ((item.contains("passed", true)) || (item.contains("Failed", true))) {
+                                        tvFollowTitle.visibility = View.GONE
+                                        tvDateTime.visibility = View.GONE
+                                    }else {
+                                        tvFollowTitle.visibility = View.VISIBLE
+                                        tvDateTime.visibility = View.VISIBLE
+                                    }
+                                }
+
                             }
                         }
                     }
