@@ -178,7 +178,7 @@ class NgApprovalFragment : Fragment() {
                 rbLeakageNotDone.isEnabled = false
                 etLiveGas.isEnabled = false
                 etMeterReading.isEnabled = false
-               etGiUnion.isEnabled = false
+                etGiUnion.isEnabled = false
                 spinnerBurnerType.isEnabled = false
                 spinnerHose.isEnabled = false
                 spinnerNb65.isEnabled = false
@@ -231,7 +231,7 @@ class NgApprovalFragment : Fragment() {
             }
 
             rfcStatus?.let {
-               spinnerRfcStatus.text = it
+                spinnerRfcStatus.text = it
                 if(it == "Passed"){
                     tvMmtTesting.visibility = View.VISIBLE
                     rgMmt.visibility = View.VISIBLE
@@ -300,33 +300,33 @@ class NgApprovalFragment : Fragment() {
                 when(i){
                     rbMmtDone.id->{
 
-                            tvLeakageTesting.visibility = View.VISIBLE
-                            rgLeakage.visibility = View.VISIBLE
-                            tvLiveGas.visibility = View.VISIBLE
-                            etLiveGas.visibility = View.VISIBLE
-                            cvMeter.visibility = View.VISIBLE
-                            cvSr.visibility = View.VISIBLE
-                            tvBurnerType.visibility = View.VISIBLE
-                            spinnerBurnerType.visibility = View.VISIBLE
-                            tvHoseOptions.visibility = View.VISIBLE
-                            spinnerHose.visibility = View.VISIBLE
-                            clNozzle.visibility = View.VISIBLE
+                        tvLeakageTesting.visibility = View.VISIBLE
+                        rgLeakage.visibility = View.VISIBLE
+                        tvLiveGas.visibility = View.VISIBLE
+                        etLiveGas.visibility = View.VISIBLE
+                        cvMeter.visibility = View.VISIBLE
+                        cvSr.visibility = View.VISIBLE
+                        tvBurnerType.visibility = View.VISIBLE
+                        spinnerBurnerType.visibility = View.VISIBLE
+                        tvHoseOptions.visibility = View.VISIBLE
+                        spinnerHose.visibility = View.VISIBLE
+                        clNozzle.visibility = View.VISIBLE
 
                         mmtStatus = "1"
                     }
                     rbMmtNotDone.id->{
 
-                            tvLeakageTesting.visibility = View.GONE
-                            rgLeakage.visibility = View.GONE
-                            tvLiveGas.visibility = View.GONE
-                            etLiveGas.visibility = View.GONE
-                            cvMeter.visibility = View.GONE
-                            cvSr.visibility = View.GONE
-                            tvBurnerType.visibility = View.GONE
-                            spinnerBurnerType.visibility = View.GONE
-                            tvHoseOptions.visibility = View.GONE
-                            spinnerHose.visibility = View.GONE
-                            clNozzle.visibility = View.GONE
+                        tvLeakageTesting.visibility = View.GONE
+                        rgLeakage.visibility = View.GONE
+                        tvLiveGas.visibility = View.GONE
+                        etLiveGas.visibility = View.GONE
+                        cvMeter.visibility = View.GONE
+                        cvSr.visibility = View.GONE
+                        tvBurnerType.visibility = View.GONE
+                        spinnerBurnerType.visibility = View.GONE
+                        tvHoseOptions.visibility = View.GONE
+                        spinnerHose.visibility = View.GONE
+                        clNozzle.visibility = View.GONE
 
                         mmtStatus = "0"
 
@@ -749,68 +749,68 @@ class NgApprovalFragment : Fragment() {
                             Toast.makeText(requireContext(), it.data.message, Toast.LENGTH_SHORT).show()
                             if(!isLmcModified && hasMeter){
                                 val directions = NgApprovalFragmentDirections.actionNgApprovalFragmentToNgVerificationFragment(
-                                bpNo = bpNo!!,
-                                jmrNo = jmrNo!!,
-                                assignedDate = assignedDate!!,
-                                workDate = conversionDate!!,
-                                appNo = args.appNo,
-                                sessionId = args.sessionId,
-                                tpiId = args.tpiId,
-                                customerInfo = args.customerInfo,
-                                conversionDate = conversionDate!!,
-                                rfcStatus = rfcStatus,
-                                mmtStatus = mmtStatus,
-                                leakageStatus = leakageStatus,
-                                gasPressure = gasPressure,
-                                finalReading = finalReading,
-                                burnerType = burnerType,
-                                hoseLength = hoseLength,
-                                ng65Length = nozzle65Length,
-                                ng90Length = nozzle90Length,
-                                ng110Length = nozzle110Length,
-                                ng125Length = nozzle125Length,
-                                acknowledgeId = acknowledgeId,
-                                drsNumber = drsNumber,
-                                srNumber = srNumber,
-                                lmcGiClamp = lmcGiClamp,
-                                lmcMlcClamp = lmcMlcClamp,
-                                lmcGiMfElbow = lmcGiMfElbow,
-                                lmcGiFfElbow = lmcGiFfElbow,
-                                lmcGi2 = lmcGi2,
-                                lmcGi3 = lmcGi3,
-                                lmcGi4 = lmcGi4,
-                                lmcGi6 = lmcGi6,
-                                lmcGi8 = lmcGi8,
-                                lmcGiTee = lmcGiTee,
-                                lmcMlcTee = lmcMlcTee,
-                                lmcGiSocket = lmcGiSocket,
-                                lmcMaleUnion = lmcMaleUnion,
-                                lmcFemaleUnion = lmcFemaleUnion,
-                                lmcMeterBracket = lmcMeterBracket,
-                                lmcMeterSticker = lmcMeterSticker,
-                                lmcPlateMarker = lmcPlateMarker,
-                                lmcAdaptorGI = lmcAdaptorGI,
-                                lmcAdaptorReg = lmcAdaptorReg,
-                                lmcAdaptorMeter = lmcAdaptorMeter,
-                                lmcFemaleMeter = lmcFemaleMeter,
-                                lmcMeterNo = lmcMeterNo,
-                                lmcRegulatorNo = lmcRegulatorNo,
-                                lmcGiLength = lmcGiLength,
-                                lmcMlcLength = lmcMlcLength,
-                                lmcAvQty = lmcAvQty,
-                                lmcIvQty = lmcIvQty,
-                                lmcExtraGiLength = lmcExtraGiLength,
-                                lmcExtraMlcLength = lmcExtraMlcLength,
-                                lmcMeterCompany = lmcMeterCompany,
-                                lmcInitialReading = lmcInitialReading,
-                                lmcWoMeterBracket = lmcWoMeterBracket,
-                                lmcWoMeterSticker = lmcWoMeterSticker,
-                                lmcWoAdaptorGI = lmcWoAdaptorGI,
-                                lmcWoAdaptorReg = lmcWoAdaptorReg,
-                                lmcWoAdaptorMeter = lmcWoAdaptorMeter,
-                                lmcWoFemaleMeter = lmcWoFemaleMeter,
-                                lmcWoMeterNumber = lmcWoMeterNumber,
-                                lmcWoRegulatorNumber = lmcWoRegulatorNumber,
+                                    bpNo = bpNo!!,
+                                    jmrNo = jmrNo!!,
+                                    assignedDate = assignedDate!!,
+                                    workDate = conversionDate!!,
+                                    appNo = args.appNo,
+                                    sessionId = args.sessionId,
+                                    tpiId = args.tpiId,
+                                    customerInfo = args.customerInfo,
+                                    conversionDate = conversionDate!!,
+                                    rfcStatus = rfcStatus,
+                                    mmtStatus = mmtStatus,
+                                    leakageStatus = leakageStatus,
+                                    gasPressure = gasPressure,
+                                    finalReading = finalReading,
+                                    burnerType = burnerType,
+                                    hoseLength = hoseLength,
+                                    ng65Length = nozzle65Length,
+                                    ng90Length = nozzle90Length,
+                                    ng110Length = nozzle110Length,
+                                    ng125Length = nozzle125Length,
+                                    acknowledgeId = acknowledgeId,
+                                    drsNumber = drsNumber,
+                                    srNumber = srNumber,
+                                    lmcGiClamp = lmcGiClamp,
+                                    lmcMlcClamp = lmcMlcClamp,
+                                    lmcGiMfElbow = lmcGiMfElbow,
+                                    lmcGiFfElbow = lmcGiFfElbow,
+                                    lmcGi2 = lmcGi2,
+                                    lmcGi3 = lmcGi3,
+                                    lmcGi4 = lmcGi4,
+                                    lmcGi6 = lmcGi6,
+                                    lmcGi8 = lmcGi8,
+                                    lmcGiTee = lmcGiTee,
+                                    lmcMlcTee = lmcMlcTee,
+                                    lmcGiSocket = lmcGiSocket,
+                                    lmcMaleUnion = lmcMaleUnion,
+                                    lmcFemaleUnion = lmcFemaleUnion,
+                                    lmcMeterBracket = lmcMeterBracket,
+                                    lmcMeterSticker = lmcMeterSticker,
+                                    lmcPlateMarker = lmcPlateMarker,
+                                    lmcAdaptorGI = lmcAdaptorGI,
+                                    lmcAdaptorReg = lmcAdaptorReg,
+                                    lmcAdaptorMeter = lmcAdaptorMeter,
+                                    lmcFemaleMeter = lmcFemaleMeter,
+                                    lmcMeterNo = lmcMeterNo,
+                                    lmcRegulatorNo = lmcRegulatorNo,
+                                    lmcGiLength = lmcGiLength,
+                                    lmcMlcLength = lmcMlcLength,
+                                    lmcAvQty = lmcAvQty,
+                                    lmcIvQty = lmcIvQty,
+                                    lmcExtraGiLength = lmcExtraGiLength,
+                                    lmcExtraMlcLength = lmcExtraMlcLength,
+                                    lmcMeterCompany = lmcMeterCompany,
+                                    lmcInitialReading = lmcInitialReading,
+                                    lmcWoMeterBracket = lmcWoMeterBracket,
+                                    lmcWoMeterSticker = lmcWoMeterSticker,
+                                    lmcWoAdaptorGI = lmcWoAdaptorGI,
+                                    lmcWoAdaptorReg = lmcWoAdaptorReg,
+                                    lmcWoAdaptorMeter = lmcWoAdaptorMeter,
+                                    lmcWoFemaleMeter = lmcWoFemaleMeter,
+                                    lmcWoMeterNumber = lmcWoMeterNumber,
+                                    lmcWoRegulatorNumber = lmcWoRegulatorNumber,
                                     lmcExtension = lmcExtension,
                                     giUnion = giUnion
                                 )
@@ -1246,7 +1246,9 @@ class NgApprovalFragment : Fragment() {
                                     }
                                 }
                                 if(AppCache.isTpi){
-                                    btnSubmit.visibility = View.VISIBLE
+                                    if (installationDetails.rfcStatus?.lowercase() == "failed" || installationDetails.rfcStatus?.lowercase() == "hold") {
+                                        btnSubmit.visibility = View.GONE
+                                    }
                                     btnApprove.visibility = View.GONE
                                     btnDecline.visibility = View.GONE
 
