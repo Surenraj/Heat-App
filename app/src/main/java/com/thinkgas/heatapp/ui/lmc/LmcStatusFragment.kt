@@ -395,7 +395,11 @@ class LmcStatusFragment : Fragment() {
             }
 
             if (AppCache.isTpi) {
-                btnSubmit.visibility = View.VISIBLE
+                if(args.status == "failed" || args.status == "hold") {
+                    btnSubmit.visibility = View.GONE
+                } else {
+                    btnSubmit.visibility = View.VISIBLE
+                }
                 btnApprove.visibility = View.GONE
                 btnDecline.visibility = View.GONE
 
