@@ -141,7 +141,7 @@ class LoginFragment : Fragment() {
                                 otp = data.otp
                                 binding.apply {
                                     etMobile.visibility = View.GONE
-//                                etPassword.visibility = View.GONE
+                                    etPassword.visibility = View.GONE
                                     etOtp.visibility = View.VISIBLE
                                     btnLogin.text = "Verify OTP"
                                 }
