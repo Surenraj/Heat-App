@@ -281,7 +281,9 @@ class TpiRepositoryImpl @Inject constructor(private val apiService: TpiApiServic
 
     override suspend fun getFeasibilityCategories(params: Map<String, String>) {
         _tpiListValue.value = Resource.loading(null)
+        Log.d("api params before", params.toString())
         val response = apiService.getFeasibilityCategories(params)
+        Log.d("api params after", params.toString())
         if (response.isSuccessful) {
             _tpiListValue.value = Resource.success(response.body())
         } else {

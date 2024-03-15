@@ -136,6 +136,13 @@ class NgApprovalFragment : Fragment() {
     var bpNo:String? = null
     var jmrNo:String? = null
     var assignedDate:String? = null
+    var mobileNo: String = ""
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val sharedPreferences = activity?.getSharedPreferences("TPI_PREFS", Context.MODE_PRIVATE)
+        mobileNo = sharedPreferences?.getString("mobile", null).toString()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -157,11 +164,10 @@ class NgApprovalFragment : Fragment() {
         viewModel.getNgApprovalList(params)
         setUpObserver()
 
-
         val paramsTpi = HashMap<String, String>()
         paramsTpi["version_code"] = "1"
         paramsTpi["os_type"] = "android"
-
+        paramsTpi["mobile_no"] = mobileNo
 
         viewModel.getTpiListTypes(paramsTpi)
         setUpTpiObserver()
